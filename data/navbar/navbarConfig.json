@@ -1,0 +1,18 @@
+[
+  {
+    "link": "/users",
+    "label": "User"
+  },
+  {
+    "link": "/buildings",
+    "label": "Building"
+  },
+  {
+    "link": "/instances",
+    "label": "Instance"
+  },
+  {
+    "link": "/funds",
+    "label": "Fund"
+  }
+]
