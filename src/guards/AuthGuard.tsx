@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 // hooks
 import useAuth from '../hooks/useAuth';
-import LoginPage from '../pages/auth/login';
+import LoginPage from '../sections/auth/LoginPageComponent';
 
 export default function AuthGuard({ children }: { children: JSX.Element | JSX.Element[] }) {
   const { isAuthenticated, isInitialized } = useAuth();

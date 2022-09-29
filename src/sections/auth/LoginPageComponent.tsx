@@ -9,6 +9,11 @@ import {
   Text,
   Anchor,
 } from '@mantine/core';
+import Link from 'next/link';
+import { useForm } from '@mantine/form';
+import useAuth from '../../hooks/useAuth';
+import { Register } from '../../types/auth/useAuth';
+import { LoginFormValues, RegisterForm } from '../../types/auth/formData';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -45,31 +50,60 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function LoginPage() {
+function LoginPageComponent() {
   const { classes } = useStyles();
+  const { login } = useAuth();
+
+  const form = useForm<LoginFormValues>({
+    initialValues: {
+      email: '',
+      password: '',
+      termsOfService: false,
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+
+  const handleSubmit = (values: LoginFormValues) => {
+    login(values.email, values.password);
+  };
   return (
-    <form className={classes.wrapper}>
+    <form className={classes.wrapper} onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <Paper className={classes.form} radius={0} p={30}>
         <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
           Welcome back to Flatmates!
         </Title>
 
-        <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-        <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
+        <TextInput
+          name="email"
+          label="Email address"
+          placeholder="hello@gmail.com"
+          size="md"
+          {...form.getInputProps('email')}
+        />
+        <PasswordInput
+          label="Password"
+          name="password"
+          placeholder="Your password"
+          mt="md"
+          size="md"
+          {...form.getInputProps('password')}
+        />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button fullWidth mt="xl" size="md">
+        <Button fullWidth type="submit" mt="xl" size="md">
           Login
         </Button>
 
         <Text align="center" mt="md">
           Don&apos;t have an account?{' '}
-          <Anchor<'a'> href="#" weight={700} onClick={(event) => event.preventDefault()}>
-            Register
-          </Anchor>
+          <Link href="/">
+            <Anchor<'a'>>Register</Anchor>
+          </Link>
         </Text>
       </Paper>
     </form>
   );
 }
 
-export default LoginPage;
+export default LoginPageComponent;

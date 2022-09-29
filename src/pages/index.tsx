@@ -1,11 +1,13 @@
 import { ReactElement } from 'react';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
 import Layout from '../layouts';
+import { SignUpForm } from '../components/auth/SignUpForm';
+import { Hero } from './main/hero';
 
 export default function HomePage() {
   return (
     <>
-      <ColorSchemeToggle />
+      <Hero />
+      <SignUpForm />
     </>
   );
 }

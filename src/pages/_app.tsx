@@ -6,13 +6,14 @@ import Head from 'next/head';
 import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 
-export type NextPageWithLayout = NextPage & {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps }: AppPropsWithLayout = props;
   const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);

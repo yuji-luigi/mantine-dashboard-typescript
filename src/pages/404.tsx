@@ -1,4 +1,5 @@
 import { createStyles, Image, Container, Title, Text, Button, SimpleGrid } from '@mantine/core';
+// eslint-disable-next-line import/no-absolute-path
 import image from '/public/images/404-mantine.svg';
 
 const useStyles = createStyles((theme) => ({

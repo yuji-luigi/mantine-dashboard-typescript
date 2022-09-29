@@ -9,7 +9,7 @@ import {
   Register,
   Login,
   Logout,
-} from '../types/auth/authentication';
+} from '../types/auth/useAuth';
 import { isValidToken, setSession } from '../utils/jwt';
 
 const initialState: JWTContextState = {

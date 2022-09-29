@@ -17,6 +17,6 @@
     "declaration": true,
     "declarationDir": "./src/types"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/input/Password.Strengthtsx"],
   "exclude": ["node_modules"]
 }
