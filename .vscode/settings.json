@@ -2,7 +2,7 @@
   "cSpell.words": ["modulz"],
   "files.exclude": {
     // "**/node_modules": true,
-    "**/.history": true,
-    "**/.next": true
+    "**/.history": true
+    // "**/.next": true
   }
 }

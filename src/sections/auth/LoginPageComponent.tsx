@@ -65,8 +65,13 @@ function LoginPageComponent() {
     },
   });
 
-  const handleSubmit = (values: LoginFormValues) => {
-    login(values.email, values.password);
+  const handleSubmit = async (values: LoginFormValues) => {
+    try {
+      const res = await login(values.email, values.password);
+      console.log(res);
+    } catch (error: any) {
+      console.error(error.message || error);
+    }
   };
   return (
     <form className={classes.wrapper} onSubmit={form.onSubmit((values) => handleSubmit(values))}>
