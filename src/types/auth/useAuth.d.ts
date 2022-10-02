@@ -61,3 +61,11 @@ export type Register = (
   firstName?: string,
   lastName?: string
 ) => Promise<void>;
+
+export interface AuthContextInterface {
+  initialState?: JWTContextState;
+  method: string;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+  register: (email: string, password: string) => Promise<void>;
+}

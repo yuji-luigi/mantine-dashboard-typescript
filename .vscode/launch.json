@@ -44,9 +44,10 @@
       "request": "launch",
       "command": "npm run dev"
     },
+
     {
       "name": "Next.js: debug client-side",
-      "type": "chrome",
+      "type": "pwa-chrome",
       "request": "launch",
       "userDataDir": false,
       "url": "http://localhost:3000"

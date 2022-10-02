@@ -10,14 +10,14 @@ const isValidToken = (accessToken: string) => {
   if (!accessToken) {
     return false;
   }
-  const decoded = jwtDecode(accessToken);
+  const decoded: any = jwtDecode(accessToken);
 
   const currentTime = Date.now() / 1000;
 
   return decoded.exp > currentTime;
 };
 
-const handleTokenExpired = (exp: string) => {
+const handleTokenExpired = (exp: number) => {
   let expiredTimer;
 
   const currentTime = Date.now();
@@ -41,10 +41,10 @@ const handleTokenExpired = (exp: string) => {
 const setSession = (accessToken: string | null) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
     // This function below will handle when token is expired
-    const { exp }: { exp: string } = jwtDecode(accessToken); // ~5 days by minimals server
+    const { exp }: { exp: number } = jwtDecode(accessToken); // ~5 days by minimals server
     handleTokenExpired(exp);
   } else {
     localStorage.removeItem('accessToken');

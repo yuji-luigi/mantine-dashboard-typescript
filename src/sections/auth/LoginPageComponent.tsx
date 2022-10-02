@@ -12,8 +12,7 @@ import {
 import Link from 'next/link';
 import { useForm } from '@mantine/form';
 import useAuth from '../../hooks/useAuth';
-import { Register } from '../../types/auth/useAuth';
-import { LoginFormValues, RegisterForm } from '../../types/auth/formData';
+import { LoginFormValues } from '../../types/auth/formData';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -67,8 +66,7 @@ function LoginPageComponent() {
 
   const handleSubmit = async (values: LoginFormValues) => {
     try {
-      const res = await login(values.email, values.password);
-      console.log(res);
+      await login(values.email, values.password);
     } catch (error: any) {
       console.error(error.message || error);
     }
