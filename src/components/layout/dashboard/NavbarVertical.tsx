@@ -11,10 +11,12 @@ import {
   IconSwitchHorizontal,
   IconLogout,
 } from '@tabler/icons';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon');
   return {
+    navbar: { position: '' },
     header: {
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
@@ -84,6 +86,7 @@ const data = [
 export function NavbarVertical() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Billing');
+  const { isOpen } = useLayoutContext();
 
   const links = data.map((item) => (
     <a
@@ -101,7 +104,7 @@ export function NavbarVertical() {
   ));
 
   return (
-    <Navbar height={700} width={{ sm: 300 }} p="md">
+    <Navbar className={classes.navbar} hidden={isOpen} height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           {/* <MantineLogo size={28} /> */}

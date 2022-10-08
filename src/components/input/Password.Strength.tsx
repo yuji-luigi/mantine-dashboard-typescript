@@ -32,7 +32,7 @@ function getStrength(password: string) {
   return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 0);
 }
 
-export function PasswordStrength() {
+export function PasswordStrength({ formControl }: { formControl: any }) {
   const [value, setValue] = useInputState('');
   const strength = getStrength(value);
   const checks = requirements.map((requirement, index) => (
@@ -59,6 +59,7 @@ export function PasswordStrength() {
         onChange={setValue}
         placeholder="Your password"
         label="Password"
+        {...formControl}
         required
       />
 

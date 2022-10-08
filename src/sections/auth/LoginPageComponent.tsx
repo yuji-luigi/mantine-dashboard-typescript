@@ -12,7 +12,9 @@ import {
 import Link from 'next/link';
 import { useForm } from '@mantine/form';
 import useAuth from '../../hooks/useAuth';
-import { LoginFormValues } from '../../types/auth/formData';
+import { LoginFormValues } from '../../types/context/auth/formData';
+import GuestGuard from '../../guards/GuestGuard';
+import { AUTH } from '../../path/page-paths';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -72,40 +74,42 @@ function LoginPageComponent() {
     }
   };
   return (
-    <form className={classes.wrapper} onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-      <Paper className={classes.form} radius={0} p={30}>
-        <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
-          Welcome back to Flatmates!
-        </Title>
+    <GuestGuard>
+      <form className={classes.wrapper} onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <Paper className={classes.form} radius={0} p={30}>
+          <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
+            Welcome back to Flatmates!
+          </Title>
 
-        <TextInput
-          name="email"
-          label="Email address"
-          placeholder="hello@gmail.com"
-          size="md"
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          label="Password"
-          name="password"
-          placeholder="Your password"
-          mt="md"
-          size="md"
-          {...form.getInputProps('password')}
-        />
-        <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button fullWidth type="submit" mt="xl" size="md">
-          Login
-        </Button>
+          <TextInput
+            name="email"
+            label="Email address"
+            placeholder="hello@gmail.com"
+            size="md"
+            {...form.getInputProps('email')}
+          />
+          <PasswordInput
+            label="Password"
+            name="password"
+            placeholder="Your password"
+            mt="md"
+            size="md"
+            {...form.getInputProps('password')}
+          />
+          <Checkbox label="Keep me logged in" mt="xl" size="md" />
+          <Button fullWidth type="submit" mt="xl" size="md">
+            Login
+          </Button>
 
-        <Text align="center" mt="md">
-          Don&apos;t have an account?{' '}
-          <Link href="/">
-            <Anchor<'a'>>Register</Anchor>
-          </Link>
-        </Text>
-      </Paper>
-    </form>
+          <Text align="center" mt="md">
+            Don&apos;t have an account?{' '}
+            <Link href={AUTH.SIGNUP}>
+              <Anchor<'a'>>Register</Anchor>
+            </Link>
+          </Text>
+        </Paper>
+      </form>
+    </GuestGuard>
   );
 }
 

@@ -22,11 +22,11 @@ export interface IUser {
 
 type ActionEnum = 'LOGIN' | 'REGISTER' | 'LOGOUT' | 'INITIALIZE';
 
-export type JWTContextState = {
-  isAuthenticated?: boolean;
-  isInitialized?: boolean;
+export interface JWTContextState {
+  isAuthenticated?: boolean | null;
+  isInitialized?: boolean | null;
   user?: IUser | null;
-};
+}
 export interface ReducerStateAction {
   payload?: JWTContextState;
 }
@@ -53,19 +53,22 @@ export interface JWTContextHandlers {
   REGISTER: JWTContextReducer;
 }
 
-export type Login = (email?: string, password?: string) => Promise<void>;
 export type Logout = () => Promise<void>;
-export type Register = (
-  email?: string,
-  password?: string,
-  firstName?: string,
-  lastName?: string
-) => Promise<void>;
 
-export interface AuthContextInterface {
-  initialState?: JWTContextState;
+export interface RegisterData {
+  email: string | null;
+  password: string | null;
+  password2: string | null;
+  name: string;
+  surname: string | null;
+  // role: string | null;
+}
+export type Register = (data: RegisterData) => Promise<void>;
+export type Login = (email?: string, password?: string) => Promise<void>;
+
+export interface AuthContextInterface extends JWTContextState {
   method: string;
-  login: (email: string, password: string) => Promise<void>;
+  login: Login;
   logout: () => void;
-  register: (email: string, password: string) => Promise<void>;
+  register: Register;
 }

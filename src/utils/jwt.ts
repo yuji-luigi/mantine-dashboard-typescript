@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 // routes
-import { PATH_AUTH } from '../routes/paths';
+import { PATH_AUTH } from '../path/api-routes';
 //
 import axios from './axios-instance';
 

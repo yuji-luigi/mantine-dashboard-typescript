@@ -15,22 +15,26 @@ const useStyles = createStyles((theme) => ({
     height: 700,
     maxWidth: 700,
     display: 'flex',
+    position: 'relative',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
     paddingBottom: theme.spacing.xl * 6,
     zIndex: 1,
-    position: 'relative',
 
     [theme.fn.smallerThan('sm')]: {
+      position: 'relative',
       height: 700,
       paddingBottom: theme.spacing.xl * 3,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
     },
   },
 
-  div: {
+  transitionContainer: {
     position: 'absolute',
-    left: 40,
+    padding: 20,
   },
 
   title: {
@@ -64,14 +68,14 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.xl * 1.5,
 
     [theme.fn.smallerThan('sm')]: {
-      width: '100%',
+      // width: '100%',
     },
   },
 }));
 
 const duration = 500;
 
-export function Hero() {
+export function HeroSection() {
   const { classes } = useStyles();
   const [isLogin, setIsLogin] = useState('');
 
@@ -87,6 +91,7 @@ export function Hero() {
     out: { opacity: 0, transform: 'translate(300px, 0)' },
     transitionProperty,
   };
+  // const transition = 'slide-right';
 
   return (
     <div className={classes.hero}>
@@ -105,10 +110,11 @@ export function Hero() {
         >
           {(styles) => (
             <>
-              <div style={styles} className={classes.div}>
+              <div style={styles} className={classes.transitionContainer}>
                 <Title className={classes.title}>Flat Mate&copy; Your living friend </Title>
                 <Text className={classes.description} size="xl" mt="xl">
-                  Register and get started with management of your apartment.
+                  We help you manage your teams. We have solution for all of the dimension of the
+                  team.
                 </Text>
                 <Button
                   onClick={() => setIsLogin('1')}
@@ -130,7 +136,7 @@ export function Hero() {
           timingFunction="ease"
         >
           {(styles) => (
-            <div style={styles} className={classes.div}>
+            <div style={styles} className={classes.transitionContainer}>
               <Title className={classes.title}>Next one? </Title>
               <Text className={classes.description} size="xl" mt="xl">
                 Some descriptions here
@@ -154,7 +160,7 @@ export function Hero() {
           timingFunction="ease"
         >
           {(styles) => (
-            <div style={styles} className={classes.div}>
+            <div style={styles} className={classes.transitionContainer}>
               <Title className={classes.title}>Third title </Title>
               <Text className={classes.description} size="xl" mt="xl">
                 Last description
@@ -175,5 +181,3 @@ export function Hero() {
     </div>
   );
 }
-
-export default Hero;

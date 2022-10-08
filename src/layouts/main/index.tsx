@@ -1,5 +1,11 @@
-import { PropChildren } from '../../types/general/config';
+import { PropWithChildren } from '../../types/general/config';
+import { MainHeader } from './MainHeader';
 
-export function MainLayout(props: PropChildren) {
-  return <>{props.children}</>;
+export function MainLayout(props: PropWithChildren) {
+  return (
+    <>
+      <MainHeader />
+      {props.children}
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
 import axiosInstance from '../utils/axios-instance';
-import { PATH_AUTH } from '../routes/paths';
+import { PATH_AUTH } from '../path/api-routes';
 import {
   JWTContextReducerAction,
   JWTContextState,
@@ -9,7 +9,8 @@ import {
   Login,
   Logout,
   AuthContextInterface,
-} from '../types/auth/useAuth';
+  RegisterData,
+} from '../types/context/auth/useAuth';
 import { isValidToken, setSession } from '../utils/jwt';
 
 const initialState: JWTContextState = {
@@ -78,7 +79,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
           const response = await axiosInstance.get(PATH_AUTH.login);
           const { user } = response.data;
 
-          dispatch({
+          ({
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,
@@ -117,7 +118,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     setSession(token.accessToken);
 
     // call me and get the user
-    console.log(axiosInstance);
     const responseMe = await axiosInstance.get(PATH_AUTH.me);
     const { user } = responseMe.data.data;
     dispatch({
@@ -128,26 +128,25 @@ function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const register: Register = async (email, password, firstName, lastName) => {
-    const response = await axiosInstance.post(PATH_AUTH.register, {
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    const { accessToken, user } = response.data;
-    localStorage.setItem('accessToken', accessToken);
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        user,
-      },
-    });
+  const register: Register = async (formData: RegisterData) => {
+    try {
+      const response = await axiosInstance.post(PATH_AUTH.register, formData);
+      const { accessToken, user } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          user,
+        },
+      });
+    } catch (error: any) {
+      console.error(error.message || error);
+    }
   };
 
   const logout: Logout = async () => {
     setSession(null);
-    dispatch({ type: 'LOGOUT' });
+    dispatch({ type: 'REGISTER' });
   };
   return (
     <AuthContext.Provider

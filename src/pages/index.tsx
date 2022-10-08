@@ -1,13 +1,17 @@
 import { ReactElement } from 'react';
 import Layout from '../layouts';
-import { SignUpForm } from '../components/auth/SignUpForm';
-import { Hero } from './main/hero';
+import { HeroSection } from '../sections/homepage/hero';
+import { AboutSection } from '../sections/homepage/AboutSection';
+import BannerSection from '../sections/homepage/BannerSection';
+import ContactUsSection from '../sections/homepage/ContactUsSection';
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <SignUpForm />
+      <HeroSection />
+      <AboutSection />
+      <BannerSection />
+      <ContactUsSection />
     </>
   );
 }

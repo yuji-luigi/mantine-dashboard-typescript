@@ -1,7 +1,8 @@
 import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+// import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons';
-import links from '../../../data/navbar/navbarConfig.json';
+import links from '../../../../data/mock/navbarConfig.json';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -50,8 +51,9 @@ const useStyles = createStyles((theme) => ({
 export type JSONType = typeof links;
 
 export function HeaderSearch() {
-  const [opened, { toggle }] = useDisclosure(false);
+  // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
+  const { isOpen, toggleBarOpen } = useLayoutContext();
 
   const items = links.map((link) => (
     <a
@@ -65,10 +67,10 @@ export function HeaderSearch() {
   ));
 
   return (
-    <Header height={56} className={classes.header} mb={120}>
+    <Header height={56} className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Burger opened={opened} onClick={toggle} size="sm" />
+          <Burger opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo size={28} /> */}
         </Group>
 

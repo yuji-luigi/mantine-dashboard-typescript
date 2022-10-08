@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { API_BASE_URL } from '../routes/paths';
+import { API_BASE_URL } from '../path/api-routes';
 
 // ----------------------------------------------------------------------
 
