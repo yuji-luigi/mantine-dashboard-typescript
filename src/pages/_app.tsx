@@ -25,6 +25,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
     setCookie('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
   };
   const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <>
       <Head>

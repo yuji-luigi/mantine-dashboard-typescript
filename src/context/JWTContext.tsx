@@ -146,7 +146,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout: Logout = async () => {
     setSession(null);
-    dispatch({ type: 'REGISTER' });
+    dispatch({ type: 'LOGOUT' });
   };
   return (
     <AuthContext.Provider

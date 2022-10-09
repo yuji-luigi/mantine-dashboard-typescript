@@ -1,11 +1,13 @@
 import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons';
-import links from '../../../../data/mock/navbarConfig.json';
-import useLayoutContext from '../../../hooks/useLayoutContext';
+import { MantineLogo } from '@mantine/ds';
+import links from '../../../data/mock/navbarConfig.json';
+import useLayoutContext from '../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme) => ({
   header: {
+    position: 'fixed',
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
   },
@@ -15,6 +17,19 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+
+  burger: {
+    display: 'none',
+    [theme.fn.smallerThan('md')]: {
+      display: 'block',
+    },
+  },
+  logo: {
+    display: 'none',
+    [theme.fn.largerThan('md')]: {
+      display: 'block',
+    },
   },
 
   links: {
@@ -67,13 +82,12 @@ export function HeaderSearch() {
   ));
 
   return (
-    <Header height={56} className={classes.header}>
+    <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Burger opened={isOpen} onClick={toggleBarOpen} size="sm" />
-          {/* <MantineLogo size={28} /> */}
+          <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
+          <MantineLogo className={classes.logo} size={28} />
         </Group>
-
         <Group>
           <Group ml={50} spacing={5} className={classes.links}>
             {items}

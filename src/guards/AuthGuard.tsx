@@ -31,5 +31,5 @@ export default function AuthGuard({ children }: { children: JSX.Element | JSX.El
     }
     return <LoginPage />;
   }
-  return <>{children};</>;
+  return <>{children}</>;
 }

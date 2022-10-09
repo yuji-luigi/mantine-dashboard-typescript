@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createStyles, Navbar, Group, Code } from '@mantine/core';
 import {
   IconBellRinging,
@@ -10,13 +10,16 @@ import {
   IconReceipt2,
   IconSwitchHorizontal,
   IconLogout,
+  IconDashboard,
+  IconHomeStats,
 } from '@tabler/icons';
-import useLayoutContext from '../../../hooks/useLayoutContext';
+import { useRouter } from 'next/router';
+import useLayoutContext from '../../hooks/useLayoutContext';
+import useAuth from '../../hooks/useAuth';
 
 const useStyles = createStyles((theme, _params, getRef) => {
-  const icon = getRef('icon');
+  const icon = getRef('icon') as string;
   return {
-    navbar: { position: '' },
     header: {
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
@@ -73,29 +76,36 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-const data = [
-  { link: '', label: 'Notifications', icon: IconBellRinging },
-  { link: '', label: 'Billing', icon: IconReceipt2 },
-  { link: '', label: 'Security', icon: IconFingerprint },
-  { link: '', label: 'SSH Keys', icon: IconKey },
-  { link: '', label: 'Databases', icon: IconDatabaseImport },
-  { link: '', label: 'Authentication', icon: Icon2fa },
-  { link: '', label: 'Other Settings', icon: IconSettings },
+export const navBarConfig = [
+  { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
+  { link: '/dashboard/statistics', label: 'Statistics', icon: IconHomeStats },
+  { link: '/dashboard/notificatons', label: 'Notifications', icon: IconBellRinging },
+  { link: '/dashboard/billing', label: 'Billing', icon: IconReceipt2 },
+  { link: '/dashboard/security', label: 'Security', icon: IconFingerprint },
+  { link: '/dashboard/sshkey', label: 'SSH Keys', icon: IconKey },
+  { link: '/dashboard/databases', label: 'Databases', icon: IconDatabaseImport },
+  { link: '/dashboard/authentication', label: 'Authentication', icon: Icon2fa },
+  { link: '/dashboard/others', label: 'Other Settings', icon: IconSettings },
 ];
+
+// const BASE_PATH = 'dashboard';
 
 export function NavbarVertical() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('Billing');
+  const { logout } = useAuth();
+  const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
+  const { asPath, push } = useRouter();
 
-  const links = data.map((item) => (
+  const links = navBarConfig.map((item) => (
     <a
-      className={cx(classes.link, { [classes.linkActive]: item.label === active })}
+      className={cx(classes.link, { [classes.linkActive]: item.link === active })}
       href={item.link}
       key={item.label}
       onClick={(event) => {
         event.preventDefault();
-        setActive(item.label);
+        setActive(item.link);
+        push(item.link);
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
@@ -103,8 +113,10 @@ export function NavbarVertical() {
     </a>
   ));
 
+  useEffect(() => setActive(asPath), [asPath]);
+
   return (
-    <Navbar className={classes.navbar} hidden={isOpen} height={700} width={{ sm: 300 }} p="md">
+    <Navbar fixed hidden={!isOpen} hiddenBreakpoint="md" height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           {/* <MantineLogo size={28} /> */}
@@ -119,7 +131,7 @@ export function NavbarVertical() {
           <span>Change account</span>
         </a>
 
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+        <a href="#" className={classes.link} onClick={logout}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
         </a>
