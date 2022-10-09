@@ -1,3 +1,4 @@
+import { setCookie } from 'cookies-next';
 import jwtDecode from 'jwt-decode';
 // routes
 import { PATH_AUTH } from '../path/api-routes';
@@ -41,6 +42,7 @@ const handleTokenExpired = (exp: number) => {
 const setSession = (accessToken: string | null) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
+    setCookie('jwt', accessToken);
     // eslint-disable-next-line @typescript-eslint/dot-notation
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     // This function below will handle when token is expired

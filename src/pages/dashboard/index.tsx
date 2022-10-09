@@ -1,10 +1,25 @@
-import React from 'react';
-import DashboardLayout from '../../layouts/dashboard/DashboardLayout';
+import { useEffect } from 'react';
+// next
+import { useRouter } from 'next/router';
+// config
+import { PATH_AFTER_LOGIN, PATH_DASHBOARD } from '../../path/page-paths';
+// routes
 
-const DashboardTopPage = () => (
-  <DashboardLayout>
-    <div>DashboardTopPage</div>
-  </DashboardLayout>
-);
+// ----------------------------------------------------------------------
 
-export default DashboardTopPage;
+export default function Index() {
+  const { pathname, replace, prefetch } = useRouter();
+  console.log('dashboard/index');
+
+  useEffect(() => {
+    if (pathname === PATH_DASHBOARD.root) {
+      replace(PATH_DASHBOARD.dashboard);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    prefetch(PATH_AFTER_LOGIN);
+  }, []);
+
+  return null;
+}

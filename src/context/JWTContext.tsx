@@ -21,7 +21,9 @@ const initialState: JWTContextState = {
 
 const handlers: JWTContextHandlers = {
   INITIALIZE: (state, action) => {
+    console.log('initialize');
     const { isAuthenticated, user } = action.payload as JWTContextState;
+    console.log(user);
     return {
       ...state,
       isAuthenticated,
@@ -30,6 +32,8 @@ const handlers: JWTContextHandlers = {
     };
   },
   LOGIN: (state, action) => {
+    console.log('login');
+
     const { user } = action.payload as JWTContextState;
     return {
       ...state,
@@ -37,13 +41,13 @@ const handlers: JWTContextHandlers = {
       user,
     };
   },
-  LOGOUT: (state) => ({
-    ...state,
-    isAuthenticated: false,
-    user: null,
-  }),
+  LOGOUT: (state) => {
+    console.log('logout');
+    return { ...state, isAuthenticated: false, user: null };
+  },
   REGISTER: (state, action) => {
     const { user } = action.payload as JWTContextState;
+    console.log('register');
 
     return {
       ...state,
@@ -69,17 +73,20 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const initialize = async () => {
+      console.log('jwt initiated');
       try {
         const accessToken =
           typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
+        console.log(`accessToken: ${accessToken}`);
 
         if (accessToken && isValidToken(accessToken)) {
-          await setSession(accessToken);
-
-          const response = await axiosInstance.get(PATH_AUTH.login);
+          console.log('Token valid');
+          setSession(accessToken);
+          const response = await axiosInstance.get(PATH_AUTH.me, { withCredentials: true });
+          console.log(response.data);
           const { user } = response.data;
-
-          ({
+          console.log(user);
+          dispatch({
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,

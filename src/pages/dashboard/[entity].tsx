@@ -2,10 +2,10 @@ import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { createStyles } from '@mantine/core';
 import { SectionHeader } from '../../components/datatable/SectionHeader';
-import DashboardLayout from '../../layouts/dashboard/DashboardLayout';
 import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
+import Layout from '../../layouts';
 
 // const entities: string[] = ['users', 'buildings'];
 const useStyle = createStyles((theme) => ({
@@ -44,9 +44,9 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = ({
 
 CrudPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <DashboardLayout>
+    <Layout>
       <CrudPage>{page}</CrudPage>
-    </DashboardLayout>
+    </Layout>
   );
 };
 
