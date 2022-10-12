@@ -1,0 +1,34 @@
+{
+  "home": {
+    "slice": "homepage",
+    "navbar": "Dashboard",
+    "link": "/dashboard/home",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": false
+  },
+  "statistics": {
+    "slice": "statistics",
+    "navbar": "Statistics",
+    "link": "/dashboard/statistics",
+    "title": "Statistics",
+    "subtitle": "subtitle",
+    "createButton": false
+  },
+  "notifications": {
+    "slice": "notifications",
+    "navbar": "Notifications",
+    "link": "/dashboard/notifications",
+    "title": "Notifications",
+    "subtitle": "subtitle",
+    "createButton": false
+  },
+  "billing": {
+    "slice": "billings",
+    "navbar": "Billing",
+    "link": "/dashboard/billing",
+    "title": "${user.name}'s billing",
+    "subtitle": "subtitle",
+    "createButton": false
+  }
+}

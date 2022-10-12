@@ -79,7 +79,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 export const navBarConfig = [
   { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
   { link: '/dashboard/statistics', label: 'Statistics', icon: IconHomeStats },
-  { link: '/dashboard/notificatons', label: 'Notifications', icon: IconBellRinging },
+  { link: '/dashboard/notifications', label: 'Notifications', icon: IconBellRinging },
   { link: '/dashboard/billing', label: 'Billing', icon: IconReceipt2 },
   { link: '/dashboard/security', label: 'Security', icon: IconFingerprint },
   { link: '/dashboard/sshkey', label: 'SSH Keys', icon: IconKey },

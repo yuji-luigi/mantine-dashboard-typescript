@@ -8,8 +8,12 @@ import {
   Anchor,
   ScrollArea,
   useMantineTheme,
+  Pagination,
 } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons';
+import { useState } from 'react';
+
+import users from '../../../data/mock/usersDatatable.json';
 
 interface UsersTableProps {
   data: { avatar: string; name: string; job: string; email: string; phone: string }[];
@@ -23,8 +27,8 @@ const jobColors: Record<string, string> = {
 
 export function UsersTable({ data }: UsersTableProps) {
   const theme = useMantineTheme();
-  const rows = data.map((item) => (
-    <tr key={item.name}>
+  const rows = data.map((item, i) => (
+    <tr key={i}>
       <td>
         <Group spacing="sm">
           <Avatar size={30} src={item.avatar} radius={30} />
@@ -64,21 +68,27 @@ export function UsersTable({ data }: UsersTableProps) {
       </td>
     </tr>
   ));
-
+  const ROWS_PER_PAGE = 5;
+  const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
+  const [page, setPage] = useState(1);
+  console.log(page);
   return (
-    <ScrollArea>
-      <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
-        <thead>
-          <tr>
-            <th>Employee</th>
-            <th>Job title</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
-    </ScrollArea>
+    <>
+      <ScrollArea>
+        <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Job title</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </Table>
+      </ScrollArea>
+      <Pagination page={page} onChange={setPage} total={TOTAL} />
+    </>
   );
 }

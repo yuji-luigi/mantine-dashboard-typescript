@@ -13,8 +13,6 @@ const Layout = ({
   children: ReactElement;
 }) => {
   if (variant === 'logoOnly') {
-    console.log('LogoOnly Layout');
-
     return (
       <>
         <p>logo only layout</p>
@@ -23,11 +21,8 @@ const Layout = ({
     );
   }
   if (variant === 'main') {
-    console.log('Main Layout');
-
     return <MainLayout>{children}</MainLayout>;
   }
-  console.log('Dashboard Layout');
   return (
     <AuthGuard>
       <DashboardLayout>{children}</DashboardLayout>

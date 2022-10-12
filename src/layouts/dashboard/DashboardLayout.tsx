@@ -10,8 +10,6 @@ const useStyles = createStyles((/* theme, _params, getRef */) => ({
 
 const DashboardLayout = ({ children }: { children: JSX.Element }) => {
   const { classes } = useStyles();
-  console.log('rendering DashboardLayout');
-
   return (
     <DashboardLayoutContextProvider>
       <HeaderSearch />

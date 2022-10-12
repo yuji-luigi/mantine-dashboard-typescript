@@ -9,8 +9,6 @@ import { PATH_AFTER_LOGIN, PATH_DASHBOARD } from '../../path/page-paths';
 
 export default function Index() {
   const { pathname, replace, prefetch } = useRouter();
-  console.log('dashboard/index');
-
   useEffect(() => {
     if (pathname === PATH_DASHBOARD.root) {
       replace(PATH_DASHBOARD.dashboard);

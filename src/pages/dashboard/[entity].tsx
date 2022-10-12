@@ -1,13 +1,16 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { createStyles } from '@mantine/core';
-import { SectionHeader } from '../../components/datatable/SectionHeader';
+import { SectionHeader } from '../../sections/datatable/SectionHeader';
 import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
 import Layout from '../../layouts';
+import { sectionData } from '../../data';
 
-// const entities: string[] = ['users', 'buildings'];
+// TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
+
+const entities: string[] = Object.keys(sectionData);
 const useStyle = createStyles((theme) => ({
   contentWrapper: {
     [theme.fn.largerThan('md')]: {
@@ -18,26 +21,21 @@ const useStyle = createStyles((theme) => ({
   },
 }));
 
-const CrudPage: NextPageWithLayout<PropWithChildren> = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { classes } = useStyle();
-  const router = useRouter();
-  const entity = router.query.entity as string;
-
-  // useEffect(() => {
-  //   if (!entities.includes(entity)) {
-  //     router.push('/404');
-  //   }
-  // }, []);
-
+  const { query, push } = useRouter();
+  const { entity } = query;
+  useEffect(() => {
+    console.log('useEffect');
+    if (!entities.includes(entity as string)) {
+      push('/dashboard/home');
+    }
+  }, [entity]);
   return (
     <div className={classes.contentWrapper}>
-      <SectionHeader entity={entity} />
+      <SectionHeader />
       <Tables />
-      {children}
+      {/* {children} */}
     </div>
   );
 };
