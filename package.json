@@ -38,7 +38,6 @@
     "@mantine/prism": "5.0.0",
     "@modulz/radix-icons": "^4.0.0",
     "@next/bundle-analyzer": "^12.1.4",
-    "@next/swc-darwin-arm64": "^11.1.2",
     "@next/swc-wasm-nodejs": "12.0.5-canary.3",
     "@next/swc-wasm-web": "12.0.5-canary.3",
     "@storybook/addons": "^6.0.0",
