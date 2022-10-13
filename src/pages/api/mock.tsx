@@ -1,4 +1,4 @@
-function handler(req, res) {
+function handler(req: any, res: any) {
   const { email, password } = req.body;
   if (email === 'admin@demo.com' && password === 'user$$$') {
     return res.status(200).json({

@@ -1,10 +1,16 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 // next
 import Head from 'next/head';
 
 // ----------------------------------------------------------------------
+interface props {
+  children?: ReactNode;
+  title?: string;
+  meta?: any;
+  other?: any;
+}
 
-const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
+const Page = forwardRef<void, props>(({ children, title = '', meta, ...other }) => (
   <>
     <Head>
       <title>{`${title} | Minimal-UI`}</title>
