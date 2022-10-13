@@ -102,17 +102,26 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login: Login = async (email, password) => {
-    const response = await axiosInstance.post(
-      PATH_AUTH.login,
-      { email, password }
-      // { withCredentials: true }
-    );
-    const { token } = response.data.data;
-    setSession(token.accessToken);
+    // const response = await axiosInstance.post(
+    //   PATH_AUTH.login,
+    //   { email, password }
+    //   // { withCredentials: true }
+    // );
+    // const { token } = response.data.data;
+    // setSession(token.accessToken);
 
-    // call me and get the user
-    const responseMe = await axiosInstance.get(PATH_AUTH.me);
-    const { user } = responseMe.data.data;
+    // // call me and get the user
+    // const responseMe = await axiosInstance.get(PATH_AUTH.me);
+    // const { user } = responseMe.data.data;
+    const res = await fetch('/api/mock', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const user = await res.json();
+    console.log(user);
     dispatch({
       type: 'LOGIN',
       payload: {
