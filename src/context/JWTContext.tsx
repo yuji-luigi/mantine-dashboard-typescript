@@ -80,13 +80,26 @@ function AuthProvider({ children }: { children: ReactNode }) {
             },
           });
         } else {
+          //NOTE: now always authenticated
           dispatch({
             type: 'INITIALIZE',
             payload: {
-              isAuthenticated: false,
-              user: null,
+              isAuthenticated: true,
+              user: {
+                name: 'always user',
+                email: 'email@demo.com',
+                password: 'encrypted',
+                userSetting: 'string',
+              },
             },
           });
+          // dispatch({
+          //   type: 'INITIALIZE',
+          //   payload: {
+          //     isAuthenticated: false,
+          //     user: null,
+          //   },
+          // });
         }
       } catch (error) {
         dispatch({

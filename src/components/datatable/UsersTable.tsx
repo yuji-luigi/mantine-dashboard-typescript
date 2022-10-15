@@ -1,91 +1,37 @@
-import {
-  Avatar,
-  Badge,
-  Table,
-  Group,
-  Text,
-  ActionIcon,
-  Anchor,
-  ScrollArea,
-  useMantineTheme,
-  Pagination,
-} from '@mantine/core';
-import { IconPencil, IconTrash } from '@tabler/icons';
+import { Table, ScrollArea, Pagination } from '@mantine/core';
 import { useState } from 'react';
 
+import { useRouter } from 'next/router';
+import { TableRow } from './TableRow';
 import users from '../../../data/mock/usersDatatable.json';
+import TableHeader from './table-rows/TableHeader';
+import TableCell from './table-rows/tablecell/TableCell';
+import { UsersTableRow } from '../../types/general/data/datatable/objects';
+import { Sections } from '../../types/general/data/datatable/sections-json';
+import formFields from '../../../data/datatable/formFields';
 
-interface UsersTableProps {
-  data: { avatar: string; name: string; job: string; email: string; phone: string }[];
-}
-
-const jobColors: Record<string, string> = {
-  engineer: 'blue',
-  manager: 'cyan',
-  designer: 'pink',
-};
-
-export function UsersTable({ data }: UsersTableProps) {
-  const theme = useMantineTheme();
-  const rows = data.map((item, i) => (
-    <tr key={i}>
-      <td>
-        <Group spacing="sm">
-          <Avatar size={30} src={item.avatar} radius={30} />
-          <Text size="sm" weight={500}>
-            {item.name}
-          </Text>
-        </Group>
-      </td>
-
-      <td>
-        <Badge
-          color={jobColors[item.job.toLowerCase()]}
-          variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
-        >
-          {item.job}
-        </Badge>
-      </td>
-      <td>
-        <Anchor<'a'> size="sm" href="#" onClick={(event) => event.preventDefault()}>
-          {item.email}
-        </Anchor>
-      </td>
-      <td>
-        <Text size="sm" color="dimmed">
-          {item.phone}
-        </Text>
-      </td>
-      <td>
-        <Group spacing={0} position="right">
-          <ActionIcon>
-            <IconPencil size={16} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon color="red">
-            <IconTrash size={16} stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </td>
-    </tr>
-  ));
+export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
   const ROWS_PER_PAGE = 5;
   const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
-  console.log(page);
+  // const { query, push } = useRouter();
+
+  // const sectionFormFields = formFields[query.entity as Sections];
+  // if (!sectionFormFields) {
+  //   push('/dashboard/home');
+  //   return null;
+  // }
+  // sectionFormFields.sort((a, b) => a.priority - b.priority);
   return (
     <>
       <ScrollArea>
         <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
-          <thead>
-            <tr>
-              <th>Employee</th>
-              <th>Job title</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
+          <TableHeader />
+          <tbody>
+            {data.map((rowData) => (
+              <TableRow rowData={rowData} />
+            ))}
+          </tbody>
         </Table>
       </ScrollArea>
       <Pagination page={page} onChange={setPage} total={TOTAL} />

@@ -1,0 +1,93 @@
+import { Badge } from '@mantine/core';
+import { FormField } from '../../../src/types/general/data/datatable/sections-json';
+
+const users: Array<FormField> = [
+  {
+    id: 'avatar',
+    name: 'avatar',
+    label: '',
+    // noTable: true,
+    type: 'avatar',
+    // required: fa,
+    priority: 1,
+  },
+  {
+    id: 'name',
+    name: 'name',
+    label: 'Nome',
+    type: 'text',
+    required: true,
+    priority: 1,
+  },
+  {
+    id: 'role',
+    name: 'role',
+    label: 'Ruolo',
+    type: 'select',
+    options: ['super_admin', 'admin', 'operatore', 'supervisore', 'manutentore'],
+    style: ['badge'],
+    required: true,
+    priority: 1,
+  },
+  {
+    id: 'email',
+    name: 'email',
+    label: 'Email',
+    type: 'text',
+    required: true,
+    priority: 1,
+  },
+  // {
+  //   id: 'surname',
+  //   name: 'surname',
+  //   label: 'Surname',
+  //   type: 'text',
+  //   noTable: true,
+  //   required: true,
+  //   priority: 2,
+  // },
+  {
+    id: 'phone',
+    name: 'phone',
+    label: 'Telefono',
+    type: 'text',
+    required: false,
+    priority: 1,
+  },
+
+  // {
+  //   id: 'password',
+  //   name: 'password',
+  //   label: 'Password',
+  //   type: 'text',
+  //   required: true,
+  //   noTable: true,
+  //   priority: 6,
+  // },
+  // {
+  //   id: 'buildings',
+  //   name: 'buildings',
+  //   label: 'Struttura',
+  //   type: 'select',
+  //   entitySingle: 'building',
+  //   entityPlural: 'buildings',
+  //   selectValues: ['name'],
+  //   multi: true,
+  //   required: false,
+  //   priority: 100,
+  // },
+  // {
+  //   id: 'customer',
+  //   name: 'customer',
+  //   label: 'Cliente',
+  //   type: 'select',
+  //   entitySingle: 'customer',
+  //   entityPlural: 'customers',
+  //   selectValues: ['ragioneSociale'],
+  //   grantTo: ['super_admin'],
+  //   required: false,
+  //   priority: 100,
+  // },
+];
+
+export default users;
