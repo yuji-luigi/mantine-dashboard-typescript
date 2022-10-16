@@ -15,6 +15,7 @@ const TableHeader = () => {
           <>{!cellData.noTable && <th key={cellData.label}>{cellData.label}</th>}</>
         ))}
       </tr>
+      <tr />
     </thead>
   );
 };

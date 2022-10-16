@@ -1,4 +1,3 @@
-import { Badge } from '@mantine/core';
 import { FormField } from '../../../src/types/general/data/datatable/sections-json';
 
 const users: Array<FormField> = [
@@ -20,12 +19,12 @@ const users: Array<FormField> = [
     priority: 1,
   },
   {
-    id: 'role',
-    name: 'role',
-    label: 'Ruolo',
-    type: 'select',
+    id: 'job',
+    name: 'job',
+    label: 'Job title',
+    type: 'static-select',
     options: ['super_admin', 'admin', 'operatore', 'supervisore', 'manutentore'],
-    style: ['badge'],
+    badge: true,
     required: true,
     priority: 1,
   },

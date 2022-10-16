@@ -1,7 +1,7 @@
 import React from 'react';
-import { Group, Avatar, Text, Badge, Anchor, ActionIcon, useMantineTheme } from '@mantine/core';
-import { IconPencil, IconTrash } from '@tabler/icons';
-import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
+import { Group, Avatar, Text } from '@mantine/core';
+// import { IconPencil, IconTrash } from '@tabler/icons';
+// import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
 import { FieldTypes } from '../../../../../data/datatable/formFields';
 import { FormField } from '../../../../types/general/data/datatable/sections-json';
 
@@ -11,72 +11,65 @@ export const jobColors: Record<string, string> = {
   designer: 'pink',
 };
 
-const TableCell = ({ rowData, cellConfig }: { rowData: UsersTableRow; cellConfig: FormField }) => {
-  const theme = useMantineTheme();
+const TableCell = ({ cellData, cellConfig }: { cellData: string; cellConfig: FormField }) => (
+  // const theme = useMantineTheme();
   // if (cellConfig.badge) {
   //   return (
   //     <td>
   //       <td>
   //         <Badge
-  //           color={jobColors[rowData.job.toLowerCase()]}
+  //           color={jobColors[cellData.job.toLowerCase()]}
   //           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
   //         >
-  //           {rowData.job}
+  //           {cellData.job}
   //         </Badge>
   //       </td>
   //     </td>
   //   );
   // }
 
-  return (
-    <>
-      {cellConfig.type === FieldTypes.Avatar && (
-        <td>
-          <Group spacing="xs">
-            <Avatar size={40} src={rowData.avatar} radius={30} />
-          </Group>
-        </td>
-      )}
-      {cellConfig.type === FieldTypes.Text && (
-        <td>
-          <Group spacing="sm">
-            <Text size="sm" weight={500}>
-              {rowData[cellConfig.name!]}
-            </Text>
-          </Group>
-        </td>
-      )}
+  <>
+    {cellConfig.type === FieldTypes.Avatar && (
+      <Group spacing="xs">
+        <Avatar size={40} src={cellData} radius={30} />
+      </Group>
+    )}
 
-      <td>
+    {cellConfig.type === 'text' && (
+      <Group spacing="sm">
+        <Text size="sm" weight={500}>
+          {cellData}
+        </Text>
+      </Group>
+    )}
+    {cellConfig.type === 'static-select' && (
+      <Group spacing="sm">
+        <Text size="sm" weight={500}>
+          {cellData}
+        </Text>
+      </Group>
+    )}
+
+    {/*
         <Badge
-          color={jobColors[rowData.job.toLowerCase()]}
+          color={jobColors[cellData?.toLowerCase()]}
           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
         >
-          {rowData.job}
+          {cellData}
         </Badge>
-      </td>
-      <td>
-        <Anchor<'a'> size="sm" href="#" onClick={(event) => event.preventDefault()}>
-          {rowData.email}
-        </Anchor>
-      </td>
-      <td>
-        <Text size="sm" color="dimmed">
-          {rowData.phone}
-        </Text>
-      </td>
-      <td>
-        <Group spacing={0} position="right">
-          <ActionIcon>
-            <IconPencil size={16} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon color="red">
-            <IconTrash size={16} stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </td>
-    </>
-  );
-};
+      */}
 
+    {/* <td>
+        <Anchor<'a'> size="sm" href="#" onClick={(event) => event.preventDefault()}>
+          {cellData}
+        </Anchor>
+      </td> */}
+
+    {/* <td>
+        <Text size="sm" color="dimmed">
+          {cellData}
+        </Text>
+      </td> */}
+  </>
+);
 export default TableCell;

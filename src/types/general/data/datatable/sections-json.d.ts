@@ -11,8 +11,9 @@ interface SectionDataJson {
   };
 }
 
-type FieldType = 'text' | 'select' | 'date' | 'number' | 'currency' | 'avatar';
+type FieldType = 'text' | 'select' | 'static-select' | 'date' | 'number' | 'currency' | 'avatar';
 type CellStyles = 'badge' | '';
+// type FieldType = FieldTypes[FieldTypes[keyof typeof FieldTypes]];
 interface FormField {
   /**
    * id and name of the field.
@@ -38,7 +39,8 @@ interface FormField {
   /**
    * from object. get the property [selectValue[0]] [selectValue[1]]... To show on the DataTable.
    */
-  style: Array<CellStyles>;
+  // style: Array<CellStyles>;
+  badge?: boolean;
   selectValues?: Array<string>;
   /** Type select. static options*/
   options?: Array<string>;
