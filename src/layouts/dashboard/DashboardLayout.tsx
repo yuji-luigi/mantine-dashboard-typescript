@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { createStyles } from '@mantine/core';
 import { DashboardLayoutContextProvider } from '../../context/DashboardLayoutContext';
 import { HeaderSearch } from './HeaderSearch';
@@ -15,7 +15,7 @@ const useStyles = createStyles((theme /* _params, getRef */) => ({
   },
 }));
 
-const DashboardLayout = ({ children }: { children: JSX.Element }) => {
+const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { classes } = useStyles();
   return (
     <DashboardLayoutContextProvider>

@@ -29,6 +29,7 @@ interface FormField {
    * See id property */
   name?: string;
   label: string;
+  placeholder?: string;
   type: FieldType;
   /**For type select */
   multi?: boolean;

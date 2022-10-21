@@ -1,47 +1,50 @@
-{
+const json = {
   "home": {
     "slice": "homepage",
-    "navbarTitle": "Dashboard",
+    "navbar": "Dashboard",
     "link": "/dashboard/home",
     "title": "welcome to dashboard",
     "subtitle": "subtitle",
     "createButton": false,
-    "icon": "Dashboard"
+    "icon": "dashboard"
   },
   "statistics": {
     "slice": "statistics",
-    "navbarTitle": "Statistics",
+    "navbar": "Statistics",
     "link": "/dashboard/statistics",
     "title": "Statistics",
     "subtitle": "subtitle",
     "createButton": false,
-    "icon": "Statistic"
+    "icon": "statistic"
   },
   "notifications": {
     "slice": "notifications",
-    "navbarTitle": "Notifications",
+    "navbar": "Notifications",
     "link": "/dashboard/notifications",
     "title": "Notifications",
     "subtitle": "subtitle",
     "createButton": false,
-    "icon": "Notification"
+    "icon": "notification"
   },
   "billing": {
     "slice": "billings",
-    "navbarTitle": "Billing",
+    "navbar": "Billing",
     "link": "/dashboard/billing",
     "title": "${user.name}'s billing",
     "subtitle": "subtitle",
     "createButton": false,
-    "icon": "Receipt"
+    "icon": "receipt"
   },
   "users": {
     "slice": "users",
-    "navbarTitle": "User",
+    "navbar": "User",
     "link": "/dashboard/users",
     "title": "Users",
     "subtitle": "subtitle",
-    "createButton": "New User",
-    "icon": "Dashboard"
+    "createButton": true
   }
 }
+
+const stJson = JSON.stringify(json)
+const data = JSON.parse(stJson)
+Object.keys(data).forEach((key, index, _) => console.log(_))

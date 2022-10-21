@@ -1,14 +1,14 @@
 import { ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import { createStyles } from '@mantine/core';
-import { SectionHeader } from '../../sections/datatable/SectionHeader';
+import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
 import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
 import Layout from '../../layouts';
 import { sectionData } from '../../data';
-import formFields from '../../../data/datatable/formFields/index';
-import { FormFields } from '../../types/general/data/datatable/sections-json';
+import formFields from '../../../data/dataTable/formFields/index';
+import { FormFields } from '../../types/general/data/dataTable/sections-json';
 import Page from '../../components/Page';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
@@ -17,7 +17,6 @@ const entities: string[] = Object.keys(sectionData);
 // const useStyle = createStyles((theme) => ({}));
 
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
-  // const { classes } = useStyle();
   const { query, push } = useRouter();
   const entity = query.entity as string;
   formFields as FormFields;
@@ -28,12 +27,10 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   }, [entity]);
   return (
     <Page>
-
-    <div>
-      <SectionHeader />
-      <Tables />
-      {/* {children} */}
-    </div>
+      <div>
+        <TableSectionHeader />
+        <Tables />
+      </div>
     </Page>
   );
 };

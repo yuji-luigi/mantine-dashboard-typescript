@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
 import { createStyles, Navbar, Group, Code } from '@mantine/core';
-import {
-  IconBellRinging,
-  IconFingerprint,
-  IconKey,
-  IconSettings,
-  Icon2fa,
-  IconDatabaseImport,
-  IconReceipt2,
-  IconSwitchHorizontal,
-  IconLogout,
-  IconDashboard,
-  IconHomeStats,
-} from '@tabler/icons';
+import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import useLayoutContext from '../../hooks/useLayoutContext';
 import useAuth from '../../hooks/useAuth';
+import { sectionData } from '../../data';
+
+import { Icons, IconsType } from '../../data/icons/index';
+import { Sections } from '../../types/general/data/dataTable/sections-json';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon') as string;
@@ -76,17 +68,30 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-export const navBarConfig = [
-  { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
-  { link: '/dashboard/statistics', label: 'Statistics', icon: IconHomeStats },
-  { link: '/dashboard/notifications', label: 'Notifications', icon: IconBellRinging },
-  { link: '/dashboard/billing', label: 'Billing', icon: IconReceipt2 },
-  { link: '/dashboard/security', label: 'Security', icon: IconFingerprint },
-  { link: '/dashboard/sshkey', label: 'SSH Keys', icon: IconKey },
-  { link: '/dashboard/databases', label: 'Databases', icon: IconDatabaseImport },
-  { link: '/dashboard/authentication', label: 'Authentication', icon: Icon2fa },
-  { link: '/dashboard/others', label: 'Other Settings', icon: IconSettings },
-];
+type NavbarConfig = { link: string; label: string; icon: TablerIcon };
+const navBarConfig: NavbarConfig[] = [];
+
+Object.keys(sectionData).forEach((key: string): void => {
+  const typedKey = key as Sections;
+  const config: NavbarConfig = {
+    link: sectionData[typedKey].link,
+    label: sectionData[typedKey].navbarTitle,
+    icon: Icons[sectionData[typedKey].icon as IconsType],
+  };
+  navBarConfig.push(config);
+});
+
+// export const navBarConfig = [
+//   { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
+//   { link: '/dashboard/statistics', label: 'Statistics', icon: IconHomeStats },
+//   { link: '/dashboard/notifications', label: 'Notifications', icon: IconBellRinging },
+//   { link: '/dashboard/billing', label: 'Billing', icon: IconReceipt2 },
+//   { link: '/dashboard/security', label: 'Security', icon: IconFingerprint },
+//   { link: '/dashboard/sshkey', label: 'SSH Keys', icon: IconKey },
+//   { link: '/dashboard/databases', label: 'Databases', icon: IconDatabaseImport },
+//   { link: '/dashboard/authentication', label: 'Authentication', icon: Icon2fa },
+//   { link: '/dashboard/others', label: 'Other Settings', icon: IconSettings },
+// ];
 
 // const BASE_PATH = 'dashboard';
 
@@ -96,7 +101,6 @@ export function NavbarVertical() {
   const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
   const { asPath, push } = useRouter();
-
   const links = navBarConfig.map((item) => (
     <a
       className={cx(classes.link, { [classes.linkActive]: item.link === active })}
@@ -114,7 +118,6 @@ export function NavbarVertical() {
   ));
 
   useEffect(() => setActive(asPath), [asPath]);
-
   return (
     <Navbar fixed hidden={!isOpen} hiddenBreakpoint="md" height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
@@ -127,12 +130,11 @@ export function NavbarVertical() {
 
       <Navbar.Section className={classes.footer}>
         <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
-          <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
+          <Icons.SwitchHorizontal className={classes.linkIcon} stroke={1.5} />
           <span>Change account</span>
         </a>
-
         <a href="#" className={classes.link} onClick={logout}>
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
+          <Icons.Logout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
         </a>
       </Navbar.Section>

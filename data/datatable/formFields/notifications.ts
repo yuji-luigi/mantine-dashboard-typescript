@@ -1,4 +1,4 @@
-import { FormField } from '../../../src/types/general/data/datatable/sections-json';
+import { FormField } from '../../../src/types/general/data/dataTable/sections-json';
 
 const users: Array<FormField> = [
   {

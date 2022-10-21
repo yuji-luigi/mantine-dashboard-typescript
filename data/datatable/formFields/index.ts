@@ -1,8 +1,8 @@
 import billing from './billings';
-import home from './users';
+import users from './users';
 import statistics from './statistics';
 import notifications from './notifications';
-import { FormFields } from '../../../src/types/general/data/datatable/sections-json';
+import { FormFields } from '../../../src/types/general/data/dataTable/sections-json';
 
 /**
  * typing support when making conditions in jsx (tabelcell component)
@@ -17,5 +17,5 @@ export enum FieldTypes {
   StaticSelect = 'static-select',
 }
 
-const formFields: FormFields = { billing, home, statistics, notifications };
+const formFields: FormFields = { billing, users, statistics, notifications };
 export default formFields;

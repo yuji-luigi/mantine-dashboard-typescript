@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import formFields from '../../../../data/datatable/formFields';
-import { Sections } from '../../../types/general/data/datatable/sections-json';
+import formFields from '../../../../data/dataTable/formFields';
+import { Sections } from '../../../types/general/data/dataTable/sections-json';
 
 const TableHeader = () => {
   const { query } = useRouter();

@@ -1,1 +1,1 @@
-export { default as sectionData } from '../../data/datatable/section/sectionData.json';
+export { default as sectionData } from '../../data/dataTable/section/sectionData.json';

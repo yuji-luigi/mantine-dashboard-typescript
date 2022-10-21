@@ -7,9 +7,9 @@ import { TableCellDecorator } from './TableCellDecorator';
 import users from '../../../data/mock/usersDatatable.json';
 import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
-import { UsersTableRow } from '../../types/general/data/datatable/objects';
-import { Sections } from '../../types/general/data/datatable/sections-json';
-import formFields from '../../../data/datatable/formFields';
+import { UsersTableRow } from '../../types/general/data/dataTable/objects';
+import { Sections } from '../../types/general/data/dataTable/sections-json';
+import formFields from '../../../data/dataTable/formFields';
 
 export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
   const ROWS_PER_PAGE = 5;

@@ -1,10 +1,11 @@
-import { FormField } from '../../../src/types/general/data/datatable/sections-json';
+import { FormField } from '../../../src/types/general/data/dataTable/sections-json';
 
 const users: Array<FormField> = [
   {
     id: 'name',
     name: 'name',
     label: 'Nome',
+    placeholder: 'First name',
     type: 'text',
     required: true,
     priority: 1,

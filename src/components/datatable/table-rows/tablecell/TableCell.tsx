@@ -2,8 +2,8 @@ import React from 'react';
 import { Group, Avatar, Text } from '@mantine/core';
 // import { IconPencil, IconTrash } from '@tabler/icons';
 // import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
-import { FieldTypes } from '../../../../../data/datatable/formFields';
-import { FormField } from '../../../../types/general/data/datatable/sections-json';
+import { FieldTypes } from '../../../../../data/dataTable/formFields';
+import { FormField } from '../../../../types/general/data/dataTable/sections-json';
 
 export const jobColors: Record<string, string> = {
   engineer: 'blue',

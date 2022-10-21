@@ -1,5 +1,5 @@
 import { Badge, useMantineTheme } from '@mantine/core';
-import { FormField } from '../../../../types/general/data/datatable/sections-json';
+import { FormField } from '../../../../types/general/data/dataTable/sections-json';
 import TableCell from './TableCell';
 
 export const colors: Record<string, string> = {
