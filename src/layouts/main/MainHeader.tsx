@@ -18,7 +18,7 @@ import {
   Collapse,
   ScrollArea,
 } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
+// import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconNotification,
@@ -29,6 +29,7 @@ import {
   IconCoin,
   IconChevronDown,
 } from '@tabler/icons';
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -149,9 +150,9 @@ export function MainHeader() {
 
   return (
     <Box>
-      <Header height={60} px="md">
+      <Header fixed height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          <MantineLogo size={30} />
+          {/* <MantineLogo size={30} /> */}
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="#" className={classes.link}>
@@ -215,6 +216,7 @@ export function MainHeader() {
               Log in
             </Button>
             <Button onClick={() => push('/sign-up')}>Sign up</Button>
+         <ColorSchemeToggle variant="outline" />
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

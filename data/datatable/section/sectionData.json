@@ -35,6 +35,15 @@
     "createButton": false,
     "icon": "Receipt"
   },
+  "buildings": {
+    "slice": "buildingss",
+    "navbarTitle": "buildings",
+    "link": "/dashboard/buildings",
+    "title": "${user.name}'s buildings",
+    "subtitle": "subtitle",
+    "createButton": false,
+    "icon": "Receipt"
+  },
   "users": {
     "slice": "users",
     "navbarTitle": "User",

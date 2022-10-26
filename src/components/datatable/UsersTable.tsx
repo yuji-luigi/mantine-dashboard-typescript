@@ -7,20 +7,19 @@ import { TableCellDecorator } from './TableCellDecorator';
 import users from '../../../data/mock/usersDatatable.json';
 import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
-import { UsersTableRow } from '../../types/general/data/dataTable/objects';
-import { Sections } from '../../types/general/data/dataTable/sections-json';
-import formFields from '../../../data/dataTable/formFields';
+import formFields from '../../../data/dataTable/formFields/index';
+import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
   const ROWS_PER_PAGE = 5;
   const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
-  const { query, push } = useRouter();
+  const { query } = useRouter();
+  const { crudDocuments } = useCrudSlice(query.entity as Sections);
 
   const sectionFormFields = formFields[query.entity as Sections];
   if (!sectionFormFields) {
-    push('/dashboard/home');
-    return null;
+    return <h1>Please provide the formField.json file to display the table</h1>;
   }
   sectionFormFields.sort((a, b) => a.priority - b.priority);
   return (
@@ -29,10 +28,14 @@ export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
         <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
           <TableHeader />
           <tbody>
-            {data.map((rowData) => (
-              <tr>
+            {crudDocuments?.documentsArray.map((rowData) => (
+              <tr key={rowData._id}>
                 {sectionFormFields.map((cellConfig) => (
-                  <TableCellDecorator cellConfig={cellConfig} rowData={rowData} />
+                  <TableCellDecorator
+                    key={cellConfig.id}
+                    cellConfig={cellConfig}
+                    rowData={rowData}
+                  />
                 ))}
                 <td>
                   <Group spacing={0} position="right">
@@ -46,7 +49,9 @@ export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
                 </td>
               </tr>
             ))}
-            <td />
+            <tr>
+              <td />
+            </tr>
           </tbody>
         </Table>
       </ScrollArea>

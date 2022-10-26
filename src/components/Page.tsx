@@ -17,9 +17,7 @@ const Page = forwardRef<void, props>(({ children, title = '', meta, ...other }) 
       {meta}
     </Head>
 
-    <div {...other}>
-      {children}
-    </div>
+    <div {...other}>{children}</div>
   </>
 ));
 

@@ -2,8 +2,10 @@ import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
+import Link from 'next/link';
 import links from '../../../data/mock/navbarConfig.json';
 import useLayoutContext from '../../hooks/useLayoutContext';
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -71,14 +73,9 @@ export function HeaderSearch() {
   const { isOpen, toggleBarOpen } = useLayoutContext();
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </a>
+    <Link key={link.label} href={link.link}>
+      <a className={classes.link}>{link.label}</a>
+    </Link>
   ));
 
   return (
@@ -98,6 +95,7 @@ export function HeaderSearch() {
             icon={<IconSearch size={16} stroke={1.5} />}
             data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
           />
+          <ColorSchemeToggle size="lg" />
         </Group>
       </div>
     </Header>

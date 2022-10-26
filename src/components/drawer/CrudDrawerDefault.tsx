@@ -1,7 +1,7 @@
 import { Drawer } from '@mantine/core';
 import FormFields from '../input/FormFields';
 
-export function DrawerDefault({
+export function CrudDrawerDefault({
   opened,
   setOpened,
 }: {

@@ -1,7 +1,7 @@
-type Sections = 'home' | 'statistics' | 'notifications' | 'billing';
+type Sections = 'home' | 'statistics' | 'notifications' | 'billing' | 'users' | 'buildings';
 
 interface SectionDataJson {
-  [Sections: string]: {
+  [key: Sections]: {
     slice: string;
     navbar: string;
     link: string;
@@ -14,7 +14,7 @@ interface SectionDataJson {
 type FieldType = 'text' | 'select' | 'static-select' | 'date' | 'number' | 'currency' | 'avatar';
 type CellStyles = 'badge' | '';
 // type FieldType = FieldTypes[FieldTypes[keyof typeof FieldTypes]];
-interface FormField {
+interface FormFieldInterface {
   /**
    * id and name of the field.
    *  Dot(.) is not allowed.
@@ -62,6 +62,6 @@ interface FormField {
   priority: number;
 }
 
-export type FormFields = {
-  [key: string]: Array<FormField>;
+type FormFieldsType = {
+  [key: string]: Array<FormFieldInterFace>;
 };

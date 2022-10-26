@@ -14,14 +14,14 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "declaration": true,
-    "declarationDir": "./src/types"
+    "declaration": false
+    // "declarationDir": "./src/types",
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/input/Password.Strengthtsx",
+    "src/components/input/Password.Strength.tsx",
     "data/dataTable/section/sectionData.js"
   ],
   "exclude": ["node_modules"]

@@ -1,6 +1,13 @@
-import { FormField } from '../../../src/types/general/data/dataTable/sections-json';
-
-const users: Array<FormField> = [
+export const statisticsTableData: Array<FormFieldInterface> = [
+  {
+    id: 'avatar',
+    name: 'avatar',
+    label: '',
+    // noTable: true,
+    type: 'avatar',
+    // required: fa,
+    priority: 1,
+  },
   {
     id: 'name',
     name: 'name',
@@ -10,21 +17,14 @@ const users: Array<FormField> = [
     priority: 1,
   },
   {
-    id: 'surname',
-    name: 'surname',
-    label: 'Cognome',
-    type: 'text',
-    required: true,
-    priority: 2,
-  },
-  {
-    id: 'role',
-    name: 'role',
-    label: 'Ruolo',
-    type: 'select',
+    id: 'job',
+    name: 'job',
+    label: 'Job title',
+    type: 'static-select',
     options: ['super_admin', 'admin', 'operatore', 'supervisore', 'manutentore'],
+    badge: true,
     required: true,
-    priority: 3,
+    priority: 1,
   },
   {
     id: 'email',
@@ -32,7 +32,16 @@ const users: Array<FormField> = [
     label: 'Email',
     type: 'text',
     required: true,
-    priority: 4,
+    priority: 1,
+  },
+  {
+    id: 'surname',
+    name: 'surname',
+    label: 'Surname',
+    type: 'text',
+    noTable: true,
+    required: true,
+    priority: 2,
   },
   {
     id: 'phone',
@@ -40,8 +49,9 @@ const users: Array<FormField> = [
     label: 'Telefono',
     type: 'text',
     required: false,
-    priority: 5,
+    priority: 1,
   },
+
   {
     id: 'password',
     name: 'password',
@@ -76,5 +86,3 @@ const users: Array<FormField> = [
     priority: 100,
   },
 ];
-
-export default users;

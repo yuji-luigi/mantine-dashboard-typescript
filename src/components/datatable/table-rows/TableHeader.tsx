@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import formFields from '../../../../data/dataTable/formFields';
-import { Sections } from '../../../types/general/data/dataTable/sections-json';
+import formFields from '../../../../data/dataTable/formFields/index';
 
 const TableHeader = () => {
   const { query } = useRouter();
@@ -12,7 +11,7 @@ const TableHeader = () => {
     <thead>
       <tr>
         {sectionRowData?.map((cellData) => (
-          <>{!cellData.noTable && <th key={cellData.label}>{cellData.label}</th>}</>
+          <Fragment key={cellData.label}>{!cellData.noTable && <th>{cellData.label}</th>}</Fragment>
         ))}
       </tr>
       <tr />

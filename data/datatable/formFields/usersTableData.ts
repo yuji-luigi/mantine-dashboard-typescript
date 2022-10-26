@@ -1,6 +1,4 @@
-import { FormField } from '../../../src/types/general/data/dataTable/sections-json';
-
-const users: Array<FormField> = [
+export const usersTableData: Array<FormFieldInterface> = [
   {
     id: 'name',
     name: 'name',
@@ -77,5 +75,3 @@ const users: Array<FormField> = [
     priority: 100,
   },
 ];
-
-export default users;

@@ -1,6 +1,4 @@
-import { FormField } from '../../../src/types/general/data/dataTable/sections-json';
-
-const billings: Array<FormField> = [
+export const billingsTableData: Array<FormFieldInterface> = [
   {
     id: 'amount',
     name: 'amount',
@@ -32,5 +30,3 @@ const billings: Array<FormField> = [
     priority: 100,
   },
 ];
-
-export default billings;

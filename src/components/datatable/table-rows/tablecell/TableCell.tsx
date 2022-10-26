@@ -2,8 +2,7 @@ import React from 'react';
 import { Group, Avatar, Text } from '@mantine/core';
 // import { IconPencil, IconTrash } from '@tabler/icons';
 // import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
-import { FieldTypes } from '../../../../../data/dataTable/formFields';
-import { FormField } from '../../../../types/general/data/dataTable/sections-json';
+import { FieldTypes } from '../../../../../data/dataTable/formFields/index';
 
 export const jobColors: Record<string, string> = {
   engineer: 'blue',
@@ -11,7 +10,13 @@ export const jobColors: Record<string, string> = {
   designer: 'pink',
 };
 
-const TableCell = ({ cellData, cellConfig }: { cellData: string; cellConfig: FormField }) => (
+const TableCell = ({
+  cellData,
+  cellConfig,
+}: {
+  cellData: string;
+  cellConfig: FormFieldInterface;
+}) => (
   // const theme = useMantineTheme();
   // if (cellConfig.badge) {
   //   return (

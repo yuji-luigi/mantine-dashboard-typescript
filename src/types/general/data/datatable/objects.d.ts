@@ -1,4 +1,4 @@
-export type UsersTableRow = {
+type UsersTableRow = {
   // index color returns string | undefined
   [key: string]: string | Record<string, string>;
   _id: string;

@@ -40,6 +40,7 @@ const handleTokenExpired = (exp: number) => {
 };
 
 const setSession = (accessToken: string | null) => {
+  console.log(accessToken);
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
     setCookie('jwt', accessToken);

@@ -1,6 +1,4 @@
 import React from 'react';
-import { UsersTableRow } from '../../types/general/data/dataTable/objects';
-import { FormField } from '../../types/general/data/dataTable/sections-json';
 import BadgeCell from './table-rows/tablecell/BadgeCell';
 // import BadgeCell from './table-rows/tablecell/BadgeCell';
 import TableCell from './table-rows/tablecell/TableCell';
@@ -10,7 +8,7 @@ export function TableCellDecorator({
   cellConfig,
 }: {
   rowData: UsersTableRow;
-  cellConfig: FormField;
+  cellConfig: FormFieldInterface;
 }) {
   // const { query, push } = useRouter();
 

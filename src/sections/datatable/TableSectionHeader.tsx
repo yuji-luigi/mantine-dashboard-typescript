@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
-import { Sections } from '../../types/general/data/dataTable/sections-json';
 import { sectionData } from '../../data';
-import { DrawerDefault } from '../../components/drawer/DrawerDefault';
+import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 
 const useStyles = createStyles(() => ({
   // sectionHeader: { display: 'flex', alignItems: 'center' },
@@ -14,7 +13,7 @@ const useStyles = createStyles(() => ({
 
 export function TableSectionHeader() {
   const [opened, setOpened] = useState(false);
-
+ sectionData as SectionDataJson;
   const { classes } = useStyles();
   const { query, pathname } = useRouter();
   const entity = query.entity as Sections;
@@ -33,7 +32,7 @@ export function TableSectionHeader() {
           <h3>{section.createButton}</h3>
         </Button>
       )}
-      <DrawerDefault opened={opened} setOpened={setOpened} />
+      <CrudDrawerDefault opened={opened} setOpened={setOpened} />
     </div>
   );
 }
