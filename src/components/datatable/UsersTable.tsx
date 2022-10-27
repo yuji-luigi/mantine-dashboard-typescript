@@ -28,7 +28,7 @@ export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
         <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
           <TableHeader />
           <tbody>
-            {crudDocuments?.documentsArray.map((rowData) => (
+            {crudDocuments?.map((rowData) => (
               <tr key={rowData._id}>
                 {sectionFormFields.map((cellConfig) => (
                   <TableCellDecorator

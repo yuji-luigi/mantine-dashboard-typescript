@@ -16,7 +16,6 @@ const Page = forwardRef<void, props>(({ children, title = '', meta, ...other }) 
       <title>{`${title} | Minimal-UI`}</title>
       {meta}
     </Head>
-
     <div {...other}>{children}</div>
   </>
 ));

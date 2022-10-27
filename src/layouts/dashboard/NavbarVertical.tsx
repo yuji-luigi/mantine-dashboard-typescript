@@ -7,7 +7,6 @@ import useAuth from '../../hooks/useAuth';
 import { sectionData } from '../../data';
 
 import { Icons, IconsType } from '../../data/icons/index';
-import { Sections } from '../../types/general/data/dataTable/sections-json';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon') as string;

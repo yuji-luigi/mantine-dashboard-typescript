@@ -125,7 +125,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
     // // call me and get the user
     const responseMe = await axiosInstance.get(PATH_AUTH.me);
-    const { user } = responseMe.data.data;
+    const { user } = responseMe.data;
     // const res = await fetch('/api/mock', {
     //   method: 'POST',
     //   headers: {
@@ -134,7 +134,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     //   body: JSON.stringify({ email, password }),
     // });
     // const user = await res.json();
-    console.log(user);
     dispatch({
       type: 'LOGIN',
       payload: {

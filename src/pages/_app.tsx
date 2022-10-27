@@ -8,6 +8,7 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from '../context/JWTContext';
 import reduxStore from '../redux/store';
+import { DashboardLayoutContextProvider } from '../context/DashboardLayoutContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -41,7 +42,9 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
               <NotificationsProvider>
-                {getLayout(<Component {...pageProps} />)}
+                <DashboardLayoutContextProvider>
+                  {getLayout(<Component {...pageProps} />)}
+                </DashboardLayoutContextProvider>
               </NotificationsProvider>
             </MantineProvider>
           </ColorSchemeProvider>
