@@ -17,5 +17,12 @@ interface CrudState {
 
 type AddCrudPayload = {
   entity: Sections;
-  document: AllModels;
+  newDocument: AllModels;
 };
+
+interface AddedCrudResponce {
+  success: boolean;
+  collection: Sections;
+  data: AllModels;
+  count: Number;
+}

@@ -42,7 +42,7 @@ const TableCell = ({
 
     {cellConfig.type === 'text' && (
       <Group spacing="sm">
-        <Text size="sm" weight={500}>
+        <Text size="lg" weight={500}>
           {cellData}
         </Text>
       </Group>

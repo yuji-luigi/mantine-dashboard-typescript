@@ -27,7 +27,7 @@
     "icon": "Notification"
   },
   "billing": {
-    "slice": "billings",
+    "slice": "billing",
     "navbarTitle": "Billing",
     "link": "/dashboard/billing",
     "title": "${user.name}'s billing",
@@ -36,7 +36,7 @@
     "icon": "Receipt"
   },
   "buildings": {
-    "slice": "buildingss",
+    "slice": "buildings",
     "navbarTitle": "buildings",
     "link": "/dashboard/buildings",
     "title": "${user.name}'s buildings",

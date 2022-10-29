@@ -9,6 +9,7 @@ import Layout from '../../layouts';
 import { sectionData } from '../../data';
 import formFields from '../../../data/dataTable/formFields/index';
 import Page from '../../components/Page';
+import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
@@ -19,15 +20,15 @@ const entities: string[] = Object.keys(sectionData);
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { query, push } = useRouter();
   const entity = query.entity as Sections;
-  // const { fetchCrudDocuments, crudDocuments } = useCrudSlice(entity);
+  const { fetchCrudDocuments, crudDocuments } = useCrudSlice(entity);
   formFields as FormFieldsType;
   useEffect(() => {
     if (!entities.includes(entity as string)) {
       push('/dashboard/home');
     }
-    // if (!crudDocuments.length) {
-    //   fetchCrudDocuments(entity);
-    // }
+    if (!crudDocuments.length) {
+      fetchCrudDocuments(entity);
+    }
   }, [entity]);
   return (
     <Page>

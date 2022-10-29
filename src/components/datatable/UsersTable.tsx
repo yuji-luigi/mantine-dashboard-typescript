@@ -25,10 +25,10 @@ export function UsersTable({ data }: { data: Array<UsersTableRow> }) {
   return (
     <>
       <ScrollArea>
-        <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
+        <Table sx={{ minWidth: 800 }} highlightOnHover>
           <TableHeader />
           <tbody>
-            {crudDocuments?.map((rowData) => (
+            {crudDocuments?.map((rowData, i) => (
               <tr key={rowData._id}>
                 {sectionFormFields.map((cellConfig) => (
                   <TableCellDecorator

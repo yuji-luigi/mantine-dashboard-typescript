@@ -1,16 +1,23 @@
-import { crudSlice, fetchCrudDocuments } from '../../redux/features/crud/crudSlice';
+import {
+  crudSlice,
+  fetchCrudDocuments,
+  addCrudDocument,
+} from '../../redux/features/crud/crudSlice';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 export const useCrudSlice = (ent?: Sections) => {
   const appDispatch = useAppDispatch();
-  const { addCrud /* , deleteCrud, increment, decrement, incrementByAmount */ } = crudSlice.actions;
+
   crudSlice.reducer;
-  const useCrudDocuments = (entity?: string) =>
-    useAppSelector((state) => state.crud.reduxdb?.[entity || ''].documentsArray || null);
+  const useCrudDocuments = (entity?: string) => {
+    console.log(entity);
+    return useAppSelector((state) => state.crud.reduxdb?.[entity || ''].documentsArray || null);
+  };
   const useAddCrud =
     () =>
-    ({ entity, document }: AddCrudPayload) =>
-      appDispatch(addCrud({ entity, document }));
+    ({ entity, newDocument }: AddCrudPayload) => {
+      appDispatch(addCrudDocument({ entity, newDocument }));
+    };
 
   const useFetchCrudDocuments = () => (entity: Sections) => appDispatch(fetchCrudDocuments(entity));
 

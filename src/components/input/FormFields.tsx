@@ -26,7 +26,7 @@ const FormFields = () => {
   });
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    addCrud({ entity, document: form.values });
+    addCrud({ entity, newDocument: form.values });
   };
   return (
     <div>
