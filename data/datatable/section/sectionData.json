@@ -54,7 +54,7 @@
     "createButton": "New Proposal",
     "icon": "Dashboard"
   },
-  "tag": {
+  "tags": {
     "slice": "tags",
     "navbarTitle": "Tag",
     "link": "/dashboard/tags",

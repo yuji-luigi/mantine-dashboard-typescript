@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { createStyles, Navbar, Group, Code } from '@mantine/core';
+import { createStyles, Navbar, Group, Code, ScrollArea } from '@mantine/core';
 import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import useLayoutContext from '../../hooks/useLayoutContext';
 import useAuth from '../../hooks/useAuth';
-import { sectionData } from '../../data';
+import { sectionData, sectionDataBeta } from '../../data';
 
 import { Icons, IconsType } from '../../data/icons/index';
 
@@ -80,26 +81,35 @@ Object.keys(sectionData).forEach((key: string): void => {
   navBarConfig.push(config);
 });
 
-// export const navBarConfig = [
-//   { link: '/dashboard', label: 'Dashboard', icon: IconDashboard },
-//   { link: '/dashboard/statistics', label: 'Statistics', icon: IconHomeStats },
-//   { link: '/dashboard/notifications', label: 'Notifications', icon: IconBellRinging },
-//   { link: '/dashboard/billing', label: 'Billing', icon: IconReceipt2 },
-//   { link: '/dashboard/security', label: 'Security', icon: IconFingerprint },
-//   { link: '/dashboard/sshkey', label: 'SSH Keys', icon: IconKey },
-//   { link: '/dashboard/databases', label: 'Databases', icon: IconDatabaseImport },
-//   { link: '/dashboard/authentication', label: 'Authentication', icon: Icon2fa },
-//   { link: '/dashboard/others', label: 'Other Settings', icon: IconSettings },
-// ];
-
-// const BASE_PATH = 'dashboard';
-
 export function NavbarVertical() {
   const { classes, cx } = useStyles();
   const { logout } = useAuth();
   const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
   const { asPath, push } = useRouter();
+
+  const linksBeta = sectionDataBeta.map((section) => {
+    console.log(section.section);
+    return (
+      <>
+        <p>{section.section}</p>
+        {section.contents.map((navbarContent) => {
+          const Icon = Icons[navbarContent.icon as IconsType];
+          return (
+            <Link
+              className={cx(classes.link, { [classes.linkActive]: navbarContent.link === active })}
+              href={navbarContent.link}
+              key={navbarContent.navbarTitle}
+            >
+              <Icon className={classes.linkIcon} stroke={1.5} />
+              {navbarContent.navbarTitle}
+            </Link>
+          );
+        })}
+      </>
+    );
+  });
+
   const links = navBarConfig.map((item) => (
     <a
       className={cx(classes.link, { [classes.linkActive]: item.link === active })}
@@ -117,26 +127,33 @@ export function NavbarVertical() {
   ));
 
   useEffect(() => setActive(asPath), [asPath]);
+  console.log(linksBeta);
+
+  console.log('\n\n\n');
+
+  console.log(links);
   return (
     <Navbar fixed hidden={!isOpen} hiddenBreakpoint="md" height={700} width={{ sm: 300 }} p="md">
-      <Navbar.Section grow>
-        <Group className={classes.header} position="apart">
-          {/* <MantineLogo size={28} /> */}
-          <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
-        </Group>
-        {links}
-      </Navbar.Section>
+      <ScrollArea>
+        <Navbar.Section grow>
+          <Group className={classes.header} position="apart">
+            {/* <MantineLogo size={28} /> */}
+            <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+          </Group>
+          {linksBeta.map((navbarData) => navbarData)}
+        </Navbar.Section>
 
-      <Navbar.Section className={classes.footer}>
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
-          <Icons.SwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
-        </a>
-        <a href="#" className={classes.link} onClick={logout}>
-          <Icons.Logout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
-        </a>
-      </Navbar.Section>
+        <Navbar.Section className={classes.footer}>
+          <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+            <Icons.SwitchHorizontal className={classes.linkIcon} stroke={1.5} />
+            <span>Change account</span>
+          </a>
+          <a href="#" className={classes.link} onClick={logout}>
+            <Icons.Logout className={classes.linkIcon} stroke={1.5} />
+            <span>Logout</span>
+          </a>
+        </Navbar.Section>
+      </ScrollArea>
     </Navbar>
   );
 }

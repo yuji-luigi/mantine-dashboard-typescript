@@ -42,7 +42,9 @@ const useStyles = createStyles((theme) => ({
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
-
+  link: {
+    color: 'black',
+  },
   logo: {
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     width: 120,
@@ -108,8 +110,8 @@ function LoginPageComponent() {
 
             <Text align="center" mt="md">
               Don&apos;t have an account?{' '}
-              <Link href={AUTH.SIGNUP}>
-                <Anchor<'a'>>Register</Anchor>
+              <Link className={classes.link} href={AUTH.SIGNUP}>
+                Register
               </Link>
             </Text>
           </Paper>

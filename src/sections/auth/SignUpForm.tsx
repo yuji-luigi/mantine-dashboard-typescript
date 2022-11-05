@@ -94,10 +94,7 @@ export function SignUpForm() {
           Register
         </Title>
         <Text color="dimmed" size="sm" align="center" mt={5}>
-          Already have an account ?{' '}
-          <Link href="/login">
-            <Anchor component="a">Login</Anchor>
-          </Link>
+          Already have an account ? <Link href="/login">Login</Link>
         </Text>
         <Paper withBorder shadow="md" p={30} mt={10} radius="md">
           <form onSubmit={form.onSubmit((values) => onSubmit(values))}>

@@ -73,8 +73,8 @@ export function HeaderSearch() {
   const { isOpen, toggleBarOpen } = useLayoutContext();
 
   const items = links.map((link) => (
-    <Link key={link.label} href={link.link}>
-      <a className={classes.link}>{link.label}</a>
+    <Link key={link.label} href={link.link} className={classes.link}>
+      {link.label}
     </Link>
   ));
 

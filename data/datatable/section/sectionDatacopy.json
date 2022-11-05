@@ -1,0 +1,158 @@
+[
+  {
+    "section": "main",
+    "contents": [
+      {
+        "slice": "bookmarks",
+        "navbarTitle": "Bookmark",
+        "link": "/dashboard/bookmarks",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Bookmark",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "comments",
+        "navbarTitle": "Comment",
+        "link": "/dashboard/comments",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Comment",
+        "icon": "Dashboard"
+      }
+    ]
+  },
+  {
+    "section": "admin",
+    "contents": [
+      {
+        "slice": "funds",
+        "navbarTitle": "Fund",
+        "link": "/dashboard/funds",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Fund",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "fundRules",
+        "navbarTitle": "Fund rule",
+        "link": "/dashboard/fundRules",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Fund Rule",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "proposals",
+        "navbarTitle": "Proposal",
+        "link": "/dashboard/proposals",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Proposal",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "threads",
+        "navbarTitle": "Thread",
+        "link": "/dashboard/threads",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Thread",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "home",
+        "navbarTitle": "Dashboard",
+        "link": "/dashboard/home",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "statistics",
+        "navbarTitle": "Statistics",
+        "link": "/dashboard/statistics",
+        "title": "Statistics",
+        "subtitle": "subtitle",
+        "createButton": "",
+        "icon": "Statistic"
+      },
+      {
+        "slice": "notifications",
+        "navbarTitle": "Notifications",
+        "link": "/dashboard/notifications",
+        "title": "Notifications",
+        "subtitle": "subtitle",
+        "createButton": "New Notification",
+        "icon": "Notification"
+      },
+
+      {
+        "slice": "instances",
+        "navbarTitle": "Instance",
+        "link": "/dashboard/instances",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Instance",
+        "icon": "Dashboard"
+      },
+
+      {
+        "slice": "tags",
+        "navbarTitle": "Tag",
+        "link": "/dashboard/tags",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Tag",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "userSettings",
+        "navbarTitle": "User setting",
+        "link": "/dashboard/userSettings",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "wallets",
+        "navbarTitle": "Wallets",
+        "link": "/dashboard/wallets",
+        "title": "welcome to dashboard",
+        "subtitle": "subtitle",
+        "createButton": "New Wallet",
+        "icon": "Dashboard"
+      },
+      {
+        "slice": "billing",
+        "navbarTitle": "Billing",
+        "link": "/dashboard/billing",
+        "title": "${user.name}'s billing",
+        "subtitle": "subtitle",
+        "createButton": "New Billing",
+        "icon": "Receipt"
+      },
+      {
+        "slice": "buildings",
+        "navbarTitle": "buildings",
+        "link": "/dashboard/buildings",
+        "title": "${user.name}'s buildings",
+        "subtitle": "subtitle",
+        "createButton": "New Building",
+        "icon": "Receipt"
+      },
+      {
+        "slice": "users",
+        "navbarTitle": "User",
+        "link": "/dashboard/users",
+        "title": "Users",
+        "subtitle": "subtitle",
+        "createButton": "New User",
+        "icon": "Dashboard"
+      }
+    ]
+  }
+]
