@@ -16,7 +16,7 @@ const TableCell = ({
 }: {
   cellData: string;
   cellConfig: FormFieldInterface;
-}) => (
+}) => {
   // const theme = useMantineTheme();
   // if (cellConfig.badge) {
   //   return (
@@ -32,30 +32,33 @@ const TableCell = ({
   //     </td>
   //   );
   // }
+  if (cellConfig.noTable) {
+    return null;
+  }
+  return (
+    <>
+      {cellConfig.type === FieldTypes.Avatar && (
+        <Group spacing="xs">
+          <Avatar size={40} src={cellData} radius={30} />
+        </Group>
+      )}
 
-  <>
-    {cellConfig.type === FieldTypes.Avatar && (
-      <Group spacing="xs">
-        <Avatar size={40} src={cellData} radius={30} />
-      </Group>
-    )}
+      {cellConfig.type === 'text' && (
+        <Group spacing="sm">
+          <Text size="lg" weight={500}>
+            {cellData}
+          </Text>
+        </Group>
+      )}
+      {cellConfig.type === 'static-select' && (
+        <Group spacing="sm">
+          <Text size="sm" weight={500}>
+            {cellData}
+          </Text>
+        </Group>
+      )}
 
-    {cellConfig.type === 'text' && (
-      <Group spacing="sm">
-        <Text size="lg" weight={500}>
-          {cellData}
-        </Text>
-      </Group>
-    )}
-    {cellConfig.type === 'static-select' && (
-      <Group spacing="sm">
-        <Text size="sm" weight={500}>
-          {cellData}
-        </Text>
-      </Group>
-    )}
-
-    {/*
+      {/*
         <Badge
           color={jobColors[cellData?.toLowerCase()]}
           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
@@ -64,17 +67,18 @@ const TableCell = ({
         </Badge>
       */}
 
-    {/* <td>
+      {/* <td>
         <Anchor<'a'> size="sm" href="#" onClick={(event) => event.preventDefault()}>
           {cellData}
         </Anchor>
       </td> */}
 
-    {/* <td>
+      {/* <td>
         <Text size="sm" color="dimmed">
           {cellData}
         </Text>
       </td> */}
-  </>
-);
+    </>
+  );
+};
 export default TableCell;

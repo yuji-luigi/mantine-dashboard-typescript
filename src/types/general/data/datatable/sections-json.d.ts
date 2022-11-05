@@ -1,4 +1,28 @@
-type Sections = 'home' | 'statistics' | 'notifications' | 'billing' | 'users' | 'buildings';
+/**
+ * state.reduxdb[Section]
+ * Sections are Entities in the DB. Also should match with the redux entity.
+ * returns {
+ *   entity: "Sections"
+ * }
+ */
+type Sections =
+  | 'home'
+  | 'statistics'
+  | 'notifications'
+  | 'billing'
+  | 'users'
+  | 'buildings'
+  | 'bookmarks'
+  | 'comments'
+  | 'funds'
+  | 'fundRules'
+  | 'instances'
+  | 'notifications'
+  | 'proposals'
+  | 'tags'
+  | 'threads'
+  | 'userSettings'
+  | 'wallets';
 
 interface SectionDataJson {
   [key: Sections]: {
@@ -11,7 +35,19 @@ interface SectionDataJson {
   };
 }
 
-type FieldType = 'text' | 'select' | 'static-select' | 'date' | 'number' | 'currency' | 'avatar';
+type FieldType =
+  | 'text'
+  | 'boolean'
+  | 'select'
+  | 'static-select'
+  | 'date'
+  | 'number'
+  | 'currency'
+  | 'avatar'
+  | 'date-picker'
+  | 'attachment'
+  | 'color-picker';
+
 type CellStyles = 'badge' | '';
 // type FieldType = FieldTypes[FieldTypes[keyof typeof FieldTypes]];
 interface FormFieldInterface {

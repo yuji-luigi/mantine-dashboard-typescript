@@ -1,11 +1,102 @@
 {
+  "bookmarks": {
+    "slice": "bookmarks",
+    "navbarTitle": "Bookmark",
+    "link": "/dashboard/bookmarks",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Bookmark",
+    "icon": "Dashboard"
+  },
+  "comments": {
+    "slice": "comments",
+    "navbarTitle": "Comment",
+    "link": "/dashboard/comments",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Comment",
+    "icon": "Dashboard"
+  },
+  "funds": {
+    "slice": "funds",
+    "navbarTitle": "Fund",
+    "link": "/dashboard/funds",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Fund",
+    "icon": "Dashboard"
+  },
+  "fundRules": {
+    "slice": "fundRules",
+    "navbarTitle": "Fund rule",
+    "link": "/dashboard/fundRules",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Fund Rule",
+    "icon": "Dashboard"
+  },
+  "instances": {
+    "slice": "instances",
+    "navbarTitle": "Instance",
+    "link": "/dashboard/instances",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Instance",
+    "icon": "Dashboard"
+  },
+
+  "proposals": {
+    "slice": "proposals",
+    "navbarTitle": "Proposal",
+    "link": "/dashboard/proposals",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Proposal",
+    "icon": "Dashboard"
+  },
+  "tag": {
+    "slice": "tags",
+    "navbarTitle": "Tag",
+    "link": "/dashboard/tags",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Tag",
+    "icon": "Dashboard"
+  },
+  "threads": {
+    "slice": "threads",
+    "navbarTitle": "Thread",
+    "link": "/dashboard/threads",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Thread",
+    "icon": "Dashboard"
+  },
+  "userSettings": {
+    "slice": "userSettings",
+    "navbarTitle": "User setting",
+    "link": "/dashboard/userSettings",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "",
+    "icon": "Dashboard"
+  },
+  "wallets": {
+    "slice": "wallets",
+    "navbarTitle": "Wallets",
+    "link": "/dashboard/wallets",
+    "title": "welcome to dashboard",
+    "subtitle": "subtitle",
+    "createButton": "New Wallet",
+    "icon": "Dashboard"
+  },
   "home": {
-    "slice": "homepage",
+    "slice": "home",
     "navbarTitle": "Dashboard",
     "link": "/dashboard/home",
     "title": "welcome to dashboard",
     "subtitle": "subtitle",
-    "createButton": false,
+    "createButton": "",
     "icon": "Dashboard"
   },
   "statistics": {
@@ -14,7 +105,7 @@
     "link": "/dashboard/statistics",
     "title": "Statistics",
     "subtitle": "subtitle",
-    "createButton": false,
+    "createButton": "",
     "icon": "Statistic"
   },
   "notifications": {
@@ -23,7 +114,7 @@
     "link": "/dashboard/notifications",
     "title": "Notifications",
     "subtitle": "subtitle",
-    "createButton": false,
+    "createButton": "New Notification",
     "icon": "Notification"
   },
   "billing": {
@@ -32,7 +123,7 @@
     "link": "/dashboard/billing",
     "title": "${user.name}'s billing",
     "subtitle": "subtitle",
-    "createButton": false,
+    "createButton": "New Billing",
     "icon": "Receipt"
   },
   "buildings": {
@@ -41,7 +132,7 @@
     "link": "/dashboard/buildings",
     "title": "${user.name}'s buildings",
     "subtitle": "subtitle",
-    "createButton": false,
+    "createButton": "New Building",
     "icon": "Receipt"
   },
   "users": {

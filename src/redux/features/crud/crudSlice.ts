@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { sectionData } from '../../../data';
+// import { sectionData } from '../../../data';
 import axiosInstance from '../../../utils/axios-instance';
 /* eslint-disable no-param-reassign */
 
@@ -34,19 +34,52 @@ export const addCrudDocument = createAsyncThunk(
   }
 );
 
-const reduxdb: ReduxDbEntity<AllModels> = {};
-Object.entries(sectionData).forEach(([key, value]) => {
-  reduxdb[value.slice] = { entity: value.slice, documentsArray: [] };
-});
-console.log({ reduxdb });
+export const deleteCrudDocument = createAsyncThunk(
+  'crud/deleteDocument',
+  async ({ entity, documentId }: { entity: Sections; documentId: String }) => {
+    const res = await axiosInstance.delete(`${entity}/${documentId}`);
+    const payload = { entity: res.data.collection, documentId: res.data.docymentId };
+    return payload;
+  }
+);
+
+// function createReduxdb():Reduxdb {
+//   const reduxdb = {}
+//   Object.entries(sectionData).forEach(([key, value]) => {
+//     reduxdb[(value.slice) as Sections] = { entity: value.slice, documentsArray: [] };
+//   });
+//   return reduxdb as Reduxdb;
+// }
+
+// TODO: Auto creation of reduxdb fails in types
+// Object.entries(sectionData).forEach(([key, value]) => {
+//   reduxdb[value.slice] = { entity: value.slice, documentsArray: [] };
+// });
+
+const reduxdb: Reduxdb = {
+  home: { entity: 'home', documentsArray: [] },
+  users: { entity: 'users', documentsArray: [] },
+  buildings: { entity: 'buildings', documentsArray: [] },
+  billing: { entity: 'billing', documentsArray: [] },
+  statistics: { entity: 'statistics', documentsArray: [] },
+  notifications: { entity: 'notifications', documentsArray: [] },
+  bookmarks: { entity: 'bookmarks', documentsArray: [] },
+  comments: { entity: 'comments', documentsArray: [] },
+  fundRules: { entity: 'fundRules', documentsArray: [] },
+  funds: { entity: 'funds', documentsArray: [] },
+  instances: { entity: 'instances', documentsArray: [] },
+  proposals: { entity: 'proposals', documentsArray: [] },
+  tags: { entity: 'tags', documentsArray: [] },
+  threads: { entity: 'threads', documentsArray: [] },
+  userSettings: { entity: 'userSettings', documentsArray: [] },
+  wallets: { entity: 'wallets', documentsArray: [] },
+};
 
 const initialState: CrudState = {
-  reduxdb /* : {    users: { entity: 'users', documentsArray: [] },
-    buildings: { entity: 'buildings', documentsArray: [] },
-    statistics: { entity: 'buildings', documentsArray: [] },
-  } */,
+  reduxdb,
   status: 'idle',
   error: null,
+  message: null,
   counter: 0,
 };
 
@@ -103,6 +136,18 @@ export const crudSlice = createSlice({
         state.status = 'succeed';
         // TODO: AllModels shows any. Don't know why.
         (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
+      })
+      .addCase(deleteCrudDocument.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteCrudDocument.fulfilled, (state, action) => {
+        const { entity, documentId } = action.payload;
+
+        state.status = 'succeed';
+        const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
+          (document) => document._id !== documentId
+        );
+        state.reduxdb[entity].documentsArray = newDocumentArray;
       });
   },
 });

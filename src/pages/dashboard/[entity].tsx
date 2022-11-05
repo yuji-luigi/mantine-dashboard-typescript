@@ -20,7 +20,7 @@ const entities: string[] = Object.keys(sectionData);
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { query, push } = useRouter();
   const entity = query.entity as Sections;
-  const { fetchCrudDocuments, crudDocuments } = useCrudSlice(entity);
+  const { fetchCrudDocuments, crudDocuments, crudMessage } = useCrudSlice(entity);
   formFields as FormFieldsType;
   useEffect(() => {
     if (!entities.includes(entity as string)) {
@@ -35,6 +35,7 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
       <div>
         <TableSectionHeader />
         <Tables />
+        <div>message: {crudMessage}</div>
       </div>
     </Page>
   );
