@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { sectionData } from '../../../data';
-import axiosInstance from '../../../utils/axios-instance';
+import axiosInstance from "../../../utils/axios-instance";
 /* eslint-disable no-param-reassign */
 
 export const fetchCrudDocuments = createAsyncThunk(
@@ -14,16 +14,42 @@ export const fetchCrudDocuments = createAsyncThunk(
     };
     rejectValue: { error: { message: string } };
   }
-> */ 'cruds/fetchCrudDocuments',
+> */ "cruds/fetchCrudDocuments",
   async (entity: Sections) => {
     const res = await axiosInstance.get(entity);
     return { entity, documents: res.data.data };
   }
 );
 
+export const fetchCrudDocumentsWithQuery = createAsyncThunk(
+  /* <
+  any,
+  AddCrudPayload,
+  {
+    state: CrudState;
+    extra: {
+      error: { message: string };
+    };
+    rejectValue: { error: { message: string } };
+  }
+> */ "cruds/fetchCrudDocumentsQuery",
+  async ({ entity, query }: { entity: Sections; query: any }) => {
+    const res = await axiosInstance.get(
+      `${entity}${"" /* query here. how to make proper string */}`
+    );
+    return { entity, documents: res.data.data };
+  }
+);
+
 export const addCrudDocument = createAsyncThunk(
-  'crud/addDocument',
-  async ({ entity, newDocument }: { entity: Sections; newDocument: AllModels }) => {
+  "crud/addDocument",
+  async ({
+    entity,
+    newDocument,
+  }: {
+    entity: Sections;
+    newDocument: AllModels;
+  }) => {
     try {
       const res = await axiosInstance.post(entity, newDocument);
       return res.data;
@@ -35,10 +61,13 @@ export const addCrudDocument = createAsyncThunk(
 );
 
 export const deleteCrudDocument = createAsyncThunk(
-  'crud/deleteDocument',
+  "crud/deleteDocument",
   async ({ entity, documentId }: { entity: Sections; documentId: String }) => {
     const res = await axiosInstance.delete(`${entity}/${documentId}`);
-    const payload = { entity: res.data.collection, documentId: res.data.docymentId };
+    const payload = {
+      entity: res.data.collection,
+      documentId: res.data.data.documentId,
+    };
     return payload;
   }
 );
@@ -57,34 +86,36 @@ export const deleteCrudDocument = createAsyncThunk(
 // });
 
 const reduxdb: Reduxdb = {
-  home: { entity: 'home', documentsArray: [] },
-  users: { entity: 'users', documentsArray: [] },
-  buildings: { entity: 'buildings', documentsArray: [] },
-  billing: { entity: 'billing', documentsArray: [] },
-  statistics: { entity: 'statistics', documentsArray: [] },
-  notifications: { entity: 'notifications', documentsArray: [] },
-  bookmarks: { entity: 'bookmarks', documentsArray: [] },
-  comments: { entity: 'comments', documentsArray: [] },
-  fundRules: { entity: 'fundRules', documentsArray: [] },
-  funds: { entity: 'funds', documentsArray: [] },
-  instances: { entity: 'instances', documentsArray: [] },
-  proposals: { entity: 'proposals', documentsArray: [] },
-  tags: { entity: 'tags', documentsArray: [] },
-  threads: { entity: 'threads', documentsArray: [] },
-  userSettings: { entity: 'userSettings', documentsArray: [] },
-  wallets: { entity: 'wallets', documentsArray: [] },
+  home: { entity: "home", documentsArray: [] },
+  users: { entity: "users", documentsArray: [] },
+  buildings: { entity: "buildings", documentsArray: [] },
+  billing: { entity: "billing", documentsArray: [] },
+  statistics: { entity: "statistics", documentsArray: [] },
+  notifications: { entity: "notifications", documentsArray: [] },
+  bookmarks: { entity: "bookmarks", documentsArray: [] },
+  comments: { entity: "comments", documentsArray: [] },
+  fundRules: { entity: "fundRules", documentsArray: [] },
+  funds: { entity: "funds", documentsArray: [] },
+  instances: { entity: "instances", documentsArray: [] },
+  proposals: { entity: "proposals", documentsArray: [] },
+  tags: { entity: "tags", documentsArray: [] },
+  threads: { entity: "threads", documentsArray: [] },
+  userSettings: { entity: "userSettings", documentsArray: [] },
+  wallets: { entity: "wallets", documentsArray: [] },
+  events: { entity: "events", documentsArray: [] },
+  owners: { entity: "owners", documentsArray: [] },
 };
 
 const initialState: CrudState = {
   reduxdb,
-  status: 'idle',
+  status: "idle",
   error: null,
   message: null,
   counter: 0,
 };
 
 export const crudSlice = createSlice({
-  name: 'crudOperation',
+  name: "crudOperation",
   initialState,
   reducers: {
     // addCrud: (state, action: PayloadAction<AddCrudPayload>) => {
@@ -98,7 +129,9 @@ export const crudSlice = createSlice({
     // },
     deleteCrud: (state, action: PayloadAction<Record<string, string>>) => {
       const { entity, documentId } = action.payload;
-      state.reduxdb[entity].documentsArray.filter((data) => data._id !== documentId);
+      state.reduxdb[entity].documentsArray.filter(
+        (data) => data._id !== documentId
+      );
     },
     increment: (state) => {
       state.counter += 1;
@@ -113,37 +146,39 @@ export const crudSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchCrudDocuments.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchCrudDocuments.fulfilled, (state, action) => {
         const { entity, documents } = action.payload;
-        state.status = 'succeed';
+        state.status = "succeed";
         state.reduxdb[entity].documentsArray = documents;
       })
       .addCase(fetchCrudDocuments.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error.message;
       })
       .addCase(addCrudDocument.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(addCrudDocument.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error.message;
       })
       .addCase(addCrudDocument.fulfilled, (state, action) => {
-        const { collection, data }: AddedCrudResponce = action.payload;
-        state.status = 'succeed';
+        const { collection, data }: AddedCrudResponse = action.payload;
+        state.status = "succeed";
         // TODO: AllModels shows any. Don't know why.
-        (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
+        (state.reduxdb[collection].documentsArray as Array<AllModels>).push(
+          data
+        );
       })
       .addCase(deleteCrudDocument.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(deleteCrudDocument.fulfilled, (state, action) => {
         const { entity, documentId } = action.payload;
 
-        state.status = 'succeed';
+        state.status = "succeed";
         const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
           (document) => document._id !== documentId
         );

@@ -3,14 +3,6 @@ interface ReduxDbEntity<Entity> {
   documentsArray: Array<Entity> | [];
 }
 
-// type CrudSlices =
-//   | 'homepage'
-//   | 'users'
-//   | 'buildings'
-//   | 'billing'
-//   | 'statistics'
-//   | 'notifications'
-//   | '';
 interface Reduxdb {
   [key: string]: ReduxDbEntity<AllModels>;
   home: ReduxDbEntity<Array<Record>>;
@@ -29,11 +21,12 @@ interface Reduxdb {
   threads: ReduxDbEntity<Array<Record>>;
   userSettings: ReduxDbEntity<Array<Record>>;
   wallets: ReduxDbEntity<Array<Record>>;
+  events: ReduxDbEntity<Array<Record>>;
 }
 
 interface CrudState {
   reduxdb: Reduxdb;
-  status: 'idle' | 'loading' | 'succeed' | 'failed';
+  status: "idle" | "loading" | "succeed" | "failed";
   error?: null | string;
   message?: null | string;
   // TODO: DELETE
@@ -45,7 +38,7 @@ type AddCrudPayload = {
   newDocument: AllModels;
 };
 
-interface AddedCrudResponce {
+interface AddedCrudResponse {
   success: boolean;
   collection: Sections;
   data: AllModels;

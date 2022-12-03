@@ -1,12 +1,12 @@
-import { createContext, ReactNode, useState } from 'react';
-import { DashboardLayoutContextStates } from '../types/context/dachboard-layout-context';
+import { createContext, ReactNode, useState } from "react";
 
-export const DashboardLayoutContext = createContext<DashboardLayoutContextStates>({
-  isOpen: false,
-  toggleBarOpen() {},
-  closeBar() {},
-  openBar() {},
-});
+export const DashboardLayoutContext =
+  createContext<DashboardLayoutContextStates>({
+    isOpen: false,
+    toggleBarOpen() {},
+    closeBar() {},
+    openBar() {},
+  });
 
 const useStore = () => {
   const [isOpen, setBarOpen] = useState(false);
@@ -18,6 +18,12 @@ const useStore = () => {
   };
 };
 
-export const DashboardLayoutContextProvider = ({ children }: { children: ReactNode }) => (
-  <DashboardLayoutContext.Provider value={useStore()}>{children}</DashboardLayoutContext.Provider>
+export const DashboardLayoutContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => (
+  <DashboardLayoutContext.Provider value={useStore()}>
+    {children}
+  </DashboardLayoutContext.Provider>
 );

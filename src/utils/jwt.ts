@@ -43,7 +43,6 @@ const setSession = (accessToken: string | null) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
     setCookie('jwt', accessToken);
-    // eslint-disable-next-line @typescript-eslint/dot-notation
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     // This function below will handle when token is expired
     const { exp }: { exp: number } = jwtDecode(accessToken); // ~5 days by minimals server

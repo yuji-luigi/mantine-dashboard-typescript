@@ -1,43 +1,72 @@
 {
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/components/ColorSchemeToggle/ColorSchemeToggle.tsx",
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    },
+    {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "name": "launch firefox",
+      "profile": "cool-theme",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack://_n_e/node_modules/next/dist/client/index.js",
+          "path": "${workspaceFolder}/pages/events/index.js"
+        },
+        {
+          "url": "webpack://_n_e",
+          "path": "${workspaceFolder}"
+        }
+      ]
+    },
     {
       "name": "Next.js: debug server-side",
       "type": "node-terminal",
       "request": "launch",
-      "skipFiles": [
-        "${workspaceFolder}/node_modules/**/*.js",
-        "${workspaceFolder}/lib/**/*.js",
-        "<node_internals>/**/*.js"
-      ],
       "command": "npm run dev"
     },
+
     {
       "name": "Next.js: debug client-side",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "http://localhost:3000",
-      "skipFiles": [
-        "${workspaceFolder}/node_modules/**/*.js",
-        "${workspaceFolder}/lib/**/*.js",
-        "<node_internals>/**/*.js"
-      ]
+      "userDataDir": true,
+      "url": "http://localhost:3000"
     },
     {
       "name": "Next.js: debug full stack",
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev",
-      "console": "integratedTerminal",
+      //   "console": "integratedTerminal",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
+        // "userDataDir": false,
         "action": "debugWithChrome"
       },
       "skipFiles": [
-        "${workspaceFolder}/node_modules/**/*.js",
-        "${workspaceFolder}/lib/**/*.js",
-        "<node_internals>/**/*.js"
+        "<node_internals>/**",
+        ".next/**"
       ]
     }
   ]

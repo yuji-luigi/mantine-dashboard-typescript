@@ -1,4 +1,4 @@
-export interface DashboardLayoutContextStates {
+interface DashboardLayoutContextStates {
   isOpen: boolean;
   toggleBarOpen(): void;
   closeBar(): void;

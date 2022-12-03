@@ -1,3 +1,7 @@
+/**
+ * use the key name same as the slice name
+ */
+
 import {
   Icon2fa as Authentication,
   IconBellRinging as Notification,
@@ -11,34 +15,68 @@ import {
   IconSwitchHorizontal as SwitchHorizontal,
   IconLogout as Logout,
   IconUser as User,
+  IconBook as Bookmark,
+  IconMessage as Comment,
+  IconBuilding as Building,
+  IconRuler as FundRule,
+  IconReceipt as Proposal,
+  IconBusinessplan as Fund,
+  IconBlockquote as Thread,
+  IconAlien as Instance,
+  IconTag as Tag,
+  IconAlertCircle as Alert,
   TablerIcon,
-} from '@tabler/icons';
+} from "@tabler/icons";
 
-export type IconsType =
-  | 'Authentication'
-  | 'Notification'
-  | 'Dashboard'
-  | 'Database'
-  | 'Security'
-  | 'Statistic'
-  | 'Key'
-  | 'Receipt'
-  | 'Cog'
-  | 'Logout'
-  | 'SwitchHorizontal'
-  | 'User';
-
-export const Icons: Record<IconsType, TablerIcon> = {
-  Authentication,
-  Notification,
-  Dashboard,
-  Database,
-  Security,
-  Statistic,
-  Key,
-  Receipt,
-  Cog,
-  Logout,
-  SwitchHorizontal,
-  User,
+export const Icons: Record<IconIndexTypes, TablerIcon> = {
+  authentication: Authentication,
+  notifications: Notification,
+  home: Dashboard,
+  database: Database,
+  security: Security,
+  statistics: Statistic,
+  key: Key,
+  receipt: Receipt,
+  cog: Cog,
+  logout: Logout,
+  switch: SwitchHorizontal,
+  user: User,
+  bookmarks: Bookmark,
+  comments: Comment,
+  funds: Fund,
+  fundRules: FundRule,
+  instances: Instance,
+  proposals: Proposal,
+  tags: Tag,
+  threads: Thread,
+  userSettings: Cog,
+  alert: Alert,
+  buildings: Building,
 };
+
+// export {
+//   Icon2fa as authentication,
+//   IconBellRinging as notifications,
+//   IconDashboard as home,
+//   IconDatabaseImport as database,
+//   IconFingerprint as security,
+//   IconHomeStats as statistics,
+//   IconKey as key,
+//   IconReceipt2 as receipt,
+//   IconSettings as userSettings,
+//   IconSwitchHorizontal as switch,
+//   IconLogout as logout,
+//   IconUser as User,
+//   IconBook as bookmarks,
+//   IconMessage as comments,
+//   IconBuilding as buildings,
+//   IconRuler as fundRules,
+//   IconReceipt as proposals,
+//   IconBusinessplan as funds,
+//   IconBlockquote as threads,
+//   IconAlien as instances,
+//   IconTag as tags,
+//   IconAlertCircle as Alert,
+//   // TablerIcon,
+
+// } from "@tabler/icons";

@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { API_BASE_URL } from '../path/api-routes';
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { API_BASE_URL } from "../path/api-routes";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,10 @@ axiosInstance.interceptors.response.use(
     // const token = localStorage.getItem('accessToken');
     // response.headers.Authorization = token as string;
     response,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
+  (error) =>
+    Promise.reject(
+      (error.response && error.response.data) || "Error connecting to server."
+    )
 );
 
 export default axiosInstance;

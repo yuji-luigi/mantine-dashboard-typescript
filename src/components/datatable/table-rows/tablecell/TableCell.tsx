@@ -43,13 +43,15 @@ const TableCell = ({
         </Group>
       )}
 
-      {cellConfig.type === 'text' && (
+      {
+     ( cellConfig.type === 'text' || cellConfig.type === 'long-text') && (
         <Group spacing="sm">
           <Text size="lg" weight={500}>
             {cellData}
           </Text>
         </Group>
-      )}
+      )
+    }
       {cellConfig.type === 'static-select' && (
         <Group spacing="sm">
           <Text size="sm" weight={500}>
