@@ -1,0 +1,32 @@
+export const billingsTableData: Array<FormFieldInterface> = [
+  {
+    id: "amount",
+    name: "amount",
+    label: "Amount",
+    type: "currency",
+    required: true,
+    priority: 4,
+  },
+  {
+    id: "to",
+    name: "to",
+    label: "To",
+    type: "select",
+    entityPlural: "users",
+    entitySingle: "user",
+    required: false,
+    priority: 5,
+  },
+  {
+    id: "owner",
+    name: "owner",
+    label: "Owner",
+    type: "select",
+    entitySingle: "owner",
+    entityPlural: "owners",
+    selectValues: ["ragioneSociale"],
+    grantTo: ["super_admin"],
+    required: false,
+    priority: 100,
+  },
+];
