@@ -1,3 +1,4 @@
+
 /**
  * state.reduxdb[Section]
  * Sections are Entities in the DB. Also should match with the redux entity.
@@ -16,7 +17,7 @@ type Sections =
   | "comments"
   | "funds"
   | "areas"
-  // | "floors"
+  | "floors"
   | "fundRules"
   | "instances"
   | "notifications"
@@ -29,15 +30,43 @@ type Sections =
   | "events";
 
 interface SectionDataJson {
-  [key: Sections]: {
     slice: string;
     navbar: string;
     link: string;
     title: string;
     subtitle: string;
     createButton?: boolean;
-  };
+}[];
+
+interface ISectionDataObject {
+  [key:  Sections]: SectionDataJson
+  // home: SectionDataJson
+  // statistics: SectionDataJson
+  // notifications: SectionDataJson
+  // billing: SectionDataJson
+  // users: SectionDataJson
+  // buildings: SectionDataJson
+  // bookmarks: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
+  // home: SectionDataJson
 }
+
+// interface SectionDataJson {
+//   [key: Sections]: {
+//     slice: string;
+//     navbar: string;
+//     link: string;
+//     title: string;
+//     subtitle: string;
+//     createButton?: boolean;
+//   };
+// }
+
 
 // type FieldType =
 //   | "text"

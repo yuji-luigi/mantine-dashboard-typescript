@@ -152,5 +152,14 @@
     "subtitle": "subtitle",
     "createButton": "New User",
     "icon": "Dashboard"
+  },
+  "owners": {
+    "slice": "users",
+    "navbarTitle": "User",
+    "link": "/dashboard/users",
+    "title": "Users",
+    "subtitle": "subtitle",
+    "createButton": "New User",
+    "icon": "Dashboard"
   }
 }

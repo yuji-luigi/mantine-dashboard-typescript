@@ -6,18 +6,22 @@ import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
 import Layout from '../../layouts';
-import { sectionData } from '../../data';
-import formFields from '../../../data/datatable/formFields';
+import { sectionData, sectionDataBeta } from '../../data';
+import formFields from '../../../data/datatable/formfields';
 import Page from '../../components/Page';
 import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import { isConstructorDeclaration } from 'typescript';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
 
 const entities: string[] = Object.keys(sectionData);
+const en: string[][] = sectionDataBeta.map(data => data.contents.map(content => content.slice))
+const ent = en.reduce((arr, cur) => arr.concat(cur) ,[])
 // const useStyle = createStyles((theme) => ({}));
 
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
+  console.log(ent)
   const { query, push } = useRouter();
   const entity = query.entity as Sections;
   const { fetchCrudDocuments, crudDocuments, crudMessage } = useCrudSlice(entity);

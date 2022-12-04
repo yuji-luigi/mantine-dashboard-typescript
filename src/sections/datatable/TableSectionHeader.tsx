@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
-import { sectionData } from '../../data';
+import { sectionData, sections } from '../../data';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 
 const useStyles = createStyles(() => ({
@@ -12,18 +12,35 @@ const useStyles = createStyles(() => ({
 }));
 
 export function TableSectionHeader() {
+  /** define open state for crudDrawer component */
   const [opened, setOpened] = useState(false);
- sectionData as SectionDataJson;
+  /** use style defined above */
   const { classes } = useStyles();
+  /** get url string by useRouter */
   const { query, pathname } = useRouter();
-  const entity = query.entity as Sections;
-  let section = sectionData[entity];
-  section = !section && pathname === '/dashboard/home' ? sectionData.home : section;
 
+  /** get entity from url using useRouter().query */
+  const entity = query.entity as Sections;
+
+  /**
+   *  getSection json data to show the page headings  sectionData is array of objects 
+   *  so find by data.slice === entity. 
+   *  maybe slice rename to entity
+  */
+  let section = sectionData.find(data => data.slice === entity)
+  section = !section && pathname === '/dashboard/home' 
+  ? sectionData.find(data => data.slice ===' home') : section;
+
+
+/** define case when theres no entity, 
+ * seem like gives an error in other component
+ */
   if (!section) {
     return <p>loading...</p>;
   }
+/** define openDrawer function. Button onClick openDrawer */
   const openDrawer = () => setOpened(true);
+  
   return (
     <div>
       <h2>{section.title}</h2>

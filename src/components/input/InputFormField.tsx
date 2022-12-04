@@ -19,7 +19,7 @@ const InputFormField = ({formField}: {formField: FormFieldInterface}) => {
       formField.type === 'boolean' && <p>bbb</p>
     }
      {
-      formField.type === 'color-picker' && <p>cp</p>
+      formField.type === 'color' && <p>cp</p>
     }
      {
       formField.type === 'currency' && <p>currency</p>
@@ -28,7 +28,7 @@ const InputFormField = ({formField}: {formField: FormFieldInterface}) => {
       formField.type === 'date' && <p>date</p>
     }
      {
-      formField.type === 'date-picker' && <p>date-picker</p>
+      formField.type === 'date' && <p>date-picker</p>
     }
      {
       formField.type === 'number' && <p>{formField.type}</p>

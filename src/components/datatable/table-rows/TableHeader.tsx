@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import formFields from '../../../../data/dataTable/formFields/index';
+import formFields from '../../../../data/datatable/formfields';
 
 const TableHeader = () => {
   const { query } = useRouter();

@@ -1,17 +1,17 @@
-import { billingsTableData as billing } from './billingsTableData';
-import { buildingTableData as buildings } from './buildingsTableData';
-import { usersTableData as users } from './usersTableData';
-import { statisticsTableData as statistics } from './statisticsTableData';
-import { notificationsTableData as notifications } from './notificationsTableData';
-import { bookmarkTableData as bookmarks } from './bookmarkTableData';
-import { commentTableData as comments } from './commentTableData';
-import { fundRuleTableData as fundRules } from './fundRuleTableData';
-import { fundTableData as funds } from './fundTableData';
-import { instancesTableData as instances } from './instancesTableData';
-import { proposalTableData as proposals } from './proposalTableData';
-import { tagTableData as tags } from './tagTableData';
-import { threadTableData as threads } from './threadTableData';
-import { userSettingTableData as userSettings } from './userSettingTableData';
+import { billingsTableData as billing } from './billings-tabledata';
+import { buildingTableData as buildings } from './buildings-tabledata';
+import { usersTableData as users } from './users-tabledata';
+import { statisticsTableData as statistics } from './statistics-tabledata';
+import { notificationsTableData as notifications } from './notifications-tabledata';
+import { bookmarkTableData as bookmarks } from './bookmark-tableata';
+import { commentTableData as comments } from './comment-tabledata';
+import { fundRuleTableData as fundRules } from './fundRule-tabledata';
+import { fundTableData as funds } from './fund-tabledata';
+import { instancesTableData as instances } from './instances-tabledata';
+import { proposalTableData as proposals } from './proposal-tabledata';
+import { tagTableData as tags } from './tag-tabledata';
+import { threadTableData as threads } from './thread-tabledata';
+import { userSettingTableData as userSettings } from './userSetting-tabledata';
 
 // /**
 //  * typing support when making conditions in jsx (tabelcell component)
