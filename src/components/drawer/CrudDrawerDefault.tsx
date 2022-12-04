@@ -2,7 +2,7 @@ import { Button, createStyles, Drawer, ScrollArea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { FormEvent } from "react";
-import formFields from "../../../data/dataTable/formfields";
+import formFields from "../../../data/datatable/formfields";
 import { useCrudSlice } from "../../hooks/redux-hooks/useCrudSlice";
 import { LoginFormValues } from "../../types/context/auth/formData";
 // import classes from "./CrudDrawerDefault.module.css";

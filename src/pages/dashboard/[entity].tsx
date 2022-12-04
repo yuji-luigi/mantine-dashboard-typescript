@@ -7,7 +7,7 @@ import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
 import Layout from '../../layouts';
 import { sectionData, sectionDataBeta } from '../../data';
-import formFields from '../../../data/dataTable/formfields';
+import formFields from '../../../data/datatable/formfields';
 import Page from '../../components/Page';
 import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 import { isConstructorDeclaration } from 'typescript';
