@@ -11,7 +11,7 @@ import {
 import { useForm } from "@mantine/form";
 import React, { FormEvent, Fragment, useEffect } from "react";
 import { LoginFormValues } from "../../types/context/auth/formData";
-import formFields from "../../../data/datatable/formfields";
+import formFields from "../../../data/dataTable/formfields";
 import { useCrudSlice } from "../../hooks/redux-hooks/useCrudSlice";
 import InputFormField from "./InputFormField";
 import { DatePicker, DateRangePicker } from "@mantine/dates";
