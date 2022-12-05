@@ -21,7 +21,7 @@ export function TableSectionHeader() {
 
   /** get entity from url using useRouter().query */
   const entity = query.entity as Sections;
-
+console.log(entity)
   /**
    *  getSection json data to show the page headings  sectionData is array of objects 
    *  so find by data.slice === entity. 

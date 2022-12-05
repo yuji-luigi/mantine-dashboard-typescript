@@ -1,8 +1,4 @@
-const { NODE_ENV } = process.env;
-export const API_BASE_URL =
-  NODE_ENV === 'production'
-    ? process.env.HOST_API_BASE_URL_PRODUCTION
-    : process.env.HOST_API_BASE_URL;
+export const API_BASE_URL = process.env.NODE_ENV === 'development' ? process.env.HOST_API_BASE_URL : process.env.HOST_API_BASE_URL_PRODUCTION;
 export const ROOT_AUTH = 'auth';
 
 export type GetPathFunc = (path: string) => string;
