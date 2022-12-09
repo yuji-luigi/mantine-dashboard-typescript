@@ -11,7 +11,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-export function TableSectionHeader({entityOverride = ''}: {entityOverride: Sections}) {
+export function TableSectionHeader({entityOverride = ''}: {entityOverride?: Sections}) {
   /** define open state for crudDrawer component */
   const [opened, setOpened] = useState(false);
   /** use style defined above */

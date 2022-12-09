@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
-import axiosInstance from '../utils/axios-instance';
-import { PATH_AUTH } from '../path/api-routes';
+
 import {
   JWTContextReducerAction,
   JWTContextState,
@@ -10,9 +9,10 @@ import {
   Logout,
   AuthContextInterface,
   RegisterData,
-} from '../types/context/auth/useAuth';
-import { isValidToken, setSession } from '../utils/jwt';
-import { compose } from '@reduxjs/toolkit';
+} from '../../types/context/auth/useAuth';
+import { isValidToken, setSession } from '../../utils/jwt';
+import axiosInstance from '../../utils/axios-instance';
+import { PATH_AUTH } from '../../path/api-routes';
 
 const initialState: JWTContextState = {
   isAuthenticated: false,
