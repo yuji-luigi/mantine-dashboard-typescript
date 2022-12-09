@@ -11,7 +11,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-export function TableSectionHeader() {
+export function TableSectionHeader({entityOverride = ''}: {entityOverride: Sections}) {
   /** define open state for crudDrawer component */
   const [opened, setOpened] = useState(false);
   /** use style defined above */
@@ -20,8 +20,8 @@ export function TableSectionHeader() {
   const { query, pathname } = useRouter();
 
   /** get entity from url using useRouter().query */
-  const entity = query.entity as Sections;
-console.log(entity)
+  let entity = query.entity as Sections;
+  entity = entityOverride ? entityOverride : entity;
   /**
    *  getSection json data to show the page headings  sectionData is array of objects 
    *  so find by data.slice === entity. 

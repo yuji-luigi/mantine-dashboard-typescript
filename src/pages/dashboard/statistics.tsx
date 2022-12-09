@@ -15,38 +15,24 @@ import { isConstructorDeclaration } from 'typescript';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
 
-const entities: string[] = Object.keys(sectionData);
-
-const en: string[][] = sectionDataBeta.map(data => data.contents.map(content => content.slice))
-const ent = en.reduce((arr, cur) => arr.concat(cur) ,[])
-// const useStyle = createStyles((theme) => ({}));
-
-const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
+const StatisticsPage: NextPageWithLayout<PropWithChildren> = () => {
+/** Define Entity from url */
   const { query, push } = useRouter();
-  const entity = query.entity as Sections;
-  const { fetchCrudDocuments, crudDocuments, crudMessage } = useCrudSlice(entity);
-  formFields as FormFieldsType;
-  useEffect(() => {
-    if (!sections.includes(entity as string)) {
-      push('/dashboard/home');
-    }
-    if (!crudDocuments.length) {
-      fetchCrudDocuments(entity);
-    }
-  }, [entity]);
+
+
   return (
     <Page>
       <div>
-        <TableSectionHeader />
-        <Tables />
-        <div>message: {crudMessage}</div>
+        <TableSectionHeader entityOverride='statistics' />
+        <Tables entityOverride='statistics' />
+        <div>message: </div>
       </div>
     </Page>
   );
 };
 
-CrudPage.getLayout = function getLayout(page: ReactElement) {
+StatisticsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export default CrudPage;
+export default StatisticsPage;
