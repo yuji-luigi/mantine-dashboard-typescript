@@ -4,10 +4,10 @@
     "contents": [
       {
         "slice": "posts",
+        "title": "Posts",
+        "subtitle": "subtitle",
         "navbarTitle": "posts",
         "link": "/posts/home",
-        "title": "welcome to posts",
-        "subtitle": "subtitle",
         "createButton": "",
         "icon": "posts"
       }
@@ -18,48 +18,48 @@
     "contents": [
       {
         "slice": "home",
-        "navbarTitle": "Dashboard",
-        "link": "/dashboard/home",
         "title": "welcome to dashboard",
         "subtitle": "subtitle",
+        "navbarTitle": "Dashboard",
+        "link": "/dashboard/home",
         "createButton": "",
         "icon": "Dashboard"
       },
 
       {
         "slice": "statistics",
-        "navbarTitle": "Statistics",
-        "link": "/dashboard/statistics",
         "title": "Statistics",
         "subtitle": "subtitle",
+        "navbarTitle": "Statistics",
+        "link": "/dashboard/statistics",
         "createButton": "",
         "icon": "Statistic"
       },
       {
         "slice": "notifications",
-        "navbarTitle": "Notifications",
-        "link": "/dashboard/notifications",
         "title": "Notifications",
         "subtitle": "subtitle",
+        "navbarTitle": "Notifications",
+        "link": "/dashboard/notifications",
         "createButton": "New Notification",
         "icon": "Notification"
       },
 
       {
         "slice": "bookmarks",
+        "title": "Bookmarks",
+        "subtitle": "subtitle",
         "navbarTitle": "Bookmark",
         "link": "/dashboard/bookmarks",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Bookmark",
         "icon": "Dashboard"
       },
       {
         "slice": "comments",
+        "title": "Comments",
+        "subtitle": "subtitle",
         "navbarTitle": "Comment",
         "link": "/dashboard/comments",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Comment",
         "icon": "Dashboard"
       }
@@ -70,65 +70,65 @@
     "contents": [
       {
         "slice": "buildings",
+        "title": "Buildings",
+        "subtitle": "subtitle",
         "navbarTitle": "buildings",
         "link": "/dashboard/buildings",
-        "title": "${user.name}'s buildings",
-        "subtitle": "subtitle",
         "createButton": "New Building",
         "icon": "buildings"
       },
       {
         "slice": "fundRules",
+        "title": "FundRules",
+        "subtitle": "subtitle",
         "navbarTitle": "Fund rule",
         "link": "/dashboard/fundRules",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Fund Rule",
         "icon": "Dashboard"
       },
       {
         "slice": "proposals",
+        "title": "Proposals",
+        "subtitle": "subtitle",
         "navbarTitle": "Proposal",
         "link": "/dashboard/proposals",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Proposal",
         "icon": "Dashboard"
       },
       {
         "slice": "funds",
+        "title": "Funds",
+        "subtitle": "subtitle",
         "navbarTitle": "Fund",
         "link": "/dashboard/funds",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Fund",
         "icon": "Dashboard"
       },
       {
         "slice": "threads",
+        "title": "Threads",
+        "subtitle": "subtitle",
         "navbarTitle": "Thread",
         "link": "/dashboard/threads",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Thread",
         "icon": "Dashboard"
       },
       {
         "slice": "instances",
+        "title": "Instances",
+        "subtitle": "subtitle",
         "navbarTitle": "Instance",
         "link": "/dashboard/instances",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Instance",
         "icon": "Dashboard"
       },
 
       {
         "slice": "tags",
+        "title": "Tags",
+        "subtitle": "subtitle",
         "navbarTitle": "Tag",
         "link": "/dashboard/tags",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Tag",
         "icon": "Dashboard"
       }
@@ -139,10 +139,10 @@
     "contents": [
       {
         "slice": "billing",
+        "title": "Billings",
+        "subtitle": "subtitle",
         "navbarTitle": "Billing",
         "link": "/dashboard/billing",
-        "title": "${user.name}'s billing",
-        "subtitle": "subtitle",
         "createButton": "New Billing",
         "icon": "Receipt"
       }
@@ -154,29 +154,29 @@
     "contents": [
       {
         "slice": "userSettings",
+        "title": "UserSettings",
+        "subtitle": "subtitle",
         "navbarTitle": "User setting",
         "link": "/dashboard/userSettings",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "",
         "icon": "Dashboard"
       },
       {
         "slice": "wallets",
+        "title": "Wallets",
+        "subtitle": "subtitle",
         "navbarTitle": "Wallets",
         "link": "/dashboard/wallets",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
         "createButton": "New Wallet",
         "icon": "Dashboard"
       },
 
       {
         "slice": "users",
-        "navbarTitle": "User",
-        "link": "/dashboard/users",
         "title": "Users",
         "subtitle": "subtitle",
+        "navbarTitle": "User",
+        "link": "/dashboard/users",
         "createButton": "New User",
         "icon": "Dashboard"
       }

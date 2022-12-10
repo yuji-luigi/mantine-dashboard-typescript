@@ -10,7 +10,7 @@ const DashboardTopPage: NextPageWithLayout<PropWithChildren> = () => {
   const { user } = useAuth();
   return (
     <Page title="HOME:">
-      <TableSectionHeader />
+      <TableSectionHeader entityOverride="home" />
       <h1>{user?.name || ''}</h1>
     </Page>
   );

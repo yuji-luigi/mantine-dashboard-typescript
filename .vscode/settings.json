@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["modulz"]
+  "cSpell.words": ["modulz"],
+  "[javascriptreact]": {
+    // "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
 }

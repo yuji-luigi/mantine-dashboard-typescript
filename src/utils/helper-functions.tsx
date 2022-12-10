@@ -2,13 +2,12 @@
 //   const import(`../../data/datatable/formFields/index${str}`);}
 
 // eslint-disable-next-line prefer-exponentiation-operator, no-restricted-properties
-export const getRandomNumber = () =>
-  Math.ceil(Math.pow(10, 10) * Math.random());
+export const getRandomNumber = () => Math.ceil(Math.pow(10, 10) * Math.random());
 
 export const createLabelFromArrayStr = (
   arr: string[],
   document: AllModels,
-  label: string = ""
+  label: string = ''
 ): string => {
   const clonedArr = [...arr];
 
@@ -23,3 +22,5 @@ export const createLabelFromArrayStr = (
 
   return createLabelFromArrayStr(clonedArr, document, label);
 };
+
+export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

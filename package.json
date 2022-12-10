@@ -29,6 +29,7 @@
     "cookies-next": "^2.1.1",
     "dayjs": "^1.11.7",
     "eslint": "8.27.0",
+    "eslint-config-mantine": "^2.0.0",
     "eslint-config-next": "13.0.5",
     "jwt-decode": "^3.1.2",
     "next": "13.0.5",

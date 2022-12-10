@@ -24,7 +24,7 @@ const ent = en.reduce((arr, cur) => arr.concat(cur) ,[])
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { query, push } = useRouter();
   const entity = query.entity as Sections;
-  const { fetchCrudDocuments, crudDocuments, crudMessage } = useCrudSlice(entity);
+  const { fetchCrudDocuments, crudDocuments, crudMessage, crudStatus } = useCrudSlice(entity);
   formFields as FormFieldsType;
   useEffect(() => {
     if (!sections.includes(entity as string)) {
@@ -34,6 +34,13 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
       fetchCrudDocuments(entity);
     }
   }, [entity]);
+
+  // useEffect(() => {
+  //   if(crudStatus === 'succeed'){
+
+  //   }
+  // },[crudStatus])
+
   return (
     <Page>
       <div>
