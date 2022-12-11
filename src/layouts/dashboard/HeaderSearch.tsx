@@ -47,11 +47,12 @@ const useStyles = createStyles((theme) => ({
   },
 
   link: {
+    textDecoration: 'none',
+
     display: 'block',
     lineHeight: 1,
     padding: '8px 12px',
     borderRadius: theme.radius.sm,
-    textDecoration: 'none',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
@@ -74,8 +75,8 @@ export function HeaderSearch() {
   const { isOpen, toggleBarOpen } = useLayoutContext();
 
   const items = links.map((link) => (
-    <Link key={link.label} href={link.link}>
-      <span className={classes.link}>{link.label}</span>
+    <Link key={link.label} className={classes.link} href={link.link}>
+      {link.label}
     </Link>
   ));
 

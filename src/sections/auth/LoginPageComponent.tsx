@@ -59,7 +59,8 @@ const useStyles = createStyles((theme) => ({
     border: 'solid black 1px',
     borderColor: theme.colorScheme === 'dark' ? theme.white : theme.black,
     borderRadius: 10,
-    background: theme.colors.gray,
+    background: theme.colorScheme === 'dark' ? theme.colors.gray : '',
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
   },
 }));
 
@@ -98,10 +99,7 @@ function LoginPageComponent() {
   return (
     <GuestGuard>
       <Page title="Login">
-        <form
-          className={classes.wrapper}
-          onSubmit={form.onSubmit((values) => handleSubmit(values))}
-        >
+        <div className={classes.wrapper}>
           <Paper className={classes.form} radius={0} p={30}>
             <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
               Welcome back to Flatmates!
@@ -117,25 +115,27 @@ function LoginPageComponent() {
             </div>
             <br />
 
-            <TextInput
-              name="email"
-              label="Email address"
-              placeholder="hello@gmail.com"
-              size="md"
-              {...form.getInputProps('email')}
-            />
-            <PasswordInput
-              label="Password"
-              name="password"
-              placeholder="Your password"
-              mt="md"
-              size="md"
-              {...form.getInputProps('password')}
-            />
-            <Checkbox label="Keep me logged in" mt="xl" size="md" />
-            <Button fullWidth type="submit" mt="xl" size="md">
-              Login
-            </Button>
+            <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+              <TextInput
+                name="email"
+                label="Email address"
+                placeholder="hello@gmail.com"
+                size="md"
+                {...form.getInputProps('email')}
+              />
+              <PasswordInput
+                label="Password"
+                name="password"
+                placeholder="Your password"
+                mt="md"
+                size="md"
+                {...form.getInputProps('password')}
+              />
+              <Checkbox label="Keep me logged in" mt="xl" size="md" />
+              <Button fullWidth type="submit" mt="xl" size="md">
+                Login
+              </Button>
+            </form>
 
             <Text align="center" mt="md">
               Don&apos;t have an account?{' '}
@@ -144,7 +144,7 @@ function LoginPageComponent() {
               </Link>
             </Text>
           </Paper>
-        </form>
+        </div>
       </Page>
     </GuestGuard>
   );

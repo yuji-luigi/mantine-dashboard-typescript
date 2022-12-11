@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { createStyles, useMantineTheme } from '@mantine/core';
+import { createStyles, ScrollArea, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { HeaderSearch } from './HeaderSearch';
 import { NavbarVertical } from './NavbarVertical';
@@ -8,7 +8,6 @@ import useLayoutContext from '../../hooks/useLayoutContext';
 const useStyles = createStyles((theme /* _params, getRef */) => ({
   pageContent: {
     display: 'flex',
-    position: 'fixed',
     paddingTop: 50,
     paddingLeft: 30,
     [theme.fn.largerThan('md')]: {

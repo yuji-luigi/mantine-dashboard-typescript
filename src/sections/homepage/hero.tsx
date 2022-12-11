@@ -102,34 +102,33 @@ export function HeroSection() {
       />
 
       <Container className={classes.container}>
-        <Transition
+        {/* <Transition
           mounted={isLogin === ''}
           transition={transition}
           duration={duration}
           timingFunction="ease"
         >
           {(styles) => (
-            <>
-              <div style={styles} className={classes.transitionContainer}>
-                <Title className={classes.title}>Flat Mate&copy; Your living friend </Title>
-                <Text className={classes.description} size="xl" mt="xl">
-                  We help you manage your teams. We have solution for all of the dimension of the
-                  team.
-                </Text>
-                <Button
-                  onClick={() => setIsLogin('1')}
-                  variant="gradient"
-                  size="xl"
-                  radius="xl"
-                  className={classes.control}
-                >
-                  Get started
-                </Button>
-              </div>
-            </>
-          )}
-        </Transition>
-        <Transition
+            <> */}
+        <div className={classes.transitionContainer}>
+          <Title className={classes.title}>Flat Mate&copy; Your living friend </Title>
+          <Text className={classes.description} size="xl" mt="xl">
+            We help you manage your teams. We have solution for all of the dimension of the team.
+          </Text>
+          {/* <Button
+            onClick={() => setIsLogin('1')}
+            variant="gradient"
+            size="xl"
+            radius="xl"
+            className={classes.control}
+          >
+            Get started
+          </Button> */}
+        </div>
+        {/* </>
+          )} */}
+        {/* </Transition> */}
+        {/* <Transition
           mounted={isLogin === '1'}
           transition={transition}
           duration={duration}
@@ -176,7 +175,7 @@ export function HeroSection() {
               </Button>
             </div>
           )}
-        </Transition>
+        </Transition> */}
       </Container>
     </div>
   );

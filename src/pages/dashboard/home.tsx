@@ -5,13 +5,25 @@ import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader'
 import { PropWithChildren } from '../../types/general/config';
 import { NextPageWithLayout } from '../_app';
 import useAuth from '../../hooks/useAuth';
+import { ProgressCard } from '../../components/stats/ProgressCard';
+import { ProgressCardColored } from '../../components/stats/ProgressCardColored';
+import { StatsGrid } from '../../components/stats/StatsGrid';
+import { StatsControls } from '../../components/stats/StatControls';
+import { StatsGridIcons } from '../../components/stats/StatGridsDiffIcons';
+import { ScrollArea } from '@mantine/core';
+
+import data from '../../../data/mock/statsGrid.json';
 
 const DashboardTopPage: NextPageWithLayout<PropWithChildren> = () => {
   const { user } = useAuth();
   return (
     <Page title="HOME:">
       <TableSectionHeader entityOverride="home" />
-      <h1>{user?.name || ''}</h1>
+      <ProgressCard />
+      {/* <ProgressCardColored /> */}
+      <StatsGrid />
+      <StatsControls />
+      <StatsGridIcons data={data} />
     </Page>
   );
 };

@@ -30,6 +30,7 @@ import {
   IconChevronDown,
 } from '@tabler/icons';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -149,15 +150,15 @@ export function MainHeader() {
   ));
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: 59 }}>
       <Header fixed height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           {/* <MantineLogo size={30} /> */}
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <a href="#" className={classes.link}>
+            <Link href="/" className={classes.link}>
               Home
-            </a>
+            </Link>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
                 <a href="#" className={classes.link}>
@@ -216,7 +217,7 @@ export function MainHeader() {
               Log in
             </Button>
             <Button onClick={() => push('/sign-up')}>Sign up</Button>
-         <ColorSchemeToggle variant="outline" />
+            <ColorSchemeToggle variant="outline" />
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

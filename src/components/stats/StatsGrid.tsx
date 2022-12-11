@@ -8,6 +8,8 @@ import {
   IconArrowDownRight,
 } from '@tabler/icons';
 
+import statGridData from '../../../data/mock/statsGrid.json';
+
 import data from '../../../data/mock/statsGrid.json';
 
 const useStyles = createStyles((theme) => ({
@@ -57,7 +59,7 @@ interface StatsGridProps {
 
 export function StatsGrid(/* { data }: StatsGridProps */) {
   const { classes } = useStyles();
-  const A = data as unknown;
+  const A = statGridData as unknown;
   const stats = (A as Array<StatsGridProps>).map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
