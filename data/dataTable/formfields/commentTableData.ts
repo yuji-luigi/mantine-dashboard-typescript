@@ -18,6 +18,24 @@ export const commentTableData: Array<FormFieldInterface> = [
     priority: 1,
   },
   {
+    id: 'password',
+    name: 'password',
+    label: 'Password for private use',
+    placeholder: 'secret_$$',
+    type: 'text',
+    required: false,
+    priority: 1,
+  },
+  {
+    id: 'private',
+    name: 'private',
+    label: 'Hide comment.',
+    type: 'boolean',
+    required: false,
+    priority: 1,
+  },
+
+  {
     id: 'building',
     name: 'building',
     label: 'building',
@@ -49,14 +67,5 @@ export const commentTableData: Array<FormFieldInterface> = [
     selectValues: ['name'],
     required: false,
     priority: 2,
-  },
-  {
-    id: 'note',
-    name: 'note',
-    label: 'note',
-    placeholder: 'note',
-    type: 'text',
-    required: true,
-    priority: 1,
   },
 ];

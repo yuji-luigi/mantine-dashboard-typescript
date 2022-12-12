@@ -3,7 +3,8 @@
     "name": "Board",
     "contents": [
       {
-        "slice": "posts",
+        "sliceName": "posts",
+        "entity": "posts",
         "title": "Posts",
         "subtitle": "subtitle",
         "navbarTitle": "posts",
@@ -17,7 +18,8 @@
     "name": "main",
     "contents": [
       {
-        "slice": "home",
+        "sliceName": "home",
+        "entity": "home",
         "title": "welcome to dashboard",
         "subtitle": "subtitle",
         "navbarTitle": "Dashboard",
@@ -27,7 +29,8 @@
       },
 
       {
-        "slice": "statistics",
+        "sliceName": "statistics",
+        "entity": "statistics",
         "title": "Statistics",
         "subtitle": "subtitle",
         "navbarTitle": "Statistics",
@@ -36,7 +39,8 @@
         "icon": "Statistic"
       },
       {
-        "slice": "notifications",
+        "sliceName": "notifications",
+        "entity": "notifications",
         "title": "Notifications",
         "subtitle": "subtitle",
         "navbarTitle": "Notifications",
@@ -46,7 +50,8 @@
       },
 
       {
-        "slice": "bookmarks",
+        "sliceName": "bookmarks",
+        "entity": "bookmarks",
         "title": "Bookmarks",
         "subtitle": "subtitle",
         "navbarTitle": "Bookmark",
@@ -55,13 +60,15 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "comments",
+        "sliceName": "comments",
+        "entity": "comments",
         "title": "Comments",
         "subtitle": "subtitle",
         "navbarTitle": "Comment",
         "link": "/dashboard/comments",
         "createButton": "New Comment",
-        "icon": "Dashboard"
+        "icon": "Dashboard",
+        "hide": true
       }
     ]
   },
@@ -69,7 +76,8 @@
     "name": "setups",
     "contents": [
       {
-        "slice": "buildings",
+        "sliceName": "buildings",
+        "entity": "buildings",
         "title": "Buildings",
         "subtitle": "subtitle",
         "navbarTitle": "buildings",
@@ -78,7 +86,8 @@
         "icon": "buildings"
       },
       {
-        "slice": "fundRules",
+        "sliceName": "fundRules",
+        "entity": "fundRules",
         "title": "FundRules",
         "subtitle": "subtitle",
         "navbarTitle": "Fund rule",
@@ -87,7 +96,8 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "proposals",
+        "sliceName": "proposals",
+        "entity": "proposals",
         "title": "Proposals",
         "subtitle": "subtitle",
         "navbarTitle": "Proposal",
@@ -96,7 +106,8 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "funds",
+        "sliceName": "funds",
+        "entity": "funds",
         "title": "Funds",
         "subtitle": "subtitle",
         "navbarTitle": "Fund",
@@ -105,7 +116,8 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "threads",
+        "sliceName": "threads",
+        "entity": "threads",
         "title": "Threads",
         "subtitle": "subtitle",
         "navbarTitle": "Thread",
@@ -114,7 +126,8 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "instances",
+        "sliceName": "instances",
+        "entity": "instances",
         "title": "Instances",
         "subtitle": "subtitle",
         "navbarTitle": "Instance",
@@ -124,7 +137,8 @@
       },
 
       {
-        "slice": "tags",
+        "sliceName": "tags",
+        "entity": "tags",
         "title": "Tags",
         "subtitle": "subtitle",
         "navbarTitle": "Tag",
@@ -138,13 +152,15 @@
     "name": "others",
     "contents": [
       {
-        "slice": "billing",
+        "sliceName": "billing",
+        "entity": "billing",
         "title": "Billings",
         "subtitle": "subtitle",
         "navbarTitle": "Billing",
         "link": "/dashboard/billing",
         "createButton": "New Billing",
-        "icon": "Receipt"
+        "icon": "Receipt",
+        "hide": true
       }
     ]
   },
@@ -153,7 +169,8 @@
     "name": "admin",
     "contents": [
       {
-        "slice": "userSettings",
+        "sliceName": "userSettings",
+        "entity": "userSettings",
         "title": "UserSettings",
         "subtitle": "subtitle",
         "navbarTitle": "User setting",
@@ -162,7 +179,8 @@
         "icon": "Dashboard"
       },
       {
-        "slice": "wallets",
+        "sliceName": "wallets",
+        "entity": "wallets",
         "title": "Wallets",
         "subtitle": "subtitle",
         "navbarTitle": "Wallets",
@@ -172,7 +190,8 @@
       },
 
       {
-        "slice": "users",
+        "sliceName": "users",
+        "entity": "users",
         "title": "Users",
         "subtitle": "subtitle",
         "navbarTitle": "User",

@@ -7,6 +7,7 @@ import useLayoutContext from '../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme /* _params, getRef */) => ({
   pageContent: {
+    zIndex: 10,
     display: 'flex',
     paddingTop: 50,
     paddingLeft: 30,

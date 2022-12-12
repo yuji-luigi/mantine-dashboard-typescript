@@ -25,7 +25,7 @@ export const bookmarkTableData: Array<FormFieldInterface> = [
     multi: true,
     entitySingle: 'thread',
     entityPlural: 'threads',
-    selectValues: ['name'],
+    selectValues: ['title'],
     required: false,
     priority: 2,
   },

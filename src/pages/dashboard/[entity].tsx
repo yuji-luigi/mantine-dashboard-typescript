@@ -6,7 +6,7 @@ import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
 import Layout from '../../layouts';
-import { sectionData, sectionDataBeta, sections } from '../../data';
+import { sectionData, sections } from '../../data';
 import formFields from '../../../data/dataTable/formfields';
 import Page from '../../components/Page';
 import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
@@ -17,8 +17,8 @@ import { isConstructorDeclaration } from 'typescript';
 
 const entities: string[] = Object.keys(sectionData);
 
-const en: string[][] = sectionDataBeta.map(data => data.contents.map(content => content.slice))
-const ent = en.reduce((arr, cur) => arr.concat(cur) ,[])
+const en: string[][] = sectionData.map((data) => data.contents.map((content) => content.entity));
+const ent = en.reduce((arr, cur) => arr.concat(cur), []);
 // const useStyle = createStyles((theme) => ({}));
 
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {

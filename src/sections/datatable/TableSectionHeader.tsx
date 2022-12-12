@@ -39,11 +39,14 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
    *  so find by data.slice === entity.
    *  maybe slice rename to entity
    */
-  let section = sectionData.find((data) => data.slice === entity);
-  section =
-    !section && pathname === '/dashboard/home'
-      ? sectionData.find((data) => data.slice === ' home')
-      : section;
+  const flattenSectionData = sectionData.flatMap((data) =>
+    data.contents.flatMap((content) => content)
+  );
+  let section = flattenSectionData.find((data) => data.entity === entity);
+  // section =
+  //   !section && pathname === '/dashboard/home'
+  //     ? sectionData.find((data) => data.slice === ' home')
+  //     : section;
 
   /** define case when theres no entity,
    * seem like gives an error in other component
