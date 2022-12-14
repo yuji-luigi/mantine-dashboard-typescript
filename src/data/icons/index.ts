@@ -25,8 +25,35 @@ import {
   IconAlien as Instance,
   IconTag as Tag,
   IconAlertCircle as Alert,
+  IconX as Close,
   TablerIcon,
-} from "@tabler/icons";
+} from '@tabler/icons';
+
+// type IconIndexTypes =
+//   | 'bookmarks'
+//   | 'comments'
+//   | 'buildings'
+//   | 'funds'
+//   | 'fundRules'
+//   | 'instances'
+//   | 'proposals'
+//   | 'tags'
+//   | 'threads'
+//   | 'userSettings'
+//   | 'authentication'
+//   | 'notifications'
+//   | 'home'
+//   | 'database'
+//   | 'security'
+//   | 'statistics'
+//   | 'key'
+//   | 'receipt'
+//   | 'cog'
+//   | 'logout'
+//   | 'switch'
+//   | 'user'
+//   | 'fundRules'
+//   | 'alert';
 
 export const Icons: Record<IconIndexTypes, TablerIcon> = {
   authentication: Authentication,
@@ -52,6 +79,7 @@ export const Icons: Record<IconIndexTypes, TablerIcon> = {
   userSettings: Cog,
   alert: Alert,
   buildings: Building,
+  close: Close,
 };
 
 // export {

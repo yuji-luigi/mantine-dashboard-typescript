@@ -46,7 +46,6 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
       <div>
         <TableSectionHeader />
         <Tables />
-        <div>message: {crudMessage}</div>
       </div>
     </Page>
   );

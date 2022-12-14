@@ -18,6 +18,5 @@ export default function GuestGuard({ children }: { children: ReactNode }) {
       push(PATH_DASHBOARD.root);
     }
   }, [isAuthenticated]);
-
   return <>{children}</>;
 }

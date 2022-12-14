@@ -1,11 +1,18 @@
 export const notificationsTableData: Array<FormFieldInterface> = [
   {
-    id: 'message',
-    name: 'message',
+    id: 'title',
+    name: 'title',
+    label: 'Title',
+    type: 'text',
+    required: false,
+    priority: 100,
+  },
+  {
+    id: 'body',
+    name: 'body',
     label: 'Message',
     type: 'text',
-
-    required: false,
+    required: true,
     priority: 100,
   },
 ];

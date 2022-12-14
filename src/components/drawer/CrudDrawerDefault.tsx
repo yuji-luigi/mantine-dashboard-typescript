@@ -4,31 +4,31 @@ import { hideNotification, showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import formFields from '../../../data/dataTable/formfields';
+import { Icons } from '../../data/icons';
 import { errorNotificationData } from '../../data/showNofification/objects';
 import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 import { LoginFormValues } from '../../types/context/auth/formData';
 import { sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
+import { useDrawerContext } from '../../context/DataTableDrawerContext';
 
 const useStyles = createStyles((theme) => ({
   drawer: {
     overflow: 'scroll',
   },
+  form: {
+    marginTop: 50,
+  },
 }));
 
-export function CrudDrawerDefault({
-  opened,
-  setOpened,
-}: {
-  opened: boolean;
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export function CrudDrawerDefault() {
   const [submitting, setSubmitting] = useState(false);
   const { classes } = useStyles();
   const { query } = useRouter();
   const entity = query.entity as Sections;
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
+  const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
   /**
    * initialValues
@@ -83,7 +83,7 @@ export function CrudDrawerDefault({
      * to handle multiple notifications
      * */
     await sleep(800);
-    setOpened(false);
+    closeDrawer();
     await sleep(200);
     hideNotification('submit');
     await sleep(100);
@@ -101,22 +101,27 @@ export function CrudDrawerDefault({
   return (
     <Drawer
       className={classes.drawer}
-      opened={opened}
-      onClose={() => setOpened(false)}
+      opened={drawerIsOpen}
+      onClose={closeDrawer}
       title="Register"
       padding="xl"
       size="xl"
     >
-      <div>
-        <form onSubmit={onSubmit}>
-          {sectionFormFields?.map((formField) => (
-            <FormFields formField={formField} key={formField.id} />
-          ))}
-          <Button fullWidth disabled={crudStatus === 'loading'} type="submit" mt="xl" size="md">
-            Add {entity}!
-          </Button>
-        </form>
-      </div>
+      <Icons.close onClick={closeDrawer} />
+      <form className={classes.form} onSubmit={onSubmit}>
+        {sectionFormFields?.map((formField) => (
+          <FormFields form={form} formField={formField} key={formField.id} />
+        ))}
+        <Button fullWidth disabled={crudStatus === 'loading'} type="submit" mt="xl" size="md">
+          Add {entity}!
+        </Button>
+      </form>
     </Drawer>
   );
+}
+
+function createDefaultValues(formFields: FormFieldInterface[]): Record<any, any> {
+  // const defauldValues
+
+  return {};
 }

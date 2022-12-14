@@ -3,29 +3,30 @@ import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
 import { sectionData, sections } from '../../data';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
+import { useDrawerContext } from '../../context/DataTableDrawerContext';
 
 const useStyles = createStyles(() => ({
-  // sectionHeader: { display: 'flex', alignItems: 'center' },
   headerWrapper: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'space-between',
+    flexDirection: 'row',
     alignItems: 'center',
-    // marginBottom: 20,
     paddingInline: 10,
+    paddingTop: 30,
   },
   title: {
-    justifySelf: 'start',
+    marginBlock: 5,
   },
   button: {
-    paddingInline: '10px',
-    // alignSelf: 'end',
+    marginLeft: 40,
   },
 }));
 
 export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections }) {
   /** define open state for crudDrawer component */
-  const [opened, setOpened] = useState(false);
+
+  const { drawerIsOpen: opened, openDrawer } = useDrawerContext();
+  // const [opened, setOpened] = useState(false);
   /** use style defined above */
   const { classes } = useStyles();
   /** get url string by useRouter */
@@ -55,7 +56,6 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
     return <p>loading...</p>;
   }
   /** define openDrawer function. Button onClick openDrawer */
-  const openDrawer = () => setOpened(true);
 
   return (
     <div>
@@ -67,7 +67,7 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
           </Button>
         )}
       </div>
-      <CrudDrawerDefault opened={opened} setOpened={setOpened} />
+      <CrudDrawerDefault />
     </div>
   );
 }

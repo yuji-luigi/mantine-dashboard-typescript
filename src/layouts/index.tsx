@@ -20,6 +20,7 @@ const Layout = ({
       </>
     );
   }
+  // homepage
   if (variant === 'main') {
     return <MainLayout>{children}</MainLayout>;
   }

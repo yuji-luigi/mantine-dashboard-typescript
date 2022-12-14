@@ -9,6 +9,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from '../context/JWTContext';
 import reduxStore from '../redux/store';
 import { DashboardLayoutContextProvider } from '../context/DashboardLayoutContext';
+import { DrawerContextProvider } from '../context/DataTableDrawerContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -43,7 +44,9 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
               <NotificationsProvider>
                 <DashboardLayoutContextProvider>
-                  {getLayout(<Component {...pageProps} />)}
+                  <DrawerContextProvider>
+                    {getLayout(<Component {...pageProps} />)}
+                  </DrawerContextProvider>
                 </DashboardLayoutContextProvider>
               </NotificationsProvider>
             </MantineProvider>

@@ -1,21 +1,14 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import {
-  Button,
-  Checkbox,
-  createStyles,
-  Select,
-  Textarea,
-  TextInput,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
-import React, { FormEvent, Fragment, useEffect } from "react";
-import { LoginFormValues } from "../../types/context/auth/formData";
-import formFields from "../../../data/dataTable/formfields";
-import { useCrudSlice } from "../../hooks/redux-hooks/useCrudSlice";
-import InputFormField from "./InputFormField";
-import { DatePicker, DateRangePicker } from "@mantine/dates";
-import { useGetSelectOptions } from "../../hooks/form-related/useGetSelectOptions";
+import { Button, Checkbox, createStyles, Select, Textarea, TextInput } from '@mantine/core';
+import { useForm, UseFormReturnType } from '@mantine/form';
+import React, { FormEvent, Fragment, useEffect } from 'react';
+import { LoginFormValues } from '../../types/context/auth/formData';
+import formFields from '../../../data/dataTable/formfields';
+import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import InputFormField from './InputFormField';
+import { DatePicker, DateRangePicker } from '@mantine/dates';
+import { useGetSelectOptions } from '../../hooks/form-related/useGetSelectOptions';
 
 const useStyle = createStyles((theme) => ({
   formControl: {
@@ -23,7 +16,13 @@ const useStyle = createStyles((theme) => ({
   },
 }));
 
-const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
+const FormFields = ({
+  formField,
+  form,
+}: {
+  formField: FormFieldInterface;
+  form: UseFormReturnType<any, any>;
+}) => {
   const { classes } = useStyle();
 
   const { query } = useRouter();
@@ -35,25 +34,25 @@ const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
 
   const { addCrud } = useCrudSlice(entity);
 
-  const form = useForm<LoginFormValues>({
-    initialValues: {
-      email: "",
-      password: "",
-      termsOfService: false,
-    },
-    // TODO: Make Validate function and set by string value from formField.
-    // validate: 'email' uses this email validator.
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    },
-  });
+  // const form = useForm<LoginFormValues>({
+  //   initialValues: {
+  //     email: "",
+  //     password: "",
+  //     termsOfService: false,
+  //   },
+  //   // TODO: Make Validate function and set by string value from formField.
+  //   // validate: 'email' uses this email validator.
+  //   validate: {
+  //     email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+  //   },
+  // });
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     addCrud({ entity, newDocument: form.values });
   };
   return (
     <>
-      {formField.type === "text" && (
+      {formField.type === 'text' && (
         <TextInput
           key={formField.id}
           name={formField.name}
@@ -64,7 +63,7 @@ const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
         />
       )}
 
-      {formField.type === "long-text" && (
+      {formField.type === 'long-text' && (
         <Textarea
           rows={10}
           name={formField.name}
@@ -74,7 +73,7 @@ const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {(formField.type === "select" || formField.type === "static-select") && (
+      {(formField.type === 'select' || formField.type === 'static-select') && (
         <Select
           data={options}
           name={formField.name}
@@ -84,7 +83,7 @@ const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === "date" && (
+      {formField.type === 'date' && (
         <DatePicker
           name={formField.name}
           label={formField.label}
@@ -93,7 +92,7 @@ const FormFields = ({ formField }: { formField: FormFieldInterface }) => {
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === "date-range" && (
+      {formField.type === 'date-range' && (
         <DateRangePicker
           name={formField.name}
           label={formField.label}

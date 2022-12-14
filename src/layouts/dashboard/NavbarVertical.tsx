@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { createStyles, Navbar, Group, Code, ScrollArea } from '@mantine/core';
+import { createStyles, Navbar, Group, Code, ScrollArea, Button } from '@mantine/core';
 import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -75,6 +75,19 @@ const useStyles = createStyles((theme, _params, getRef) => {
             color: theme.primaryColor,
           }).color,
         },
+      },
+    },
+    button: {
+      background: theme.colorScheme === 'dark' ? theme.colors.gray : '',
+      '&:hover': {
+        backgroundColor:
+          theme.colorScheme === 'dark'
+            ? theme.fn.variant({
+                variant: 'light',
+                color: theme.primaryColor,
+              }).background
+            : '',
+        // color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
       },
     },
   };
@@ -158,14 +171,14 @@ export function NavbarVertical() {
         </Navbar.Section>
 
         <Navbar.Section className={classes.footer}>
-          <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+          {/* <Button className={classes.button} onClick={(event) => event.preventDefault()}>
             <Icons.switch className={classes.linkIcon} stroke={1.5} />
             <span>Change account</span>
-          </a>
-          <a href="#" className={classes.link} onClick={logout}>
+          </Button> */}
+          <Button variant="outline" className={classes.button} onClick={logout}>
             <Icons.logout className={classes.linkIcon} stroke={1.5} />
             <span>Logout</span>
-          </a>
+          </Button>
         </Navbar.Section>
       </ScrollArea>
     </Navbar>

@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { TableCellDecorator } from '../TableCellDecorator';
+import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 
 export function TableRow({
   rowData,
@@ -12,9 +13,14 @@ export function TableRow({
   rowData: AllModels;
   sectionFormFields: Array<FormFieldInterface>;
 }) {
+  const { openDrawer } = useDrawerContext();
   const { query } = useRouter();
+
   const { deleteCrudDocument } = useCrudSlice();
-  const onModify = (): void => {};
+  const onModify = (): void => {
+    openDrawer();
+    console.log(rowData);
+  };
   const onDelete = (): void => {
     deleteCrudDocument({ entity: query.entity as Sections, documentId: rowData._id });
   };
