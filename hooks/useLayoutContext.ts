@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DashboardLayoutContext } from '../context/DashboardLayoutContext';
+import { DashboardLayoutContext } from '../src/context/DashboardLayoutContext';
 
 const useLayoutContext = () => {
   const context = useContext(DashboardLayoutContext);

@@ -15,7 +15,7 @@ import {
 import Link from 'next/link';
 
 import { useForm } from '@mantine/form';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 
 import { PasswordStrength } from '../../components/input/Password.Strength';
 import { RegisterData } from '../../types/context/auth/useAuth';

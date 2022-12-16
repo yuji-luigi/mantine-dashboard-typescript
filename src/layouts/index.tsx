@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import AuthGuard from '../guards/AuthGuard';
 import DashboardLayout from './dashboard/DashboardLayout';
-import { MainLayout } from './main';
+import { HomepageLayout } from './homepage';
 
 export type LayoutVariants = 'main' | 'logoOnly' | 'dashboard';
 
@@ -22,7 +22,7 @@ const Layout = ({
   }
   // homepage
   if (variant === 'main') {
-    return <MainLayout>{children}</MainLayout>;
+    return <HomepageLayout>{children}</HomepageLayout>;
   }
   return (
     <AuthGuard>

@@ -6,7 +6,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
-import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { LoginFormValues } from '../../types/context/auth/formData';
 import { sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";

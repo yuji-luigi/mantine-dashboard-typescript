@@ -3,7 +3,7 @@ import {
   addCrudDocument,
   deleteCrudDocument,
   crudSlice,
-} from '../../redux/features/crud/crudSlice';
+} from '../../src/redux/features/crud/crudSlice';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 export const useCrudSlice = (ent?: Sections) => {

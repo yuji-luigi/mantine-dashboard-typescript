@@ -2,7 +2,7 @@ import { ActionIcon, Group } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
 import { TableCellDecorator } from '../TableCellDecorator';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 

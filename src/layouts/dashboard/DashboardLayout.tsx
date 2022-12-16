@@ -3,7 +3,7 @@ import { createStyles, ScrollArea, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { HeaderSearch } from './HeaderSearch';
 import { NavbarVertical } from './NavbarVertical';
-import useLayoutContext from '../../hooks/useLayoutContext';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme /* _params, getRef */) => ({
   pageContent: {

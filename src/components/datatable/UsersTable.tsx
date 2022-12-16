@@ -17,7 +17,7 @@ import users from '../../../json/mock/usersDatatable.json';
 import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
 import formFields from '../../../json/dataTable/formfields';
-import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 
 export function UsersTable(
   /* { data }: { data: Array<UsersTableRow> } */ {

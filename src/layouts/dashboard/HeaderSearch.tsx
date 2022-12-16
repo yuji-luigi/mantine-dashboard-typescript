@@ -4,8 +4,9 @@ import { IconSearch } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
 import links from '../../../json/navbar/headerLinks.json';
-import useLayoutContext from '../../hooks/useLayoutContext';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import Image from 'next/image';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -85,7 +86,13 @@ export function HeaderSearch() {
       <div className={classes.inner}>
         <Group>
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
-          <MantineLogo className={classes.logo} size={28} />
+          {/* <MantineLogo className={classes.logo} size={28} /> */}
+          <Image
+            src="/images/flatmates_logo_banner_copy.jpeg"
+            alt="flate mates logo"
+            width={200}
+            height={50}
+          />
         </Group>
         <Group>
           <Group ml={50} spacing={5} className={classes.links}>

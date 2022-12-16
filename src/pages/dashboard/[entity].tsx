@@ -9,7 +9,7 @@ import Layout from '../../layouts';
 import { sectionData, sections } from '../../data';
 import formFields from '../../../json/dataTable/formfields';
 import Page from '../../components/Page';
-import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { isConstructorDeclaration } from 'typescript';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 

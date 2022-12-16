@@ -1,5 +1,5 @@
 // export { default as sectionData } from '../../data/dataTable/section/sectionData.json';
-import { default as beta } from '../../json/dataTable/section/sectionDatacopy.json';
+import { default as beta } from '../../json/dataTable/section/sectionData.json';
 
 const en: string[][] = beta.map((data) => data.contents.map((content) => content.entity));
 

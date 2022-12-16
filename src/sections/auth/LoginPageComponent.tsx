@@ -12,7 +12,7 @@ import {
 import { useNotifications, showNotification } from '@mantine/notifications';
 import Link from 'next/link';
 import { useForm } from '@mantine/form';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { LoginFormValues } from '../../types/context/auth/formData';
 import GuestGuard from '../../guards/GuestGuard';
 import { AUTH } from '../../path/page-paths';

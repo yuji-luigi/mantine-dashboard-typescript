@@ -4,7 +4,7 @@ import Layout from '../../layouts';
 import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
 import { PropWithChildren } from '../../types/general/config';
 import { NextPageWithLayout } from '../_app';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { ProgressCard } from '../../components/stats/ProgressCard';
 import { ProgressCardColored } from '../../components/stats/ProgressCardColored';
 import { StatsGrid } from '../../components/stats/StatsGrid';

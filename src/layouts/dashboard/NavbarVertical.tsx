@@ -1,13 +1,24 @@
 import { Fragment, useEffect, useState } from 'react';
-import { createStyles, Navbar, Group, Code, ScrollArea, Button } from '@mantine/core';
+import {
+  createStyles,
+  Navbar,
+  Group,
+  Code,
+  ScrollArea,
+  Button,
+  Avatar,
+  Text,
+  Space,
+} from '@mantine/core';
 import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import useLayoutContext from '../../hooks/useLayoutContext';
-import useAuth from '../../hooks/useAuth';
+import useLayoutContext from '../../../hooks/useLayoutContext';
+import useAuth from '../../../hooks/useAuth';
 import { sectionData } from '../../data';
 
 import { Icons } from '../../data/icons/icons';
+import { MantineLogo } from '@mantine/ds';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon') as string;
@@ -33,6 +44,11 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
     link: {
       textDecoration: 'none',
+    },
+
+    flexVertical: {
+      display: 'flex',
+      flexDirection: 'column',
     },
 
     linkLabel: {
@@ -108,6 +124,7 @@ type NavbarConfig = { link: string; label: string; icon: TablerIcon };
 
 export function NavbarVertical() {
   const { classes, cx } = useStyles();
+  const { user } = useAuth();
   const { logout } = useAuth();
   const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
@@ -163,12 +180,15 @@ export function NavbarVertical() {
     >
       <ScrollArea>
         <Navbar.Section grow>
-          <Group className={classes.header} position="apart">
-            {/* <MantineLogo size={28} /> */}
-            <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+          <Group className={classes.header} position="left">
+            <Avatar size={50} />
+            <div className={classes.flexVertical}>
+              <Text fw={700}>{user?.name}</Text>
+              <Text fw={500}>{user?.email}</Text>
+            </div>
           </Group>
-          {links.map((navbarData) => navbarData)}
         </Navbar.Section>
+        {links.map((navbarData) => navbarData)}
 
         <Navbar.Section className={classes.footer}>
           {/* <Button className={classes.button} onClick={(event) => event.preventDefault()}>

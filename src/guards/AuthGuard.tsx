@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 // hooks
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import LoginPage from '../sections/auth/LoginPageComponent';
 
 export default function AuthGuard({ children }: { children: JSX.Element | JSX.Element[] }) {

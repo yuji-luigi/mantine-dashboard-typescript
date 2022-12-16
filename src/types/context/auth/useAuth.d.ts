@@ -1,17 +1,17 @@
 export interface IUser {
-  _id?: string;
-  name?: string | undefined;
+  _id: string;
+  name: string | undefined;
   surname?: string | undefined;
   phone?: string | undefined;
-  email?: string | undefined;
+  email: string | undefined;
   password: string;
-  role?: string | undefined;
-  bookmarks?: string[] | IBookmark[];
+  role: string | undefined;
+  bookmarks: string[] | IBookmark[];
   wallet?: string | IWallet;
-  buildings?: string[] | IBuilding[] | undefined;
+  buildings: [] | string[] | IBuilding[] | undefined;
   userSetting: string | IUserSetting;
-  last_login?: Date;
-  modules?: modules;
+  last_login: Date;
+  // modules?: modules;
 
   _update?: {
     password?: Buffer | string;

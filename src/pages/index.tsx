@@ -16,7 +16,6 @@ export default function HomePage() {
           content="Flatmates where you can create group of people and their social media or platform where manage all kinds of communications."
         />
       </Head>
-
       <HeroSection />
       <AboutSection />
       <BannerSection />

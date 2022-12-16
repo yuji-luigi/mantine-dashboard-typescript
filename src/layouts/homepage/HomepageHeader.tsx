@@ -127,7 +127,7 @@ const mockdata = [
   },
 ];
 
-export function MainHeader() {
+export function HomepageHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
