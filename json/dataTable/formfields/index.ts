@@ -26,6 +26,13 @@ export enum FieldTypes {
   StaticSelect = 'static-select',
 }
 
+/**
+ * define object formFields
+ * that can be indexed by entity.
+ * ex: formFields[entity]
+ * type for the json files
+ *
+ * */
 const formFields: FormFieldsType = {
   billing,
   users,

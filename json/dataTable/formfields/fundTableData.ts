@@ -18,6 +18,17 @@ export const fundTableData: Array<FormFieldInterface> = [
     priority: 1,
   },
   {
+    id: 'building',
+    name: 'building',
+    label: 'Building',
+    type: 'select',
+    entitySingle: 'building',
+    entityPlural: 'buildings',
+    selectValues: ['name'],
+    required: false,
+    priority: 2,
+  },
+  {
     id: 'user',
     name: 'user',
     label: 'created by',

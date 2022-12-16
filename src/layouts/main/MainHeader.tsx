@@ -31,6 +31,8 @@ import {
 } from '@tabler/icons';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import Link from 'next/link';
+import { useCloseDrawer } from '../../context/DataTableDrawerContext';
+import { sleep } from '../../utils/helper-functions';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -130,6 +132,11 @@ export function MainHeader() {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
   const { push } = useRouter();
+
+  function pushAndCloseDrawer(path: string) {
+    push(path);
+    closeDrawer();
+  }
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -236,10 +243,11 @@ export function MainHeader() {
         <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
-          <a href="#" className={classes.link}>
+          <a href="/" className={classes.link}>
             Home
           </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
+
+          {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
                 Features
@@ -247,21 +255,21 @@ export function MainHeader() {
               <IconChevronDown size={16} color={theme.primaryColor} />
             </Center>
           </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
+          <Collapse in={linksOpened}>{links}</Collapse> */}
+          {/* <a href="#" className={classes.link}>
             Learn
-          </a>
-          <a href="#" className={classes.link}>
+          </a> */}
+          {/* <a href="#" className={classes.link}>
             Academy
-          </a>
+          </a> */}
 
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button onClick={() => push('/login')} variant="default">
+            <Button onClick={() => pushAndCloseDrawer('/login')} variant="default">
               Log in
             </Button>
-            <Button onClick={() => push('/sign-up')}>Sign up</Button>
+            <Button onClick={() => pushAndCloseDrawer('/sign-up')}>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>

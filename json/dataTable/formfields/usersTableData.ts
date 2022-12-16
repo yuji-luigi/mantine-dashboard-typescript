@@ -13,7 +13,7 @@ export const usersTableData: Array<FormFieldInterface> = [
     name: 'surname',
     label: 'Cognome',
     type: 'text',
-    required: true,
+    required: false,
     priority: 2,
   },
   {
@@ -22,7 +22,7 @@ export const usersTableData: Array<FormFieldInterface> = [
     label: 'Ruolo',
     type: 'text',
     // options: ['super_admin', 'admin', 'operatore', 'supervisore', 'manutentore'],
-    options: [{ value: "static-slect-value", label: "static-label" }],
+    options: [{ value: 'static-slect-value', label: 'static-label' }],
 
     required: true,
     priority: 3,

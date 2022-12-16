@@ -2,7 +2,7 @@ import React from 'react';
 import { Group, Avatar, Text } from '@mantine/core';
 // import { IconPencil, IconTrash } from '@tabler/icons';
 // import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
-import { FieldTypes } from '../../../../../data/dataTable/formfields';
+import { FieldTypes } from '../../../../../json/dataTable/formfields';
 export const jobColors: Record<string, string> = {
   engineer: 'blue',
   manager: 'cyan',
@@ -42,15 +42,13 @@ const TableCell = ({
         </Group>
       )}
 
-      {
-     ( cellConfig.type === 'text' || cellConfig.type === 'long-text') && (
+      {(cellConfig.type === 'text' || cellConfig.type === 'long-text') && (
         <Group spacing="sm">
           <Text size="lg" weight={500}>
             {cellData}
           </Text>
         </Group>
-      )
-    }
+      )}
       {cellConfig.type === 'static-select' && (
         <Group spacing="sm">
           <Text size="sm" weight={500}>

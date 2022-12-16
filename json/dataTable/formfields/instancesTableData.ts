@@ -17,6 +17,7 @@ export const instancesTableData: Array<FormFieldInterface> = [
     required: true,
     priority: 1,
   },
+
   {
     id: 'building',
     name: 'building',
@@ -24,6 +25,20 @@ export const instancesTableData: Array<FormFieldInterface> = [
     type: 'select',
     entitySingle: 'building',
     entityPlural: 'buildings',
+    selectValues: ['name'],
+    required: false,
+    priority: 2,
+  },
+  {
+    id: 'type',
+    name: 'type',
+    label: 'created by',
+    type: 'static-select',
+    multi: true,
+    options: [
+      { label: 'user', value: 'user' },
+      { label: 'space', value: 'space' },
+    ],
     selectValues: ['name'],
     required: false,
     priority: 2,

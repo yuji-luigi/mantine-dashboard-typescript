@@ -7,7 +7,7 @@ import useLayoutContext from '../../hooks/useLayoutContext';
 import useAuth from '../../hooks/useAuth';
 import { sectionData } from '../../data';
 
-import { Icons } from '../../data/icons/index';
+import { Icons } from '../../data/icons/icons';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon') as string;

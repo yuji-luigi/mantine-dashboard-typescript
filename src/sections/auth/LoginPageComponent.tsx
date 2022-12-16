@@ -17,7 +17,7 @@ import { LoginFormValues } from '../../types/context/auth/formData';
 import GuestGuard from '../../guards/GuestGuard';
 import { AUTH } from '../../path/page-paths';
 import Page from '../../components/Page';
-import { Icons } from '../../data/icons';
+import { Icons } from '../../data/icons/icons';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {

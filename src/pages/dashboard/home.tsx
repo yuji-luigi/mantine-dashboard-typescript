@@ -12,7 +12,7 @@ import { StatsControls } from '../../components/stats/StatControls';
 import { StatsGridIcons } from '../../components/stats/StatGridsDiffIcons';
 import { ScrollArea } from '@mantine/core';
 
-import data from '../../../data/mock/statsGrid.json';
+import data from '../../../json/mock/statsGrid.json';
 
 const DashboardTopPage: NextPageWithLayout<PropWithChildren> = () => {
   const { user } = useAuth();

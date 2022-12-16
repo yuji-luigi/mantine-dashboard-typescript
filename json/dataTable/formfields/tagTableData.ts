@@ -37,4 +37,16 @@ export const tagTableData: Array<FormFieldInterface> = [
     required: false,
     priority: 2,
   },
+  {
+    id: 'owner',
+    name: 'owner',
+    label: 'created by',
+    type: 'select',
+    multi: true,
+    entitySingle: 'owner',
+    entityPlural: 'owners',
+    selectValues: ['name'],
+    required: false,
+    priority: 2,
+  },
 ];

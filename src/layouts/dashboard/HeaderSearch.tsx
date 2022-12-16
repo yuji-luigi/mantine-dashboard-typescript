@@ -3,7 +3,7 @@ import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core
 import { IconSearch } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
-import links from '../../../data/mock/navbarConfig.json';
+import links from '../../../json/navbar/headerLinks.json';
 import useLayoutContext from '../../hooks/useLayoutContext';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 

@@ -8,9 +8,9 @@ import {
   IconArrowDownRight,
 } from '@tabler/icons';
 
-import statGridData from '../../../data/mock/statsGrid.json';
+import statGridData from '../../../json/mock/statsGrid.json';
 
-import data from '../../../data/mock/statsGrid.json';
+import data from '../../../json/mock/statsGrid.json';
 
 const useStyles = createStyles((theme) => ({
   root: {

@@ -1,5 +1,5 @@
 import { showNotification } from '@mantine/notifications';
-import { Icons } from '../data/icons';
+import { Icons } from '../data/icons/icons';
 
 interface Error {
   message: string;

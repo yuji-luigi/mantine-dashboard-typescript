@@ -34,6 +34,14 @@ export const commentTableData: Array<FormFieldInterface> = [
     required: false,
     priority: 1,
   },
+  {
+    id: 'anonymous',
+    name: 'anonymous',
+    label: 'Hide comment.',
+    type: 'boolean',
+    required: false,
+    priority: 1,
+  },
 
   {
     id: 'building',
@@ -43,7 +51,7 @@ export const commentTableData: Array<FormFieldInterface> = [
     entitySingle: 'building',
     entityPlural: 'buildings',
     selectValues: ['name'],
-    required: false,
+    required: true,
     priority: 2,
   },
   {
@@ -58,13 +66,13 @@ export const commentTableData: Array<FormFieldInterface> = [
     priority: 2,
   },
   {
-    id: 'user',
-    name: 'user',
-    label: 'user',
+    id: 'createdBy',
+    name: 'createdBy',
+    label: 'Created by',
     type: 'select',
     entitySingle: 'user',
     entityPlural: 'users',
-    selectValues: ['name'],
+    selectValues: ['name', 'email'],
     required: false,
     priority: 2,
   },
