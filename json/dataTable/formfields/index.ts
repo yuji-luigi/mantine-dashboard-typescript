@@ -12,6 +12,8 @@ import { proposalTableData as proposals } from './proposalTableData';
 import { tagTableData as tags } from './tagTableData';
 import { threadTableData as threads } from './threadTableData';
 import { userSettingTableData as userSettings } from './userSetting-tabledata';
+import { ownersTableData as owners } from './ownersTableData';
+import { spacesTableData as spaces } from './spacesTableData';
 
 // /**
 //  * typing support when making conditions in jsx (tabelcell component)
@@ -48,5 +50,7 @@ const formFields: FormFieldsType = {
   tags,
   threads,
   userSettings,
+  owners,
+  spaces,
 };
 export default formFields;

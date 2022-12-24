@@ -9,4 +9,6 @@ const en: string[][] = beta.map((data) => data.contents.map((content) => content
 /** all the sections. d */
 export const sections: string[] = en.reduce((arr, cur) => arr.concat(cur), []);
 
+export const flattenSectionData = beta.flatMap((sectionData) => sectionData.contents);
+
 export const sectionData = beta;

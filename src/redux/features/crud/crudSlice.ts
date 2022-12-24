@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { sectionData } from '../../../data';
-import axiosInstance from '../../../utils/axios-instance';
+import axiosInstance, { AxiosResData } from '../../../utils/axios-instance';
+import { flattenSectionData } from '../../../data';
 /* eslint-disable no-param-reassign */
 
+//TODO: ONDELETE GET REQUEST/ SOME UPDATE REDUX STORE LOGIC IN BACKEND OR IN FRONTEND
 export const fetchCrudDocuments = createAsyncThunk(
   /* <
   any,
@@ -15,9 +17,14 @@ export const fetchCrudDocuments = createAsyncThunk(
     rejectValue: { error: { message: string } };
   }
 > */ 'cruds/fetchCrudDocuments',
-  async (entity: Sections) => {
-    const res = await axiosInstance.get(entity);
-    return { entity, documents: res.data.data };
+  async ({ entity, query }: { entity: Sections; query?: string }) => {
+    const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`);
+
+    return {
+      entity,
+      documents: res.data.documents,
+      totalDocuments: res.data.totalDocuments,
+    };
   }
 );
 
@@ -79,26 +86,38 @@ export const deleteCrudDocument = createAsyncThunk(
 //   reduxdb[value.slice] = { entity: value.slice, documentsArray: [] };
 // });
 
-const reduxdb: Reduxdb = {
-  home: { entity: 'home', documentsArray: [] },
-  users: { entity: 'users', documentsArray: [] },
-  buildings: { entity: 'buildings', documentsArray: [] },
-  billing: { entity: 'billing', documentsArray: [] },
-  statistics: { entity: 'statistics', documentsArray: [] },
-  notifications: { entity: 'notifications', documentsArray: [] },
-  bookmarks: { entity: 'bookmarks', documentsArray: [] },
-  comments: { entity: 'comments', documentsArray: [] },
-  fundRules: { entity: 'fundRules', documentsArray: [] },
-  funds: { entity: 'funds', documentsArray: [] },
-  instances: { entity: 'instances', documentsArray: [] },
-  proposals: { entity: 'proposals', documentsArray: [] },
-  tags: { entity: 'tags', documentsArray: [] },
-  threads: { entity: 'threads', documentsArray: [] },
-  userSettings: { entity: 'userSettings', documentsArray: [] },
-  wallets: { entity: 'wallets', documentsArray: [] },
-  events: { entity: 'events', documentsArray: [] },
-  owners: { entity: 'owners', documentsArray: [] },
-};
+// const reduxdb: Reduxdb = {
+//   home: { entity: 'home', documentsArray: [] },
+//   users: { entity: 'users', documentsArray: [] },
+//   buildings: { entity: 'buildings', documentsArray: [] },
+//   billing: { entity: 'billing', documentsArray: [] },
+//   statistics: { entity: 'statistics', documentsArray: [] },
+//   notifications: { entity: 'notifications', documentsArray: [] },
+//   bookmarks: { entity: 'bookmarks', documentsArray: [] },
+//   comments: { entity: 'comments', documentsArray: [] },
+//   fundRules: { entity: 'fundRules', documentsArray: [] },
+//   funds: { entity: 'funds', documentsArray: [] },
+//   instances: { entity: 'instances', documentsArray: [] },
+//   proposals: { entity: 'proposals', documentsArray: [] },
+//   tags: { entity: 'tags', documentsArray: [] },
+//   threads: { entity: 'threads', documentsArray: [] },
+//   userSettings: { entity: 'userSettings', documentsArray: [] },
+//   wallets: { entity: 'wallets', documentsArray: [] },
+//   events: { entity: 'events', documentsArray: [] },
+//   owners: { entity: 'owners', documentsArray: [] },
+// };
+
+const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentData) => {
+  totalData = {
+    ...totalData,
+    [currentData.sliceName as Sections]: {
+      entity: currentData.entity as Sections,
+      documentsArray: [],
+      totalDocuments: 0,
+    },
+  };
+  return totalData;
+}, {} as Reduxdb);
 
 const initialState: CrudState = {
   reduxdb,
@@ -135,9 +154,11 @@ export const crudSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchCrudDocuments.fulfilled, (state, action) => {
-        const { entity, documents } = action.payload;
+        const { entity, documents, totalDocuments } = action.payload;
         state.status = 'succeed';
+        console.log(entity);
         state.reduxdb[entity].documentsArray = documents;
+        state.reduxdb[entity].totalDocuments = totalDocuments;
       })
       .addCase(fetchCrudDocuments.rejected, (state, action) => {
         state.status = 'failed';

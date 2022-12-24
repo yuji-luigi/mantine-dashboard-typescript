@@ -8,7 +8,7 @@
         "title": "Posts",
         "subtitle": "subtitle",
         "navbarTitle": "posts",
-        "link": "/posts",
+        "link": "/dashboard/posts",
         "createButton": "",
         "icon": "posts"
       }
@@ -135,6 +135,26 @@
         "createButton": "New Instance",
         "icon": "Dashboard"
       },
+      {
+        "sliceName": "areas",
+        "entity": "areas",
+        "title": "areas",
+        "subtitle": "subtitle",
+        "navbarTitle": "Areas",
+        "link": "/dashboard/areas",
+        "createButton": "New Area",
+        "icon": "Dashboard"
+      },
+      {
+        "sliceName": "spaces",
+        "entity": "spaces",
+        "title": "spaces",
+        "subtitle": "subtitle",
+        "navbarTitle": "spaces",
+        "link": "/dashboard/spaces",
+        "createButton": "New Space",
+        "icon": "Dashboard"
+      },
 
       {
         "sliceName": "tags",
@@ -197,6 +217,16 @@
         "navbarTitle": "User",
         "link": "/dashboard/users",
         "createButton": "New User",
+        "icon": "Dashboard"
+      },
+      {
+        "sliceName": "owners",
+        "entity": "owners",
+        "title": "owners",
+        "subtitle": "subtitle",
+        "navbarTitle": "Owners",
+        "link": "/dashboard/owners",
+        "createButton": "New Owner",
         "icon": "Dashboard"
       }
     ]

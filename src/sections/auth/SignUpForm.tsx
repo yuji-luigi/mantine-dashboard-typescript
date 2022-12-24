@@ -20,6 +20,8 @@ import useAuth from '../../../hooks/useAuth';
 import { PasswordStrength } from '../../components/input/Password.Strength';
 import { RegisterData } from '../../types/context/auth/useAuth';
 import GuestGuard from '../../guards/GuestGuard';
+import { showNotification } from '@mantine/notifications';
+import { Icons } from '../../data/icons';
 
 // const API_ENDPOINT = process.env.HOST_API_BASE_URL;
 
@@ -71,18 +73,30 @@ export function SignUpForm() {
   const { classes } = useStyles();
   const form = useForm({ initialValues });
   const onSubmit = async (data: RegisterData) => {
-    // const {email, password, name, surname} = data;
-    register(data);
-    // const response = await fetch(`${API_ENDPOINT}/auth/register`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data) as BodyInit,
-    // });
-    // const dataFromServer = await response.json();
-    // console.log(dataFromServer);
+    try {
+      // const {email, password, name, surname} = data;
+      await register(data);
+      // const response = await fetch(`${API_ENDPOINT}/auth/register`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(data) as BodyInit,
+      // });
+      // const dataFromServer = await response.json();
+      // console.log(dataFromServer);
+    } catch (error: any) {
+      showNotification({
+        title: 'Error',
+        color: 'red',
+        icon: <Icons.alert />,
+        message: error.message || error || 'connection error',
+        autoClose: 2000,
+      });
+      console.error(error.message || error);
+    }
   };
+
   return (
     <GuestGuard>
       <Container size={420} my={40}>

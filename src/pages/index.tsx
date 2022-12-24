@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Flat Mate© | Top</title>
+        <title>FlatMates© | Top</title>
         <meta
           name="description"
           content="Flatmates where you can create group of people and their social media or platform where manage all kinds of communications."

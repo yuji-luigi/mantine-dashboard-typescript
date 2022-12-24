@@ -1,6 +1,7 @@
 interface ReduxDbEntity<Entity> {
   entity: Sections;
   documentsArray: Array<Entity> | [];
+  totalDocuments: number;
 }
 
 interface Reduxdb {
@@ -26,7 +27,7 @@ interface Reduxdb {
 
 interface CrudState {
   reduxdb: Reduxdb;
-  status: "idle" | "loading" | "succeed" | "failed";
+  status: 'idle' | 'loading' | 'succeed' | 'failed';
   error?: null | string;
   message?: null | string;
   // TODO: DELETE

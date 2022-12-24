@@ -18,18 +18,21 @@ import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
 import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+import { ParsedUrlQuery } from 'querystring';
 
 export function UsersTable(
   /* { data }: { data: Array<UsersTableRow> } */ {
     entityOverride = '',
   }: { entityOverride: Sections }
 ) {
-  const ROWS_PER_PAGE = 5;
-  const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
+  const ROWS_PER_PAGE = 10;
+  // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
 
   const { query } = useRouter();
-  const { crudDocuments } = useCrudSlice(query.entity as Sections);
+  const { crudDocuments, totalDocumentsCount, fetchCrudDocuments } = useCrudSlice(
+    query.entity as Sections
+  );
 
   const sectionFormFields = formFields[query.entity as Sections];
   if (!sectionFormFields) {
@@ -37,6 +40,12 @@ export function UsersTable(
   }
   sectionFormFields.sort((a, b) => a.priority - b.priority);
 
+  const TOTAL = Math.floor(totalDocumentsCount / ROWS_PER_PAGE);
+
+  function onPageChange(page: number) {
+    setPage(page);
+    fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${page}` });
+  }
   return (
     <>
       <ScrollArea>
@@ -51,7 +60,7 @@ export function UsersTable(
         </Table>
         <Divider sx={{ marginBottom: 20 }} />
       </ScrollArea>
-      <Pagination page={page} onChange={setPage} total={TOTAL} />
+      <Pagination page={page} onChange={(page) => onPageChange(page)} total={TOTAL} />
     </>
   );
 }

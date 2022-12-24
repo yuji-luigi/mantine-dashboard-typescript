@@ -10,7 +10,7 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
 
   useEffect(() => {
     if (formField.type === 'select') {
-      fetchCrudDocuments(formField.entityPlural!);
+      fetchCrudDocuments({ entity: formField.entityPlural! });
     }
   }, [formField]);
 

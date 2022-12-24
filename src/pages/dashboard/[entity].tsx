@@ -31,15 +31,9 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
       push('/dashboard/home');
     }
     if (!crudDocuments.length) {
-      fetchCrudDocuments(entity);
+      fetchCrudDocuments({ entity });
     }
   }, [entity]);
-
-  // useEffect(() => {
-  //   if(crudStatus === 'succeed'){
-
-  //   }
-  // },[crudStatus])
 
   return (
     <Page>

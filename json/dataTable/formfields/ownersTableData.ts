@@ -1,4 +1,4 @@
-export const proposalTableData: Array<FormFieldInterface> = [
+export const ownersTableData: Array<FormFieldInterface> = [
   {
     id: 'name',
     name: 'name',

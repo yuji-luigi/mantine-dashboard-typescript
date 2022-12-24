@@ -116,42 +116,26 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login: Login = async (email, password) => {
-    try{
-    const response = await axiosInstance.post(
-      PATH_AUTH.login,
-      { email, password }
-      // { withCredentials: true }
-    );
-    const { token } = response.data.data;
-    setSession(token.accessToken);
-
-    // // call me and get the user
-    const responseMe = await axiosInstance.get(PATH_AUTH.me);
-    const { user } = responseMe.data;
-    // const res = await fetch('/api/mock', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email, password }),
-    // });
-    // const user = await res.json();
-    dispatch({
-      type: 'LOGIN',
-      payload: {
-        user,
-      },
-    });
-  }catch (error: any) {
-    throw error
-  }
-  };
-
-  const register: Register = async (formData: RegisterData) => {
     try {
-      const response = await axiosInstance.post(PATH_AUTH.register, formData);
-      const { accessToken, user } = response.data;
-      localStorage.setItem('accessToken', accessToken);
+      const response = await axiosInstance.post(
+        PATH_AUTH.login,
+        { email, password }
+        // { withCredentials: true }
+      );
+      const { token } = response.data.data;
+      setSession(token.accessToken);
+
+      // // call me and get the user
+      const responseMe = await axiosInstance.get(PATH_AUTH.me);
+      const { user } = responseMe.data;
+      // const res = await fetch('/api/mock', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ email, password }),
+      // });
+      // const user = await res.json();
       dispatch({
         type: 'LOGIN',
         payload: {
@@ -159,7 +143,26 @@ function AuthProvider({ children }: { children: ReactNode }) {
         },
       });
     } catch (error: any) {
+      throw error;
+    }
+  };
+
+  const register: Register = async (formData: RegisterData) => {
+    try {
+      const response = await axiosInstance.post(PATH_AUTH.register, formData);
+      const { accessToken, user } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+      setSession(accessToken);
+
+      dispatch({
+        type: 'REGISTER',
+        payload: {
+          user,
+        },
+      });
+    } catch (error: any) {
       console.error(error.message || error);
+      throw error;
     }
   };
 

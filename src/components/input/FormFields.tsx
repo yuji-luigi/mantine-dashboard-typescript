@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 
-import { Button, Checkbox, createStyles, Select, Textarea, TextInput } from '@mantine/core';
-import { useForm, UseFormReturnType } from '@mantine/form';
-import React, { FormEvent, Fragment, useEffect } from 'react';
-import { LoginFormValues } from '../../types/context/auth/formData';
-import formFields from '../../../json/dataTable/formfields';
-import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-import InputFormField from './InputFormField';
+import { createStyles, Select, Switch, Textarea, TextInput } from '@mantine/core';
+import { UseFormReturnType } from '@mantine/form';
+import React /* { FormEvent, Fragment, useEffect } */ from 'react';
+// import { LoginFormValues } from '../../types/context/auth/formData';
+// import formFields from '../../../json/dataTable/formfields';
+// import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+// import InputFormField from './InputFormField';
 import { DatePicker, DateRangePicker } from '@mantine/dates';
 import { useGetSelectOptions } from '../../../hooks/form-related/useGetSelectOptions';
 
@@ -23,16 +23,12 @@ const FormFields = ({
   formField: FormFieldInterface;
   form: UseFormReturnType<any, any>;
 }) => {
-  const { classes } = useStyle();
-
   const { query } = useRouter();
   const entity = query.entity as Sections;
 
-  const sectionFormFields: FormFieldInterface[] = formFields[entity];
-
   const options = useGetSelectOptions(formField);
 
-  const { addCrud } = useCrudSlice(entity);
+  // const { addCrud } = useCrudSlice(entity);
 
   // const form = useForm<LoginFormValues>({
   //   initialValues: {
@@ -46,10 +42,10 @@ const FormFields = ({
   //     email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
   //   },
   // });
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    addCrud({ entity, newDocument: form.values });
-  };
+  // const onSubmit = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   addCrud({ entity, newDocument: form.values });
+  // };
   return (
     <>
       {formField.type === 'text' && (
@@ -89,6 +85,16 @@ const FormFields = ({
           label={formField.label}
           placeholder={formField.placeholder}
           size="md"
+          {...form.getInputProps(formField.name || formField.id)}
+        />
+      )}
+      {formField.type === 'boolean' && (
+        <Switch
+          name={formField.name}
+          label={formField.label}
+          placeholder={formField.placeholder}
+          size="md"
+          mt={10}
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}

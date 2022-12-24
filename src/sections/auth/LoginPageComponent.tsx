@@ -67,9 +67,6 @@ const useStyles = createStyles((theme) => ({
 function LoginPageComponent() {
   const { classes } = useStyles();
   const { login } = useAuth();
-  const a = process.env.NODE_ENV;
-  console.log(a);
-  const { notifications, queue } = useNotifications();
 
   const form = useForm<LoginFormValues>({
     initialValues: {

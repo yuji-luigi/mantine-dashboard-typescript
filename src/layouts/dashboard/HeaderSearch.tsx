@@ -1,3 +1,4 @@
+import { LogoBanner } from './../../components/Banner/LogoBanner';
 import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons';
@@ -87,12 +88,7 @@ export function HeaderSearch() {
         <Group>
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo className={classes.logo} size={28} /> */}
-          <Image
-            src="/images/flatmates_logo_banner_copy.jpeg"
-            alt="flate mates logo"
-            width={200}
-            height={50}
-          />
+          <LogoBanner transparent />
         </Group>
         <Group>
           <Group ml={50} spacing={5} className={classes.links}>

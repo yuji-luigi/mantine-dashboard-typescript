@@ -1,6 +1,6 @@
 import { Button, createStyles, Drawer, ScrollArea } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { hideNotification, showNotification } from '@mantine/notifications';
+import { cleanNotifications, hideNotification, showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import formFields from '../../../json/dataTable/formfields';
@@ -37,7 +37,7 @@ export function CrudDrawerDefault() {
   const { addCrud, crudStatus, crudError } = useCrudSlice(entity);
   const form = useForm({
     initialValues: {
-      name: 'aga',
+      name: '',
       password: '',
       termsOfService: false,
     },
@@ -71,8 +71,10 @@ export function CrudDrawerDefault() {
         handleSubmitSucceed();
       }
       if (crudError) {
-        showNotification(errorNotificationData(crudError));
+        hideNotification('submit');
+        showNotification(errorNotificationData(crudError, 5000));
         setSubmitting(false);
+        sleep(5000).then((_) => cleanNotifications());
       }
     }
   }, [crudStatus]);

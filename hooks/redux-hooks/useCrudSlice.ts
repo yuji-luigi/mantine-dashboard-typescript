@@ -20,6 +20,8 @@ export const useCrudSlice = (ent?: Sections) => {
   /** Get error string sent by api */
   const useCrudDocuments = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.documentsArray || []);
+  const useTotalDocumentsCount = (entity?: string) =>
+    useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
   /** use to set crud status to idle */
   // const useResetCrudStatus = () => appDispatch(crudSlice.actions.resetStatus());
 
@@ -32,7 +34,10 @@ export const useCrudSlice = (ent?: Sections) => {
     () =>
     ({ entity, documentId }: { entity: Sections; documentId: string }) =>
       appDispatch(deleteCrudDocument({ entity, documentId }));
-  const useFetchCrudDocuments = () => (entity: Sections) => appDispatch(fetchCrudDocuments(entity));
+  const useFetchCrudDocuments =
+    () =>
+    ({ entity, query }: { entity: Sections; query?: string }) =>
+      appDispatch(fetchCrudDocuments({ entity, query }));
 
   /** TODO: fetchWithQuery, singleDataCrud. */
   return {
@@ -43,6 +48,7 @@ export const useCrudSlice = (ent?: Sections) => {
     crudStatus: useCrudStatus(),
     fetchCrudDocuments: useFetchCrudDocuments(),
     deleteCrudDocument: useDeleteCrudDocument(),
+    totalDocumentsCount: useTotalDocumentsCount(ent),
     // resetCrudStatus: useResetCrudStatus(),
   };
 };
