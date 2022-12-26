@@ -46,7 +46,7 @@
     },
 
     {
-      "name": "Next.js: debug client-side",
+      "name": "client-side Next.js: debug ",
       "type": "pwa-chrome",
       "request": "launch",
       "userDataDir": true,
@@ -64,10 +64,7 @@
         // "userDataDir": false,
         "action": "debugWithChrome"
       },
-      "skipFiles": [
-        "<node_internals>/**",
-        ".next/**"
-      ]
+      "skipFiles": ["<node_internals>/**", ".next/**"]
     }
   ]
 }

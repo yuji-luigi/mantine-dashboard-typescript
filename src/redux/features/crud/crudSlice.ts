@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { sectionData } from '../../../data';
 import axiosInstance, { AxiosResData } from '../../../utils/axios-instance';
 import { flattenSectionData } from '../../../data';
+import { isObjectEmpty } from '../../../utils/helper-functions';
 /* eslint-disable no-param-reassign */
 
 //TODO: ONDELETE GET REQUEST/ SOME UPDATE REDUX STORE LOGIC IN BACKEND OR IN FRONTEND
@@ -114,6 +115,7 @@ const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentD
       entity: currentData.entity as Sections,
       documentsArray: [],
       totalDocuments: 0,
+      selectedDocument: null,
     },
   };
   return totalData;
@@ -125,6 +127,7 @@ const initialState: CrudState = {
   error: null,
   message: null,
   counter: 0,
+  // selectedDocuments: [],
 };
 
 export const crudSlice = createSlice({
@@ -135,18 +138,30 @@ export const crudSlice = createSlice({
       const { entity, documentId } = action.payload;
       state.reduxdb[entity].documentsArray.filter((data) => data._id !== documentId);
     },
-    // resetStatus: (state) => {
-    //   state.status = 'idle';
+    selectCrudDocument: (state, action: PayloadAction<SelectCrudPayload>) => {
+      let { entity, document } = action.payload;
+
+      /** Define clearing pattern as passing empty object */
+      if (document === null) {
+        document = null;
+      }
+      // if (isObjectEmpty(document)) {
+      //   document = {};
+      // }
+      state.reduxdb[entity].selectedDocument = document;
+    },
+    resetStatus: (state) => {
+      state.status = 'idle';
+    },
+    // increment: (state) => {
+    //   state.counter += 1;
     // },
-    increment: (state) => {
-      state.counter += 1;
-    },
-    decrement: (state) => {
-      state.counter -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.counter + action.payload;
-    },
+    // decrement: (state) => {
+    //   state.counter -= 1;
+    // },
+    // incrementByAmount: (state, action) => {
+    //   state.counter + action.payload;
+    // },
   },
   extraReducers(builder) {
     builder
@@ -156,7 +171,6 @@ export const crudSlice = createSlice({
       .addCase(fetchCrudDocuments.fulfilled, (state, action) => {
         const { entity, documents, totalDocuments } = action.payload;
         state.status = 'succeed';
-        console.log(entity);
         state.reduxdb[entity].documentsArray = documents;
         state.reduxdb[entity].totalDocuments = totalDocuments;
       })
@@ -195,5 +209,6 @@ export const crudSlice = createSlice({
 //   state.crud.reduxdb[entity].find((document) => document._id === searchId);
 // const count = useSelector((state) => state.crud.counter);
 //   const dispatch = useDispatch();
+export const { selectCrudDocument } = crudSlice.actions;
 
 export default crudSlice.reducer;

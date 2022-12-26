@@ -8,7 +8,7 @@ import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { LoginFormValues } from '../../types/context/auth/formData';
-import { sleep } from '../../utils/helper-functions';
+import { getDefaultValues, sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
@@ -24,23 +24,26 @@ const useStyles = createStyles((theme) => ({
 
 export function CrudDrawerDefault() {
   const [submitting, setSubmitting] = useState(false);
+
   const { classes } = useStyles();
   const { query } = useRouter();
   const entity = query.entity as Sections;
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
+  const { getSelectedDocument } = useCrudSlice(entity);
+
+  const selectedDocument = getSelectedDocument(entity);
   /**
    * initialValues
    * defined here
    */
   const { addCrud, crudStatus, crudError } = useCrudSlice(entity);
+
+  const initialValues = getDefaultValues(sectionFormFields, selectedDocument);
   const form = useForm({
-    initialValues: {
-      name: '',
-      password: '',
-      termsOfService: false,
-    },
+    initialValues,
+
     // TODO: Make Validate function and set by string value from formField.
     // validate: 'email' uses this email validator.
     // validate: {

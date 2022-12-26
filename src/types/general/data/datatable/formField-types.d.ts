@@ -16,18 +16,18 @@ interface FormFieldInterface {
   placeholder?: string;
 
   type:
-    | "text"
-    | "long-text"
-    | "boolean"
-    | "select"
-    | "static-select"
-    | "number"
-    | "currency"
-    | "avatar"
-    | "date"
-    | "date-range"
-    | "attachment"
-    | "color";
+    | 'text'
+    | 'long-text'
+    | 'boolean'
+    | 'select'
+    | 'static-select'
+    | 'number'
+    | 'currency'
+    | 'avatar'
+    | 'date'
+    | 'date-range'
+    | 'attachment'
+    | 'color';
   /**For type select */
   multi?: boolean;
   /**For type select */
@@ -56,6 +56,8 @@ interface FormFieldInterface {
    */
   grantTo?: Array<string>;
   required?: boolean;
+  /** when defined: show the defaultValue on the dataTable.
+   */
   priority: number;
 }
 

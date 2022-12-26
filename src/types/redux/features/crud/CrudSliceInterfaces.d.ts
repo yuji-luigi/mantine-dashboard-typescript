@@ -2,6 +2,7 @@ interface ReduxDbEntity<Entity> {
   entity: Sections;
   documentsArray: Array<Entity> | [];
   totalDocuments: number;
+  selectedDocument: AllModels | null;
 }
 
 interface Reduxdb {
@@ -25,6 +26,10 @@ interface Reduxdb {
   events: ReduxDbEntity<Array<Record>>;
 }
 
+// interface SelectedDocument {
+//   entity: Sections;
+//   document: AllModels;
+// }
 interface CrudState {
   reduxdb: Reduxdb;
   status: 'idle' | 'loading' | 'succeed' | 'failed';
@@ -32,12 +37,18 @@ interface CrudState {
   message?: null | string;
   // TODO: DELETE
   counter: number;
+  // selectedDocuments: [] | SelectedDocument[];
 }
 
 type AddCrudPayload = {
   entity: Sections;
   newDocument: AllModels;
 };
+
+interface SelectCrudPayload {
+  entity: Sections;
+  document: AllModels;
+}
 
 interface AddedCrudResponse {
   success: boolean;

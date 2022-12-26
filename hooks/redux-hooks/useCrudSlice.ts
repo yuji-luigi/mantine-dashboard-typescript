@@ -2,7 +2,7 @@ import {
   fetchCrudDocuments,
   addCrudDocument,
   deleteCrudDocument,
-  crudSlice,
+  selectCrudDocument,
 } from '../../src/redux/features/crud/crudSlice';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
@@ -20,20 +20,34 @@ export const useCrudSlice = (ent?: Sections) => {
   /** Get error string sent by api */
   const useCrudDocuments = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.documentsArray || []);
+
   const useTotalDocumentsCount = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
+  const useGetSelectedDocument = () => (entity: Sections) =>
+    useAppSelector((state) => state.crud.reduxdb?.[entity]?.selectedDocument);
   /** use to set crud status to idle */
   // const useResetCrudStatus = () => appDispatch(crudSlice.actions.resetStatus());
+
+  /**
+   *  argument is passed when calling the function. not useCrudSlice(entity) call
+   *  after use call.
+   */
+  const useSelectCrudDocument =
+    () =>
+    ({ entity, document }: { entity: Sections; document: AllModels }) =>
+      appDispatch(selectCrudDocument({ entity, document }));
 
   const useAddCrud =
     () =>
     ({ entity, newDocument }: AddCrudPayload) => {
       appDispatch(addCrudDocument({ entity, newDocument }));
     };
+
   const useDeleteCrudDocument =
     () =>
     ({ entity, documentId }: { entity: Sections; documentId: string }) =>
       appDispatch(deleteCrudDocument({ entity, documentId }));
+
   const useFetchCrudDocuments =
     () =>
     ({ entity, query }: { entity: Sections; query?: string }) =>
@@ -49,6 +63,8 @@ export const useCrudSlice = (ent?: Sections) => {
     fetchCrudDocuments: useFetchCrudDocuments(),
     deleteCrudDocument: useDeleteCrudDocument(),
     totalDocumentsCount: useTotalDocumentsCount(ent),
+    selectCrudDocument: useSelectCrudDocument(),
+    getSelectedDocument: useGetSelectedDocument(),
     // resetCrudStatus: useResetCrudStatus(),
   };
 };
