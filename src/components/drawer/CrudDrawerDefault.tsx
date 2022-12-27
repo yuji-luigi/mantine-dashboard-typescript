@@ -12,6 +12,7 @@ import { getDefaultValues, sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
+import { useMemo } from 'react';
 
 const useStyles = createStyles((theme) => ({
   drawer: {
@@ -40,10 +41,18 @@ export function CrudDrawerDefault() {
    */
   const { addCrud, crudStatus, crudError } = useCrudSlice(entity);
 
-  const initialValues = getDefaultValues(sectionFormFields, selectedDocument);
-  const form = useForm({
-    initialValues,
+  const initialValues = useMemo(
+    () => getDefaultValues(sectionFormFields, selectedDocument),
+    [selectedDocument]
+  );
+  // const clonedValues = { ...initialValues };
+  // const initialValues = {
+  //   name: 'ininnini',
+  //   address: 'AAAAA',
+  // };
 
+  const form = useForm<Record<string, unknown>>({
+    initialValues,
     // TODO: Make Validate function and set by string value from formField.
     // validate: 'email' uses this email validator.
     // validate: {
@@ -82,6 +91,11 @@ export function CrudDrawerDefault() {
     }
   }, [crudStatus]);
 
+  useEffect(() => {
+    form.setValues(initialValues);
+    console.log('eff');
+  }, [initialValues]);
+
   async function handleSubmitSucceed() {
     /**
      * delay for drawer closing and ect these lines
@@ -115,7 +129,12 @@ export function CrudDrawerDefault() {
       <Icons.close onClick={closeDrawer} />
       <form className={classes.form} onSubmit={onSubmit}>
         {sectionFormFields?.map((formField) => (
-          <FormFields form={form} formField={formField} key={formField.id} />
+          <FormFields
+            // initialValues={initialValues}
+            form={form}
+            formField={formField}
+            key={formField.id}
+          />
         ))}
         <Button fullWidth disabled={crudStatus === 'loading'} type="submit" mt="xl" size="md">
           Add {entity}!
@@ -123,10 +142,4 @@ export function CrudDrawerDefault() {
       </form>
     </Drawer>
   );
-}
-
-function createDefaultValues(formFields: FormFieldInterface[]): Record<any, any> {
-  // const defauldValues
-
-  return {};
 }

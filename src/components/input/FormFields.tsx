@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { createStyles, Select, Switch, Textarea, TextInput } from '@mantine/core';
-import { UseFormReturnType } from '@mantine/form';
+import { useForm, UseFormReturnType } from '@mantine/form';
 import React /* { FormEvent, Fragment, useEffect } */ from 'react';
 // import { LoginFormValues } from '../../types/context/auth/formData';
 // import formFields from '../../../json/dataTable/formfields';
@@ -9,6 +9,7 @@ import React /* { FormEvent, Fragment, useEffect } */ from 'react';
 // import InputFormField from './InputFormField';
 import { DatePicker, DateRangePicker } from '@mantine/dates';
 import { useGetSelectOptions } from '../../../hooks/form-related/useGetSelectOptions';
+import { LoginFormValues } from '../../types/context/auth/formData';
 
 const useStyle = createStyles((theme) => ({
   formControl: {
@@ -18,10 +19,12 @@ const useStyle = createStyles((theme) => ({
 
 const FormFields = ({
   formField,
+  // initialValues,
   form,
 }: {
   formField: FormFieldInterface;
-  form: UseFormReturnType<any, any>;
+  // initialValues: Record<string, any>;
+  form: UseFormReturnType<Record<string, unknown>>;
 }) => {
   const { query } = useRouter();
   const entity = query.entity as Sections;
@@ -31,15 +34,11 @@ const FormFields = ({
   // const { addCrud } = useCrudSlice(entity);
 
   // const form = useForm<LoginFormValues>({
-  //   initialValues: {
-  //     email: "",
-  //     password: "",
-  //     termsOfService: false,
-  //   },
-  //   // TODO: Make Validate function and set by string value from formField.
-  //   // validate: 'email' uses this email validator.
+  //   initialValues,
+  // TODO: Make Validate function and set by string value from formField.
+  // validate: 'email' uses this email validator.
   //   validate: {
-  //     email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+  //     email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
   //   },
   // });
   // const onSubmit = (e: FormEvent) => {
