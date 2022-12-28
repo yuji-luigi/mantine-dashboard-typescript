@@ -62,6 +62,25 @@ export const addCrudDocument = createAsyncThunk(
   }
 );
 
+export const updateCrudDocument = createAsyncThunk(
+  'crud/updateDocument',
+  async ({
+    entity,
+    updateData,
+    documentId,
+  }: {
+    entity: Sections;
+    updateData: any;
+    documentId: string;
+  }) => {
+    const res = await axiosInstance.put(`${entity}/${documentId}`, updateData);
+    const payload = {
+      entity: res.data.collection,
+      updatedDocument: res.data.data as Record<string, any>,
+    };
+    return payload;
+  }
+);
 export const deleteCrudDocument = createAsyncThunk(
   'crud/deleteDocument',
   async ({ entity, documentId }: { entity: Sections; documentId: String }) => {
@@ -189,6 +208,27 @@ export const crudSlice = createSlice({
         const { collection, data }: AddedCrudResponse = action.payload;
         state.status = 'succeed';
         (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
+      })
+      .addCase(updateCrudDocument.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateCrudDocument.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(updateCrudDocument.fulfilled, (state, action) => {
+        const { entity, updatedDocument } = action.payload;
+        state.status = 'succeed';
+        const updatedDocuments = state.reduxdb[entity].documentsArray.map((document) => {
+          // TODO: FIX ERROR
+          if (document._id === updatedDocument._id) {
+            // update
+            return updatedDocument;
+          }
+          // return same
+          return document;
+        });
+        state.reduxdb[entity].documentsArray = updatedDocuments;
       })
       .addCase(deleteCrudDocument.pending, (state) => {
         state.status = 'loading';

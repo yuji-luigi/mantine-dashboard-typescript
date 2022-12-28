@@ -3,6 +3,7 @@ import {
   addCrudDocument,
   deleteCrudDocument,
   selectCrudDocument,
+  updateCrudDocument,
 } from '../../src/redux/features/crud/crudSlice';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
@@ -23,6 +24,7 @@ export const useCrudSlice = (ent?: Sections) => {
 
   const useTotalDocumentsCount = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
+
   const useGetSelectedDocument = () => (entity: Sections) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity]?.selectedDocument);
   /** use to set crud status to idle */
@@ -43,6 +45,19 @@ export const useCrudSlice = (ent?: Sections) => {
       appDispatch(addCrudDocument({ entity, newDocument }));
     };
 
+  const useUpdateCrudDocument =
+    () =>
+    ({
+      entity,
+      updateData,
+      documentId,
+    }: {
+      entity: Sections;
+      updateData: any;
+      documentId: string;
+    }) =>
+      appDispatch(updateCrudDocument({ entity, updateData, documentId }));
+
   const useDeleteCrudDocument =
     () =>
     ({ entity, documentId }: { entity: Sections; documentId: string }) =>
@@ -61,6 +76,7 @@ export const useCrudSlice = (ent?: Sections) => {
     crudError: useCrudError(),
     crudStatus: useCrudStatus(),
     fetchCrudDocuments: useFetchCrudDocuments(),
+    updateCrudDocument: useUpdateCrudDocument(),
     deleteCrudDocument: useDeleteCrudDocument(),
     totalDocumentsCount: useTotalDocumentsCount(ent),
     selectCrudDocument: useSelectCrudDocument(),

@@ -32,7 +32,7 @@ export function CrudDrawerDefault() {
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
-  const { getSelectedDocument } = useCrudSlice(entity);
+  const { getSelectedDocument, updateCrudDocument } = useCrudSlice(entity);
 
   const selectedDocument = getSelectedDocument(entity);
   /**
@@ -71,7 +71,13 @@ export function CrudDrawerDefault() {
       autoClose: false,
     });
     setSubmitting(true);
-    addCrud({ entity, newDocument: form.values });
+
+    if (!selectedDocument) {
+      addCrud({ entity, newDocument: form.values });
+    }
+    if (selectedDocument) {
+      updateCrudDocument({ entity, updateData: form.values, documentId: selectedDocument._id });
+    }
   };
 
   useEffect(() => {
