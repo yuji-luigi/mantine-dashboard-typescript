@@ -10,16 +10,15 @@ import TableHeader from './table-rows/TableHeader';
 import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 
-export function UsersTable() {
-  /* { data }: { data: Array<UsersTableRow> }
-  {
-    */
-  //   entityOverride = '',
-  // }: { entityOverride: Sections }
+export function UsersTable(
+  /* { data }: { data: Array<UsersTableRow> } */ {
+    entityOverride = '',
+  }: { entityOverride?: Sections }
+) {
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
-
+  console.log(entityOverride);
   const { query } = useRouter();
   const { crudDocuments, totalDocumentsCount, fetchCrudDocuments } = useCrudSlice(
     query.entity as Sections
