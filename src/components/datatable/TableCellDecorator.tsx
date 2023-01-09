@@ -31,13 +31,22 @@ export function TableCellDecorator({
     }
     return (
       <td>
-        <BadgeCell cellConfig={cellConfig} color={color} cellData={queriedCellData as string} />
+        <BadgeCell
+          cellConfig={cellConfig}
+          color={color}
+          rowData={rowData}
+          cellData={queriedCellData as string}
+        />
       </td>
     );
   }
   return (
     <td>
-      <TableCell cellData={rowData[cellConfig.name!] as string} cellConfig={cellConfig} />
+      <TableCell
+        cellData={rowData[cellConfig.name!] as string}
+        cellConfig={cellConfig}
+        rowData={rowData}
+      />
     </td>
   );
 }

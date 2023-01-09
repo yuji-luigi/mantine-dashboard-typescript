@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // export const getFormFieldsJson = async (str: string): Promise<Array<any>> =>{
 //   const import(`../../data/datatable/formFields/index${str}`);}
 
@@ -23,6 +24,7 @@ export const createLabelFromArrayStr = (
   return createLabelFromArrayStr(clonedArr, document, label);
 };
 
+// eslint-disable-next-line no-promise-executor-return
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // import _cloneDeep from 'lodash/cloneDeep';
@@ -86,6 +88,31 @@ export function createQuery(data: Record<string, string>) {
     return acc;
   }, '?');
   return createdQuery === '?' ? undefined : createdQuery;
+}
+
+/** Piece of useful function from StackOverflow
+ * https://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-and-arrays-by-string-path */
+export function _get(obj: Record<string, any>, path: string[] | string, separator: string = '.') {
+  const properties = Array.isArray(path) ? path : path.split(separator);
+  return properties.reduce((prev, curr) => prev?.[curr], obj);
+}
+
+export function _set(
+  obj: Record<string, any>,
+  path: string[] | string,
+  newValue: any,
+  separator: string = '.'
+) {
+  const properties = Array.isArray(path) ? path : path.split(separator);
+  return properties.reduce((prev, curr, index) => {
+    /** define case last index of the property set the value */
+    if (properties.length === index + 1) {
+      prev[curr] = newValue;
+      return obj;
+    }
+    /** new prev value to next reduce function */
+    return prev?.[curr];
+  }, obj);
 }
 
 // export const getCsvPrimitive = ({
@@ -169,28 +196,3 @@ export const getDefaultValues = (
   // return { name: 'jijij', address: 'static' };
   return defaultValueObj || {};
 };
-
-/** Piece of useful function from StackOverflow
- * https://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-and-arrays-by-string-path */
-export function _get(obj: Record<string, any>, path: string[] | string, separator: string = '.') {
-  const properties = Array.isArray(path) ? path : path.split(separator);
-  return properties.reduce((prev, curr) => prev?.[curr], obj);
-}
-
-export function _set(
-  obj: Record<string, any>,
-  path: string[] | string,
-  newValue: any,
-  separator: string = '.'
-) {
-  const properties = Array.isArray(path) ? path : path.split(separator);
-  return properties.reduce((prev, curr, index) => {
-    /** define case last index of the property set the value */
-    if (properties.length === index + 1) {
-      prev[curr] = newValue;
-      return obj;
-    }
-    /** new prev value to next reduce function */
-    return prev?.[curr];
-  }, obj);
-}

@@ -39,7 +39,7 @@
       ]
     },
     {
-      "name": "Next.js: debug server-side",
+      "name": "server-side:Next.js: debug",
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev"
@@ -53,7 +53,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "name": "Next.js: debug full stack",
+      "name": "Full stack:Next.js: debug",
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev",

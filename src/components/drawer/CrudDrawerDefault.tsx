@@ -1,20 +1,19 @@
-import { Button, createStyles, Drawer, ScrollArea } from '@mantine/core';
+/* eslint-disable react/jsx-pascal-case */
+import { Button, createStyles, Drawer } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { cleanNotifications, hideNotification, showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState, useMemo } from 'react';
 import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-import { LoginFormValues } from '../../types/context/auth/formData';
 import { getDefaultValues, sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
-import { useMemo } from 'react';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   drawer: {
     overflow: 'scroll',
   },
@@ -80,28 +79,6 @@ export function CrudDrawerDefault() {
     }
   };
 
-  useEffect(() => {
-    if (submitting) {
-      if (crudStatus === 'loading') {
-      }
-      /** define case for succeed */
-      if (crudStatus == 'succeed') {
-        handleSubmitSucceed();
-      }
-      if (crudError) {
-        hideNotification('submit');
-        showNotification(errorNotificationData(crudError, 5000));
-        setSubmitting(false);
-        sleep(5000).then((_) => cleanNotifications());
-      }
-    }
-  }, [crudStatus]);
-
-  useEffect(() => {
-    form.setValues(initialValues);
-    console.log('eff');
-  }, [initialValues]);
-
   async function handleSubmitSucceed() {
     /**
      * delay for drawer closing and ect these lines
@@ -122,6 +99,27 @@ export function CrudDrawerDefault() {
     });
     setSubmitting(false);
   }
+  useEffect(() => {
+    if (submitting) {
+      if (crudStatus === 'loading') {
+        null;
+      }
+      /** define case for succeed */
+      if (crudStatus === 'succeed') {
+        handleSubmitSucceed();
+      }
+      if (crudError) {
+        hideNotification('submit');
+        showNotification(errorNotificationData(crudError, 5000));
+        setSubmitting(false);
+        sleep(5000).then(() => cleanNotifications());
+      }
+    }
+  }, [crudStatus]);
+
+  useEffect(() => {
+    form.setValues(initialValues);
+  }, [initialValues]);
 
   return (
     <Drawer

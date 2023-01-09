@@ -12,8 +12,11 @@ const BadgeCell = ({
   cellConfig,
   cellData,
   color,
+  rowData,
 }: {
   cellConfig: FormFieldInterface;
+  // TODO: type
+  rowData: any;
   cellData: string;
   color: string;
 }) => {
@@ -23,7 +26,7 @@ const BadgeCell = ({
       color={colors[color || '__null']}
       variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
     >
-      <TableCell cellData={cellData} cellConfig={cellConfig} />
+      <TableCell cellData={cellData} cellConfig={cellConfig} rowData={rowData} />
     </Badge>
   );
 };

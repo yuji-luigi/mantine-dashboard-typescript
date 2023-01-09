@@ -1,30 +1,21 @@
-import {
-  Table,
-  ScrollArea,
-  Pagination,
-  Group,
-  ActionIcon,
-  Divider,
-  createStyles,
-} from '@mantine/core';
+import { Table, ScrollArea, Pagination, Divider } from '@mantine/core';
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import { IconPencil, IconTrash } from '@tabler/icons';
+
 import { TableRow } from './table-rows/TableRow';
-import { TableCellDecorator } from './TableCellDecorator';
-import users from '../../../json/mock/usersDatatable.json';
+
 import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
 import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-import { ParsedUrlQuery } from 'querystring';
 
-export function UsersTable(
-  /* { data }: { data: Array<UsersTableRow> } */ {
-    entityOverride = '',
-  }: { entityOverride: Sections }
-) {
+export function UsersTable() {
+  /* { data }: { data: Array<UsersTableRow> }
+  {
+    */
+  //   entityOverride = '',
+  // }: { entityOverride: Sections }
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
@@ -40,11 +31,11 @@ export function UsersTable(
   }
   sectionFormFields.sort((a, b) => a.priority - b.priority);
 
-  const TOTAL = Math.floor(totalDocumentsCount / ROWS_PER_PAGE);
+  const TOTAL = Math.floor((totalDocumentsCount - 1) / ROWS_PER_PAGE);
 
-  function onPageChange(page: number) {
-    setPage(page);
-    fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${page}` });
+  function onPageChange(pageNumber: number) {
+    setPage(pageNumber);
+    fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
   }
   return (
     <>
@@ -60,7 +51,7 @@ export function UsersTable(
         </Table>
         <Divider sx={{ marginBottom: 20 }} />
       </ScrollArea>
-      <Pagination page={page} onChange={(page) => onPageChange(page)} total={TOTAL} />
+      <Pagination page={page} onChange={(pageNumber) => onPageChange(pageNumber)} total={TOTAL} />
     </>
   );
 }

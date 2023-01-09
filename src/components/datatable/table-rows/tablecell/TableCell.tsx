@@ -1,8 +1,10 @@
 import React from 'react';
 import { Group, Avatar, Text } from '@mantine/core';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FieldTypes } from '../../../../../json/dataTable/formfields';
 // import { IconPencil, IconTrash } from '@tabler/icons';
 // import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
-import { FieldTypes } from '../../../../../json/dataTable/formfields';
 export const jobColors: Record<string, string> = {
   engineer: 'blue',
   manager: 'cyan',
@@ -12,10 +14,13 @@ export const jobColors: Record<string, string> = {
 const TableCell = ({
   cellData,
   cellConfig,
+  rowData,
 }: {
   cellData: string;
   cellConfig: FormFieldInterface;
+  rowData: any;
 }) => {
+  const { query } = useRouter();
   // const theme = useMantineTheme();
   // if (cellConfig.badge) {
   //   return (
@@ -54,6 +59,15 @@ const TableCell = ({
           <Text size="sm" weight={500}>
             {cellData}
           </Text>
+        </Group>
+      )}
+      {cellConfig.type === 'tree-link' && (
+        <Group spacing="sm">
+          <Link href={`${query.entity as string}/${rowData._id}` || ''}>
+            <Text size="sm" weight={500}>
+              {cellData}
+            </Text>
+          </Link>
         </Group>
       )}
 

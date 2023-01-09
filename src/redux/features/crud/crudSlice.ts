@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { sectionData } from '../../../data';
 import axiosInstance, { AxiosResData } from '../../../utils/axios-instance';
 import { flattenSectionData } from '../../../data';
-import { isObjectEmpty } from '../../../utils/helper-functions';
 /* eslint-disable no-param-reassign */
 
 //TODO: ONDELETE GET REQUEST/ SOME UPDATE REDUX STORE LOGIC IN BACKEND OR IN FRONTEND
@@ -41,7 +40,7 @@ export const fetchCrudDocumentsWithQuery = createAsyncThunk(
     rejectValue: { error: { message: string } };
   }
 > */ 'cruds/fetchCrudDocumentsQuery',
-  async ({ entity, query }: { entity: Sections; query: any }) => {
+  async ({ entity }: { entity: Sections; query: any }) => {
     const res = await axiosInstance.get(
       `${entity}${'' /* query here. how to make proper string */}`
     );
@@ -158,6 +157,7 @@ export const crudSlice = createSlice({
       state.reduxdb[entity].documentsArray.filter((data) => data._id !== documentId);
     },
     selectCrudDocument: (state, action: PayloadAction<SelectCrudPayload>) => {
+      // eslint-disable-next-line prefer-const
       let { entity, document } = action.payload;
 
       /** Define clearing pattern as passing empty object */

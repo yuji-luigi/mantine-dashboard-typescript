@@ -18,7 +18,7 @@ export function TableRow({
   /** use hook router hook */
   const { query } = useRouter();
   /** use hook useCrudSlice */
-  const { selectCrudDocument, getSelectedDocument } = useCrudSlice();
+  const { selectCrudDocument } = useCrudSlice();
 
   /** get runtime value of the entity */
   const entity = query.entity as Sections;
@@ -31,20 +31,21 @@ export function TableRow({
   const onDelete = (): void => {
     deleteCrudDocument({ entity, documentId: rowData._id });
   };
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       selectCrudDocument({ entity, document: null });
-    };
-  }, []);
+    },
+    []
+  );
   return (
     <tr key={rowData._id}>
-      {/* 
+      {/*
           Regular cells defined here
       */}
       {sectionFormFields.map((cellConfig) => (
         <TableCellDecorator key={cellConfig.id} cellConfig={cellConfig} rowData={rowData} />
       ))}
-      {/* 
+      {/*
           Action cells defined here(modify, delete button)
       */}
       <td>
