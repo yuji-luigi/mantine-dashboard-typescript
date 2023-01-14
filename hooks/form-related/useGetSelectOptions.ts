@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createLabelFromArrayStr } from '../../src/utils/helper-functions';
 import { useCrudSlice } from '../redux-hooks/useCrudSlice';
 
-export const useGetSelectOptions = (formField: FormFieldInterface): Array<SelectOption> | null => {
+export const useGetSelectOptions = (formField: FormFieldInterface): Array<SelectOption> | [] => {
   // const options: Array<SelectOption> = [];
-  const [idleDocuments, setIdleDocuments] = useState<SelectOption[]>([]);
+  // const [idleDocuments, setIdleDocuments] = useState<SelectOption[]>([]);
   /** fetch with query,  */
   const { fetchCrudDocuments, crudDocuments } = useCrudSlice(formField.entityPlural);
 
@@ -26,5 +26,5 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
     /** static-select type must have options Array<SelectOptions> */
     return formField.options!;
   }
-  return null;
+  return [];
 };

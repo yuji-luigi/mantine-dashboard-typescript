@@ -1,21 +1,9 @@
-import { useRouter } from 'next/router';
+import { Select, Switch, Textarea, TextInput } from '@mantine/core';
+import { UseFormReturnType } from '@mantine/form';
+import React from 'react';
 
-import { createStyles, Select, Switch, Textarea, TextInput } from '@mantine/core';
-import { useForm, UseFormReturnType } from '@mantine/form';
-import React /* { FormEvent, Fragment, useEffect } */ from 'react';
-// import { LoginFormValues } from '../../types/context/auth/formData';
-// import formFields from '../../../json/dataTable/formfields';
-// import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-// import InputFormField from './InputFormField';
 import { DatePicker, DateRangePicker } from '@mantine/dates';
 import { useGetSelectOptions } from '../../../hooks/form-related/useGetSelectOptions';
-import { LoginFormValues } from '../../types/context/auth/formData';
-
-const useStyle = createStyles((theme) => ({
-  formControl: {
-    my: 5,
-  },
-}));
 
 const FormFields = ({
   formField,
@@ -26,9 +14,6 @@ const FormFields = ({
   // initialValues: Record<string, any>;
   form: UseFormReturnType<Record<string, unknown>>;
 }) => {
-  const { query } = useRouter();
-  const entity = query.entity as Sections;
-
   const options = useGetSelectOptions(formField);
 
   // const { addCrud } = useCrudSlice(entity);
