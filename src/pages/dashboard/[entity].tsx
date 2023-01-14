@@ -35,7 +35,9 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
     if (!sections.includes(entity as string)) {
       push('/dashboard/home');
     }
-    setBreadcrumbs((prev) => [...prev, { title: entity.toUpperCase(), href: `/${entity}` }]);
+    const regex = /^\w/;
+    const title = entity.replace(regex, (c) => c.toUpperCase());
+    setBreadcrumbs((prev) => [...prev, { title, href: `/${entity}` }]);
 
     if (!crudDocuments.length) {
       fetchCrudDocuments({ entity });
