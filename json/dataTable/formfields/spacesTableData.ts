@@ -4,7 +4,7 @@ export const spacesTableData: Array<FormFieldInterface> = [
     name: 'name',
     label: 'Name',
     placeholder: 'Building East/Quarto oggiaro district(whole city as building)',
-    type: 'tree-link',
+    type: 'link-children',
     required: true,
     priority: 1,
   },

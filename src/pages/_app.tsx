@@ -10,6 +10,7 @@ import { AuthProvider } from '../context/JWTContext';
 import reduxStore from '../redux/store';
 import { DashboardLayoutContextProvider } from '../context/DashboardLayoutContext';
 import { DrawerContextProvider } from '../context/DataTableDrawerContext';
+import { PaginationContextProvider } from '../context/PaginationContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -44,9 +45,11 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
               <NotificationsProvider>
                 <DashboardLayoutContextProvider>
-                  <DrawerContextProvider>
-                    {getLayout(<Component {...pageProps} />)}
-                  </DrawerContextProvider>
+                  <PaginationContextProvider>
+                    <DrawerContextProvider>
+                      {getLayout(<Component {...pageProps} />)}
+                    </DrawerContextProvider>
+                  </PaginationContextProvider>
                 </DashboardLayoutContextProvider>
               </NotificationsProvider>
             </MantineProvider>

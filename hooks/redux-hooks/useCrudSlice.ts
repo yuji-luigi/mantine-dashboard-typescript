@@ -4,6 +4,7 @@ import {
   deleteCrudDocument,
   selectCrudDocument,
   updateCrudDocument,
+  setCrudDocuments,
 } from '../../src/redux/features/crud/crudSlice';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
@@ -18,6 +19,12 @@ export const useCrudSlice = (ent?: Sections) => {
   /** Get status string set in addCase function */
   const useCrudStatus = () => useAppSelector((state) => state.crud.status);
 
+  /** Set Crud documents fetch outside of the redux the documents and set into reduxDb.documents array */
+  const useSetCrudDocuments =
+    () =>
+    ({ entity = '', documents }: { entity?: Sections; documents: AllModels }) =>
+      appDispatch(setCrudDocuments({ entity, documents }));
+
   /** Get error string sent by api */
   const useCrudDocuments = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.documentsArray || []);
@@ -26,6 +33,7 @@ export const useCrudSlice = (ent?: Sections) => {
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
 
   const useGetSelectedDocument = () => (entity: Sections) =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useAppSelector((state) => state.crud.reduxdb?.[entity]?.selectedDocument);
   /** use to set crud status to idle */
   // const useResetCrudStatus = () => appDispatch(crudSlice.actions.resetStatus());
@@ -81,6 +89,7 @@ export const useCrudSlice = (ent?: Sections) => {
     totalDocumentsCount: useTotalDocumentsCount(ent),
     selectCrudDocument: useSelectCrudDocument(),
     getSelectedDocument: useGetSelectedDocument(),
+    setCrudDocuments: useSetCrudDocuments(),
     // resetCrudStatus: useResetCrudStatus(),
   };
 };

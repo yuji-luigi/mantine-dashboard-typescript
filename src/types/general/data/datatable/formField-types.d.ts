@@ -27,7 +27,7 @@ interface FormFieldInterface {
     | 'date'
     | 'date-range'
     | 'attachment'
-    | 'tree-link'
+    | 'link-children'
     | 'color';
   /**For type select */
   multi?: boolean;

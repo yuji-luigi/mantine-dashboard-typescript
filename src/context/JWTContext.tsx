@@ -12,7 +12,6 @@ import {
   RegisterData,
 } from '../types/context/auth/useAuth';
 import { isValidToken, setSession } from '../utils/jwt';
-import { compose } from '@reduxjs/toolkit';
 
 const initialState: JWTContextState = {
   isAuthenticated: false,
@@ -116,6 +115,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login: Login = async (email, password) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       const response = await axiosInstance.post(
         PATH_AUTH.login,

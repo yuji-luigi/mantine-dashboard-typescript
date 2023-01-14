@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 // routes
 import { PATH_AUTH } from '../path/api-routes';
 //
-import axios from './axios-instance';
+import axiosInstance from './axios-instance';
 
 // ----------------------------------------------------------------------
 
@@ -43,13 +43,13 @@ const setSession = (accessToken: string | null) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
     setCookie('jwt', accessToken);
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     // This function below will handle when token is expired
     const { exp }: { exp: number } = jwtDecode(accessToken); // ~5 days by minimals server
     handleTokenExpired(exp);
   } else {
     localStorage.removeItem('accessToken');
-    delete axios.defaults.headers.common.Authorization;
+    delete axiosInstance.defaults.headers.common.Authorization;
   }
 };
 

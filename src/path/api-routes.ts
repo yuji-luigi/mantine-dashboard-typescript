@@ -1,9 +1,13 @@
-export const API_BASE_URL = process.env.NODE_ENV === 'development' ? process.env.HOST_API_BASE_URL : process.env.HOST_API_BASE_URL_PRODUCTION;
-export const ROOT_AUTH = 'auth';
-
+export const API_BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? process.env.HOST_API_BASE_URL
+    : process.env.HOST_API_BASE_URL_PRODUCTION;
 export type GetPathFunc = (path: string) => string;
-
-// const getApiBasePath: GetPathFunc = (path) => `${API_BASE_URL}/${path}`;
+/**
+ *  define auth string for api
+ * tried to avoid repetition but was not necessary?
+ */
+export const ROOT_AUTH = 'auth';
 const getAuthPath: GetPathFunc = (path) => `${ROOT_AUTH}/${path}`;
 
 type TAuthPath = {
@@ -20,3 +24,7 @@ export const PATH_AUTH: TAuthPath = {
   logout: getAuthPath('logout'),
   me: getAuthPath('me'),
 };
+
+export enum PATH {
+  linkedChildren = 'linkedChildren',
+}

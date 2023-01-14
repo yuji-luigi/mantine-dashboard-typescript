@@ -80,6 +80,7 @@ export const updateCrudDocument = createAsyncThunk(
     return payload;
   }
 );
+
 export const deleteCrudDocument = createAsyncThunk(
   'crud/deleteDocument',
   async ({ entity, documentId }: { entity: Sections; documentId: String }) => {
@@ -172,6 +173,12 @@ export const crudSlice = createSlice({
     resetStatus: (state) => {
       state.status = 'idle';
     },
+    setCrudDocuments: (state, action) => {
+      const { entity, documents, totalDocuments } = action.payload;
+      state.status = 'succeed';
+      state.reduxdb[entity].documentsArray = documents;
+      state.reduxdb[entity].totalDocuments = totalDocuments;
+    },
     // increment: (state) => {
     //   state.counter += 1;
     // },
@@ -249,6 +256,6 @@ export const crudSlice = createSlice({
 //   state.crud.reduxdb[entity].find((document) => document._id === searchId);
 // const count = useSelector((state) => state.crud.counter);
 //   const dispatch = useDispatch();
-export const { selectCrudDocument } = crudSlice.actions;
+export const { selectCrudDocument, setCrudDocuments } = crudSlice.actions;
 
 export default crudSlice.reducer;

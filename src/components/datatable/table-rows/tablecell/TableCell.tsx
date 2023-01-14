@@ -61,9 +61,9 @@ const TableCell = ({
           </Text>
         </Group>
       )}
-      {cellConfig.type === 'tree-link' && (
+      {cellConfig.type === 'link-children' && (
         <Group spacing="sm">
-          <Link href={`${query.entity as string}/${rowData._id}` || ''}>
+          <Link href={`access/${query.entity as string}/${rowData._id}` || ''}>
             <Text size="sm" weight={500}>
               {cellData}
             </Text>

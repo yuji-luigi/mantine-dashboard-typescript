@@ -7,7 +7,7 @@ export const AUTH = {
 
 export const PATH_AFTER_LOGIN = '/dashboard/home';
 
-export const PATH_DASHBOARD = {
-  root: '/dashboard',
-  dashboard: '/dashboard/home',
-};
+export enum PATH_DASHBOARD {
+  root = '/dashboard',
+  dashboard = '/dashboard/home',
+}
