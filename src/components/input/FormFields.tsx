@@ -55,7 +55,7 @@ const FormFields = ({
       )}
       {(formField.type === 'select' || formField.type === 'static-select') && (
         <Select
-          data={options!}
+          data={options}
           name={formField.name}
           label={formField.label}
           placeholder={formField.placeholder}

@@ -62,8 +62,8 @@ interface FormFieldInterface {
   priority: number;
 }
 
-interface SelectOption {
+interface SelectOption extends React.ComponentPropsWithoutRef<'div'> {
   /** both must be string or null */
-  value: string | null;
-  label: string | null;
+  value: string;
+  label: string;
 }
