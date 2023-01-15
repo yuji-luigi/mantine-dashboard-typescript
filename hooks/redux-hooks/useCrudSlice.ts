@@ -42,6 +42,8 @@ export const useCrudSlice = (ent?: Sections) => {
    *  argument is passed when calling the function. not useCrudSlice(entity) call
    *  after use call.
    */
+
+  /** to reset set document to null */
   const useSelectCrudDocument =
     () =>
     ({ entity, document }: { entity: Sections; document: AllModels }) =>

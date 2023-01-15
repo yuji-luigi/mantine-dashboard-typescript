@@ -1,5 +1,5 @@
 /**  */
-export interface PaginationContextInterface {
+interface PaginationContextInterface {
   pagination: number;
   setPagination: (number: number) => void;
   resetPagination: () => void;

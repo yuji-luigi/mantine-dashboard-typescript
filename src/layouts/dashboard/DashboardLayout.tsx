@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { createStyles, ScrollArea, useMantineTheme } from '@mantine/core';
+import { createStyles, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { HeaderSearch } from './HeaderSearch';
 import { NavbarVertical } from './NavbarVertical';

@@ -1,10 +1,14 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
+import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+
 // This custom hook is to control entity of the dashboard page: jsonFormField, sectionJson.
 // And CrudDrawer component state.
 // Also childEntity state to control when creating child entity in the parent page ex: create area from building page.
 
 const useStore = () => {
+  const { selectCrudDocument } = useCrudSlice();
+
   // Drawer status state.
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
   // initial entity set to idle set make condition based on this initial value in
@@ -20,32 +24,25 @@ const useStore = () => {
   return {
     drawerIsOpen,
     openDrawer: () => setDrawerIsOpen(true),
-    closeDrawer: () => {
+    closeDrawer: (entity?: Sections) => {
+      if (entity) {
+        selectCrudDocument({ entity, document: null });
+      }
       setDrawerIsOpen(false);
-      // setChildEntity(''); // set child entity to '' and automatically update drawer entity
-      // setParentId(''); // set parent id to ''
     },
+    // closeDrawer: () => {
+    //   setDrawerIsOpen(false);
+    // },
     toggleOpenDrawer: () => setDrawerIsOpen((prev) => !prev),
   };
 };
 
 // can be null. set this to get extra support by intellisense
-const DrawerContext = createContext({
-  // entity: '',
-  // setEntity: () => {},
-  // childEntity: '',
-  // setChildEntity: () => {},
-  // clearChildEntity: () => {},
-  // parentId: '',
-  // setParentId: () => {},
+const DrawerContext = createContext<DrawerContextInterface>({
   drawerIsOpen: false,
   openDrawer: () => {},
   closeDrawer: () => {},
   toggleOpenDrawer: () => {},
-  // crudSuccess: false,
-  // setCrudSuccess: () => {},
-  // crudError: null,
-  // setCrudError: () => {},
 });
 
 export const DrawerContextProvider = ({ children }: { children: ReactNode }) => (

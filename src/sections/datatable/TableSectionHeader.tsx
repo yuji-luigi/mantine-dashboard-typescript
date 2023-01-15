@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
+import { useEffect } from 'react';
 import { sectionData } from '../../data';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 
 const useStyles = createStyles(() => ({
   headerWrapper: {
@@ -25,8 +27,10 @@ const useStyles = createStyles(() => ({
 export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections }) {
   /** define open state for crudDrawer component */
 
-  const { /*  drawerIsOpen: opened, */ openDrawer } = useDrawerContext();
-  // const [opened, setOpened] = useState(false);
+  const { openDrawer } = useDrawerContext();
+
+  const { setBreadcrumbs, breadcrumbs, setPrevBreadcrumbs } = useLayoutContext();
+
   /** use style defined above */
   const { classes } = useStyles();
   /** get url string by useRouter */
@@ -44,10 +48,17 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
     data.contents.flatMap((content) => content)
   );
   const section = flattenSectionData.find((data) => data.entity === entity);
-  // section =
-  //   !section && pathname === '/dashboard/home'
-  //     ? sectionData.find((data) => data.slice === ' home')
-  //     : section;
+
+  useEffect(() => {
+    const regex = /^\w/;
+    const title = entity.replace(regex, (c) => c.toUpperCase());
+    setBreadcrumbs({ title, href: `${entity}` });
+    setPrevBreadcrumbs(breadcrumbs);
+
+    return () => {
+      setBreadcrumbs(null);
+    };
+  }, [query.entity]);
 
   /** define case when theres no entity,
    * seem like gives an error in other component
@@ -60,8 +71,10 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   return (
     <div>
       <div className={classes.headerWrapper}>
-        <h1 className={classes.title}>{section.title}</h1>
-        <BreadcrumbsCustom />
+        <div>
+          <h1 className={classes.title}>{section.title}</h1>
+          <BreadcrumbsCustom />
+        </div>
         {section.createButton && (
           <Button onClick={openDrawer} className={classes.button}>
             <h3>{section.createButton}</h3>

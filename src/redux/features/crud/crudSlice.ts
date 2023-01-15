@@ -137,6 +137,7 @@ export const crudSlice = createSlice({
       const { entity, documentId } = action.payload;
       state.reduxdb[entity].documentsArray.filter((data) => data._id !== documentId);
     },
+    /** to reset selectedDocument, set document to null */
     selectCrudDocument: (state, action: PayloadAction<SelectCrudPayload>) => {
       // eslint-disable-next-line prefer-const
       let { entity, document } = action.payload;

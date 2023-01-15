@@ -31,15 +31,21 @@ export function CrudDrawerDefault() {
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
-  const { getSelectedDocument, updateCrudDocument } = useCrudSlice(entity);
+  const {
+    getSelectedDocument,
+    updateCrudDocument,
+    addCrud,
+    crudStatus,
+    crudError,
+    selectCrudDocument,
+  } = useCrudSlice(entity);
 
   const selectedDocument = getSelectedDocument(entity);
+
   /**
    * initialValues
    * defined here
    */
-  const { addCrud, crudStatus, crudError } = useCrudSlice(entity);
-
   const initialValues = useMemo(
     () => getDefaultValues(sectionFormFields, selectedDocument),
     [selectedDocument]
@@ -62,6 +68,11 @@ export function CrudDrawerDefault() {
    *  Define submit function
    *  show notification/error
    */
+  function handleCloseDrawer() {
+    selectCrudDocument({ entity, document: null });
+    closeDrawer();
+  }
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     showNotification({
@@ -125,12 +136,12 @@ export function CrudDrawerDefault() {
     <Drawer
       className={classes.drawer}
       opened={drawerIsOpen}
-      onClose={closeDrawer}
+      onClose={handleCloseDrawer}
       title="Register"
       padding="xl"
       size="xl"
     >
-      <Icons.close onClick={closeDrawer} />
+      <Icons.close onClick={handleCloseDrawer} />
       <form className={classes.form} onSubmit={onSubmit}>
         {sectionFormFields?.map((formField) => (
           <FormFields
@@ -140,7 +151,7 @@ export function CrudDrawerDefault() {
             key={formField.id}
           />
         ))}
-        <Button fullWidth disabled={crudStatus === 'loading'} type="submit" mt="xl" size="md">
+        <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
           Add {entity}!
         </Button>
       </form>

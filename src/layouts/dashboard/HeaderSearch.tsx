@@ -1,13 +1,11 @@
-import { LogoBanner } from './../../components/Banner/LogoBanner';
 import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons';
-import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
 import links from '../../../json/navbar/headerLinks.json';
 import useLayoutContext from '../../../hooks/useLayoutContext';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
-import Image from 'next/image';
+import { LogoBanner } from '../../components/Banner/LogoBanner';
 
 const useStyles = createStyles((theme) => ({
   header: {

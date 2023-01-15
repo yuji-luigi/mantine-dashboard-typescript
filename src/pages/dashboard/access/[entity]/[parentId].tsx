@@ -10,11 +10,9 @@ import { UsersTable } from '../../../../components/datatable/UsersTable';
 import Layout from '../../../../layouts';
 import { TableSectionHeader } from '../../../../sections/datatable/TableSectionHeader';
 import Page from '../../../../components/Page';
+import useLayoutContext from '../../../../../hooks/useLayoutContext';
 
-const fetcher = (args: string) => {
-  console.log(axiosInstance);
-  return axiosInstance.get(args).then((res) => res.data);
-};
+const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
 
 interface Query extends ParsedUrlQuery {
   entity?: Sections;
@@ -24,6 +22,8 @@ const ChildrenTablePage = () => {
   const { query }: { query: Query } = useRouter();
   const { setCrudDocuments } = useCrudSlice(query.entity);
 
+  const { prevBreadcrumbs, restorePrevBreadcrumbs } = useLayoutContext();
+
   const { data, error } = useSWR(
     `/${PATH.linkedChildren}/${query.entity}/${query.parentId}`,
     fetcher
@@ -31,6 +31,11 @@ const ChildrenTablePage = () => {
   useEffect(() => {
     setCrudDocuments({ entity: query.entity, documents: data?.data || [] });
   }, [data]);
+
+  useEffect(() => {
+    restorePrevBreadcrumbs(prevBreadcrumbs);
+  }, []);
+
   // console.log(crudDocuments);
   if (!data) {
     return <p>loading</p>;

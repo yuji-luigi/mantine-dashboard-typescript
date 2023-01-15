@@ -20,14 +20,15 @@ import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 // const ent = en.reduce((arr, cur) => arr.concat(cur), []);
 // const useStyle = createStyles((theme) => ({}));
 
-interface BreadCrumb {
+interface Breadcrumb {
   title: string;
   href: string;
 }
 
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { query, push } = useRouter();
-  const [breadcrumbs, setBreadcrumbs] = useState<Array<BreadCrumb>>([]);
+  // const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb>>([]);
+
   const entity = query.entity as Sections;
   const { fetchCrudDocuments, crudDocuments } = useCrudSlice(entity);
   formFields as FormFieldsType;
@@ -35,21 +36,21 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
     if (!sections.includes(entity as string)) {
       push('/dashboard/home');
     }
-    const regex = /^\w/;
-    const title = entity.replace(regex, (c) => c.toUpperCase());
-    setBreadcrumbs((prev) => [...prev, { title, href: `/${entity}` }]);
+    // const regex = /^\w/;
+    // const title = entity.replace(regex, (c) => c.toUpperCase());
+    // setBreadcrumbs((prev) => [...prev, { title, href: `/${entity}` }]);
 
     if (!crudDocuments.length) {
       fetchCrudDocuments({ entity });
     }
-    return () => setBreadcrumbs([]);
+    // return () => setBreadcrumbs([]);
   }, [entity]);
 
   return (
     <Page>
       <div>
         <TableSectionHeader />
-        {JSON.stringify(breadcrumbs)}
+        {/* {JSON.stringify(breadcrumbs)} */}
         <Tables />
       </div>
     </Page>
