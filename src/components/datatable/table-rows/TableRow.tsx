@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
 import { TableCellDecorator } from '../TableCellDecorator';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
+import { usePaginationContext } from '../../../context/PaginationContext';
 
 export function TableRow({
   rowData,
@@ -13,6 +14,8 @@ export function TableRow({
   rowData: AllModels;
   sectionFormFields: Array<FormFieldInterface>;
 }) {
+  const { paginationQuery } = usePaginationContext();
+
   /** use hook context */
   const { openDrawer } = useDrawerContext();
   /** use hook router hook */
@@ -29,7 +32,7 @@ export function TableRow({
     openDrawer();
   };
   const onDelete = (): void => {
-    deleteCrudDocument({ entity, documentId: rowData._id });
+    deleteCrudDocument({ entity, documentId: rowData._id, query: paginationQuery });
   };
   useEffect(
     () => () => {

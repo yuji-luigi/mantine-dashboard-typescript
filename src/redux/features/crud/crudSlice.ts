@@ -83,49 +83,29 @@ export const updateCrudDocument = createAsyncThunk(
 
 export const deleteCrudDocument = createAsyncThunk(
   'crud/deleteDocument',
-  async ({ entity, documentId }: { entity: Sections; documentId: String }) => {
-    const res = await axiosInstance.delete(`${entity}/${documentId}`);
+  async ({
+    entity,
+    documentId,
+    paginationQuery,
+  }: {
+    entity: Sections;
+    documentId: string;
+    paginationQuery: string;
+  }) => {
+    /**
+     * in the Api first delete and do getCrudDocuments
+     * returns new crudDocuments with limit number
+     *  */
+    const res = await axiosInstance.delete(`${entity}/${documentId}${paginationQuery}`);
     const payload = {
       entity: res.data.collection,
-      documentId: res.data.data.documentId,
+      documents: res.data.documents,
+      documentId,
+      totalDocuments: res.data.totalDocuments,
     };
     return payload;
   }
 );
-
-// function createReduxdb():Reduxdb {
-//   const reduxdb = {}
-//   Object.entries(sectionData).forEach(([key, value]) => {
-//     reduxdb[(value.slice) as Sections] = { entity: value.slice, documentsArray: [] };
-//   });
-//   return reduxdb as Reduxdb;
-// }
-
-// TODO: Auto creation of reduxdb fails in types
-// Object.entries(sectionData).forEach(([key, value]) => {
-//   reduxdb[value.slice] = { entity: value.slice, documentsArray: [] };
-// });
-
-// const reduxdb: Reduxdb = {
-//   home: { entity: 'home', documentsArray: [] },
-//   users: { entity: 'users', documentsArray: [] },
-//   buildings: { entity: 'buildings', documentsArray: [] },
-//   billing: { entity: 'billing', documentsArray: [] },
-//   statistics: { entity: 'statistics', documentsArray: [] },
-//   notifications: { entity: 'notifications', documentsArray: [] },
-//   bookmarks: { entity: 'bookmarks', documentsArray: [] },
-//   comments: { entity: 'comments', documentsArray: [] },
-//   fundRules: { entity: 'fundRules', documentsArray: [] },
-//   funds: { entity: 'funds', documentsArray: [] },
-//   instances: { entity: 'instances', documentsArray: [] },
-//   proposals: { entity: 'proposals', documentsArray: [] },
-//   tags: { entity: 'tags', documentsArray: [] },
-//   threads: { entity: 'threads', documentsArray: [] },
-//   userSettings: { entity: 'userSettings', documentsArray: [] },
-//   wallets: { entity: 'wallets', documentsArray: [] },
-//   events: { entity: 'events', documentsArray: [] },
-//   owners: { entity: 'owners', documentsArray: [] },
-// };
 
 const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentData) => {
   totalData = {
@@ -241,11 +221,13 @@ export const crudSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(deleteCrudDocument.fulfilled, (state, action) => {
-        const { entity, documentId } = action.payload;
+        const { entity, documents, totalDocuments } = action.payload;
         state.status = 'succeed';
-        const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
-          (document) => document._id !== documentId
-        );
+        const newDocumentArray = documents;
+        // const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
+        //   (document) => document._id !== documentId
+        // );
+        state.reduxdb[entity].totalDocuments = totalDocuments;
         state.reduxdb[entity].documentsArray = newDocumentArray;
       });
   },

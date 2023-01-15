@@ -27,8 +27,14 @@ interface FormFieldInterface {
     | 'date'
     | 'date-range'
     | 'attachment'
-    | 'link-children'
+    // | 'link-children'
     | 'color';
+
+  /**
+   *  type refers to form type. this cellType specifically
+   * refers to how to display in the dataTable
+   * */
+  cellType?: 'link-children';
   /**For type select */
   multi?: boolean;
   /**For type select */

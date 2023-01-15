@@ -1,7 +1,6 @@
 import React from 'react';
 import { Group, Avatar, Text } from '@mantine/core';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { SpecificTableCell } from './SpecificTableCell';
 import { FieldTypes } from '../../../../../json/dataTable/formfields';
 // import { IconPencil, IconTrash } from '@tabler/icons';
 // import { UsersTableRow } from '../../../../types/general/data/datatable/objects';
@@ -20,25 +19,18 @@ const TableCell = ({
   cellConfig: FormFieldInterface;
   rowData: any;
 }) => {
-  const { query } = useRouter();
-  // const theme = useMantineTheme();
-  // if (cellConfig.badge) {
-  //   return (
-  //     <td>
-  //       <td>
-  //         <Badge
-  //           color={jobColors[cellData.job.toLowerCase()]}
-  //           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
-  //         >
-  //           {cellData.job}
-  //         </Badge>
-  //       </td>
-  //     </td>
-  //   );
-  // }
   if (cellConfig.noTable) {
     return null;
   }
+
+  /**
+   *  Define case cellType is specified in the tableData.
+   * FormType is the same as the type but cell is different.
+   */
+  if (cellConfig.cellType) {
+    return <SpecificTableCell rowData={rowData} cellData={cellData} cellConfig={cellConfig} />;
+  }
+
   return (
     <>
       {cellConfig.type === FieldTypes.Avatar && (
@@ -59,15 +51,6 @@ const TableCell = ({
           <Text size="sm" weight={500}>
             {cellData}
           </Text>
-        </Group>
-      )}
-      {cellConfig.type === 'link-children' && (
-        <Group spacing="sm">
-          <Link href={`access/${query.entity as string}/${rowData._id}` || ''}>
-            <Text size="sm" weight={500}>
-              {cellData}
-            </Text>
-          </Link>
         </Group>
       )}
 

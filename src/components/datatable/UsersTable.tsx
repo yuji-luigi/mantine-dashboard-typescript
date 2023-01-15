@@ -9,31 +9,31 @@ import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
 import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+import { usePaginationContext } from '../../context/PaginationContext';
 
-export function UsersTable(
-  /* { data }: { data: Array<UsersTableRow> } */ {
-    entityOverride = '',
-  }: { entityOverride?: Sections }
-) {
+export function UsersTable() {
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
-  console.log(entityOverride);
+  const { setPagination } = usePaginationContext();
   const { query } = useRouter();
   const { crudDocuments, totalDocumentsCount, fetchCrudDocuments } = useCrudSlice(
     query.entity as Sections
   );
 
   const sectionFormFields = formFields[query.entity as Sections];
+
   if (!sectionFormFields) {
     return <h1>Please provide the formField.json file to display the table</h1>;
   }
+
   sectionFormFields.sort((a, b) => a.priority - b.priority);
 
-  const TOTAL = Math.floor((totalDocumentsCount - 1) / ROWS_PER_PAGE);
+  const TOTAL = Math.floor((totalDocumentsCount - 1) / ROWS_PER_PAGE) + 1;
 
   function onPageChange(pageNumber: number) {
     setPage(pageNumber);
+    setPagination(pageNumber);
     fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
   }
   return (

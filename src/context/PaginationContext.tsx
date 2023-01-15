@@ -8,12 +8,16 @@ import { PaginationContextInterface } from '../types/context/pagination-context'
 const useStore = () => {
   // PagenNumber status state.
   const [pagination, setPagination] = useState(0);
+  const [rowsPerPage, setRowPerPage] = useState(10);
 
   return {
     pagination,
     setPagination: (number: number) => setPagination(number),
     resetPagination: () => setPagination(0),
-    paginationQuery: () => `?skip=${pagination}`,
+    /** ? in this string might not be needed */
+    paginationQuery: `?skip=${pagination}&limit=${rowsPerPage}`,
+    rowsPerPage,
+    setRowsPerPage: (rowsN: number) => setRowPerPage(rowsN),
   };
 };
 
@@ -25,7 +29,9 @@ const PaginationContext = createContext<PaginationContextInterface>({
   resetPagination: () => {},
   setPagination: () => {},
   /** @return {string} */
-  paginationQuery: () => '',
+  paginationQuery: '',
+  rowsPerPage: 10,
+  setRowsPerPage: () => {},
 });
 
 export const PaginationContextProvider = ({ children }: { children: ReactNode }) => (
@@ -42,12 +48,19 @@ export const PaginationContextProvider = ({ children }: { children: ReactNode })
  *  define hooks here in the context to use all of them
  *  with usePaginationContext
  * */
-
-const usePagination = () => useContext(PaginationContext).pagination;
-const useSetPagination = () => useContext(PaginationContext).setPagination;
+/** define hooks pagination related */
+export const usePagination = () => useContext(PaginationContext).pagination;
+export const useSetPagination = () => useContext(PaginationContext).setPagination;
+export const usePaginationQuery = () => useContext(PaginationContext).paginationQuery;
+/** define hooks related to limit query */
+export const useRowsPerPage = () => useContext(PaginationContext).rowsPerPage;
+export const useSetRowsPerPage = () => useContext(PaginationContext).setRowsPerPage;
 
 // this hook to use easily
 export const usePaginationContext = () => ({
   pagination: usePagination(),
-  useSetPagination: useSetPagination(),
+  setPagination: useSetPagination(),
+  paginationQuery: usePaginationQuery(),
+  rowsPerPage: useRowsPerPage(),
+  setRowsPerPage: useSetRowsPerPage(),
 });
