@@ -11,7 +11,8 @@ import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
 
-export function UsersTable() {
+export function UsersTable({ entityOverride }: { entityOverride?: string }) {
+  console.log({ entityOverride });
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);

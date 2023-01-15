@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { useRouter } from 'next/router';
 // import { createStyles } from '@mantine/core';
 import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
 import type { NextPageWithLayout } from '../_app';
@@ -11,21 +10,17 @@ import Page from '../../components/Page';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
 
-const StatisticsPage: NextPageWithLayout<PropWithChildren> = () => {
+const StatisticsPage: NextPageWithLayout<PropWithChildren> = () => (
   /** Define Entity from url */
-  const { query, push } = useRouter();
 
-  return (
-    <Page>
-      <div>
-        <TableSectionHeader entityOverride="statistics" />
-        <Tables entityOverride="statistics" />
-        <div>message: </div>
-      </div>
-    </Page>
-  );
-};
-
+  <Page>
+    <div>
+      <TableSectionHeader entityOverride="statistics" />
+      <Tables entityOverride="statistics" />
+      <div>message: </div>
+    </div>
+  </Page>
+);
 StatisticsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
