@@ -1,5 +1,5 @@
 import { Table, ScrollArea, Pagination, Divider } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -11,8 +11,7 @@ import formFields from '../../../json/dataTable/formfields';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
 
-export function UsersTable({ entityOverride }: { entityOverride?: string }) {
-  console.log({ entityOverride });
+export function UsersTable({ entityOverride = '' }: { entityOverride?: string }) {
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
@@ -23,6 +22,13 @@ export function UsersTable({ entityOverride }: { entityOverride?: string }) {
   );
 
   const sectionFormFields = formFields[query.entity as Sections];
+
+  /** might need handle entityOverride with context in the future */
+  useEffect(() => {
+    if (entityOverride) {
+      null;
+    }
+  }, []);
 
   if (!sectionFormFields) {
     return <h1>Please provide the formField.json file to display the table</h1>;
@@ -37,6 +43,7 @@ export function UsersTable({ entityOverride }: { entityOverride?: string }) {
     setPagination(pageNumber);
     fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
   }
+
   return (
     <>
       <ScrollArea>

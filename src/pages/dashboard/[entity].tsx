@@ -10,6 +10,7 @@ import { sections } from '../../data';
 import formFields from '../../../json/dataTable/formfields';
 import Page from '../../components/Page';
 import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
@@ -53,6 +54,7 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
         {/* {JSON.stringify(breadcrumbs)} */}
         <Tables />
       </div>
+      <CrudDrawerDefault />
     </Page>
   );
 };

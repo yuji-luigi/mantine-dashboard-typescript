@@ -4,6 +4,7 @@ import { useForm } from '@mantine/form';
 import { cleanNotifications, hideNotification, showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState, useMemo } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
@@ -50,11 +51,6 @@ export function CrudDrawerDefault() {
     () => getDefaultValues(sectionFormFields, selectedDocument),
     [selectedDocument]
   );
-  // const clonedValues = { ...initialValues };
-  // const initialValues = {
-  //   name: 'ininnini',
-  //   address: 'AAAAA',
-  // };
 
   const form = useForm<Record<string, unknown>>({
     initialValues,
@@ -82,11 +78,18 @@ export function CrudDrawerDefault() {
     });
     setSubmitting(true);
 
+    /** Create new Document */
     if (!selectedDocument) {
-      addCrud({ entity, newDocument: form.values });
+      addCrud({ entity, newDocument: form.values, parentId: query.parentId });
     }
+    /** Modify selected document */
     if (selectedDocument) {
-      updateCrudDocument({ entity, updateData: form.values, documentId: selectedDocument._id });
+      updateCrudDocument({
+        entity,
+        updateData: form.values,
+        documentId: selectedDocument._id,
+        parentId: query.parentId,
+      });
     }
   };
 

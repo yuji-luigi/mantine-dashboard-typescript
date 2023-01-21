@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useState, useReducer } from 'react';
 
 import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
@@ -6,21 +6,35 @@ import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 // And CrudDrawer component state.
 // Also childEntity state to control when creating child entity in the parent page ex: create area from building page.
 
+function drawerFormStateReducer(state: ReducerState, action: DrawerStateAction) {
+  const { type /* ,payload */ } = action;
+
+  const reducerStore = {
+    linkedChildren: { mode: 'linkedChildren' },
+    reset: { mode: '', age: 0 },
+  };
+
+  const returnValue = reducerStore[type] || null;
+
+  if (returnValue) {
+    return { ...state, ...returnValue } as ReducerState;
+  }
+  throw Error('unknown action');
+  // return newState;
+}
+
 const useStore = () => {
   const { selectCrudDocument } = useCrudSlice();
 
   // Drawer status state.
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-  // initial entity set to idle set make condition based on this initial value in
-  // index.slice.js
-  // const [entity, setEntity] = useState('idle');
-  // // When create child entity we use this state and eventually clear state.
-  // const [childEntity, setChildEntity] = useState('');
-  // // Usually id of the building. but in the future we can use this for others. (supply...etc)
-  // const [parentId, setParentId] = useState('');
-  // // flash(snackbar status for all entity)
-  // const [crudSuccess, setCrudSuccess] = useState(false);
-  // const [crudError, setCrudError] = useState(null);
+  // not using now 15/1/2023
+  const [drawerFormState, drawerFormStateDispatch] = useReducer(drawerFormStateReducer, {
+    mode: '',
+  });
+
+  const [isChildrenPage, setIsChildrenPage] = useState(false);
+
   return {
     drawerIsOpen,
     openDrawer: () => setDrawerIsOpen(true),
@@ -34,6 +48,10 @@ const useStore = () => {
     //   setDrawerIsOpen(false);
     // },
     toggleOpenDrawer: () => setDrawerIsOpen((prev) => !prev),
+    drawerFormState,
+    drawerFormStateDispatch,
+    isChildrenPage,
+    setIsChildrenPage: (bool: boolean) => setIsChildrenPage(bool),
   };
 };
 
@@ -43,6 +61,10 @@ const DrawerContext = createContext<DrawerContextInterface>({
   openDrawer: () => {},
   closeDrawer: () => {},
   toggleOpenDrawer: () => {},
+  drawerFormState: { mode: '' },
+  drawerFormStateDispatch: () => {},
+  isChildrenPage: false,
+  setIsChildrenPage: () => {},
 });
 
 export const DrawerContextProvider = ({ children }: { children: ReactNode }) => (
@@ -62,12 +84,13 @@ export const useCloseDrawer = () => useContext(DrawerContext).closeDrawer;
 export const useToggleOpenDrawer = () => useContext(DrawerContext).toggleOpenDrawer;
 
 // this hook to use easily
-export const useDrawerContext = () => ({
-  drawerIsOpen: useDrawerIsOpen(),
-  openDrawer: useOpenDrawer(),
-  closeDrawer: useCloseDrawer(),
-  toggleOpenDrawer: useToggleOpenDrawer(),
-});
+// export const useDrawerContext = () => ({
+//   drawerIsOpen: useDrawerIsOpen(),
+//   openDrawer: useOpenDrawer(),
+//   closeDrawer: useCloseDrawer(),
+//   toggleOpenDrawer: useToggleOpenDrawer(),
+// });
+export const useDrawerContext = () => useContext(DrawerContext);
 
 // Planning specific drawer state
 

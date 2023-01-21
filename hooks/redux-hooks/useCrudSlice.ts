@@ -51,8 +51,8 @@ export const useCrudSlice = (ent?: Sections) => {
 
   const useAddCrud =
     () =>
-    ({ entity, newDocument }: AddCrudPayload) => {
-      appDispatch(addCrudDocument({ entity, newDocument }));
+    ({ entity, newDocument, parentId }: AddCrudPayload) => {
+      appDispatch(addCrudDocument({ entity, newDocument, parentId }));
     };
 
   const useUpdateCrudDocument =
@@ -61,12 +61,14 @@ export const useCrudSlice = (ent?: Sections) => {
       entity,
       updateData,
       documentId,
+      parentId,
     }: {
       entity: Sections;
       updateData: any;
       documentId: string;
+      parentId?: string;
     }) =>
-      appDispatch(updateCrudDocument({ entity, updateData, documentId }));
+      appDispatch(updateCrudDocument({ entity, updateData, documentId, parentId }));
 
   const useDeleteCrudDocument =
     () =>

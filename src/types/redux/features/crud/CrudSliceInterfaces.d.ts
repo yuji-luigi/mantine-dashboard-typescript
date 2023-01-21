@@ -43,6 +43,7 @@ interface CrudState {
 type AddCrudPayload = {
   entity: Sections;
   newDocument: AllModels;
+  parentId?: string;
 };
 
 interface SelectCrudPayload {

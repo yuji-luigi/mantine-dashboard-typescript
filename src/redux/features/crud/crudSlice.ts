@@ -50,9 +50,20 @@ export const fetchCrudDocumentsWithQuery = createAsyncThunk(
 
 export const addCrudDocument = createAsyncThunk(
   'crud/addDocument',
-  async ({ entity, newDocument }: { entity: Sections; newDocument: AllModels }) => {
+  async ({
+    entity,
+    newDocument,
+    parentId,
+  }: {
+    entity: Sections;
+    newDocument: AllModels;
+    /** specify parentId for creation of child of given id */
+    parentId?: string;
+  }) => {
     try {
-      const res = await axiosInstance.post(entity, newDocument);
+      /** handle endpoint by checking if parentId is passed */
+      const endPoint = !parentId ? entity : `linkedChildren/${entity}/${parentId}`;
+      const res = await axiosInstance.post(endPoint, newDocument);
       return res.data;
     } catch (error: any) {
       console.error(error.message || error);
@@ -67,12 +78,18 @@ export const updateCrudDocument = createAsyncThunk(
     entity,
     updateData,
     documentId,
+    parentId,
   }: {
     entity: Sections;
     updateData: any;
     documentId: string;
+    parentId?: string;
   }) => {
-    const res = await axiosInstance.put(`${entity}/${documentId}`, updateData);
+    /** parentId ? then linkedChildren endpoint. else case update normally */
+    const endpoint = !parentId
+      ? `${entity}/${documentId}`
+      : `/linkedChildren/${entity}/${parentId}`;
+    const res = await axiosInstance.put(endpoint, updateData);
     const payload = {
       entity: res.data.collection,
       updatedDocument: res.data.data as Record<string, any>,

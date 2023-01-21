@@ -9,8 +9,6 @@ import { UsersTable } from './UsersTable';
 const Tables = ({ entityOverride }: { entityOverride?: string }) => (
   <>
     <UsersTable entityOverride={entityOverride} />
-    {/* <UsersRolesTable data={data1.data} />
-    <UsersStack data={data2.data} /> */}
   </>
 );
 

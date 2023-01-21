@@ -20,25 +20,6 @@
       "type": "node"
     },
     {
-      "type": "firefox",
-      "request": "launch",
-      "reAttach": true,
-      "name": "launch firefox",
-      "profile": "cool-theme",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
-      "pathMappings": [
-        {
-          "url": "webpack://_n_e/node_modules/next/dist/client/index.js",
-          "path": "${workspaceFolder}/pages/events/index.js"
-        },
-        {
-          "url": "webpack://_n_e",
-          "path": "${workspaceFolder}"
-        }
-      ]
-    },
-    {
       "name": "server-side:Next.js: debug",
       "type": "node-terminal",
       "request": "launch",
@@ -47,10 +28,10 @@
 
     {
       "name": "client-side Next.js: debug ",
-      "type": "pwa-chrome",
+      "type": "chrome",
       "request": "launch",
       "userDataDir": true,
-      "url": "http://localhost:3000"
+      "url": "http://generic.host:3000"
     },
     {
       "name": "Full stack:Next.js: debug",
@@ -58,10 +39,10 @@
       "request": "launch",
       "command": "npm run dev",
       //   "console": "integratedTerminal",
+      "userDataDir": false,
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
-        // "userDataDir": false,
         "action": "debugWithChrome"
       },
       "skipFiles": ["<node_internals>/**", ".next/**"]

@@ -11,6 +11,8 @@ import Layout from '../../../../layouts';
 import { TableSectionHeader } from '../../../../sections/datatable/TableSectionHeader';
 import Page from '../../../../components/Page';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
+import { useDrawerContext } from '../../../../context/DataTableDrawerContext';
+import { CrudDrawerDefault } from '../../../../components/drawer/CrudDrawerDefault';
 
 const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
 
@@ -21,7 +23,7 @@ interface Query extends ParsedUrlQuery {
 const ChildrenTablePage = () => {
   const { query }: { query: Query } = useRouter();
   const { setCrudDocuments } = useCrudSlice(query.entity);
-
+  const { /* drawerFormStateDispatch, */ setIsChildrenPage } = useDrawerContext();
   const { prevBreadcrumbs, restorePrevBreadcrumbs } = useLayoutContext();
 
   const { data, error } = useSWR(
@@ -34,19 +36,23 @@ const ChildrenTablePage = () => {
 
   useEffect(() => {
     restorePrevBreadcrumbs(prevBreadcrumbs);
+    // drawerFormStateDispatch({ type: 'linkedChildren' });
+    setIsChildrenPage(true);
+    return () => setIsChildrenPage(false);
   }, []);
 
-  // console.log(crudDocuments);
   if (!data) {
     return <p>loading</p>;
   }
   if (error) {
     return <p>{error.message || error || 'error occurred'}</p>;
   }
+
   return (
     <Page>
       <TableSectionHeader />
       <UsersTable />
+      <CrudDrawerDefault />
     </Page>
   );
 };
