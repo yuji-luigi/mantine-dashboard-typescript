@@ -1,32 +1,16 @@
 /* eslint-disable react/jsx-pascal-case */
-import {
-  createStyles,
-  Paper,
-  Text,
-  Title,
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Button,
-} from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { showNotification } from '@mantine/notifications';
+import { createStyles, Paper, Text, Title } from '@mantine/core';
 import { GetServerSidePropsContext } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { ReactElement, useEffect } from 'react';
-import { userAgent } from 'next/server';
-import useAuth from '../../hooks/useAuth';
+import { ReactElement } from 'react';
+
 import Page from '../components/Page';
-import { Icons } from '../data/icons';
 import GuestGuard from '../guards/GuestGuard';
 import Layout from '../layouts';
 import { API_BASE_URL, PATH_AUTH } from '../path/api-routes';
 import { AUTH } from '../path/page-paths';
 import LoginForm from '../sections/auth/LoginForm';
 import DashboardTopPage from './dashboard/home';
-import { LoginFormValues } from '../types/context/auth/formData';
-import axiosInstance from '../utils/axios-instance';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -73,7 +57,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const LoginPage = ({ user }) => {
+const LoginPage = ({ user }: { user: User }) => {
   const { classes } = useStyles();
   if (user?.active) {
     return <DashboardTopPage />;

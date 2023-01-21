@@ -80,7 +80,7 @@ export function CrudDrawerDefault() {
 
     /** Create new Document */
     if (!selectedDocument) {
-      addCrud({ entity, newDocument: form.values, parentId: query.parentId });
+      addCrud({ entity, newDocument: form.values, parentId: query.parentId as string });
     }
     /** Modify selected document */
     if (selectedDocument) {
@@ -88,7 +88,7 @@ export function CrudDrawerDefault() {
         entity,
         updateData: form.values,
         documentId: selectedDocument._id,
-        parentId: query.parentId,
+        parentId: query.parentId as string,
       });
     }
   };
