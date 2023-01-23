@@ -3,6 +3,7 @@ interface ReduxDbEntity<Entity> {
   documentsArray: Array<Entity> | [];
   totalDocuments: number;
   selectedDocument: AllModels | null;
+  isChildrenTree: boolean;
 }
 
 interface Reduxdb {

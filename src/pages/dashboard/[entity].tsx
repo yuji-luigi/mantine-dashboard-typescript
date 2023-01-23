@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import { createStyles } from '@mantine/core';
 import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
@@ -21,17 +21,12 @@ import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 // const ent = en.reduce((arr, cur) => arr.concat(cur), []);
 // const useStyle = createStyles((theme) => ({}));
 
-interface Breadcrumb {
-  title: string;
-  href: string;
-}
-
 const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   const { query, push } = useRouter();
   // const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb>>([]);
-
   const entity = query.entity as Sections;
-  const { fetchCrudDocuments, crudDocuments } = useCrudSlice(entity);
+
+  const { fetchCrudDocuments, crudDocuments, isChildrenTree } = useCrudSlice(entity);
   formFields as FormFieldsType;
   useEffect(() => {
     if (!sections.includes(entity as string)) {
@@ -44,9 +39,13 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
     if (!crudDocuments.length) {
       fetchCrudDocuments({ entity });
     }
-    // return () => setBreadcrumbs([]);
-  }, [entity]);
-
+    if (isChildrenTree) {
+      fetchCrudDocuments({ entity, isChildrenTree: false });
+    }
+    return () => {
+      console.log('cleanup func');
+    };
+  }, [entity]); // include parentId: string | undefined to update on change page
   return (
     <Page>
       <div>

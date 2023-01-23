@@ -4,7 +4,6 @@ import { useForm } from '@mantine/form';
 import { cleanNotifications, hideNotification, showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState, useMemo } from 'react';
-import { ParsedUrlQuery } from 'querystring';
 import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
@@ -27,8 +26,11 @@ export function CrudDrawerDefault() {
   const [submitting, setSubmitting] = useState(false);
 
   const { classes } = useStyles();
+
   const { query } = useRouter();
   const entity = query.entity as Sections;
+  const parentId = query.parentId as string;
+
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
@@ -80,7 +82,7 @@ export function CrudDrawerDefault() {
 
     /** Create new Document */
     if (!selectedDocument) {
-      addCrud({ entity, newDocument: form.values, parentId: query.parentId as string });
+      addCrud({ entity, newDocument: form.values, parentId });
     }
     /** Modify selected document */
     if (selectedDocument) {
@@ -93,6 +95,7 @@ export function CrudDrawerDefault() {
     }
   };
 
+  /** todo: separate the function in to hooks or util function.*/
   async function handleSubmitSucceed() {
     /**
      * delay for drawer closing and ect these lines
@@ -113,6 +116,7 @@ export function CrudDrawerDefault() {
     });
     setSubmitting(false);
   }
+
   useEffect(() => {
     if (submitting) {
       if (crudStatus === 'loading') {

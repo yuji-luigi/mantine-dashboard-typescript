@@ -22,8 +22,16 @@ export const useCrudSlice = (ent?: Sections) => {
   /** Set Crud documents fetch outside of the redux the documents and set into reduxDb.documents array */
   const useSetCrudDocuments =
     () =>
-    ({ entity = '', documents }: { entity?: Sections; documents: AllModels }) =>
-      appDispatch(setCrudDocuments({ entity, documents }));
+    ({
+      entity = '',
+      documents,
+      isChildrenTree = false,
+    }: {
+      entity?: Sections;
+      documents: AllModels;
+      isChildrenTree?: boolean;
+    }) =>
+      appDispatch(setCrudDocuments({ entity, documents, isChildrenTree }));
 
   /** Get error string sent by api */
   const useCrudDocuments = (entity?: string) =>
@@ -31,6 +39,9 @@ export const useCrudSlice = (ent?: Sections) => {
 
   const useTotalDocumentsCount = (entity?: string) =>
     useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
+
+  const useIsChildrenTree = (entity?: string) =>
+    useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.isChildrenTree);
 
   const useGetSelectedDocument = () => (entity: Sections) =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -81,8 +92,16 @@ export const useCrudSlice = (ent?: Sections) => {
 
   const useFetchCrudDocuments =
     () =>
-    ({ entity, query }: { entity: Sections; query?: string }) =>
-      appDispatch(fetchCrudDocuments({ entity, query }));
+    ({
+      entity,
+      query,
+      isChildrenTree = false,
+    }: {
+      entity: Sections;
+      query?: string;
+      isChildrenTree?: boolean;
+    }) =>
+      appDispatch(fetchCrudDocuments({ entity, query, isChildrenTree }));
 
   /** TODO: fetchWithQuery, singleDataCrud. */
   return {
@@ -98,6 +117,7 @@ export const useCrudSlice = (ent?: Sections) => {
     selectCrudDocument: useSelectCrudDocument(),
     getSelectedDocument: useGetSelectedDocument(),
     setCrudDocuments: useSetCrudDocuments(),
+    isChildrenTree: useIsChildrenTree(ent),
     // resetCrudStatus: useResetCrudStatus(),
   };
 };

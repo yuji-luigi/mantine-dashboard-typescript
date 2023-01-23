@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import React, { ReactElement, useEffect } from 'react';
-import { ParsedUrlQuery } from 'querystring';
 import axiosInstance from '../../../../utils/axios-instance';
 import { PATH } from '../../../../path/api-routes';
 
@@ -11,41 +10,49 @@ import Layout from '../../../../layouts';
 import { TableSectionHeader } from '../../../../sections/datatable/TableSectionHeader';
 import Page from '../../../../components/Page';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
-import { useDrawerContext } from '../../../../context/DataTableDrawerContext';
 import { CrudDrawerDefault } from '../../../../components/drawer/CrudDrawerDefault';
 
 const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
 
-interface Query extends ParsedUrlQuery {
-  entity?: Sections;
-  parentId?: string;
-}
 const ChildrenTablePage = () => {
-  const { query }: { query: Query } = useRouter();
+  const { query }: { query: ParsedQueryCustom } = useRouter();
   const { setCrudDocuments } = useCrudSlice(query.entity);
-  const { /* drawerFormStateDispatch, */ setIsChildrenPage } = useDrawerContext();
+
+  const { setParentData } = useLayoutContext();
+
   const { prevBreadcrumbs, restorePrevBreadcrumbs } = useLayoutContext();
 
   const { data, error } = useSWR(
     `/${PATH.linkedChildren}/${query.entity}/${query.parentId}`,
     fetcher
   );
-  useEffect(() => {
-    setCrudDocuments({ entity: query.entity, documents: data?.data || [] });
-  }, [data]);
+  const { data: parentData, error: parentError } = useSWR(
+    `/${query.entity}/${query.parentId}`,
+    fetcher
+  );
 
+  useEffect(() => {
+    setCrudDocuments({ entity: query.entity, documents: data?.data || [], isChildrenTree: true });
+    if (parentData) {
+      setParentData(parentData.data);
+    }
+  }, [data, parentData?.data]);
+
+  // console.log(query.parentId);
   useEffect(() => {
     restorePrevBreadcrumbs(prevBreadcrumbs);
     // drawerFormStateDispatch({ type: 'linkedChildren' });
-    setIsChildrenPage(true);
-    return () => setIsChildrenPage(false);
+    // setIsChildrenPage(true);
+    // return () => setIsChildrenPage(false);
   }, []);
 
   if (!data) {
     return <p>loading</p>;
   }
-  if (error) {
-    return <p>{error.message || error || 'error occurred'}</p>;
+  if (error || parentError) {
+    return (
+      <p>{error.message || error || parentError.message || parentError || 'error occurred'}</p>
+    );
   }
 
   return (

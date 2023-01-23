@@ -10,12 +10,15 @@ export const DashboardLayoutContext = createContext<DashboardLayoutContextStates
   prevBreadcrumbs: [],
   restorePrevBreadcrumbs() {},
   setPrevBreadcrumbs() {},
+  setParentData() {},
+  parentData: { name: '' },
 });
 
 const useStore = () => {
   const [isOpen, setBarOpen] = useState(false);
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbInterface[]>([]);
   const [prevBreadcrumbs, setPrevBreadcrumbs] = useState<BreadcrumbInterface[]>([]);
+  const [parentData, setParentData] = useState<ParentDataInterface | {}>({});
 
   return {
     isOpen,
@@ -31,6 +34,8 @@ const useStore = () => {
     },
     breadcrumbs,
     prevBreadcrumbs,
+    parentData,
+    setParentData: (data: ParentDataInterface) => setParentData(data),
     restorePrevBreadcrumbs: (prevDataArray: BreadcrumbInterface[]) => setBreadcrumbs(prevDataArray),
     setPrevBreadcrumbs,
   };

@@ -1,4 +1,4 @@
 interface IEntityContext {
   overrideEntity: Sections | '';
-  setOverrideEntity: (entity) => void
+  setOverrideEntity: (entity) => void;
 }

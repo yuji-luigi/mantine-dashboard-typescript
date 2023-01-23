@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
 import { useEffect } from 'react';
 import { sectionData } from '../../data';
-import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
 import useLayoutContext from '../../../hooks/useLayoutContext';
@@ -23,22 +22,25 @@ const useStyles = createStyles(() => ({
     marginLeft: 40,
   },
 }));
-
+function instanceOfParentDataInterface(object: any): object is ParentDataInterface {
+  return 'name' in object;
+}
 export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections }) {
   /** define open state for crudDrawer component */
 
   const { openDrawer } = useDrawerContext();
 
-  const { setBreadcrumbs, breadcrumbs, setPrevBreadcrumbs } = useLayoutContext();
+  const { setBreadcrumbs, breadcrumbs, setPrevBreadcrumbs, parentData } = useLayoutContext();
 
   /** use style defined above */
   const { classes } = useStyles();
   /** get url string by useRouter */
-  const { query /* pathname */ } = useRouter();
+  const { query }: { query: ParsedQueryCustom } = useRouter();
 
   /** get entity from url using useRouter().query */
-  let entity = query.entity as Sections;
-  entity = entityOverride || entity;
+  let { entity } = query;
+  entity = entityOverride || entity; // if entityOverride is present entity is set to override one
+
   /**
    *  getSection json data to show the page headings  sectionData is array of objects
    *  so find by data.slice === entity.
@@ -50,14 +52,16 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   const section = flattenSectionData.find((data) => data.entity === entity);
 
   useEffect(() => {
-    const regex = /^\w/;
-    const title = entity.replace(regex, (c) => c.toUpperCase());
-    setBreadcrumbs({ title, href: `${entity}` });
-    setPrevBreadcrumbs(breadcrumbs);
-
-    return () => {
-      setBreadcrumbs(null);
-    };
+    /** entity is possibly null */
+    if (entity) {
+      const regex = /^\w/;
+      const title = entity.replace(regex, (c) => c.toUpperCase());
+      /** TODO: fix hardcoded /dashboard */
+      setBreadcrumbs({ title, href: `/dashboard/${entity}` });
+      setPrevBreadcrumbs(breadcrumbs);
+    }
+    /** if null is passed set to [] in condition. */
+    return () => setBreadcrumbs(null);
   }, [query.entity]);
 
   /** define case when theres no entity,
@@ -68,11 +72,15 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   }
   /** define openDrawer function. Button onClick openDrawer */
 
+  let { title } = section;
+  if (query.parentId && instanceOfParentDataInterface(parentData)) {
+    title = parentData.name;
+  }
   return (
     <div>
       <div className={classes.headerWrapper}>
         <div>
-          <h1 className={classes.title}>{section.title}</h1>
+          <h1 className={classes.title}>{title}</h1>
           <BreadcrumbsCustom />
         </div>
         {section.createButton && (

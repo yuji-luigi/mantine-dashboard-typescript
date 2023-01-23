@@ -10,7 +10,7 @@ const axiosInstance: AxiosInstance = axios.create({
 export interface AxiosResData {
   success: boolean;
   collection: Sections;
-  documents: Array<AllModels>;
+  data: Array<AllModels>;
   totalDocuments: number;
 }
 

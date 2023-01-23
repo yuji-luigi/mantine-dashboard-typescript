@@ -17,12 +17,21 @@ export const fetchCrudDocuments = createAsyncThunk(
     rejectValue: { error: { message: string } };
   }
 > */ 'cruds/fetchCrudDocuments',
-  async ({ entity, query }: { entity: Sections; query?: string }) => {
+  async ({
+    entity,
+    query,
+    isChildrenTree,
+  }: {
+    entity: Sections;
+    query?: string;
+    isChildrenTree: boolean;
+  }) => {
     const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`);
 
     return {
       entity,
-      documents: res.data.documents,
+      isChildrenTree,
+      documents: res.data.data,
       totalDocuments: res.data.totalDocuments,
     };
   }
@@ -116,9 +125,9 @@ export const deleteCrudDocument = createAsyncThunk(
     const res = await axiosInstance.delete(`${entity}/${documentId}${paginationQuery}`);
     const payload = {
       entity: res.data.collection,
-      documents: res.data.documents,
+      documents: res.data.data,
       documentId,
-      totalDocuments: res.data.totalDocuments,
+      totalDocuments: res.data.totalDataLength,
     };
     return payload;
   }
@@ -132,6 +141,7 @@ const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentD
       documentsArray: [],
       totalDocuments: 0,
       selectedDocument: null,
+      isChildrenTree: false,
     },
   };
   return totalData;
@@ -163,6 +173,7 @@ export const crudSlice = createSlice({
       if (document === null) {
         document = null;
       }
+
       // if (isObjectEmpty(document)) {
       //   document = {};
       // }
@@ -172,8 +183,10 @@ export const crudSlice = createSlice({
       state.status = 'idle';
     },
     setCrudDocuments: (state, action) => {
-      const { entity, documents, totalDocuments } = action.payload;
+      const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
+
       state.status = 'succeed';
+      state.reduxdb[entity].isChildrenTree = isChildrenTree;
       state.reduxdb[entity].documentsArray = documents;
       state.reduxdb[entity].totalDocuments = totalDocuments;
     },
@@ -193,8 +206,9 @@ export const crudSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchCrudDocuments.fulfilled, (state, action) => {
-        const { entity, documents, totalDocuments } = action.payload;
+        const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
         state.status = 'succeed';
+        state.reduxdb[entity].isChildrenTree = isChildrenTree;
         state.reduxdb[entity].documentsArray = documents;
         state.reduxdb[entity].totalDocuments = totalDocuments;
       })

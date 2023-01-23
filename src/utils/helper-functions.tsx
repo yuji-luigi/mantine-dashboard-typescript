@@ -18,7 +18,6 @@ export const createLabelFromArrayStr = (
 
   const index = clonedArr.shift()!;
   const gotLabel = document[index];
-  console.log(!!label);
   label += label ? `${label} - ${gotLabel}` : gotLabel;
 
   return createLabelFromArrayStr(clonedArr, document, label);
@@ -133,7 +132,8 @@ export function _set(
 
 export const getDefaultValues = (
   formFields: FormFieldInterface[],
-  crudDocument: AllModels = {}
+  crudDocument: AllModels = {},
+  parentId?: string
 ) => {
   /** define defauldValueObj by reduce */
   const defaultValueObj = formFields?.reduce<Record<string, any>>((obj, field) => {
@@ -160,6 +160,10 @@ export const getDefaultValues = (
               crudDocument[path]?._id || ''
         );
         return newObj;
+      }
+      if (parentId) {
+        obj.parentId = parentId;
+        return obj;
       }
 
       // Everything else seem to get into this line
