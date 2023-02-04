@@ -84,11 +84,7 @@ export const useCrudSlice = (ent?: Sections) => {
   const useDeleteCrudDocument =
     () =>
     ({ entity, documentId, query }: { entity: Sections; documentId: string; query: string }) =>
-      appDispatch(deleteCrudDocument({ entity, documentId, paginationQuery: query }));
-  // const useDeleteCrudDocument =
-  //   () =>
-  //   ({ entity, documentId }: { entity: Sections; documentId: string }) =>
-  //     appDispatch(deleteCrudDocument({ entity, documentId }));
+      appDispatch(deleteCrudDocument({ entity, documentId, query }));
 
   const useFetchCrudDocuments =
     () =>

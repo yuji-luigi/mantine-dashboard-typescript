@@ -27,4 +27,5 @@ type Sections =
   | 'wallets'
   | 'owners'
   | 'events'
+  | 'spaces'
   | '';

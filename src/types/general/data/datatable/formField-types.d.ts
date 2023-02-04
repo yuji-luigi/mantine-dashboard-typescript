@@ -37,10 +37,8 @@ interface FormFieldInterface {
   cellType?: 'link-children';
   /**For type select */
   multi?: boolean;
-  /**For type select */
-  entitySingle?: string;
-  /**For type select */
-  entityPlural?: Sections;
+  /**For type select for editing reason put under score meaning field in formField config json(object)*/
+  _entity?: Sections;
   /**
    * from object. get the property [selectValue[0]] [selectValue[1]]... To show on the DataTable.
    */

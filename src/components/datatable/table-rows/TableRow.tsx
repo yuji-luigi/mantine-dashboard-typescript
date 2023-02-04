@@ -2,10 +2,11 @@ import { ActionIcon, Group } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
+// import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
 import { TableCellDecorator } from '../TableCellDecorator';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { usePaginationContext } from '../../../context/PaginationContext';
+import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 
 export function TableRow({
   rowData,
@@ -21,12 +22,13 @@ export function TableRow({
   /** use hook router hook */
   const { query } = useRouter();
   /** use hook useCrudSlice */
-  const { selectCrudDocument } = useCrudSlice();
+  // const { selectCrudDocument } = useCrudSlice();
+  const { selectCrudDocument, deleteCrudDocument } = useCrudSliceStore();
 
   /** get runtime value of the entity */
   const entity = query.entity as Sections;
   // const selectedDocument = getSelectedDocument(entity);
-  const { deleteCrudDocument } = useCrudSlice();
+  // const { deleteCrudDocument: old } = useCrudSlice();
   const onModify = (): void => {
     selectCrudDocument({ entity, document: rowData });
     openDrawer();

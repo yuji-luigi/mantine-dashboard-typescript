@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useContext, useState, useReducer } from 'react';
 
-import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+// import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
+import { useCrudSliceStore } from '../redux/features/crud/crudSlice';
 
 // This custom hook is to control entity of the dashboard page: jsonFormField, sectionJson.
 // And CrudDrawer component state.
@@ -24,7 +25,8 @@ function drawerFormStateReducer(state: ReducerState, action: DrawerStateAction) 
 }
 
 const useStore = () => {
-  const { selectCrudDocument } = useCrudSlice();
+  const { selectCrudDocument } = useCrudSliceStore();
+  // const { selectCrudDocument } = useCrudSlice();
 
   // Drawer status state.
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -38,6 +40,7 @@ const useStore = () => {
   return {
     drawerIsOpen,
     openDrawer: () => setDrawerIsOpen(true),
+    /** every time close the drawer set selectedDocument to null */
     closeDrawer: (entity?: Sections) => {
       if (entity) {
         selectCrudDocument({ entity, document: null });

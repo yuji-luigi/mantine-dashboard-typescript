@@ -4,5 +4,5 @@
     // "editor.defaultFormatter": "vscode.typescript-language-features"
     "editor.defaultFormatter": "esbenp.prettier-vscode"
     // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
+  }
 }

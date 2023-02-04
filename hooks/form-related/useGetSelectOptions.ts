@@ -6,11 +6,11 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
   // const options: Array<SelectOption> = [];
   // const [idleDocuments, setIdleDocuments] = useState<SelectOption[]>([]);
   /** fetch with query,  */
-  const { fetchCrudDocuments, crudDocuments } = useCrudSlice(formField.entityPlural);
+  const { fetchCrudDocuments, crudDocuments } = useCrudSlice(formField._entity);
 
   useEffect(() => {
     if (formField.type === 'select') {
-      fetchCrudDocuments({ entity: formField.entityPlural! });
+      fetchCrudDocuments({ entity: formField._entity! });
     }
   }, [formField]);
 

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import {
   createStyles,
   Header,
@@ -18,7 +17,7 @@ import {
   Collapse,
   ScrollArea,
 } from '@mantine/core';
-// import { MantineLogo } from '@mantine/ds';
+import { MantineLogo } from '@mantine/ds';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconNotification,
@@ -29,10 +28,6 @@ import {
   IconCoin,
   IconChevronDown,
 } from '@tabler/icons';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
-import Link from 'next/link';
-import { useCloseDrawer } from '../../context/DataTableDrawerContext';
-import { sleep } from '../../utils/helper-functions';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -127,22 +122,16 @@ const mockdata = [
   },
 ];
 
-export function HomepageHeader() {
+export function HomepageHeaderUpdated() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
-  const { push } = useRouter();
-
-  function pushAndCloseDrawer(path: string) {
-    push(path);
-    closeDrawer();
-  }
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group noWrap align="flex-start">
-        <ThemeIcon size={34} variant="filled" radius="md">
-          <item.icon size={22} color={theme.primaryColor} />
+        <ThemeIcon size={34} variant="default" radius="md">
+          <item.icon size={22} color={theme.fn.primaryColor()} />
         </ThemeIcon>
         <div>
           <Text size="sm" weight={500}>
@@ -157,15 +146,15 @@ export function HomepageHeader() {
   ));
 
   return (
-    <Box sx={{ marginBottom: 59 }}>
-      <Header fixed height={60} px="md">
+    <Box pb={120}>
+      <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          {/* <MantineLogo size={30} /> */}
+          <MantineLogo size={30} />
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <Link href="/" className={classes.link}>
+            <a href="#" className={classes.link}>
               Home
-            </Link>
+            </a>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
                 <a href="#" className={classes.link}>
@@ -173,7 +162,7 @@ export function HomepageHeader() {
                     <Box component="span" mr={5}>
                       Features
                     </Box>
-                    <IconChevronDown /* size={16} */ color={theme.primaryColor} />
+                    <IconChevronDown size={16} color={theme.fn.primaryColor()} />
                   </Center>
                 </a>
               </HoverCard.Target>
@@ -220,11 +209,8 @@ export function HomepageHeader() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button onClick={() => push('/login')} variant="default">
-              Log in
-            </Button>
-            <Button onClick={() => push('/sign-up')}>Sign up</Button>
-            <ColorSchemeToggle variant="outline" />
+            <Button variant="default">Log in</Button>
+            <Button>Sign up</Button>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
@@ -243,33 +229,30 @@ export function HomepageHeader() {
         <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
-          <a href="/" className={classes.link}>
+          <a href="#" className={classes.link}>
             Home
           </a>
-
-          {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
+          <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
                 Features
               </Box>
-              <IconChevronDown size={16} color={theme.primaryColor} />
+              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
           </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse> */}
-          {/* <a href="#" className={classes.link}>
+          <Collapse in={linksOpened}>{links}</Collapse>
+          <a href="#" className={classes.link}>
             Learn
-          </a> */}
-          {/* <a href="#" className={classes.link}>
+          </a>
+          <a href="#" className={classes.link}>
             Academy
-          </a> */}
+          </a>
 
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button onClick={() => pushAndCloseDrawer('/login')} variant="default">
-              Log in
-            </Button>
-            <Button onClick={() => pushAndCloseDrawer('/sign-up')}>Sign up</Button>
+            <Button variant="default">Log in</Button>
+            <Button>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>

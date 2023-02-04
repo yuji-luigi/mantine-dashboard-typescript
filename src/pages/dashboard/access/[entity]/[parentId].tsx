@@ -51,7 +51,7 @@ const ChildrenTablePage = () => {
   }
   if (error || parentError) {
     return (
-      <p>{error.message || error || parentError.message || parentError || 'error occurred'}</p>
+      <p>{error?.message || error || parentError.message || parentError || 'error occurred'}</p>
     );
   }
 

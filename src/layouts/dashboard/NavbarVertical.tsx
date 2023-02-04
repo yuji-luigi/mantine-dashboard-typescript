@@ -1,15 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import {
-  createStyles,
-  Navbar,
-  Group,
-  Code,
-  ScrollArea,
-  Button,
-  Avatar,
-  Text,
-  Space,
-} from '@mantine/core';
+import { createStyles, Navbar, Group, ScrollArea, Button, Avatar, Text } from '@mantine/core';
 import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -18,7 +8,6 @@ import useAuth from '../../../hooks/useAuth';
 import { sectionData } from '../../data';
 
 import { Icons } from '../../data/icons/icons';
-import { MantineLogo } from '@mantine/ds';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon') as string;
@@ -109,7 +98,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-type NavbarConfig = { link: string; label: string; icon: TablerIcon };
+// type NavbarConfig = { link: string; label: string; icon: TablerIcon };
 // const navBarConfig: NavbarConfig[] = [];
 
 // Object.keys(sectionData).forEach((key: string): void => {
@@ -132,40 +121,38 @@ export function NavbarVertical() {
 
   const filteredSectionData = sectionData.filter((data) => data.name !== 'others');
 
-  const links = filteredSectionData.map((section) => {
-    return (
-      <Fragment key={section.name}>
-        <p>{section.name}</p>
-        {section.contents.map((navbarContent) => {
-          const Icon = Icons[navbarContent.entity as IconIndexTypes] || Icons.home;
+  const links = filteredSectionData.map((section) => (
+    <Fragment key={section.name}>
+      <p>{section.name}</p>
+      {section.contents.map((navbarContent) => {
+        const Icon = Icons[navbarContent.entity as IconIndexTypes] || Icons.home;
 
-          if (navbarContent.hide) {
-            return null;
-          }
+        if (navbarContent.hide) {
+          return null;
+        }
 
-          return (
-            <Link
-              className={classes.link}
-              href={navbarContent.link}
-              key={navbarContent.navbarTitle}
-              onClick={(event) => {
-                setActive(navbarContent.navbarTitle);
-              }}
+        return (
+          <Link
+            className={classes.link}
+            href={navbarContent.link}
+            key={navbarContent.navbarTitle}
+            onClick={() => {
+              setActive(navbarContent.navbarTitle);
+            }}
+          >
+            <div
+              className={cx(classes.linkLabel, {
+                [classes.linkActive]: navbarContent.link === active,
+              })}
             >
-              <div
-                className={cx(classes.linkLabel, {
-                  [classes.linkActive]: navbarContent.link === active,
-                })}
-              >
-                <Icon className={classes.linkIcon} stroke={1.5} />
-                {navbarContent.navbarTitle}
-              </div>
-            </Link>
-          );
-        })}
-      </Fragment>
-    );
-  });
+              <Icon className={classes.linkIcon} stroke={1.5} />
+              {navbarContent.navbarTitle}
+            </div>
+          </Link>
+        );
+      })}
+    </Fragment>
+  ));
 
   useEffect(() => setActive(asPath), [asPath]);
 

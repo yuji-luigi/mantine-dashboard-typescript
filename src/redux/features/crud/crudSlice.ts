@@ -2,7 +2,32 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { sectionData } from '../../../data';
 import axiosInstance, { AxiosResData } from '../../../utils/axios-instance';
 import { flattenSectionData } from '../../../data';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux-hooks/useRedux';
+// import { appDispatch } from '../../store';
 /* eslint-disable no-param-reassign */
+
+// flat section data since it is nested
+const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentData) => {
+  totalData = {
+    ...totalData,
+    [currentData.sliceName as Sections]: {
+      entity: currentData.entity as Sections,
+      documentsArray: [],
+      totalDocuments: 0,
+      selectedDocument: null,
+      selectedDocuments: [],
+      isChildrenTree: false,
+    },
+  };
+  return totalData;
+}, {} as Reduxdb);
+
+const initialState: CrudState = {
+  reduxdb,
+  status: 'idle',
+  error: null,
+  message: null,
+};
 
 //TODO: ONDELETE GET REQUEST/ SOME UPDATE REDUX STORE LOGIC IN BACKEND OR IN FRONTEND
 export const fetchCrudDocuments = createAsyncThunk(
@@ -17,17 +42,8 @@ export const fetchCrudDocuments = createAsyncThunk(
     rejectValue: { error: { message: string } };
   }
 > */ 'cruds/fetchCrudDocuments',
-  async ({
-    entity,
-    query,
-    isChildrenTree,
-  }: {
-    entity: Sections;
-    query?: string;
-    isChildrenTree: boolean;
-  }) => {
+  async ({ entity, query, isChildrenTree = false }: FetchCrudPayload) => {
     const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`);
-
     return {
       entity,
       isChildrenTree,
@@ -37,63 +53,19 @@ export const fetchCrudDocuments = createAsyncThunk(
   }
 );
 
-export const fetchCrudDocumentsWithQuery = createAsyncThunk(
-  /* <
-  any,
-  AddCrudPayload,
-  {
-    state: CrudState;
-    extra: {
-      error: { message: string };
-    };
-    rejectValue: { error: { message: string } };
-  }
-> */ 'cruds/fetchCrudDocumentsQuery',
-  async ({ entity }: { entity: Sections; query: any }) => {
-    const res = await axiosInstance.get(
-      `${entity}${'' /* query here. how to make proper string */}`
-    );
-    return { entity, documents: res.data.data };
-  }
-);
-
 export const addCrudDocument = createAsyncThunk(
   'crud/addDocument',
-  async ({
-    entity,
-    newDocument,
-    parentId,
-  }: {
-    entity: Sections;
-    newDocument: AllModels;
-    /** specify parentId for creation of child of given id */
-    parentId?: string;
-  }) => {
-    try {
-      /** handle endpoint by checking if parentId is passed */
-      const endPoint = !parentId ? entity : `linkedChildren/${entity}/${parentId}`;
-      const res = await axiosInstance.post(endPoint, newDocument);
-      return res.data;
-    } catch (error: any) {
-      console.error(error.message || error);
-      throw error;
-    }
+  async ({ entity, newDocument, parentId }: AddCrudPayload) => {
+    /** handle endpoint by checking if parentId is passed */
+    const endPoint = !parentId ? entity : `linkedChildren/${entity}/${parentId}`;
+    const res = await axiosInstance.post(endPoint, newDocument);
+    return res.data;
   }
 );
 
 export const updateCrudDocument = createAsyncThunk(
   'crud/updateDocument',
-  async ({
-    entity,
-    updateData,
-    documentId,
-    parentId,
-  }: {
-    entity: Sections;
-    updateData: any;
-    documentId: string;
-    parentId?: string;
-  }) => {
+  async ({ entity, updateData, documentId, parentId }: UpdateCrudPayload) => {
     /** parentId ? then linkedChildren endpoint. else case update normally */
     const endpoint = !parentId
       ? `${entity}/${documentId}`
@@ -109,20 +81,12 @@ export const updateCrudDocument = createAsyncThunk(
 
 export const deleteCrudDocument = createAsyncThunk(
   'crud/deleteDocument',
-  async ({
-    entity,
-    documentId,
-    paginationQuery,
-  }: {
-    entity: Sections;
-    documentId: string;
-    paginationQuery: string;
-  }) => {
+  async ({ entity, documentId, query = '' }: DeleteCrudPayload) => {
     /**
      * in the Api first delete and do getCrudDocuments
      * returns new crudDocuments with limit number
      *  */
-    const res = await axiosInstance.delete(`${entity}/${documentId}${paginationQuery}`);
+    const res = await axiosInstance.delete(`${entity}/${documentId}${query}`);
     const payload = {
       entity: res.data.collection,
       documents: res.data.data,
@@ -132,29 +96,6 @@ export const deleteCrudDocument = createAsyncThunk(
     return payload;
   }
 );
-
-const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentData) => {
-  totalData = {
-    ...totalData,
-    [currentData.sliceName as Sections]: {
-      entity: currentData.entity as Sections,
-      documentsArray: [],
-      totalDocuments: 0,
-      selectedDocument: null,
-      isChildrenTree: false,
-    },
-  };
-  return totalData;
-}, {} as Reduxdb);
-
-const initialState: CrudState = {
-  reduxdb,
-  status: 'idle',
-  error: null,
-  message: null,
-  counter: 0,
-  // selectedDocuments: [],
-};
 
 export const crudSlice = createSlice({
   name: 'crudOperation',
@@ -167,17 +108,21 @@ export const crudSlice = createSlice({
     /** to reset selectedDocument, set document to null */
     selectCrudDocument: (state, action: PayloadAction<SelectCrudPayload>) => {
       // eslint-disable-next-line prefer-const
-      let { entity, document } = action.payload;
-
-      /** Define clearing pattern as passing empty object */
-      if (document === null) {
-        document = null;
+      let { entity, documentId, document } = action.payload;
+      /** if both are null/undefined clean up the state */
+      if (!documentId && !document) {
+        state.reduxdb[entity].selectedDocument = null;
+        return;
       }
-
-      // if (isObjectEmpty(document)) {
-      //   document = {};
-      // }
-      state.reduxdb[entity].selectedDocument = document;
+      /** if the payload is object set itself in the store */
+      if (document) {
+        state.reduxdb[entity].selectedDocument = document;
+      } else {
+        /** if id is present then find from existing documents array */
+        state.reduxdb[entity].selectedDocument =
+          state.reduxdb[entity].selectedDocument.find((doc: AllModels) => doc._id === documentId) ||
+          null;
+      }
     },
     resetStatus: (state) => {
       state.status = 'idle';
@@ -190,18 +135,12 @@ export const crudSlice = createSlice({
       state.reduxdb[entity].documentsArray = documents;
       state.reduxdb[entity].totalDocuments = totalDocuments;
     },
-    // increment: (state) => {
-    //   state.counter += 1;
-    // },
-    // decrement: (state) => {
-    //   state.counter -= 1;
-    // },
-    // incrementByAmount: (state, action) => {
-    //   state.counter + action.payload;
-    // },
   },
   extraReducers(builder) {
     builder
+      /**
+       * FETCH DOCUMENTS
+       */
       .addCase(fetchCrudDocuments.pending, (state) => {
         state.status = 'loading';
       })
@@ -216,6 +155,9 @@ export const crudSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
+      /**
+       * ADD/CREATE NEW DOCUMENT
+       */
       .addCase(addCrudDocument.pending, (state) => {
         state.status = 'loading';
       })
@@ -228,6 +170,9 @@ export const crudSlice = createSlice({
         state.status = 'succeed';
         (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
       })
+      /**
+       * UPDATE/MODIFY A DOCUMENT
+       */
       .addCase(updateCrudDocument.pending, (state) => {
         state.status = 'loading';
       })
@@ -249,27 +194,96 @@ export const crudSlice = createSlice({
         });
         state.reduxdb[entity].documentsArray = updatedDocuments;
       })
+      /**
+       * DELETE A DOCUMENT
+       */
       .addCase(deleteCrudDocument.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(deleteCrudDocument.fulfilled, (state, action) => {
-        const { entity, documents, totalDocuments } = action.payload;
+        const { entity, documentId, totalDocuments } = action.payload;
         state.status = 'succeed';
-        const newDocumentArray = documents;
-        // const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
-        //   (document) => document._id !== documentId
-        // );
+        // const newDocumentArray = documents;
+        const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
+          (document) => document._id !== documentId
+        );
         state.reduxdb[entity].totalDocuments = totalDocuments;
         state.reduxdb[entity].documentsArray = newDocumentArray;
       });
   },
 });
 
-// const selectCrudDocuments = (state: any, entity: string, searchId) => state.crud.reduxdb[entity];
-// const selectCrudDocumentById = (state: any, entity: string) =>
-//   state.crud.reduxdb[entity].find((document) => document._id === searchId);
-// const count = useSelector((state) => state.crud.counter);
-//   const dispatch = useDispatch();
 export const { selectCrudDocument, setCrudDocuments } = crudSlice.actions;
 
 export default crudSlice.reducer;
+
+export const useCrudSliceStore = () => {
+  const appDispatch = useAppDispatch();
+  // TODO: do the same
+
+  return {
+    /** get documents from api and set in documentsArray in redux */
+    fetchCrudDocuments(data: FetchCrudPayload) {
+      appDispatch(fetchCrudDocuments(data));
+    },
+    /** add new document in api and insert in redux. */
+    createCrudDocument(data: AddCrudPayload) {
+      appDispatch(addCrudDocument(data));
+    },
+    /** update in Api and update new document with old document in redux */
+    updateCrudDocument(data: UpdateCrudPayload) {
+      appDispatch(updateCrudDocument(data));
+    },
+    /** delete from Api and redux */
+    deleteCrudDocument(data: DeleteCrudPayload) {
+      appDispatch(deleteCrudDocument(data));
+    },
+    /** set object in selectedDocument in Reduxdb*/
+    selectCrudDocument(data: SelectCrudPayload) {
+      appDispatch(selectCrudDocument(data));
+    },
+  };
+};
+
+/** Returns Array of Documents of the entity: whole array of entity */
+const useCrudDocuments = (entity: Sections): AllModels[] =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity]?.documentsArray);
+
+/** returns string if api sent message */
+const useCrudMessage = () => useAppSelector((state) => state.crud.message);
+
+/** returns status string during api call process */
+const useCrudStatus = () => useAppSelector((state) => state.crud.status);
+
+/** returns string if error is present. show flash on the screen */
+const useCrudError = () => useAppSelector((state) => state.crud.error);
+
+/** total document selector for entity */
+const useTotalDocumentsCount = (entity: Sections): number =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
+
+/** if it has a parent returns true. ex- space instances can be either a parent or a child */
+const useIsChildrenTree = (entity: Sections): boolean =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.isChildrenTree);
+
+/** Returns Document of the entity */
+const useSelectedDocument = (entity: Sections): AllModels =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity]?.selectedDocument);
+
+/** Hook for selector. this time need do pass entity when initialize the hook. */
+export const useCrudSelectors = (entity: Sections) => ({
+  /** Returns Array of Documents of the entity: whole array of entity */
+  crudDocuments: useCrudDocuments(entity),
+  /** Returns selected Document of the entity */
+  selectedCrudDocument: useSelectedDocument(entity),
+  /** returns string if error is present. to show flash on the screen */
+  crudError: useCrudError(),
+  /** returns string if api sent message */
+  crudMessage: useCrudMessage(),
+  /** returns status string during api call process */
+  crudStatus: useCrudStatus(),
+  /** if it has a parent returns true. ex- space instances can be either a parent or a child */
+  isChildrenTree: useIsChildrenTree(entity),
+  /** number of total documents in queried array from db. */
+  totalDocumentsCount: useTotalDocumentsCount(entity),
+});

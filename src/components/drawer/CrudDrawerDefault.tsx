@@ -7,11 +7,12 @@ import { FormEvent, useEffect, useState, useMemo } from 'react';
 import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
-import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+// import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { getDefaultValues, sleep } from '../../utils/helper-functions';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
+import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -34,16 +35,24 @@ export function CrudDrawerDefault() {
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
+  // const {
+  //   getSelectedDocument,
+  //   updateCrudDocument,
+  //   addCrud,
+  //   crudStatus,
+  //   crudError,
+  //   selectCrudDocument,
+  // } = useCrudSlice(entity);
   const {
-    getSelectedDocument,
+    createCrudDocument: addCrud,
+    selectCrudDocument,
     updateCrudDocument,
-    addCrud,
+  } = useCrudSliceStore();
+  const {
+    selectedCrudDocument: selectedDocument,
     crudStatus,
     crudError,
-    selectCrudDocument,
-  } = useCrudSlice(entity);
-
-  const selectedDocument = getSelectedDocument(entity);
+  } = useCrudSelectors(entity);
 
   /**
    * initialValues

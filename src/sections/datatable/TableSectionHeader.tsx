@@ -5,6 +5,7 @@ import { sectionData } from '../../data';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
 import useLayoutContext from '../../../hooks/useLayoutContext';
+import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
 const useStyles = createStyles(() => ({
   headerWrapper: {
@@ -29,6 +30,8 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   /** define open state for crudDrawer component */
 
   const { openDrawer } = useDrawerContext();
+
+  const { selectCrudDocument } = useCrudSliceStore();
 
   const { setBreadcrumbs, breadcrumbs, setPrevBreadcrumbs, parentData } = useLayoutContext();
 
@@ -72,6 +75,13 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   }
   /** define openDrawer function. Button onClick openDrawer */
 
+  function handleOpenDrawer() {
+    if (typeof entity !== 'undefined') {
+      selectCrudDocument({ entity, document: null });
+    }
+    openDrawer();
+  }
+
   let { title } = section;
   if (query.parentId && instanceOfParentDataInterface(parentData)) {
     title = parentData.name;
@@ -84,7 +94,7 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
           <BreadcrumbsCustom />
         </div>
         {section.createButton && (
-          <Button onClick={openDrawer} className={classes.button}>
+          <Button onClick={handleOpenDrawer} className={classes.button}>
             <h3>{section.createButton}</h3>
           </Button>
         )}
