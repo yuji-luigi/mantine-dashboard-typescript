@@ -13,6 +13,7 @@ import { getDefaultValues, sleep } from '../../utils/helper-functions';
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import { usePaginationQuery } from '../../context/PaginationContext';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -32,17 +33,11 @@ export function CrudDrawerDefault() {
   const entity = query.entity as Sections;
   const parentId = query.parentId as string;
 
+  const paginationQuery = usePaginationQuery();
+
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
-  // const {
-  //   getSelectedDocument,
-  //   updateCrudDocument,
-  //   addCrud,
-  //   crudStatus,
-  //   crudError,
-  //   selectCrudDocument,
-  // } = useCrudSlice(entity);
   const {
     createCrudDocument: addCrud,
     selectCrudDocument,
@@ -91,7 +86,7 @@ export function CrudDrawerDefault() {
 
     /** Create new Document */
     if (!selectedDocument) {
-      addCrud({ entity, newDocument: form.values, parentId });
+      addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
     }
     /** Modify selected document */
     if (selectedDocument) {

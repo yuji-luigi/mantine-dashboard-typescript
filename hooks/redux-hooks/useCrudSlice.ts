@@ -1,11 +1,10 @@
+import { selectCrudDocument, setCrudDocuments } from '../../src/redux/features/crud/crudSlice';
 import {
-  fetchCrudDocuments,
   addCrudDocument,
   deleteCrudDocument,
-  selectCrudDocument,
+  fetchCrudDocuments,
   updateCrudDocument,
-  setCrudDocuments,
-} from '../../src/redux/features/crud/crudSlice';
+} from '../../src/redux/features/crudAsyncThunks';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 export const useCrudSlice = (ent?: Sections) => {

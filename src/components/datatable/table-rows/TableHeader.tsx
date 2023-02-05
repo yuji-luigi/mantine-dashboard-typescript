@@ -11,7 +11,7 @@ const TableHeader = () => {
     <thead>
       <tr>
         {sectionRowData?.map((cellData) => (
-          <Fragment key={cellData.label}>{!cellData.noTable && <th>{cellData.label}</th>}</Fragment>
+          <Fragment key={cellData.id}>{!cellData.noTable && <th>{cellData.label}</th>}</Fragment>
         ))}
         <th>actions</th>
       </tr>

@@ -8,8 +8,9 @@ import { TableRow } from './table-rows/TableRow';
 import TableHeader from './table-rows/TableHeader';
 // import TableCell from './table-rows/tablecell/TableCell';
 import formFields from '../../../json/dataTable/formfields';
-import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+// import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
+import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
 export function UsersTable({ entityOverride = '' }: { entityOverride?: string }) {
   const ROWS_PER_PAGE = 10;
@@ -17,10 +18,8 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   const [page, setPage] = useState(1);
   const { setPagination } = usePaginationContext();
   const { query } = useRouter();
-  const { crudDocuments, totalDocumentsCount, fetchCrudDocuments } = useCrudSlice(
-    query.entity as Sections
-  );
-
+  const { fetchCrudDocuments } = useCrudSliceStore();
+  const { crudDocuments, totalDocumentsCount } = useCrudSelectors(query.entity as Sections);
   const sectionFormFields = formFields[query.entity as Sections];
 
   /** might need handle entityOverride with context in the future */

@@ -21,6 +21,7 @@ interface AddCrudPayload {
   newDocument: AllModels;
   /** specify parentId for creation of child of given id */
   parentId?: string;
+  query?: string;
 }
 
 type AddCrudPayload = {
