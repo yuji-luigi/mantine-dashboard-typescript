@@ -4,19 +4,19 @@ import React, { ReactElement, useEffect } from 'react';
 import axiosInstance from '../../../../utils/axios-instance';
 import { PATH } from '../../../../path/api-routes';
 
-import { useCrudSlice } from '../../../../../hooks/redux-hooks/useCrudSlice';
 import { UsersTable } from '../../../../components/datatable/UsersTable';
 import Layout from '../../../../layouts';
 import { TableSectionHeader } from '../../../../sections/datatable/TableSectionHeader';
 import Page from '../../../../components/Page';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
 import { CrudDrawerDefault } from '../../../../components/drawer/CrudDrawerDefault';
+import { useCrudSliceStore } from '../../../../redux/features/crud/crudSlice';
 
 const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
 
 const ChildrenTablePage = () => {
   const { query }: { query: ParsedQueryCustom } = useRouter();
-  const { setCrudDocuments } = useCrudSlice(query.entity);
+  const { setCrudDocuments } = useCrudSliceStore();
 
   const { setParentData } = useLayoutContext();
 
@@ -32,6 +32,7 @@ const ChildrenTablePage = () => {
   );
 
   useEffect(() => {
+    console.log(query);
     setCrudDocuments({ entity: query.entity, documents: data?.data || [], isChildrenTree: true });
     if (parentData) {
       setParentData(parentData.data);

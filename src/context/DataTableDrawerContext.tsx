@@ -35,7 +35,7 @@ const useStore = () => {
     mode: '',
   });
 
-  const [isChildrenPage, setIsChildrenPage] = useState(false);
+  // const [isChildrenPage, setIsChildrenPage] = useState(false);
 
   return {
     drawerIsOpen,
@@ -53,8 +53,8 @@ const useStore = () => {
     toggleOpenDrawer: () => setDrawerIsOpen((prev) => !prev),
     drawerFormState,
     drawerFormStateDispatch,
-    isChildrenPage,
-    setIsChildrenPage: (bool: boolean) => setIsChildrenPage(bool),
+    // isChildrenPage,
+    // setIsChildrenPage: (bool: boolean) => setIsChildrenPage(bool),
   };
 };
 
@@ -66,8 +66,8 @@ const DrawerContext = createContext<DrawerContextInterface>({
   toggleOpenDrawer: () => {},
   drawerFormState: { mode: '' },
   drawerFormStateDispatch: () => {},
-  isChildrenPage: false,
-  setIsChildrenPage: () => {},
+  // isChildrenPage: false,
+  // setIsChildrenPage: () => {},
 });
 
 export const DrawerContextProvider = ({ children }: { children: ReactNode }) => (

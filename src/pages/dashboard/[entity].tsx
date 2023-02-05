@@ -9,8 +9,9 @@ import Layout from '../../layouts';
 import { sections } from '../../data';
 import formFields from '../../../json/dataTable/formfields';
 import Page from '../../components/Page';
-import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
+// import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
+import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
@@ -26,7 +27,8 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
   // const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb>>([]);
   const entity = query.entity as Sections;
 
-  const { fetchCrudDocuments, crudDocuments, isChildrenTree } = useCrudSlice(entity);
+  const { fetchCrudDocuments } = useCrudSliceStore();
+  const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
   formFields as FormFieldsType;
   useEffect(() => {
     if (!sections.includes(entity as string)) {

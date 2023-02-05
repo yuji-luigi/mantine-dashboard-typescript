@@ -5,8 +5,9 @@ interface DrawerContextInterface {
   toggleOpenDrawer: () => void;
   drawerFormState: ReducerState;
   drawerFormStateDispatch: Dispatch<DrawerStateAction>;
-  isChildrenPage: boolean;
-  setIsChildrenPage: (bool: boolean) => void;
+  /** deprecated now using query.parentId by next router */
+  // isChildrenPage: boolean;
+  // setIsChildrenPage: (bool: boolean) => void;
 }
 
 interface ReducerStore {

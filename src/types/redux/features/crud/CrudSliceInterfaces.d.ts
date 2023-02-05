@@ -4,6 +4,7 @@ interface ReduxDbEntity<Entity> {
   totalDocuments: number;
   /** document */
   selectedDocument: AllModels | null;
+  /** now leave this */
   isChildrenTree: boolean;
   /** _id of selectedDocuments  */
   selectedDocuments: string[] | [];

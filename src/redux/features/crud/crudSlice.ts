@@ -188,6 +188,9 @@ export const useCrudSliceStore = () => {
     selectCrudDocument(data: SelectCrudPayload) {
       appDispatch(selectCrudDocument(data));
     },
+    setCrudDocuments(data: SetCrudDocumentsPayload) {
+      appDispatch(setCrudDocuments(data));
+    },
   };
 };
 

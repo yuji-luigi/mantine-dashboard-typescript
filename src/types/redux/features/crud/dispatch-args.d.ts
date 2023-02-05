@@ -35,3 +35,9 @@ interface SelectCrudPayload {
   document?: AllModels;
   documentId?: string | null;
 }
+
+interface SetCrudDocumentsPayload {
+  entity?: Sections;
+  documents: AllModels;
+  isChildrenTree?: boolean;
+}

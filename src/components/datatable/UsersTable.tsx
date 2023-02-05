@@ -16,10 +16,11 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   const ROWS_PER_PAGE = 10;
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
-  const { setPagination } = usePaginationContext();
+  const { setPagination, paginationQuery } = usePaginationContext();
   const { query } = useRouter();
   const { fetchCrudDocuments } = useCrudSliceStore();
   const { crudDocuments, totalDocumentsCount } = useCrudSelectors(query.entity as Sections);
+
   const sectionFormFields = formFields[query.entity as Sections];
 
   /** might need handle entityOverride with context in the future */
@@ -28,6 +29,15 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
       null;
     }
   }, []);
+
+  useEffect(() => {
+    /** check if this is a childrenPage */
+    if (query.parentId) {
+      return;
+    }
+    /** fetch all the entity if not childrenpage */
+    fetchCrudDocuments({ entity: query.entity as Sections, query: paginationQuery });
+  }, [paginationQuery]);
 
   if (!sectionFormFields) {
     return <h1>Please provide the formField.json file to display the table</h1>;
@@ -39,8 +49,8 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
 
   function onPageChange(pageNumber: number) {
     setPage(pageNumber);
-    setPagination(pageNumber);
-    fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
+    setPagination(pageNumber); //! after setting the pagination. useEffect will be called to fetch the documents
+    // fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
   }
 
   return (
