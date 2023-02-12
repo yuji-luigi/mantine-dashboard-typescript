@@ -11,7 +11,7 @@ interface FormFieldInterface {
   id: string;
   /** Set the property in case of nested field.
    * See id property */
-  name?: string;
+  name: string;
   label: string;
   placeholder?: string;
 

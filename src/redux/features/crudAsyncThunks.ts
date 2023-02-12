@@ -5,6 +5,7 @@
  * */
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { API_PATH } from '../../path/api-routes';
 import axiosInstance, { AxiosResData } from '../../utils/axios-instance';
 
 export const fetchCrudDocuments = createAsyncThunk(
@@ -20,11 +21,50 @@ export const fetchCrudDocuments = createAsyncThunk(
   }
 );
 
+export const fetchLinkedChildren = createAsyncThunk(
+  'cruds/fetchCrudDocuments',
+  async ({ entity, query, /* isChildrenTree = true, */ parentId }: FetchLinkedChildrenPayload) => {
+    const res = await axiosInstance.get<AxiosResData>(
+      `/linkedChildren/${entity}/${parentId}${query || ''}`
+    );
+    return {
+      entity,
+      /**
+       * set to be true because is not head
+       * ? or put the logic inside reducer.
+       */
+      isChildrenTree: true,
+      documents: res.data.data,
+      totalDocuments: res.data.totalDocuments,
+    };
+  }
+);
+
+/**
+ * addCrudDocument handles regular crud creation and linkedChildren creation
+ * ! Todo: should be separate the functions
+ * */
 export const addCrudDocument = createAsyncThunk(
   'crud/addDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
     /** handle endpoint by checking if parentId is passed */
-    const endPoint = !parentId ? entity : `linkedChildren/${entity}/${parentId}`;
+    const endPoint = !parentId ? entity : `${API_PATH.linkedChildren}/${entity}/${parentId}`;
+    const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
+    const payload = {
+      entity: res.data.collection,
+      documents: res.data.data,
+      // documentId,
+      totalDocuments: res.data.totalDocuments,
+    };
+    return payload;
+    // return res.data;
+  }
+);
+export const addLinkedChildrenDocument = createAsyncThunk(
+  'crud/addDocument',
+  async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
+    /** handle endpoint by checking if parentId is passed */
+    const endPoint = `${API_PATH.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
     const payload = {
       entity: res.data.collection,

@@ -17,9 +17,11 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   // const TOTAL = Math.ceil(users.length / ROWS_PER_PAGE);
   const [page, setPage] = useState(1);
   const { setPagination, paginationQuery } = usePaginationContext();
-  const { query } = useRouter();
+  const { query }: { query: ParsedQueryCustom } = useRouter();
   const { fetchCrudDocuments } = useCrudSliceStore();
-  const { crudDocuments, totalDocumentsCount } = useCrudSelectors(query.entity as Sections);
+  const { crudDocuments, totalDocumentsCount, crudStatus } = useCrudSelectors(
+    query.entity as Sections
+  );
 
   const sectionFormFields = formFields[query.entity as Sections];
 
@@ -31,13 +33,22 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   }, []);
 
   useEffect(() => {
+    /** type guard */
+    if (!query.entity) {
+      return;
+    }
     /** check if this is a childrenPage */
     if (query.parentId) {
       return;
     }
     /** fetch all the entity if not childrenpage */
-    fetchCrudDocuments({ entity: query.entity as Sections, query: paginationQuery });
+    fetchCrudDocuments({ entity: query.entity, query: paginationQuery });
   }, [paginationQuery]);
+
+  useEffect(() => {
+    setPage(1);
+    setPagination(1);
+  }, [query.entity]);
 
   if (!sectionFormFields) {
     return <h1>Please provide the formField.json file to display the table</h1>;
@@ -56,15 +67,23 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   return (
     <>
       <ScrollArea>
-        <Table sx={{ minWidth: 800 }} highlightOnHover>
-          <TableHeader />
-          <tbody>
-            {/* TODO: screate crudDocuments type that includes all possible fields in mongooseDocument.  */}
-            {crudDocuments?.map((rowData: { _id: string }) => (
-              <TableRow key={rowData._id} sectionFormFields={sectionFormFields} rowData={rowData} />
-            ))}
-          </tbody>
-        </Table>
+        {!crudDocuments.length && crudStatus === 'loading' ? (
+          <p>loading</p>
+        ) : (
+          <Table sx={{ minWidth: 800 }} highlightOnHover>
+            <TableHeader />
+
+            <tbody>
+              {crudDocuments?.map((rowData: { _id: string }) => (
+                <TableRow
+                  key={rowData._id}
+                  sectionFormFields={sectionFormFields}
+                  rowData={rowData}
+                />
+              ))}
+            </tbody>
+          </Table>
+        )}
         <Divider sx={{ marginBottom: 20 }} />
       </ScrollArea>
       <Pagination page={page} onChange={(pageNumber) => onPageChange(pageNumber)} total={TOTAL} />

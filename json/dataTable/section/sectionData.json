@@ -76,16 +76,6 @@
     "name": "setups",
     "contents": [
       {
-        "sliceName": "buildings",
-        "entity": "buildings",
-        "title": "Buildings",
-        "subtitle": "subtitle",
-        "navbarTitle": "buildings",
-        "link": "/dashboard/buildings",
-        "createButton": "New Building",
-        "icon": "buildings"
-      },
-      {
         "sliceName": "fundRules",
         "entity": "fundRules",
         "title": "FundRules",
@@ -135,16 +125,7 @@
         "createButton": "New Instance",
         "icon": "Dashboard"
       },
-      {
-        "sliceName": "areas",
-        "entity": "areas",
-        "title": "areas",
-        "subtitle": "subtitle",
-        "navbarTitle": "Areas",
-        "link": "/dashboard/areas",
-        "createButton": "New Area",
-        "icon": "Dashboard"
-      },
+
       {
         "sliceName": "spaces",
         "entity": "spaces",

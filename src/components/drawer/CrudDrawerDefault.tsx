@@ -14,6 +14,7 @@ import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationQuery } from '../../context/PaginationContext';
+import { addLinkedChildrenDocument } from '../../redux/features/crudAsyncThunks';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -72,7 +73,7 @@ export function CrudDrawerDefault() {
    */
   function handleCloseDrawer() {
     selectCrudDocument({ entity, document: null });
-    closeDrawer();
+    form.reset();
   }
 
   const onSubmit = async (e: FormEvent) => {
@@ -86,6 +87,14 @@ export function CrudDrawerDefault() {
 
     /** Create new Document */
     if (!selectedDocument) {
+      if (parentId) {
+        addLinkedChildrenDocument({
+          entity,
+          parentId,
+          query: paginationQuery,
+          newDocument: form.values,
+        });
+      }
       addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
     }
     /** Modify selected document */
@@ -107,6 +116,7 @@ export function CrudDrawerDefault() {
      * */
     await sleep(800);
     closeDrawer();
+    window.alert('handle submit run');
     await sleep(200);
     hideNotification('submit');
     await sleep(100);
@@ -121,6 +131,7 @@ export function CrudDrawerDefault() {
     setSubmitting(false);
   }
 
+  /** runs every time crudStatus changed */
   useEffect(() => {
     if (submitting) {
       if (crudStatus === 'loading') {

@@ -74,6 +74,7 @@ const FormFields = ({
       )}
       {formField.type === 'boolean' && (
         <Switch
+          checked={form.values[formField.name]}
           name={formField.name}
           label={formField.label}
           placeholder={formField.placeholder}

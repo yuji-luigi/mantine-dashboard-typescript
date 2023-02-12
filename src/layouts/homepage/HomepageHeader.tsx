@@ -29,8 +29,8 @@ import {
   IconCoin,
   IconChevronDown,
 } from '@tabler/icons';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import Link from 'next/link';
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import { useCloseDrawer } from '../../context/DataTableDrawerContext';
 import { sleep } from '../../utils/helper-functions';
 
@@ -173,7 +173,7 @@ export function HomepageHeader() {
                     <Box component="span" mr={5}>
                       Features
                     </Box>
-                    <IconChevronDown /* size={16} */ color={theme.primaryColor} />
+                    <IconChevronDown color={theme.primaryColor} />
                   </Center>
                 </a>
               </HoverCard.Target>

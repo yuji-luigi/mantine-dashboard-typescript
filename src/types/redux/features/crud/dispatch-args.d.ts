@@ -3,6 +3,15 @@ interface FetchCrudPayload {
   query?: string;
   isChildrenTree?: boolean;
 }
+/** has parentId */
+interface FetchLinkedChildrenPayload {
+  entity: Sections;
+  query?: string;
+  parentId: string;
+  /** always true in this call */
+  /*   isChildrenTree?: true;
+   */
+}
 interface DeleteCrudPayload {
   entity: Sections;
   documentId: string;
@@ -11,6 +20,7 @@ interface DeleteCrudPayload {
 }
 interface UpdateCrudPayload {
   entity: Sections;
+  /** form.values */
   updateData: any;
   documentId: string;
   parentId?: string;
@@ -18,9 +28,18 @@ interface UpdateCrudPayload {
 
 interface AddCrudPayload {
   entity: Sections;
+  /** form.values */
   newDocument: AllModels;
   /** specify parentId for creation of child of given id */
   parentId?: string;
+  query?: string;
+}
+interface AddLinkedChildPayload {
+  entity: Sections;
+  /** form.values */
+  newDocument: AllModels;
+  /** specify parentId for creation of child of given id */
+  parentId: string;
   query?: string;
 }
 

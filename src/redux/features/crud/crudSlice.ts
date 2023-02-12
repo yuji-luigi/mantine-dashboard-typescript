@@ -4,6 +4,8 @@ import {
   addCrudDocument,
   updateCrudDocument,
   deleteCrudDocument,
+  fetchLinkedChildren,
+  addLinkedChildrenDocument,
 } from '../crudAsyncThunks';
 // import { sectionData } from '../../../data';
 import { flattenSectionData } from '../../../data';
@@ -15,7 +17,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux-hooks/us
 const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentData) => {
   totalData = {
     ...totalData,
-    [currentData.sliceName as Sections]: {
+    [currentData.entity as Sections]: {
       entity: currentData.entity as Sections,
       documentsArray: [],
       totalDocuments: 0,
@@ -172,9 +174,17 @@ export const useCrudSliceStore = () => {
     fetchCrudDocuments(data: FetchCrudPayload) {
       appDispatch(fetchCrudDocuments(data));
     },
+    /** get children documents from api and set in documentsArray in redux */
+    fetchLinkedChildren(data: FetchLinkedChildrenPayload) {
+      appDispatch(fetchLinkedChildren(data));
+    },
     /** add new document in api and insert in redux. */
     createCrudDocument(data: AddCrudPayload) {
       appDispatch(addCrudDocument(data));
+    },
+    /** add new document in api and insert in redux. */
+    createLinkedChildDocument(data: AddLinkedChildPayload) {
+      appDispatch(addLinkedChildrenDocument(data));
     },
     /** update in Api and update new document with old document in redux */
     updateCrudDocument(data: UpdateCrudPayload) {

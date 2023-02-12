@@ -25,6 +25,6 @@ export const PATH_AUTH: TAuthPath = {
   me: getAuthPath('me'),
 };
 
-export enum PATH {
+export enum API_PATH {
   linkedChildren = 'linkedChildren',
 }
