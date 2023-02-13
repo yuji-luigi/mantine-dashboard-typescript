@@ -205,8 +205,8 @@ export const useCrudSliceStore = () => {
 };
 
 /** Returns Array of Documents of the entity: whole array of entity */
-const useCrudDocuments = (entity: Sections): AllModels[] =>
-  useAppSelector((state) => state.crud.reduxdb?.[entity].documentsArray);
+const useCrudDocuments = (entity?: Sections): AllModels[] =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.documentsArray);
 
 /** returns string if api sent message */
 const useCrudMessage = () => useAppSelector((state) => state.crud.message);
@@ -218,19 +218,19 @@ const useCrudStatus = () => useAppSelector((state) => state.crud.status);
 const useCrudError = () => useAppSelector((state) => state.crud.error);
 
 /** total document selector for entity */
-const useTotalDocumentsCount = (entity: Sections): number =>
+const useTotalDocumentsCount = (entity?: Sections): number =>
   useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.totalDocuments || 0);
 
 /** if it has a parent returns true. ex- space instances can be either a parent or a child */
-const useIsChildrenTree = (entity: Sections): boolean =>
+const useIsChildrenTree = (entity?: Sections): boolean =>
   useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.isChildrenTree);
 
 /** Returns Document of the entity */
-const useSelectedDocument = (entity: Sections): AllModels =>
-  useAppSelector((state) => state.crud.reduxdb?.[entity].selectedDocument);
+const useSelectedDocument = (entity?: Sections): AllModels =>
+  useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.selectedDocument || {});
 
 /** Hook for selector. this time need do pass entity when initialize the hook. */
-export const useCrudSelectors = (entity: Sections) => ({
+export const useCrudSelectors = (entity?: Sections) => ({
   /** Returns Array of Documents of the entity: whole array of entity */
   crudDocuments: useCrudDocuments(entity) || [],
   /** Returns selected Document of the entity */

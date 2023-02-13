@@ -72,6 +72,7 @@ export function CrudDrawerDefault() {
    *  show notification/error
    */
   function handleCloseDrawer() {
+    closeDrawer();
     selectCrudDocument({ entity, document: null });
     form.reset();
   }
@@ -152,7 +153,7 @@ export function CrudDrawerDefault() {
 
   useEffect(() => {
     form.setValues(initialValues);
-  }, [initialValues]);
+  }, [selectedDocument._id]);
 
   return (
     <Drawer
