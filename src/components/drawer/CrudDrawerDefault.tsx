@@ -87,7 +87,7 @@ export function CrudDrawerDefault() {
     setSubmitting(true);
 
     /** Create new Document */
-    if (!selectedDocument) {
+    if (!selectedDocument._id) {
       if (parentId) {
         addLinkedChildrenDocument({
           entity,
@@ -95,8 +95,10 @@ export function CrudDrawerDefault() {
           query: paginationQuery,
           newDocument: form.values,
         });
+        return;
       }
       addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
+      return;
     }
     /** Modify selected document */
     if (selectedDocument) {

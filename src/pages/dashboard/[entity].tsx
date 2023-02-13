@@ -44,9 +44,6 @@ const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
     if (isChildrenTree) {
       fetchCrudDocuments({ entity, isChildrenTree: false });
     }
-    return () => {
-      console.log('cleanup func');
-    };
   }, [entity]); // include parentId: string | undefined to update on change page
   return (
     <Page>

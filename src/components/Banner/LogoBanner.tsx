@@ -27,6 +27,7 @@ export function LogoBanner({
       alt={alt || 'flate mates logo'}
       width={width || 200}
       height={height || 50}
+      priority
     />
   );
 }

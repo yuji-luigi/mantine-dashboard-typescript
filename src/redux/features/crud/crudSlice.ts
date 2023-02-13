@@ -113,6 +113,7 @@ export const crudSlice = createSlice({
         // const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
         //   (document) => document._id !== documentId
         // );
+        const prevDocuments = state.reduxdb[entity].documentsArray;
         state.reduxdb[entity].totalDocuments = totalDocuments;
         state.reduxdb[entity].documentsArray = documents;
         // const { collection, data }: AddedCrudResponse = action.payload;
@@ -234,7 +235,7 @@ export const useCrudSelectors = (entity?: Sections) => ({
   /** Returns Array of Documents of the entity: whole array of entity */
   crudDocuments: useCrudDocuments(entity) || [],
   /** Returns selected Document of the entity */
-  selectedCrudDocument: useSelectedDocument(entity) || {},
+  selectedCrudDocument: useSelectedDocument(entity) || null,
   /** returns string if error is present. to show flash on the screen */
   crudError: useCrudError(),
   /** returns string if api sent message */
