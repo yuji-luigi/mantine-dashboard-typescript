@@ -26,7 +26,7 @@ const useStyles = createStyles(() => ({
 function instanceOfParentDataInterface(object: any): object is ParentDataInterface {
   return 'name' in object;
 }
-export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections }) {
+export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections | '' }) {
   /** define open state for crudDrawer component */
 
   const { openDrawer } = useDrawerContext();

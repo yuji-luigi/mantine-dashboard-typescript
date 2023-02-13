@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
 import { createStyles, Navbar, Group, ScrollArea, Button, Avatar, Text } from '@mantine/core';
-import { TablerIcon } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useLayoutContext from '../../../hooks/useLayoutContext';

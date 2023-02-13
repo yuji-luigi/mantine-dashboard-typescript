@@ -26,8 +26,8 @@ import {
   IconTag as Tag,
   IconAlertCircle as Alert,
   IconX as Close,
-  TablerIcon,
-} from '@tabler/icons';
+  Icon,
+} from '@tabler/icons-react';
 
 // type IconIndexTypes =
 //   | 'bookmarks'
@@ -55,7 +55,7 @@ import {
 //   | 'fundRules'
 //   | 'alert';
 
-export const Icons: Record<IconIndexTypes, TablerIcon> = {
+export const Icons: Record<IconIndexTypes, Icon> = {
   authentication: Authentication,
   notifications: Notification,
   home: Dashboard,

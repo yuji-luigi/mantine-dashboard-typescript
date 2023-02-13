@@ -1,6 +1,6 @@
 import React from 'react';
 import { Group, Avatar, Text, Badge, Anchor, ActionIcon, useMantineTheme } from '@mantine/core';
-import { IconPencil, IconTrash } from '@tabler/icons';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { FieldTypes } from '../../../../../data/dataTable/formFields/index';
 
 export const jobColors: Record<string, string> = {

@@ -19,5 +19,6 @@
   "rules": {
     "react/react-in-jsx-scope": "off"
     // "allowAllCaps": true
-  }
+  },
+  "react/jsx-pascal-case": "off"
 }

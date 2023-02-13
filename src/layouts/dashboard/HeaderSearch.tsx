@@ -1,6 +1,6 @@
 import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from '@tabler/icons-react';
 import Link from 'next/link';
 import links from '../../../json/navbar/headerLinks.json';
 import useLayoutContext from '../../../hooks/useLayoutContext';

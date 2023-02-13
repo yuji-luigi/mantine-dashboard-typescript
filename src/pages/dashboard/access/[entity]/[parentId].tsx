@@ -9,7 +9,9 @@ import { TableSectionHeader } from '../../../../sections/datatable/TableSectionH
 import Page from '../../../../components/Page';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
 import { CrudDrawerDefault } from '../../../../components/drawer/CrudDrawerDefault';
-import { useCrudSelectors, useCrudSliceStore } from '../../../../redux/features/crud/crudSlice';
+import {
+  /* useCrudSelectors, */ useCrudSliceStore,
+} from '../../../../redux/features/crud/crudSlice';
 import { usePaginationContext } from '../../../../context/PaginationContext';
 
 const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
@@ -17,7 +19,7 @@ const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data
 const ChildrenTablePage = () => {
   const { query }: { query: ParsedQueryCustom } = useRouter();
   const { fetchLinkedChildren } = useCrudSliceStore();
-  const { crudStatus } = useCrudSelectors(query.entity || '');
+  // const { crudStatus } = useCrudSelectors(query.entity);
   const { paginationQuery } = usePaginationContext();
 
   const { setParentData } = useLayoutContext();

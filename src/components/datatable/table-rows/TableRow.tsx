@@ -1,5 +1,5 @@
 import { ActionIcon, Group } from '@mantine/core';
-import { IconPencil, IconTrash } from '@tabler/icons';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
