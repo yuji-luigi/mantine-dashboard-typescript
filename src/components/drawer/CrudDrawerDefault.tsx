@@ -43,6 +43,7 @@ export function CrudDrawerDefault() {
     createCrudDocument: addCrud,
     selectCrudDocument,
     updateCrudDocument,
+    createLinkedChildDocument,
   } = useCrudSliceStore();
   const {
     selectedCrudDocument: selectedDocument,
@@ -89,19 +90,18 @@ export function CrudDrawerDefault() {
     /** Create new Document */
     if (!selectedDocument._id) {
       if (parentId) {
-        addLinkedChildrenDocument({
+        createLinkedChildDocument({
           entity,
           parentId,
           query: paginationQuery,
           newDocument: form.values,
         });
-        return;
+      } else {
+        addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
       }
-      addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
-      return;
     }
     /** Modify selected document */
-    if (selectedDocument) {
+    if (selectedDocument._id) {
       updateCrudDocument({
         entity,
         updateData: form.values,
@@ -109,6 +109,7 @@ export function CrudDrawerDefault() {
         parentId: query.parentId as string,
       });
     }
+    form.reset();
   };
 
   /** todo: separate the function in to hooks or util function.*/
@@ -119,7 +120,6 @@ export function CrudDrawerDefault() {
      * */
     await sleep(800);
     closeDrawer();
-    window.alert('handle submit run');
     await sleep(200);
     hideNotification('submit');
     await sleep(100);

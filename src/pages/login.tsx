@@ -109,6 +109,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     if (!jwtToken) {
       return { props: { user: null } };
     }
+    // used fetch without reason. ok with axios instance too.
     const response = await fetch(`${API_BASE_URL}/${PATH_AUTH.me}`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin

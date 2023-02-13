@@ -22,7 +22,7 @@ import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/c
 // const ent = en.reduce((arr, cur) => arr.concat(cur), []);
 // const useStyle = createStyles((theme) => ({}));
 
-const CrudPage: NextPageWithLayout<PropWithChildren> = () => {
+const CrudPage = ({ isHead = false }: { isHead: boolean }) => {
   const { query, push } = useRouter();
   // const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb>>([]);
   const entity = query.entity as Sections;
