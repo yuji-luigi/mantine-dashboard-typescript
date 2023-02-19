@@ -14,7 +14,7 @@ import {
 } from '../../../../redux/features/crud/crudSlice';
 import { usePaginationContext } from '../../../../context/PaginationContext';
 
-const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data);
+const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data?.data);
 
 const ChildrenTablePage = () => {
   const { query }: { query: ParsedQueryCustom } = useRouter();
@@ -24,13 +24,13 @@ const ChildrenTablePage = () => {
 
   const { setParentData } = useLayoutContext();
 
-  const { prevBreadcrumbs, restorePrevBreadcrumbs } = useLayoutContext();
+  const { setBreadcrumbs } = useLayoutContext();
 
   // const { data, error } = useSWR(
   //   `/${API_PATH.linkedChildren}/${query.entity}/${query.parentId}`,
   //   fetcher
   // );
-  const { data: parentData, error: parentError } = useSWR(
+  const { data: parentData, error: parentError } = useSWR<MongooseBaseModel<null>>(
     `/${query.entity}/${query.parentId}`,
     fetcher
   );
@@ -44,17 +44,12 @@ const ChildrenTablePage = () => {
     // setCrudDocuments({ entity: query.entity, documents: data?.data || [], isChildrenTree: true });
 
     if (parentData) {
-      setParentData(parentData.data);
+      setParentData(parentData);
+      setBreadcrumbs({ title: parentData.name, href: parentData._id });
     }
-  }, [parentData?.data, paginationQuery]);
+  }, [parentData, paginationQuery]);
 
   // console.log(query.parentId);
-  useEffect(() => {
-    restorePrevBreadcrumbs(prevBreadcrumbs);
-    // drawerFormStateDispatch({ type: 'linkedChildren' });
-    // setIsChildrenPage(true);
-    // return () => setIsChildrenPage(false);
-  }, []);
 
   // if (crudStatus === 'loading' || crudStatus === 'idle') {
   //   return <p>loading</p>;
