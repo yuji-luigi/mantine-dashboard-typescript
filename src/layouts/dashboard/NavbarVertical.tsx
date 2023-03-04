@@ -1,5 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
-import { createStyles, Navbar, Group, ScrollArea, Button, Avatar, Text } from '@mantine/core';
+import {
+  createStyles,
+  getStylesRef,
+  Navbar,
+  Group,
+  ScrollArea,
+  Button,
+  Avatar,
+  Text,
+} from '@mantine/core';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useLayoutContext from '../../../hooks/useLayoutContext';
@@ -8,15 +17,15 @@ import { sectionData } from '../../data';
 
 import { Icons } from '../../data/icons/icons';
 
-const useStyles = createStyles((theme, _params, getRef) => {
-  const icon = getRef('icon') as string;
+const useStyles = createStyles((theme /* , _params, getRef */) => {
+  const icon = getStylesRef('icon') as string;
   return {
     navbar: {
       zIndex: 5,
     },
     header: {
       paddingBottom: theme.spacing.md,
-      marginBottom: theme.spacing.md * 1.5,
+      marginBottom: `calc(${theme.spacing.md} * 1.5)`,
       borderBottom: `1px solid ${
         theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
       }`,
@@ -31,7 +40,21 @@ const useStyles = createStyles((theme, _params, getRef) => {
     },
 
     link: {
+      // textDecoration: 'none',
+      ...theme.fn.focusStyles(),
+      display: 'flex',
+      alignItems: 'center',
       textDecoration: 'none',
+      fontSize: theme.fontSizes.sm,
+      color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
+      padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+      borderRadius: theme.radius.sm,
+      fontWeight: 500,
+
+      '&:hover': {
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+      },
     },
 
     flexVertical: {
@@ -39,26 +62,26 @@ const useStyles = createStyles((theme, _params, getRef) => {
       flexDirection: 'column',
     },
 
-    linkLabel: {
-      ...theme.fn.focusStyles(),
-      display: 'flex',
-      alignItems: 'center',
-      textDecoration: 'none',
-      fontSize: theme.fontSizes.sm,
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
-      padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-      borderRadius: theme.radius.sm,
-      fontWeight: 500,
+    // linkLabel: {
+    //   ...theme.fn.focusStyles(),
+    //   display: 'flex',
+    //   alignItems: 'center',
+    //   textDecoration: 'none',
+    //   fontSize: theme.fontSizes.sm,
+    //   color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
+    //   padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
+    //   borderRadius: theme.radius.sm,
+    //   fontWeight: 500,
 
-      '&:hover': {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    //   '&:hover': {
+    //     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    //     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
 
-        [`& .${icon}`]: {
-          color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-        },
-      },
-    },
+    //     [`& .${icon}`]: {
+    //       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    //     },
+    //   },
+    // },
 
     linkIcon: {
       ref: icon,
@@ -132,21 +155,25 @@ export function NavbarVertical() {
 
         return (
           <Link
-            className={classes.link}
+            className={cx(classes.link, {
+              [classes.linkActive]: `${navbarContent.link}/` === active,
+            })}
+            // className={classes.link}
             href={navbarContent.link}
             key={navbarContent.navbarTitle}
-            onClick={() => {
-              setActive(navbarContent.navbarTitle);
-            }}
+            // onClick={(event) => {
+            //   event.preventDefault();
+            //   setActive(navbarContent.navbarTitle);
+            // }}
           >
-            <div
+            {/* <div
               className={cx(classes.linkLabel, {
                 [classes.linkActive]: navbarContent.link === active,
               })}
-            >
-              <Icon className={classes.linkIcon} stroke={1.5} />
-              {navbarContent.navbarTitle}
-            </div>
+            > */}
+            <Icon className={classes.linkIcon} stroke={1.5} />
+            {navbarContent.navbarTitle}
+            {/* </div> */}
           </Link>
         );
       })}
