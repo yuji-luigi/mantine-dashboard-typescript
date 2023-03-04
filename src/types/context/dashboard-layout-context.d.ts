@@ -21,6 +21,11 @@ interface DashboardLayoutContextStates {
    */
   setPrevBreadcrumbs(data): void;
   restorePrevBreadcrumbs(prevData): void;
+  /**
+   * used to set parent data page as breadcrumbs. sets $rootUrl/access/:id
+   * todo: when going back to parent page, the breadcrumbs should be deleted
+   * */
+  setChildrenBreadcrumbs(breadcrumb: BreadcrumbInterface | null): void;
 }
 
 interface BreadcrumbInterface {

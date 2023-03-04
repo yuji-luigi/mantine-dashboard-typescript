@@ -12,6 +12,7 @@ export const DashboardLayoutContext = createContext<DashboardLayoutContextStates
   setPrevBreadcrumbs() {},
   setParentData() {},
   parentData: { name: '' },
+  setChildrenBreadcrumbs() {},
 });
 
 const useStore = () => {
@@ -19,7 +20,22 @@ const useStore = () => {
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbInterface[]>([]);
   const [prevBreadcrumbs, setPrevBreadcrumbs] = useState<BreadcrumbInterface[]>([]);
   const [parentData, setParentData] = useState<ParentDataInterface | {}>({});
-
+  const setChildrenBreadcrumbs = (breadcrumb: BreadcrumbInterface) => {
+    setBreadcrumbs((prev) => {
+      const baseUrl = prev[0].href;
+      const allButLast = prev.slice(0, -1);
+      const idArray = prev.map((p) => p.href.split('/').pop());
+      const currentid = breadcrumb.href.split('/').pop();
+      const foundIndex = idArray.findIndex((id) => id === currentid);
+      if (foundIndex !== -1) {
+        //remove all breadcrumbs after foundIndex
+        const newBreadcrumbs = prev.slice(0, foundIndex + 1);
+        return newBreadcrumbs;
+      }
+      const newBreadcrumb = { ...breadcrumb, href: `${baseUrl}/access/${breadcrumb.href}` };
+      return [...prev, newBreadcrumb];
+    });
+  };
   return {
     isOpen,
     toggleBarOpen: () => setBarOpen(!isOpen),
@@ -38,6 +54,7 @@ const useStore = () => {
     setParentData: (data: ParentDataInterface) => setParentData(data),
     restorePrevBreadcrumbs: (prevDataArray: BreadcrumbInterface[]) => setBreadcrumbs(prevDataArray),
     setPrevBreadcrumbs,
+    setChildrenBreadcrumbs,
   };
 };
 
