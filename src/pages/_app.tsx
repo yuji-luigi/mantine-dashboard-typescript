@@ -4,7 +4,6 @@ import { AppProps } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
 import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
 import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from '../context/JWTContext';
 import reduxStore from '../redux/store';
@@ -43,15 +42,13 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <ReduxProvider store={reduxStore}>
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-              <NotificationsProvider>
-                <DashboardLayoutContextProvider>
-                  <PaginationContextProvider>
-                    <DrawerContextProvider>
-                      {getLayout(<Component {...pageProps} />)}
-                    </DrawerContextProvider>
-                  </PaginationContextProvider>
-                </DashboardLayoutContextProvider>
-              </NotificationsProvider>
+              <DashboardLayoutContextProvider>
+                <PaginationContextProvider>
+                  <DrawerContextProvider>
+                    {getLayout(<Component {...pageProps} />)}
+                  </DrawerContextProvider>
+                </PaginationContextProvider>
+              </DashboardLayoutContextProvider>
             </MantineProvider>
           </ColorSchemeProvider>
         </ReduxProvider>
