@@ -1,21 +1,37 @@
-import { createStyles, Header, Autocomplete, Group, Burger, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
+// import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
-import { MantineLogo } from '@mantine/ds';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import Link from 'next/link';
 import links from '../../../json/navbar/headerLinks.json';
+import useLayoutContext from '../../../hooks/useLayoutContext';
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import { LogoBanner } from '../../components/Banner/LogoBanner';
 
 const useStyles = createStyles((theme) => ({
   header: {
+    position: 'fixed',
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
   },
 
   inner: {
-    height: rem(56),
+    height: 56,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+
+  burger: {
+    display: 'none',
+    [theme.fn.smallerThan('md')]: {
+      display: 'block',
+    },
+  },
+  logo: {
+    display: 'none',
+    [theme.fn.largerThan('md')]: {
+      display: 'block',
+    },
   },
 
   links: {
@@ -31,14 +47,16 @@ const useStyles = createStyles((theme) => ({
   },
 
   link: {
+    textDecoration: 'none',
+
     display: 'block',
     lineHeight: 1,
-    padding: `${rem(8)} ${rem(12)}`,
+    padding: '8px 12px',
     borderRadius: theme.radius.sm,
-    textDecoration: 'none',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
+    fontStyle: 'normal',
 
     '&:hover': {
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
@@ -46,33 +64,30 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeaderSearchProps {
-  links: { link: string; label: string }[];
-}
+// interface HeaderSearchProps {
+//     links: { link: string; label: string }[];
+// }
+export type JSONType = typeof links;
 
-export function HeaderSearch(/* { links }: HeaderSearchProps */) {
-  const [opened, { toggle }] = useDisclosure(false);
+export function HeaderSearch() {
+  // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
+  const { isOpen, toggleBarOpen } = useLayoutContext();
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
+    <Link key={link.label} className={classes.link} href={link.link}>
       {link.label}
-    </a>
+    </Link>
   ));
 
   return (
-    <Header height={56} className={classes.header} mb={120}>
+    <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Burger opened={opened} onClick={toggle} size="sm" />
-          <MantineLogo size={28} />
+          <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
+          {/* <MantineLogo className={classes.logo} size={28} /> */}
+          <LogoBanner transparent />
         </Group>
-
         <Group>
           <Group ml={50} spacing={5} className={classes.links}>
             {items}
@@ -80,11 +95,11 @@ export function HeaderSearch(/* { links }: HeaderSearchProps */) {
           <Autocomplete
             className={classes.search}
             placeholder="Search"
-            icon={<IconSearch size="1rem" stroke={1.5} />}
+            icon={<IconSearch size={16} stroke={1.5} />}
             data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
           />
+          <ColorSchemeToggle size="lg" />
         </Group>
-        <ColorSchemeToggle size="lg" />
       </div>
     </Header>
   );
