@@ -17,7 +17,8 @@ export function SpecificTableCell({
     <>
       {cellConfig.cellType === 'link-children' && (
         <Group spacing="sm">
-          <Link href={`/dashboard/access/${query.entity as string}/${rowData._id}` || ''}>
+          <Link href={`/dashboard/${query.entity as string}/access/${rowData._id}` || ''}>
+            {/* <Link href={`/dashboard/access/${query.entity as string}/${rowData._id}` || ''}> */}
             <Text size="sm" weight={500}>
               {cellData}
             </Text>

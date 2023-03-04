@@ -24,7 +24,7 @@ const ChildrenTablePage = () => {
 
   const { setParentData } = useLayoutContext();
 
-  const { setBreadcrumbs } = useLayoutContext();
+  const { setBreadcrumbs, setChildrenBreadcrumbs } = useLayoutContext();
 
   // const { data, error } = useSWR(
   //   `/${API_PATH.linkedChildren}/${query.entity}/${query.parentId}`,
@@ -45,7 +45,8 @@ const ChildrenTablePage = () => {
 
     if (parentData) {
       setParentData(parentData);
-      setBreadcrumbs({ title: parentData.name, href: parentData._id });
+      // setBreadcrumbs({ title: parentData.name, href: parentData._id });
+      setChildrenBreadcrumbs({ title: parentData.name, href: parentData._id });
     }
   }, [parentData, paginationQuery]);
 
