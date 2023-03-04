@@ -1,10 +1,10 @@
 import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
 import { ReactElement } from 'react';
 import Layout from '../../layouts';
-import PostsPageSections from '../../sections/homepage/posts/PostsPageSctions';
+import PostsPageSection from '../../sections/homepage/posts/PostsPage';
 
 export default function PostsPage() {
-  <PostsPageSections />;
+  return <PostsPageSection />;
 }
 
 PostsPage.getLayout = function getLayout(page: ReactElement) {
