@@ -57,7 +57,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   control: {
-    marginTop: theme.spacing.xl * 1.5,
+    marginTop: `calc(${theme.spacing.xl} * 1.5)`,
 
     [theme.fn.smallerThan('sm')]: {
       width: '100%',

@@ -2,7 +2,7 @@ import { Select, Switch, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import React from 'react';
 
-import { DatePicker, DateRangePicker } from '@mantine/dates';
+import { DatePicker } from '@mantine/dates';
 import { useGetSelectOptions } from '../../../hooks/form-related/useGetSelectOptions';
 
 const FormFields = ({
@@ -65,8 +65,8 @@ const FormFields = ({
       )}
       {formField.type === 'date' && (
         <DatePicker
-          name={formField.name}
-          label={formField.label}
+          // name={formField.name}
+          // label={formField.label}
           placeholder={formField.placeholder}
           size="md"
           {...form.getInputProps(formField.name || formField.id)}
@@ -83,7 +83,7 @@ const FormFields = ({
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === 'date-range' && (
+      {/* {formField.type === 'date-range' && (
         <DateRangePicker
           name={formField.name}
           label={formField.label}
@@ -91,7 +91,7 @@ const FormFields = ({
           size="md"
           {...form.getInputProps(formField.name || formField.id)}
         />
-      )}
+      )} */}
     </>
   );
 };

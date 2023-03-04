@@ -1,5 +1,5 @@
 import { EmailBanner } from '../../components/Banner/EmailBanner';
 
-const BannerSection = () => <EmailBanner image="images/email-banner-default.svg" />;
+const BannerSection = () => <EmailBanner />;
 
 export default BannerSection;

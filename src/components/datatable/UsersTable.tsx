@@ -86,7 +86,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
         )}
         <Divider sx={{ marginBottom: 20 }} />
       </ScrollArea>
-      <Pagination page={page} onChange={(pageNumber) => onPageChange(pageNumber)} total={TOTAL} />
+      <Pagination value={page} onChange={(pageNumber) => onPageChange(pageNumber)} total={TOTAL} />
     </>
   );
 }

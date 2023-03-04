@@ -80,7 +80,7 @@ const useStyles = createStyles((theme) => ({
   controls: {
     display: 'flex',
     flexDirection: 'column',
-    marginRight: theme.spacing.xl * 2,
+    marginRight: `calc(${theme.spacing.xl} * 2)`,
 
     [theme.fn.smallerThan('xs')]: {
       flexDirection: 'row',

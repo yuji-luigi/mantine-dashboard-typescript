@@ -1,12 +1,24 @@
-import { ActionIcon, ActionIconVariant, Group, MantineNumberSize, MantineStyleSystemSize, useMantineColorScheme } from '@mantine/core';
+import {
+  ActionIcon,
+  ActionIconProps,
+  Group,
+  MantineNumberSize,
+  MantineStyleSystemProps,
+  SpacingValue,
+  SystemProp,
+  useMantineColorScheme,
+  Variants,
+} from '@mantine/core';
 import { SunIcon, MoonIcon } from '@modulz/radix-icons';
 
 type Props = {
-  mt?: MantineStyleSystemSize
-  variant?: ActionIconVariant
-  size?: MantineNumberSize
+  variant?: Variants<
+    'subtle' | 'filled' | 'outline' | 'light' | 'default' | 'transparent' | 'gradient'
+  >;
+  mt?: SystemProp<SpacingValue>;
+  size?: MantineNumberSize;
 };
-export function ColorSchemeToggle(props:Props) {
+export function ColorSchemeToggle(props: Props) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (

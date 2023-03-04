@@ -3,7 +3,7 @@ import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {
-    padding: theme.spacing.xl * 1.5,
+    padding: `calc(${theme.spacing.xl} * 1.5)`,
   },
 
   label: {

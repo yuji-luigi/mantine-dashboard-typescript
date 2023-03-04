@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
     position: 'relative',
     overflow: 'visible',
     padding: theme.spacing.xl,
-    paddingTop: theme.spacing.xl * 1.5 + ICON_SIZE / 3,
+    paddingTop: `calc(${theme.spacing.xl}) * 1.5 + ${ICON_SIZE} / 3`,
   },
 
   icon: {

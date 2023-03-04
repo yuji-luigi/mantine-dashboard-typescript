@@ -19,13 +19,13 @@ const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
-    paddingBottom: theme.spacing.xl * 6,
+    paddingBottom: `calc(${theme.spacing.xl}) * 6`,
     zIndex: 1,
 
     [theme.fn.smallerThan('sm')]: {
       position: 'relative',
       height: 700,
-      paddingBottom: theme.spacing.xl * 3,
+      paddingBottom: `calc(${theme.spacing.xl}) * 3`,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'flex-start',
@@ -65,7 +65,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   control: {
-    marginTop: theme.spacing.xl * 1.5,
+    marginTop: `calc(${theme.spacing.xl} * 1.5)`,
 
     [theme.fn.smallerThan('sm')]: {
       // width: '100%',
