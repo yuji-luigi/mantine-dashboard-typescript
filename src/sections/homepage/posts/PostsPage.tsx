@@ -1,3 +1,6 @@
+//useSWR allows the use of SWR inside function components
+import useSWR from 'swr';
+
 import {
   createStyles,
   SimpleGrid,
@@ -9,8 +12,13 @@ import {
   Group,
   Box,
 } from '@mantine/core';
-// import { CardCustom } from '../../../components/card/CardCustom';
-import { CardCustom } from '../../../components/card/CardCustom';
+//Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
+// import { UserCard } from '../../../components/card/UserCard';
+import { UserCard } from '../../../components/card/UserCard';
+import { CardArticleSmall } from '../../../components/card/CardArticleSmall';
+import { CardArticleImageDescFooter } from '../../../components/card/CardArticle';
+import CardArticleImageBig from '../../../components/card/CardArticleImageBig';
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const mockdata = [
   {
     title: 'Top 10 places to visit in Norway this summer',
@@ -47,6 +55,7 @@ const mockdata = [
   },
 ];
 
+export type TypeMock = typeof mockdata[1];
 const mock2 = [
   {
     image:
@@ -120,89 +129,51 @@ const mock2 = [
   },
 ];
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
-
-    '&:hover': {
-      transform: 'scale(1.01)',
-      boxShadow: theme.shadows.md,
-    },
-  },
-
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 600,
-  },
-  description: { fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 600 },
-}));
-
 export default function PostsPage() {
-  const { classes } = useStyles();
-  console.log('post');
-  const cards = mockdata.map((article) => (
-    // <Card
-    //   key={article.title}
-    //   p="md"
-    //   radius="md"
-    //   component="a"
-    //   href="#"
-    //   className={classes.card}
-    //   sx={{ maxHeight: 400 }}
-    // >
-    //   {article.image && (
-    //     <AspectRatio ratio={1920 / 1080}>
-    //       <Image src={article.image} />
-    //     </AspectRatio>
-    //   )}
-    //   <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-    //     {article.date}
-    //   </Text>
-    //   <Text className={classes.title} mt={5}>
-    //     {article.title}
-    //   </Text>
-    //   <Text size={15} mt={5}>
-    //     {article.description}
-    //   </Text>
-    // </Card>
-    <Card
-      key={article.title}
-      sx={{ maxHeight: 400 }}
-      p="md"
-      radius="md"
-      component="a"
-      href="#"
-      className={classes.card}
-    >
-      <Box sx={{ height: 300 }}>
-        <Text className={classes.title} align="center" my={5} mb={10}>
-          {article.title}
-        </Text>
-        {article.image && (
-          <AspectRatio ratio={1920 / 1080}>
-            <Image src={article.image} />
-          </AspectRatio>
-        )}
-
-        <Text size={15} mt={5}>
-          {article.description}
-        </Text>
-      </Box>
-      <Box sx={{ height: 100 }}>
-        <Text color="dimmed" size="xs" transform="uppercase" align="right" weight={700} mt="md">
-          {article.date}
-        </Text>
-      </Box>
-    </Card>
-  ));
-
-  const otherCards = mock2.map((data) => <CardCustom key={data.name} data={data} />);
-  console.log(mock2);
+  const { data, error } = useSWR('/api/data?fileName=CardArticleSmall', fetcher);
+  const { data: articleCardData, error: artucleCardDat } = useSWR(
+    '/api/data?fileName=articleCard',
+    fetcher
+  );
+  // const { data, error } = useSWR('/mock/verticalCardArticleImageDescFooter.json', fetcher);
+  const cards = mockdata.map((article) => <CardArticleImageBig article={article} />);
+  const formatedData = data && JSON.parse(data);
+  const formatedCardArticleImageDescFooterData = articleCardData && JSON.parse(articleCardData);
+  const otherCards = mock2.map((data) => <UserCard key={data.name} data={data} />);
+  const VACards =
+    formatedData &&
+    formatedData.map((VAData: any) => (
+      <CardArticleSmall
+        key={VAData.title}
+        author={VAData.author}
+        category={VAData.category}
+        date={VAData.date}
+        image={VAData.image}
+        title={VAData.title}
+      />
+    ));
+  const articleCards =
+    formatedCardArticleImageDescFooterData &&
+    formatedCardArticleImageDescFooterData.map((VAData: any) => (
+      <CardArticleImageDescFooter
+        key={VAData.title}
+        className={VAData.className}
+        image={VAData.image}
+        link={VAData.link}
+        title={VAData.title}
+        description={VAData.description}
+        author={VAData.author}
+        rating={VAData.rating}
+        sx={{ width: 300 }}
+      />
+    ));
   return (
     <Container py="xl">
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        {cards}
-        {otherCards}
+        {/* {cards} */}
+        {/* {otherCards} */}
+        {VACards}
+        {/* {articleCards} */}
       </SimpleGrid>
     </Container>
   );
