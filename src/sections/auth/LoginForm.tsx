@@ -1,5 +1,5 @@
 import { TextInput, PasswordInput, Checkbox, Button } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
+import { notifications } from '@mantine/notifications';
 
 import { useForm } from '@mantine/form';
 
@@ -26,7 +26,7 @@ function LoginForm() {
     try {
       await login(values.email, values.password);
     } catch (error: any) {
-      showNotification({
+      notifications.show({
         title: 'Error',
         color: 'red',
         // eslint-disable-next-line react/jsx-pascal-case
