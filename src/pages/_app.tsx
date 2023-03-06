@@ -10,7 +10,7 @@ import reduxStore from '../redux/store';
 import { DashboardLayoutContextProvider } from '../context/DashboardLayoutContext';
 import { DrawerContextProvider } from '../context/DataTableDrawerContext';
 import { PaginationContextProvider } from '../context/PaginationContext';
-
+import { Notifications } from '@mantine/notifications';
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -45,6 +45,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
               <DashboardLayoutContextProvider>
                 <PaginationContextProvider>
                   <DrawerContextProvider>
+                    <Notifications />
                     {getLayout(<Component {...pageProps} />)}
                   </DrawerContextProvider>
                 </PaginationContextProvider>
