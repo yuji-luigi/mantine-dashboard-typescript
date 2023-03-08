@@ -12,6 +12,10 @@ import Page from '../../components/Page';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import useAuth from '../../../hooks/useAuth';
+import axiosInstance from '../../utils/axios-instance';
+import { PATH_AUTH } from '../../path/api-routes';
+import { GetServerSideProps } from 'next';
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 
 // TODO: GET_STATIC PROPS AND GET JSON THEN REDIRECT IF DOES NOT EXIST
@@ -24,6 +28,7 @@ import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/c
 
 const CrudPage = ({ isHead = false }: { isHead: boolean }) => {
   const { query, push } = useRouter();
+
   // const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb>>([]);
   const entity = query.entity as Sections;
 
@@ -31,6 +36,11 @@ const CrudPage = ({ isHead = false }: { isHead: boolean }) => {
   const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
   formFields as FormFieldsType;
   useEffect(() => {
+    // axiosInstance
+    //   .get('/auth/me', { withCredentials: true })
+    //   .then((res) => console.log(res.data))
+    //   .catch((err) => console.log(err));
+
     if (!sections.includes(entity as string)) {
       push('/dashboard/home');
     }
@@ -60,5 +70,19 @@ const CrudPage = ({ isHead = false }: { isHead: boolean }) => {
 CrudPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+type Data = { data: any };
+
+// export const getServerSideProps: GetServerSideProps<{ data: Data }> = async (context) => {
+//   console.log(context);
+//   const res = await axiosInstance.get('/auth/me', { withCredentials: true });
+//   // const data: Data = res.data;
+//   // console.log(data);
+//   return {
+//     props: {
+//       data: res.data,
+//     },
+//   };
+// };
 
 export default CrudPage;
