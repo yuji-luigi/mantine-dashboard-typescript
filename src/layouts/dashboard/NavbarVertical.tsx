@@ -143,42 +143,33 @@ export function NavbarVertical() {
 
   const filteredSectionData = sectionData.filter((data) => data.name !== 'others');
 
-  const links = filteredSectionData.map((section) => (
-    <Fragment key={section.name}>
-      <p>{section.name}</p>
-      {section.contents.map((navbarContent) => {
-        const Icon = Icons[navbarContent.entity as IconIndexTypes] || Icons.home;
-
-        if (navbarContent.hide) {
-          return null;
-        }
-
-        return (
-          <Link
-            className={cx(classes.link, {
-              [classes.linkActive]: `${navbarContent.link}/` === active,
+  if (!user) return null;
+  const links = sectionData.map((section) => {
+    return (
+      <>
+        {section.roles?.includes(user.role) && (
+          <Fragment key={section.name}>
+            <p>{section.name}</p>
+            {section.contents.map((navbarContent) => {
+              const Icon = Icons[navbarContent.entity as IconIndexTypes] || Icons.home;
+              return (
+                <Link
+                  className={cx(classes.link, {
+                    [classes.linkActive]: `${navbarContent.link}/` === active,
+                  })}
+                  href={navbarContent.link}
+                  key={navbarContent.navbarTitle}
+                >
+                  <Icon className={classes.linkIcon} stroke={1.5} />
+                  {navbarContent.navbarTitle}
+                </Link>
+              );
             })}
-            // className={classes.link}
-            href={navbarContent.link}
-            key={navbarContent.navbarTitle}
-            // onClick={(event) => {
-            //   event.preventDefault();
-            //   setActive(navbarContent.navbarTitle);
-            // }}
-          >
-            {/* <div
-              className={cx(classes.linkLabel, {
-                [classes.linkActive]: navbarContent.link === active,
-              })}
-            > */}
-            <Icon className={classes.linkIcon} stroke={1.5} />
-            {navbarContent.navbarTitle}
-            {/* </div> */}
-          </Link>
-        );
-      })}
-    </Fragment>
-  ));
+          </Fragment>
+        )}
+      </>
+    );
+  });
 
   useEffect(() => setActive(asPath), [asPath]);
 
