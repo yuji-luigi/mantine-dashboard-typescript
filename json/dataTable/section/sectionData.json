@@ -1,215 +1,220 @@
 [
-  {
-    "name": "Board",
-    "contents": [
-      {
-        "sliceName": "posts",
-        "entity": "posts",
-        "title": "Posts",
-        "subtitle": "subtitle",
-        "navbarTitle": "posts",
-        "link": "/dashboard/posts",
-        "createButton": "",
-        "icon": "posts"
-      }
-    ]
-  },
-  {
-    "name": "main",
-    "contents": [
-      {
-        "sliceName": "home",
-        "entity": "home",
-        "title": "welcome to dashboard",
-        "subtitle": "subtitle",
-        "navbarTitle": "Dashboard",
-        "link": "/dashboard/home",
-        "createButton": "",
-        "icon": "Dashboard"
-      },
-
-      {
-        "sliceName": "statistics",
-        "entity": "statistics",
-        "title": "Statistics",
-        "subtitle": "subtitle",
-        "navbarTitle": "Statistics",
-        "link": "/dashboard/statistics",
-        "createButton": "",
-        "icon": "Statistic"
-      },
-      {
-        "sliceName": "notifications",
-        "entity": "notifications",
-        "title": "Notifications",
-        "subtitle": "subtitle",
-        "navbarTitle": "Notifications",
-        "link": "/dashboard/notifications",
-        "createButton": "New Notification",
-        "icon": "Notification"
-      },
-
-      {
-        "sliceName": "bookmarks",
-        "entity": "bookmarks",
-        "title": "Bookmarks",
-        "subtitle": "subtitle",
-        "navbarTitle": "Bookmark",
-        "link": "/dashboard/bookmarks",
-        "createButton": "New Bookmark",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "comments",
-        "entity": "comments",
-        "title": "Comments",
-        "subtitle": "subtitle",
-        "navbarTitle": "Comment",
-        "link": "/dashboard/comments",
-        "createButton": "New Comment",
-        "icon": "Dashboard",
-        "hide": true
-      }
-    ]
-  },
-  {
-    "name": "setups",
-    "contents": [
-      {
-        "sliceName": "fundRules",
-        "entity": "fundRules",
-        "title": "FundRules",
-        "subtitle": "subtitle",
-        "navbarTitle": "Fund rule",
-        "link": "/dashboard/fundRules",
-        "createButton": "New Fund Rule",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "proposals",
-        "entity": "proposals",
-        "title": "Proposals",
-        "subtitle": "subtitle",
-        "navbarTitle": "Proposal",
-        "link": "/dashboard/proposals",
-        "createButton": "New Proposal",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "funds",
-        "entity": "funds",
-        "title": "Funds",
-        "subtitle": "subtitle",
-        "navbarTitle": "Fund",
-        "link": "/dashboard/funds",
-        "createButton": "New Fund",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "threads",
-        "entity": "threads",
-        "title": "Threads",
-        "subtitle": "subtitle",
-        "navbarTitle": "Thread",
-        "link": "/dashboard/threads",
-        "createButton": "New Thread",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "instances",
-        "entity": "instances",
-        "title": "Instances",
-        "subtitle": "subtitle",
-        "navbarTitle": "Instance",
-        "link": "/dashboard/instances",
-        "createButton": "New Instance",
-        "icon": "Dashboard"
-      },
-
-      {
-        "sliceName": "spaces",
-        "entity": "spaces",
-        "title": "spaces",
-        "subtitle": "subtitle",
-        "navbarTitle": "spaces",
-        "link": "/dashboard/spaces",
-        "createButton": "New Space",
-        "icon": "Dashboard"
-      },
-
-      {
-        "sliceName": "tags",
-        "entity": "tags",
-        "title": "Tags",
-        "subtitle": "subtitle",
-        "navbarTitle": "Tag",
-        "link": "/dashboard/tags",
-        "createButton": "New Tag",
-        "icon": "Dashboard"
-      }
-    ]
-  },
-  {
-    "name": "others",
-    "contents": [
-      {
-        "sliceName": "billing",
-        "entity": "billing",
-        "title": "Billings",
-        "subtitle": "subtitle",
-        "navbarTitle": "Billing",
-        "link": "/dashboard/billing",
-        "createButton": "New Billing",
-        "icon": "Receipt",
-        "hide": true
-      }
-    ]
-  },
-
-  {
-    "name": "admin",
-    "contents": [
-      {
-        "sliceName": "userSettings",
-        "entity": "userSettings",
-        "title": "UserSettings",
-        "subtitle": "subtitle",
-        "navbarTitle": "User setting",
-        "link": "/dashboard/userSettings",
-        "createButton": "",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "wallets",
-        "entity": "wallets",
-        "title": "Wallets",
-        "subtitle": "subtitle",
-        "navbarTitle": "Wallets",
-        "link": "/dashboard/wallets",
-        "createButton": "New Wallet",
-        "icon": "Dashboard"
-      },
-
-      {
-        "sliceName": "users",
-        "entity": "users",
-        "title": "Users",
-        "subtitle": "subtitle",
-        "navbarTitle": "User",
-        "link": "/dashboard/users",
-        "createButton": "New User",
-        "icon": "Dashboard"
-      },
-      {
-        "sliceName": "owners",
-        "entity": "owners",
-        "title": "owners",
-        "subtitle": "subtitle",
-        "navbarTitle": "Owners",
-        "link": "/dashboard/owners",
-        "createButton": "New Owner",
-        "icon": "Dashboard"
-      }
-    ]
-  }
+	{
+		"name": "Board",
+		"roles": [
+			"admin",
+			"user",
+			"super_admin"
+		],
+		"contents": [
+			{
+				"sliceName": "posts",
+				"entity": "posts",
+				"title": "Posts",
+				"subtitle": "subtitle",
+				"navbarTitle": "posts",
+				"link": "/dashboard/posts",
+				"createButton": "",
+				"icon": "posts"
+			}
+		]
+	},
+	{
+		"name": "main",
+		"roles": [
+			"super_admin",
+			"admin",
+			"user"
+		],
+		"contents": [
+			{
+				"sliceName": "home",
+				"entity": "home",
+				"title": "welcome to dashboard",
+				"subtitle": "subtitle",
+				"navbarTitle": "Dashboard",
+				"link": "/dashboard/home",
+				"createButton": "",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "statistics",
+				"entity": "statistics",
+				"title": "Statistics",
+				"subtitle": "subtitle",
+				"navbarTitle": "Statistics",
+				"link": "/dashboard/statistics",
+				"createButton": "",
+				"icon": "Statistic"
+			},
+			{
+				"sliceName": "notifications",
+				"entity": "notifications",
+				"title": "Notifications",
+				"subtitle": "subtitle",
+				"navbarTitle": "Notifications",
+				"link": "/dashboard/notifications",
+				"createButton": "New Notification",
+				"icon": "Notification"
+			},
+			{
+				"sliceName": "bookmarks",
+				"entity": "bookmarks",
+				"title": "Bookmarks",
+				"subtitle": "subtitle",
+				"navbarTitle": "Bookmark",
+				"link": "/dashboard/bookmarks",
+				"createButton": "New Bookmark",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "comments",
+				"entity": "comments",
+				"title": "Comments",
+				"subtitle": "subtitle",
+				"navbarTitle": "Comment",
+				"link": "/dashboard/comments",
+				"createButton": "New Comment",
+				"icon": "Dashboard",
+				"hide": true
+			}
+		]
+	},
+	{
+		"name": "setups",
+		"roles": [
+			"super_admin",
+			"admin",
+			"user"
+		],
+		"contents": [
+			{
+				"sliceName": "fundRules",
+				"entity": "fundRules",
+				"title": "FundRules",
+				"subtitle": "subtitle",
+				"navbarTitle": "Fund rule",
+				"link": "/dashboard/fundRules",
+				"createButton": "New Fund Rule",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "proposals",
+				"entity": "proposals",
+				"title": "Proposals",
+				"subtitle": "subtitle",
+				"navbarTitle": "Proposal",
+				"link": "/dashboard/proposals",
+				"createButton": "New Proposal",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "funds",
+				"entity": "funds",
+				"title": "Funds",
+				"subtitle": "subtitle",
+				"navbarTitle": "Fund",
+				"link": "/dashboard/funds",
+				"createButton": "New Fund",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "threads",
+				"entity": "threads",
+				"title": "Threads",
+				"subtitle": "subtitle",
+				"navbarTitle": "Thread",
+				"link": "/dashboard/threads",
+				"createButton": "New Thread",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "instances",
+				"entity": "instances",
+				"title": "Instances",
+				"subtitle": "subtitle",
+				"navbarTitle": "Instance",
+				"link": "/dashboard/instances",
+				"createButton": "New Instance",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "tags",
+				"entity": "tags",
+				"title": "Tags",
+				"subtitle": "subtitle",
+				"navbarTitle": "Tag",
+				"link": "/dashboard/tags",
+				"createButton": "New Tag",
+				"icon": "Dashboard"
+			}
+		]
+	},
+	{
+		"name": "admin",
+		"roles": [
+			"super_admin",
+			"admin"
+		],
+		"contents": [
+			{
+				"sliceName": "spaces",
+				"entity": "spaces",
+				"title": "spaces",
+				"subtitle": "subtitle",
+				"navbarTitle": "spaces",
+				"link": "/dashboard/spaces",
+				"createButton": "New Space",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "users",
+				"entity": "users",
+				"title": "Users",
+				"subtitle": "subtitle",
+				"navbarTitle": "User",
+				"link": "/dashboard/users",
+				"createButton": "New User",
+				"icon": "Dashboard"
+			}
+		]
+	},
+	{
+		"name": "Sensitive",
+		"roles": [
+			"super_admin"
+		],
+		"contents": [
+			{
+				"sliceName": "wallets",
+				"entity": "wallets",
+				"title": "Wallets",
+				"subtitle": "subtitle",
+				"navbarTitle": "Wallets",
+				"link": "/dashboard/wallets",
+				"createButton": "New Wallet",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "userSettings",
+				"entity": "userSettings",
+				"title": "UserSettings",
+				"subtitle": "subtitle",
+				"navbarTitle": "User setting",
+				"link": "/dashboard/userSettings",
+				"createButton": "",
+				"icon": "Dashboard"
+			},
+			{
+				"sliceName": "owners",
+				"entity": "owners",
+				"title": "owners",
+				"subtitle": "subtitle",
+				"navbarTitle": "Owners",
+				"link": "/dashboard/owners",
+				"createButton": "New Owner",
+				"icon": "Dashboard"
+			}
+		]
+	}
 ]
