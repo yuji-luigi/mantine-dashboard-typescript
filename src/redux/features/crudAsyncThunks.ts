@@ -81,9 +81,10 @@ export const updateCrudDocument = createAsyncThunk(
   'crud/updateDocument',
   async ({ entity, updateData, documentId, parentId }: UpdateCrudPayload) => {
     /** parentId ? then linkedChildren endpoint. else case update normally */
-    const endpoint = !parentId
-      ? `${entity}/${documentId}`
-      : `/linkedChildren/${entity}/${parentId}`;
+    const endpoint = `${entity}/${documentId}`;
+    // const endpoint = !parentId
+    //   ? `${entity}/${documentId}`
+    //   : `/linkedChildren/${entity}/${parentId}`;
     const res = await axiosInstance.put(endpoint, updateData);
     const payload = {
       entity: res.data.collection,
