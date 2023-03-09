@@ -27,6 +27,7 @@ interface FormFieldInterface {
     | 'date'
     | 'date-range'
     | 'attachment'
+    | 'dropzone'
     // | 'link-children'
     | 'color';
 
