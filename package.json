@@ -14,6 +14,7 @@
     "@emotion/server": "^11.10.0",
     "@mantine/core": "^6.0.0",
     "@mantine/dates": "^6.0.0",
+    "@mantine/dropzone": "^6.0.1",
     "@mantine/ds": "^6.0.0",
     "@mantine/form": "^6.0.0",
     "@mantine/hooks": "^6.0.0",
