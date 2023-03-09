@@ -3,6 +3,7 @@
  */
 
 import {
+  default as TablerIcon,
   Icon2fa as Authentication,
   IconBellRinging as Notification,
   IconDashboard as Dashboard,
@@ -26,36 +27,12 @@ import {
   IconTag as Tag,
   IconAlertCircle as Alert,
   IconX as Close,
-  Icon,
+  IconPlus as Plus,
+  IconArticle as Article,
+  IconMessageDots as MessageDots,
 } from '@tabler/icons-react';
 
-// type IconIndexTypes =
-//   | 'bookmarks'
-//   | 'comments'
-//   | 'buildings'
-//   | 'funds'
-//   | 'fundRules'
-//   | 'instances'
-//   | 'proposals'
-//   | 'tags'
-//   | 'threads'
-//   | 'userSettings'
-//   | 'authentication'
-//   | 'notifications'
-//   | 'home'
-//   | 'database'
-//   | 'security'
-//   | 'statistics'
-//   | 'key'
-//   | 'receipt'
-//   | 'cog'
-//   | 'logout'
-//   | 'switch'
-//   | 'user'
-//   | 'fundRules'
-//   | 'alert';
-
-export const Icons: Record<IconIndexTypes, Icon> = {
+export const Icons /* : Record<IconIndexTypes, Icon> */ = {
   authentication: Authentication,
   notifications: Notification,
   home: Dashboard,
@@ -80,7 +57,11 @@ export const Icons: Record<IconIndexTypes, Icon> = {
   alert: Alert,
   buildings: Building,
   close: Close,
-};
+  plus: Plus,
+  article: Article,
+  messageDots: MessageDots,
+  TablerIcon,
+} as const;
 
 // export {
 //   Icon2fa as authentication,
