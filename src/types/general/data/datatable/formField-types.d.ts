@@ -65,6 +65,12 @@ interface FormFieldInterface {
   /** when defined: show the defaultValue on the dataTable.
    */
   priority: number;
+
+  /**
+   * determines in which formField(table column) can be found the dropzone's file url
+   * since this current field doesn't have the file url. it should be string or string[]
+   * */
+  preview?: string;
 }
 
 interface SelectOption extends React.ComponentPropsWithoutRef<'div'> {
