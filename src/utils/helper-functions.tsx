@@ -140,7 +140,7 @@ export const getDefaultValues = (
     /** define path field.name or field.id */
     const path = field.name || field.id;
 
-    /**
+    /**§
      *  define case there is a data in path
      *  specifically when passing the crudDocument.
      *  to populate formFields.
@@ -159,6 +159,11 @@ export const getDefaultValues = (
             : /** otherwise set only id as defaultValue */
               crudDocument[path]?._id || ''
         );
+
+        if (field.type === 'dropzone') {
+          newObj.dropzone = { [path]: crudDocument[path] };
+        }
+
         return newObj;
       }
       if (parentId) {
@@ -193,6 +198,13 @@ export const getDefaultValues = (
     if (field.type === 'number') {
       obj[path] = crudDocument?.[path] || 0;
       return obj;
+    }
+    if (field.type === 'dropzone') {
+      // set id of the file
+      obj[path] = { [path]: crudDocument[path] };
+      // set file preview url
+      obj.preview = { [path]: crudDocument[field.preview!] || {} };
+      obj.dropzone = { [path]: crudDocument[field.preview!] || {} };
     }
     obj[path] = crudDocument?.[path] || '';
     return obj;

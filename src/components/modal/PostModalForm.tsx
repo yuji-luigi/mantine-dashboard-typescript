@@ -3,9 +3,11 @@ import { Button, createStyles, Drawer } from '@mantine/core';
 
 import FormFields from '../input/FormFields';
 import formFields from '../../../json/dataTable/formfields';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useMemo } from 'react';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
-import { useForm } from '@mantine/form';
+import { Form, useForm } from '@mantine/form';
+import { FormCustom } from '../../context/FormContextProvider';
+import { getDefaultValues } from '../../utils/helper-functions';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -22,13 +24,10 @@ const PostModalForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const sectionFormFields: FormFieldInterface[] = formFields.threads;
   const { createCrudDocument: addPost } = useCrudSliceStore();
+  const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
   const form = useForm<Record<string, unknown>>({
-    // TODO: Make Validate function and set by string value from formField.
-    // validate: 'email' uses this email validator.
-    // validate: {
-    //   email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    // },
+    initialValues,
   });
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();

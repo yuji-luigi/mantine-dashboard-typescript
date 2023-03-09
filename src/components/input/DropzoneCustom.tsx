@@ -1,15 +1,25 @@
 import { Group, Text, useMantineTheme, rem } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { useForm } from '@mantine/form';
+import { UseFormReturnType } from '@mantine/form';
 
-export function DropzoneCustom(props: Partial<DropzoneProps>) {
+interface Props extends Partial<DropzoneProps> {
+  form: UseFormReturnType<Record<string, unknown>>;
+  formField: FormFieldInterface;
+}
+
+export function DropzoneCustom(props: Props) {
   const theme = useMantineTheme();
-  const form = useForm();
+  const { form, formField } = props;
   console.log(form.values);
+  const handleDropFile = (files: File[]) => {
+    console.log('files', files);
+    form.setFieldValue(`dropzone.${formField.name}`, files[0]);
+  };
   return (
     <Dropzone
-      onDrop={(files) => console.log('accepted files', files)}
+      onDrop={handleDropFile}
+      multiple={formField?.multi}
       onReject={(files) => console.log('rejected files', files)}
       maxSize={3 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
