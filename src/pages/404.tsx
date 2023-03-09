@@ -1,4 +1,5 @@
 import { createStyles, Image, Container, Title, Text, Button, SimpleGrid } from '@mantine/core';
+import Link from 'next/link';
 // eslint-disable-next-line import/no-absolute-path
 import image from '/public/images/404-mantine.svg';
 
@@ -51,9 +52,11 @@ export default function NotFoundImage() {
             Page you are trying to open does not exist. You may have mistyped the address, or the
             page has been moved to another URL. If you think this is an error contact support.
           </Text>
-          <Button variant="outline" size="md" mt="xl" className={classes.control}>
-            Get back to home page
-          </Button>
+          <Link href="/dashboard">
+            <Button variant="outline" size="md" mt="xl" className={classes.control}>
+              Get back to home page
+            </Button>
+          </Link>
         </div>
         <Image src={image.src} className={classes.desktopImage} />
       </SimpleGrid>
