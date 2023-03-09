@@ -18,16 +18,18 @@ import { useState } from 'react';
 
 export function HeaderCreationModal() {
   const [opened, { open, close }] = useDisclosure(false);
+  const [modalType, setModalType] = useState<ModalType | null>(null);
   const [section, setSection] = useState<SectionDataJsonWithRoles | null>(null);
 
-  const handleOpenModal = (modalType: ModalType) => {
-    console.log('l');
-    setSection(allSectionArrayWithRoles.find((section) => section.entity === modalType) || null);
+  const handleOpenModal = (type: ModalType) => {
+    console.log(type);
+    setSection(allSectionArrayWithRoles.find((section) => section.entity === type) || null);
+    setModalType(type);
     open();
   };
   return (
     <>
-      <Menu shadow="md" width={250}>
+      <Menu shadow="lg" width={250}>
         <Menu.Target>
           <ActionIcon>
             <Icons.plus />
@@ -75,7 +77,7 @@ export function HeaderCreationModal() {
         </Menu.Dropdown>
       </Menu>
       <Modal opened={opened} onClose={close} title={section?.createButton}>
-        <ModalContent />
+        <ModalContent size="lg" modalType={modalType} />
       </Modal>
     </>
   );
