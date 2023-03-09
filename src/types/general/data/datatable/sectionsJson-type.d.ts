@@ -1,16 +1,35 @@
-
-
 interface SectionDataJson {
-    slice: string;
-    navbar: string;
-    link: string;
-    title: string;
-    subtitle: string;
-    createButton?: boolean;
-}[];
+  sliceName: string;
+  entity: string;
+  title: string;
+  subtitle: string;
+  navbarTitle: string;
+  link: string;
+  createButton: string;
+  icon: string;
+  hide?: boolean;
+}
+[];
+interface SectionDataJsonWithRoles extends SectionDataJson {
+  roles: string[];
+}
+[];
+
+interface a {
+  roles: string[];
+  sliceName: string;
+  entity: string;
+  title: string;
+  subtitle: string;
+  navbarTitle: string;
+  link: string;
+  createButton: string;
+  icon: string;
+  hide?: undefined;
+}
 
 interface ISectionDataObject {
-  [key:  Sections]: SectionDataJson
+  [key: Sections]: SectionDataJson;
   // home: SectionDataJson
   // statistics: SectionDataJson
   // notifications: SectionDataJson
@@ -38,7 +57,6 @@ interface ISectionDataObject {
 //   };
 // }
 
-
 // type FieldType =
 //   | "text"
 //   | "long-text"
@@ -53,7 +71,7 @@ interface ISectionDataObject {
 //   | "attachment"
 //   | "color-picker";
 
-type CellStyles = "badge" | "";
+type CellStyles = 'badge' | '';
 // type FieldType = FieldTypes[FieldTypes[keyof typeof FieldTypes]];
 
 type FormFieldsType = {
