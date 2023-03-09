@@ -48,8 +48,8 @@ export function CardArticleSmall({
           </Text>
           <Group noWrap spacing="xs">
             <Group spacing="xs" noWrap>
-              <Avatar size={20} src={author.avatar} />
-              <Text size="xs">{author.name}</Text>
+              <Avatar size={20} src={author?.avatar || ''} />
+              <Text size="xs">{author?.name || 'hh'}</Text>
             </Group>
             <Text size="xs" color="dimmed">
               •

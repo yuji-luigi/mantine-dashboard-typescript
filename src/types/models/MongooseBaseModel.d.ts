@@ -4,4 +4,6 @@ interface MongooseBaseModel<ChildModel> {
   description?: string;
   children?: Array<ChildModel>;
   parent?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

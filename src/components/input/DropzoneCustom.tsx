@@ -11,7 +11,6 @@ interface Props extends Partial<DropzoneProps> {
 export function DropzoneCustom(props: Props) {
   const theme = useMantineTheme();
   const { form, formField } = props;
-  console.log(form.values);
   const handleDropFile = (files: File[]) => {
     console.log('files', files);
     form.setFieldValue(`dropzone.${formField.name}`, files[0]);

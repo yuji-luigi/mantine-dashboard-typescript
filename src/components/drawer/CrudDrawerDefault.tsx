@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-pascal-case */
 import { Button, createStyles, Drawer } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { cleanNotifications, hideNotification, showNotification } from '@mantine/notifications';
+import {
+  cleanNotifications,
+  hideNotification,
+  notifications,
+  showNotification,
+} from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState, useMemo } from 'react';
 import formFields from '../../../json/dataTable/formfields';
@@ -146,7 +151,7 @@ export function CrudDrawerDefault() {
       }
       if (crudError) {
         hideNotification('submit');
-        showNotification(errorNotificationData(crudError, 5000));
+        notifications.show(errorNotificationData(crudError, 5000));
         setSubmitting(false);
         sleep(5000).then(() => cleanNotifications());
       }

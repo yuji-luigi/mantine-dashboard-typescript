@@ -77,7 +77,7 @@ export function HeaderCreationModal() {
         </Menu.Dropdown>
       </Menu>
       <Modal opened={opened} onClose={close} title={section?.createButton}>
-        <ModalContent size="lg" modalType={modalType} />
+        <ModalContent modalType={modalType} />
       </Modal>
     </>
   );

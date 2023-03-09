@@ -1,6 +1,6 @@
 import { AspectRatio, Box, Card, createStyles, Text, Image } from '@mantine/core';
 import React from 'react';
-import { TypeMock } from '../../sections/homepage/posts/PostsPage';
+import { TypeMock } from '../../sections/homepage/posts/PostsPageComponent';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -47,7 +47,7 @@ const CardArticleImageBig = ({ article }: { article: TypeMock }) => {
         </Text>
       </Box>
       <Box sx={{ height: 100 }}>
-        <Text color="dimmed" size="xs" ltransform="uppercase" align="right" weight={700} mt="md">
+        <Text color="dimmed" size="xs" transform="uppercase" align="right" weight={700} mt="md">
           {article.date}
         </Text>
       </Box>

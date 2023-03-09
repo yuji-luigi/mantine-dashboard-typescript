@@ -3,11 +3,12 @@ import { Button, createStyles, Drawer } from '@mantine/core';
 
 import FormFields from '../input/FormFields';
 import formFields from '../../../json/dataTable/formfields';
-import { useState, FormEvent, useMemo } from 'react';
+import { useState, FormEvent, useMemo, useEffect } from 'react';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { Form, useForm } from '@mantine/form';
 import { FormCustom } from '../../context/FormContextProvider';
 import { getDefaultValues } from '../../utils/helper-functions';
+import { notifications } from '@mantine/notifications';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -23,20 +24,21 @@ const PostModalForm = () => {
   const { classes } = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const sectionFormFields: FormFieldInterface[] = formFields.threads;
-  const { createCrudDocument: addPost } = useCrudSliceStore();
+  const { createCrudDocument } = useCrudSliceStore();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
-  const form = useForm<Record<string, unknown>>({
+  const form = useForm({
     initialValues,
   });
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // showNotification({
-    //   id: 'submit',
-    //   message: 'Sending data to the server.',
-    //   autoClose: false,
-    // });
-    setSubmitting(true);
+    createCrudDocument({ entity: 'threads', newDocument: form.values });
+    notifications.show({
+      id: 'submit',
+      message: 'Sending data to the server.',
+      autoClose: false,
+    });
+    // setSubmitting(true);
 
     /** Create new Document */
 

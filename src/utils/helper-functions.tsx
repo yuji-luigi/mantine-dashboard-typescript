@@ -130,11 +130,11 @@ export function _set(
 //   return getCsvPrimitive({ array, obj: newData || '' });
 // };
 
-export const getDefaultValues = (
+export function getDefaultValues(
   formFields: FormFieldInterface[],
   crudDocument: AllModels = {},
   parentId?: string
-) => {
+) {
   /** define defauldValueObj by reduce */
   const defaultValueObj = formFields?.reduce<Record<string, any>>((obj, field) => {
     /** define path field.name or field.id */
@@ -211,4 +211,4 @@ export const getDefaultValues = (
   }, {});
   // return { name: 'jijij', address: 'static' };
   return defaultValueObj || {};
-};
+}

@@ -18,6 +18,7 @@ import { UserCard } from '../../../components/card/UserCard';
 import { CardArticleSmall } from '../../../components/card/CardArticleSmall';
 import { CardArticleImageDescFooter } from '../../../components/card/CardArticle';
 import CardArticleImageBig from '../../../components/card/CardArticleImageBig';
+import axiosInstance from '../../../utils/axios-instance';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const mockdata = [
   {
@@ -129,7 +130,7 @@ const mock2 = [
   },
 ];
 
-export default function PostsPage() {
+export default function PostsPage({ threads }: { threads: Thread[] }) {
   const { data, error } = useSWR('/api/data?fileName=CardArticleSmall', fetcher);
   const { data: articleCardData, error: artucleCardDat } = useSWR(
     '/api/data?fileName=articleCard',
@@ -173,6 +174,16 @@ export default function PostsPage() {
         {/* {cards} */}
         {/* {otherCards} */}
         {VACards}
+        {threads.map((thread) => (
+          <CardArticleSmall
+            key={thread.title}
+            author={thread.createdBy}
+            category={thread.tag?.toString() || 'tech'}
+            date={thread.createdAt?.toString() || '12/23'}
+            image={thread.attachments?.toString() || ''}
+            title={thread.title}
+          />
+        ))}
         {/* {articleCards} */}
       </SimpleGrid>
     </Container>
