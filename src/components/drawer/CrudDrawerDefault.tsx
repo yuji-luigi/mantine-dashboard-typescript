@@ -5,7 +5,7 @@ import { cleanNotifications, hideNotification, showNotification } from '@mantine
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState, useMemo } from 'react';
 import formFields from '../../../json/dataTable/formfields';
-import { Icons } from '../../data/icons/icons';
+import { Icons } from '../../data/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { getDefaultValues, sleep } from '../../utils/helper-functions';

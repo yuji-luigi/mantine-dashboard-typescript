@@ -1,14 +1,15 @@
 import React, { ReactNode } from 'react';
 import { createStyles, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { HeaderSearch } from './HeaderSearch';
+import { DashboardHeaderSearch } from './DashboardHeaderSearch';
 import { NavbarVertical } from './NavbarVertical';
 import useLayoutContext from '../../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme /* _params, getRef */) => ({
   pageContent: {
     zIndex: 10,
-    display: 'flex',
+    // display: 'flex',
+    // alignItems: 'center',
     paddingTop: 50,
     paddingLeft: 30,
     [theme.fn.largerThan('md')]: {
@@ -25,7 +26,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const paddingSmOpen = isOpen && matches ? { paddingLeft: 320 } : {};
   return (
     <>
-      <HeaderSearch />
+      <DashboardHeaderSearch />
       <div className={classes.pageContent} style={paddingSmOpen}>
         <NavbarVertical />
         {children}

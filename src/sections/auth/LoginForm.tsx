@@ -6,7 +6,7 @@ import { useForm } from '@mantine/form';
 import useAuth from '../../../hooks/useAuth';
 import { LoginFormValues } from '../../types/context/auth/formData';
 
-import { Icons } from '../../data/icons/icons';
+import { Icons } from '../../data/icons';
 
 function LoginForm() {
   const { login } = useAuth();

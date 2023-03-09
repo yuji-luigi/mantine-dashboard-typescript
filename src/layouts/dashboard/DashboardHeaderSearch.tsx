@@ -1,4 +1,4 @@
-import { createStyles, Header, Autocomplete, Group, Burger } from '@mantine/core';
+import { createStyles, Header, Autocomplete, Group, Burger, Button } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -6,6 +6,8 @@ import links from '../../../json/navbar/headerLinks.json';
 import useLayoutContext from '../../../hooks/useLayoutContext';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import { LogoBanner } from '../../components/Banner/LogoBanner';
+import { Icons } from '../../data/icons';
+import { HeaderCreationModal } from '../../components/modal/HeaderCreationModal';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -64,12 +66,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-// interface HeaderSearchProps {
+// interface DashboardHeaderSearchProps {
 //     links: { link: string; label: string }[];
 // }
 export type JSONType = typeof links;
 
-export function HeaderSearch() {
+export function DashboardHeaderSearch() {
   // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
   const { isOpen, toggleBarOpen } = useLayoutContext();
@@ -80,6 +82,9 @@ export function HeaderSearch() {
     </Link>
   ));
 
+  const handleOpenModal = () => {
+    window.alert('open modal');
+  };
   return (
     <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
@@ -87,6 +92,7 @@ export function HeaderSearch() {
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo className={classes.logo} size={28} /> */}
           <LogoBanner transparent />
+          <HeaderCreationModal />
         </Group>
         <Group>
           <Group ml={50} spacing={5} className={classes.links}>

@@ -1,4 +1,4 @@
-import { Icons } from '../icons/icons';
+import { Icons } from '../icons';
 
 export const errorNotificationData = (data: string, ms: number = 1000) => {
   return {
