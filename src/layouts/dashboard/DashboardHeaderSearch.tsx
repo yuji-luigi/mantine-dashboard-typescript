@@ -20,6 +20,7 @@ const useStyles = createStyles((theme) => ({
     height: 56,
     display: 'flex',
     justifyContent: 'space-between',
+    // justifyContent: 'flex-start',
     alignItems: 'center',
   },
 
@@ -82,9 +83,6 @@ export function DashboardHeaderSearch() {
     </Link>
   ));
 
-  const handleOpenModal = () => {
-    window.alert('open modal');
-  };
   return (
     <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
@@ -92,18 +90,18 @@ export function DashboardHeaderSearch() {
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo className={classes.logo} size={28} /> */}
           <LogoBanner transparent />
-          <HeaderCreationModal />
-        </Group>
-        <Group>
-          <Group ml={50} spacing={5} className={classes.links}>
-            {items}
-          </Group>
           <Autocomplete
             className={classes.search}
             placeholder="Search"
             icon={<IconSearch size={16} stroke={1.5} />}
             data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
           />
+          <Group ml={5} spacing={5} className={classes.links}>
+            {items}
+          </Group>
+          <HeaderCreationModal />
+        </Group>
+        <Group>
           <ColorSchemeToggle size="lg" />
         </Group>
       </div>
