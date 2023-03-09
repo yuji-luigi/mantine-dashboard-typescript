@@ -91,7 +91,7 @@ const FormFields = ({
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === 'dropzone' && <DropzoneCustom />}
+      {formField.type === 'dropzone' && <DropzoneCustom form={form} formField={formField} />}
       {/* {formField.type === 'date-range' && (
         <DateRangePicker
           name={formField.name}
