@@ -13,12 +13,20 @@ interface FormValues {
 // useFormContext hook return form object that was previously set in FormProvider
 // useForm hook works the same way as useForm exported from the package but has predefined type
 
-function Form<FormDefaultValues>({ children }: { children: ReactNode }) {
+export function FormCustom<FormDefaultValues>({
+  children,
+  className,
+  onSubmit,
+}: {
+  children: ReactNode;
+  className?: string;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) {
   const [FormProvider, useFormContext, useForm] = createFormContext<FormDefaultValues>();
-  const form = useFormContext();
+  const form = useForm();
   return (
     <FormProvider form={form}>
-      <form onSubmit={form.onSubmit(() => {})}>{children}</form>
+      <form>{children}</form>
     </FormProvider>
   );
 }
