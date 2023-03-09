@@ -14,7 +14,7 @@
 				"subtitle": "subtitle",
 				"navbarTitle": "posts",
 				"link": "/dashboard/posts",
-				"createButton": "",
+				"createButton": "New post",
 				"icon": "posts"
 			}
 		]
