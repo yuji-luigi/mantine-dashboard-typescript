@@ -1,9 +1,13 @@
 interface Thread extends MongooseBaseModel<null> {
   title: string;
-  body?: string | undefined;
-  tag: string[] | [];
+  images: string[] | IUpload[] | [];
+  imagesUrl: string[] | [];
+  description: string;
   attachments?: string[] | undefined;
-  tags?: string[] | ITag[];
-  building?: string | Building;
-  createdBy: string | IUser;
+  attachmentsUrl?: string[] | undefined;
+  tags?: string[];
+  rating?: number;
+  building?: string | IBuilding;
+  createdBy: IUser | string;
+  owner: IOwner | string;
 }

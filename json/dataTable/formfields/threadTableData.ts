@@ -9,8 +9,8 @@ export const threadTableData: Array<FormFieldInterface> = [
     priority: 1,
   },
   {
-    id: 'body',
-    name: 'body',
+    id: 'description',
+    name: 'description',
     label: 'Texts',
     placeholder: 'Have you ever seen the cat with 6 colors?...',
     type: 'long-text',
