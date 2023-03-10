@@ -32,7 +32,7 @@ export function CardArticleSmall({
   category,
   title,
   date,
-  author,
+  author = { name: 'not registered user', avatar: '' },
 }: CardArticleImageDescFooterVerticalProps) {
   const { classes } = useStyles();
   return (
@@ -48,7 +48,7 @@ export function CardArticleSmall({
           </Text>
           <Group noWrap spacing="xs">
             <Group spacing="xs" noWrap>
-              <Avatar size={20} src={author?.avatar || ''} />
+              <Avatar size={20} src={''} />
               <Text size="xs">{author?.name || 'hh'}</Text>
             </Group>
             <Text size="xs" color="dimmed">

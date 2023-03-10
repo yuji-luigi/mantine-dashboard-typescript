@@ -63,14 +63,14 @@ export function CardArticleImageDescFooter({
   link,
   title,
   description,
-  author,
+  author = { name: 'not registered user', image: '' },
   rating,
   sx,
   ...others
 }: CardArticleImageDescFooterProps &
   Omit<React.ComponentPropsWithoutRef<'div'>, keyof CardArticleImageDescFooterProps>) {
   const { classes, cx, theme } = useStyles();
-  const linkProps = { href: link, target: '_blank', rel: 'noopener noreferrer' };
+  const linkProps = { href: `posts/${link}`, target: '_blank', rel: 'noopener noreferrer' };
 
   return (
     <Card withBorder radius="md" className={cx(classes.card, className)} {...others}>
@@ -94,7 +94,7 @@ export function CardArticleImageDescFooter({
 
       <Group position="apart" className={classes.footer}>
         <Center>
-          <Avatar src={author.image} size={24} radius="xl" mr="xs" />
+          <Avatar src={''} size={24} radius="xl" mr="xs" />
           <Text fz="sm" inline>
             {author.name}
           </Text>
