@@ -16,7 +16,7 @@ import {
 // import { UserCard } from '../../../components/card/UserCard';
 import { UserCard } from '../../../components/card/UserCard';
 import { CardArticleSmall } from '../../../components/card/CardArticleSmall';
-import { CardArticleImageDescFooter } from '../../../components/card/CardArticle';
+import { CardArticleImageDescFooter } from '../../../components/card/CardArticleImageDescFooter';
 import CardArticleImageBig from '../../../components/card/CardArticleImageBig';
 import axiosInstance from '../../../utils/axios-instance';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -178,10 +178,24 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
           <CardArticleSmall
             key={thread.title}
             author={thread.createdBy}
-            category={thread.tag?.toString() || 'tech'}
+            category={thread.tags?.toString() || 'tech'}
             date={thread.createdAt?.toString() || '12/23'}
             image={thread.attachments?.toString() || ''}
             title={thread.title}
+          />
+        ))}
+
+        {threads.map((thread) => (
+          <CardArticleImageDescFooter
+            key={thread.title}
+            className={''}
+            image={thread.imagesUrl[0]}
+            link={thread._id}
+            title={thread.title}
+            description={thread.description}
+            author={thread.createdBy}
+            rating={'40' /* thread.rating ||  */}
+            sx={{ width: 300 }}
           />
         ))}
         {/* {articleCards} */}
