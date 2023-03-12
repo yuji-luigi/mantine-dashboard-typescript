@@ -9,6 +9,14 @@ import { Form, useForm } from '@mantine/form';
 import { FormCustom } from '../../context/FormContextProvider';
 import { getDefaultValues } from '../../utils/helper-functions';
 import { notifications } from '@mantine/notifications';
+import axiosInstance from '../../utils/axios-instance';
+import CreationToolBar, { ReturnTypeCustom } from '../input/CreationToolBar';
+
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+};
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -29,9 +37,18 @@ const PostModalForm = () => {
 
   const form = useForm({
     initialValues,
-  });
+  }) as ReturnTypeCustom;
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', form.values.media.files[0]);
+    const rawData = await axiosInstance.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/upload-files`,
+      formData,
+      config
+    );
+    const data = rawData.data.data;
     createCrudDocument({ entity: 'threads', newDocument: form.values });
     notifications.show({
       id: 'submit',
@@ -55,9 +72,15 @@ const PostModalForm = () => {
           minRows={formField.type === 'long-text' ? 10 : 3}
         />
       ))}
-      <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
-        Add Post!
-      </Button>
+      <CreationToolBar
+        formFields={sectionFormFields}
+        form={form}
+        submitButton={
+          <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
+            Add Post!
+          </Button>
+        }
+      />
     </form>
   );
 };

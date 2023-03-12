@@ -28,10 +28,22 @@ export const threadTableData: Array<FormFieldInterface> = [
   },
 
   {
+    id: 'images',
+    name: 'images',
+    label: 'Photos',
+    type: 'image',
+    multi: true,
+    // type: 'dropzone',
+    selectValues: ['name'],
+    required: false,
+    priority: 2,
+  },
+  {
     id: 'attachments',
     name: 'attachments',
+    multi: true,
     label: 'Attachments',
-    type: 'dropzone',
+    type: 'attachment',
     selectValues: ['name'],
     required: false,
     priority: 2,

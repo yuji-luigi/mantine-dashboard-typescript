@@ -1,21 +1,25 @@
 import { Select, Switch, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
-import React, { CSSProperties } from 'react';
-
+import React, { CSSProperties, ReactNode } from 'react';
+import Image from 'next/image';
 import { DatePicker } from '@mantine/dates';
 import { useGetSelectOptions } from '../../../hooks/form-related/useGetSelectOptions';
 import { Dropzone } from '@mantine/dropzone';
-import { DropzoneCustom } from './DropzoneCustom';
+import { DropzoneCustomImage } from './DropzoneCustomImage';
+import { DropzoneCustomButton } from './DropzoneCustomButton';
+import CreationToolBar from './CreationToolBar';
 interface Props {
   formField: FormFieldInterface;
   // initialValues: Record<string, any>;
   minRows?: number;
   form: UseFormReturnType<Record<string, unknown>>;
+  // submitButton?: ReactNode;
 }
 const FormFields = ({
   formField,
   // initialValues,
   form,
+  // submitButton,
   ...others
 }: Props) => {
   const options = useGetSelectOptions(formField);
@@ -43,6 +47,7 @@ const FormFields = ({
           label={formField.label}
           placeholder={formField.placeholder}
           size="md"
+          mt={10}
           {...others}
           {...form.getInputProps(formField.name || formField.id)}
         />
@@ -54,6 +59,7 @@ const FormFields = ({
           label={formField.label}
           placeholder={formField.placeholder}
           size="md"
+          mt={10}
           {...others}
           {...form.getInputProps(formField.name || formField.id)}
         />
@@ -65,6 +71,7 @@ const FormFields = ({
           label={formField.label}
           placeholder={formField.placeholder}
           size="md"
+          mt={10}
           {...others}
           {...form.getInputProps(formField.name || formField.id)}
         />
@@ -75,6 +82,7 @@ const FormFields = ({
           // label={formField.label}
           placeholder={formField.placeholder}
           size="md"
+          mt={10}
           {...others}
           {...form.getInputProps(formField.name || formField.id)}
         />
@@ -91,7 +99,6 @@ const FormFields = ({
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === 'dropzone' && <DropzoneCustom form={form} formField={formField} />}
       {/* {formField.type === 'date-range' && (
         <DateRangePicker
           name={formField.name}

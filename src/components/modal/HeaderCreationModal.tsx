@@ -22,14 +22,13 @@ export function HeaderCreationModal() {
   const [section, setSection] = useState<SectionDataJsonWithRoles | null>(null);
 
   const handleOpenModal = (type: ModalType) => {
-    console.log(type);
     setSection(allSectionArrayWithRoles.find((section) => section.entity === type) || null);
     setModalType(type);
     open();
   };
   return (
     <>
-      <Menu shadow="lg" width={250}>
+      <Menu shadow="lg">
         <Menu.Target>
           <ActionIcon>
             <Icons.plus />
@@ -76,7 +75,7 @@ export function HeaderCreationModal() {
         </Menu.Item> */}
         </Menu.Dropdown>
       </Menu>
-      <Modal opened={opened} onClose={close} title={section?.createButton}>
+      <Modal opened={opened} onClose={close} size="lg" title={section?.createButton}>
         <ModalContent modalType={modalType} />
       </Modal>
     </>

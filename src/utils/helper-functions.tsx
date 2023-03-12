@@ -160,8 +160,8 @@ export function getDefaultValues(
               crudDocument[path]?._id || ''
         );
 
-        if (field.type === 'dropzone') {
-          newObj.dropzone = { [path]: crudDocument[path] };
+        if (field.type === 'attachment' || field.type === 'image') {
+          newObj.media = { [path]: crudDocument[path] };
         }
 
         return newObj;
@@ -199,16 +199,17 @@ export function getDefaultValues(
       obj[path] = crudDocument?.[path] || 0;
       return obj;
     }
-    if (field.type === 'dropzone') {
+    if (field.type === 'attachment' || field.type === 'image') {
       // set id of the file
-      obj[path] = { [path]: crudDocument[path] };
+      obj.media = { [path]: crudDocument[path] };
+      return obj;
       // set file preview url
-      obj.preview = { [path]: crudDocument[field.preview!] || {} };
-      obj.dropzone = { [path]: crudDocument[field.preview!] || {} };
+      // obj.media = { [path]: crudDocument[field.preview!] || {} };
     }
+
     obj[path] = crudDocument?.[path] || '';
     return obj;
   }, {});
-  // return { name: 'jijij', address: 'static' };
+  console.log(defaultValueObj);
   return defaultValueObj || {};
 }

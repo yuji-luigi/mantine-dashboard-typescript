@@ -30,6 +30,8 @@ import {
   IconPlus as Plus,
   IconArticle as Article,
   IconMessageDots as MessageDots,
+  IconPhoto as Photo,
+  IconPaperclip as Paperclip,
 } from '@tabler/icons-react';
 
 export const Icons /* : Record<IconIndexTypes, Icon> */ = {
@@ -60,6 +62,8 @@ export const Icons /* : Record<IconIndexTypes, Icon> */ = {
   plus: Plus,
   article: Article,
   messageDots: MessageDots,
+  photo: Photo,
+  paperclip: Paperclip,
   TablerIcon,
 } as const;
 
