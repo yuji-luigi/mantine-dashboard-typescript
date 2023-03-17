@@ -11,6 +11,7 @@ import {
   AspectRatio,
   Group,
   Box,
+  Grid,
 } from '@mantine/core';
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 // import { UserCard } from '../../../components/card/UserCard';
@@ -130,7 +131,23 @@ const mock2 = [
   },
 ];
 
+const useStyles = createStyles((theme) => ({
+  pinContainer: {
+    // position: 'absolute',
+    width: '100%',
+    // left: '50%',
+    // transform: 'translateX(-50%)',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, 400px)',
+    gridAutoRows: 'minmax(50px, auto)',
+    justifyContent: 'center',
+    gap: 10,
+  },
+}));
+
 export default function PostsPage({ threads }: { threads: Thread[] }) {
+  const { classes, cx, theme } = useStyles();
+
   const { data, error } = useSWR('/api/data?fileName=CardArticleSmall', fetcher);
   const { data: articleCardData, error: artucleCardDat } = useSWR(
     '/api/data?fileName=articleCard',
@@ -170,8 +187,10 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
     ));
   return (
     <Container py="xl">
-      <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        {/* {cards} */}
+      <Box
+        className={classes.pinContainer} /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
+      >
+        {/*  {cards} */}
         {/* {otherCards} */}
         {VACards}
         {threads.map((thread) => (
@@ -180,7 +199,7 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
             author={thread.createdBy}
             category={thread.tags?.toString() || 'tech'}
             date={thread.createdAt?.toString() || '12/23'}
-            image={thread.attachments?.toString() || ''}
+            image={thread.images[0].url}
             title={thread.title}
           />
         ))}
@@ -189,7 +208,7 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
           <CardArticleImageDescFooter
             key={thread.title}
             className={''}
-            image={thread.imagesUrl[0]}
+            image={thread.images[0].url}
             link={thread._id}
             title={thread.title}
             description={thread.description}
@@ -199,7 +218,7 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
           />
         ))}
         {/* {articleCards} */}
-      </SimpleGrid>
+      </Box>
     </Container>
   );
 }
