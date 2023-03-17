@@ -9,7 +9,7 @@ import PreviewFileZone from './PreviewFileZone';
 
 export interface ReturnTypeCustom extends UseFormReturnType<Record<string, unknown>> {
   values: {
-    media: {
+    media?: {
       [key: string]: File[];
     };
   };
@@ -40,7 +40,7 @@ function CreationToolBar({ form, formFields, submitButton }: Props) {
   const uploadFormFields = formFields.filter(
     (field) => field.type === 'image' || field.type === 'attachment'
   );
-  const files = form.values.media[imageFormField?.name || ''] || [];
+  const files = form.values.media?.[imageFormField?.name || ''] || [];
   //todo: need to iterate over the formFields and create a upload icon for each one
   return (
     <Stack>

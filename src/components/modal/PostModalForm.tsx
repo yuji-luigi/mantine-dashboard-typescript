@@ -11,11 +11,12 @@ import { getDefaultValues } from '../../utils/helper-functions';
 import { notifications } from '@mantine/notifications';
 import axiosInstance from '../../utils/axios-instance';
 import CreationToolBar, { ReturnTypeCustom } from '../input/CreationToolBar';
-
+import { UPLOAD_FOLDERS } from '../../lib/enums';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
   },
+  // withCredentials: true,
 };
 
 const useStyles = createStyles(() => ({
@@ -41,15 +42,27 @@ const PostModalForm = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', form.values.media.files[0]);
-    const rawData = await axiosInstance.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/upload-files`,
-      formData,
-      config
-    );
-    const data = rawData.data.data;
-    createCrudDocument({ entity: 'threads', newDocument: form.values });
+    // const formData = new FormData();
+    // formData.append('file', form.values.media.files[0]);
+    // const rawData = await axiosInstance.post(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/upload-files`,
+    //   { ...form.values.media, folderName: UPLOAD_FOLDERS.threads },
+    //   config
+    // );
+    // const data = rawData.data.data;
+    const media = structuredClone(form.values.media);
+
+    const reqBody = {
+      ...media,
+      folderName: UPLOAD_FOLDERS.threads,
+      ...form.values,
+      media: undefined,
+    };
+    createCrudDocument({
+      entity: 'threads',
+      newDocument: reqBody,
+      config,
+    });
     notifications.show({
       id: 'submit',
       message: 'Sending data to the server.',
@@ -59,7 +72,7 @@ const PostModalForm = () => {
 
     /** Create new Document */
 
-    form.reset();
+    // form.reset();
   };
   return (
     <form className={classes.form} onSubmit={onSubmit}>
