@@ -17,6 +17,14 @@ const useStyles = createStyles((theme) => ({
   card: {
     position: 'relative',
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    // maxWidth: 350,
+    maxWidth: 400,
+    // width: 300,
+    // height: 300,
+    // flex: '1 auto',
+    padding: 10,
+    border: '1px solid red',
+    gridRowEnd: 'span 2',
   },
 
   rating: {
@@ -71,7 +79,6 @@ export function CardArticleImageDescFooter({
   Omit<React.ComponentPropsWithoutRef<'div'>, keyof CardArticleImageDescFooterProps>) {
   const { classes, cx, theme } = useStyles();
   const linkProps = { href: `posts/${link}`, target: '_blank', rel: 'noopener noreferrer' };
-
   return (
     <Card withBorder radius="md" className={cx(classes.card, className)} {...others}>
       <Card.Section>

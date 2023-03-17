@@ -1,8 +1,15 @@
-import { createStyles, Card, Image, Avatar, Text, Group } from '@mantine/core';
+import { createStyles, Card, Image, Avatar, Text, Group, Box } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.white,
+    maxWidth: 400,
+    // width: 300,
+    height: 150,
+    // flex: '1 auto',
+    padding: 10,
+    border: '1px solid red',
+    gridRowEnd: 'span 1',
   },
 
   title: {
