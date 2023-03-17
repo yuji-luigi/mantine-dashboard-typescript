@@ -8,6 +8,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_PATH } from '../../path/api-routes';
 import axiosInstance, { AxiosResData } from '../../utils/axios-instance';
 
+export const HTTP_MULTIPART_CONFIG = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+  withCredentials: true,
+};
+
 export const fetchCrudDocuments = createAsyncThunk(
   'cruds/fetchCrudDocuments',
   async ({ entity, query, isChildrenTree = false }: FetchCrudPayload) => {
@@ -40,16 +47,23 @@ export const fetchLinkedChildren = createAsyncThunk(
   }
 );
 
+interface AddCrudPayloadWithConfig extends AddCrudPayload {
+  config?: {
+    headers: {
+      'Content-Type': 'multipart/form-data';
+    };
+  };
+}
 /**
  * addCrudDocument handles regular crud creation and linkedChildren creation
  * ! Todo: should be separate the functions
  * */
 export const addCrudDocument = createAsyncThunk(
   'crud/addDocument',
-  async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
+  async ({ entity, newDocument, parentId, query = '', config }: AddCrudPayloadWithConfig) => {
     /** handle endpoint by checking if parentId is passed */
     const endPoint = !parentId ? entity : `${API_PATH.linkedChildren}/${entity}/${parentId}`;
-    const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
+    const res = await axiosInstance.post(`${endPoint}${query}`, newDocument, config);
     const payload = {
       entity: res.data.collection,
       documents: res.data.data,
