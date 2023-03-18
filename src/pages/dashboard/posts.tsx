@@ -1,4 +1,6 @@
 import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
+import fetch from 'node-fetch';
+
 import { GetServerSidePropsContext } from 'next';
 import { ReactElement } from 'react';
 import Layout from '../../layouts';
@@ -16,14 +18,17 @@ PostsPage.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const jwtToken = context.req.cookies.jwt;
   // const res = await axiosInstance.get(`/api/v1/cms`, { params: { section: 'home' } });
-  const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/public/threads`, {
+  console.log(process.env.NEXT_PUBLIC_API_URL || 'env.NEXT_PUBLIC_API_URL: undefined');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/threads`, {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 
-  const threads = res.data.data || [];
+  const data = (await res.json()) as Record<string, any>;
+
+  const threads = data.data || [];
 
   return {
     props: {

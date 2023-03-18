@@ -23,8 +23,6 @@ import GuestGuard from '../../guards/GuestGuard';
 import { showNotification } from '@mantine/notifications';
 import { Icons } from '../../data/icons';
 
-// const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
-
 const initialValues: RegisterData = {
   email: '',
   password: '',
