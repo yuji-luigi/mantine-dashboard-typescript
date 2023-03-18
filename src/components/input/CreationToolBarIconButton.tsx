@@ -2,13 +2,14 @@ import { ActionIcon } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import React from 'react';
 import { Icons } from '../../data/icons';
+import { UseFormReturnTypeCustom } from './input_interfaces/useForm_interface';
 
 const CreationToolBarIconButton = ({
   formField,
   form,
 }: {
   formField: FormFieldInterface;
-  form: UseFormReturnType<any, any>;
+  form: UseFormReturnTypeCustom;
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -26,7 +27,7 @@ const CreationToolBarIconButton = ({
         ref={inputRef}
         onChange={(event) => {
           if (event.target.files) {
-            const prevFiles = form.values.media[formField.name];
+            const prevFiles = form.values.media?.[formField.name];
             if (!prevFiles) {
               form.setFieldValue(`media.${formField.name}`, [...event.target.files]);
               return;

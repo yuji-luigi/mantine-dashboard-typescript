@@ -1,9 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import { Group, Stack, Text } from '@mantine/core';
+import { UseFormReturnType } from '@mantine/form';
 
-const PreviewFileZone = ({ form, formField }) => {
-  const files = form.values.media[formField?.name || ''] || [];
+interface Prop {
+  form: UseFormReturnTypeWithMedia;
+  formField: FormFieldInterface;
+}
+const PreviewFileZone = ({ form, formField }: Prop) => {
+  const files = form.values.media?.[formField?.name || ''] || [];
   if (!files.length) {
     return null;
   }

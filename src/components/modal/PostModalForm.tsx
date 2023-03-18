@@ -10,8 +10,9 @@ import { FormCustom } from '../../context/FormContextProvider';
 import { getDefaultValues } from '../../utils/helper-functions';
 import { notifications } from '@mantine/notifications';
 import axiosInstance from '../../utils/axios-instance';
-import CreationToolBar, { ReturnTypeCustom } from '../input/CreationToolBar';
+import CreationToolBar from '../input/CreationToolBar';
 import { UPLOAD_FOLDERS } from '../../lib/enums';
+import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -38,7 +39,7 @@ const PostModalForm = () => {
 
   const form = useForm({
     initialValues,
-  }) as ReturnTypeCustom;
+  }) as UseFormReturnTypeCustom;
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();

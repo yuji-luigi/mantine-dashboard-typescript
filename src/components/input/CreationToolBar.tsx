@@ -6,17 +6,10 @@ import Image from 'next/image';
 import { Icons } from '../../data/icons';
 import CreationToolBarIconButton from './CreationToolBarIconButton';
 import PreviewFileZone from './PreviewFileZone';
+import { UseFormReturnTypeCustom } from './input_interfaces/useForm_interface';
 
-export interface ReturnTypeCustom extends UseFormReturnType<Record<string, unknown>> {
-  values: {
-    media?: {
-      [key: string]: File[];
-    };
-  };
-}
 interface Props {
-  form: ReturnTypeCustom;
-  // form: UseFormReturnType<Record<string, unknown>>;
+  form: UseFormReturnTypeCustom;
   formFields: FormFieldInterface[];
   submitButton?: ReactNode;
 }

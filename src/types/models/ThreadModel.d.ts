@@ -1,6 +1,6 @@
 interface Thread extends MongooseBaseModel<null> {
   title: string;
-  images: string[] | IUpload[] | [];
+  images: Upload[];
   description: string;
   attachments?: string[] | undefined;
   tags?: string[];
