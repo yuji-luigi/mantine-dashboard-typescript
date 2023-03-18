@@ -12,16 +12,16 @@
       "skipFiles": ["${workspaceFolder}/<node_internals>/**", "${workspaceFolder}/node_modules/**"],
       "command": "npm run dev"
     },
-    {
-      "name": "firefox launch",
-      "type": "firefox",
-      "request": "launch",
-      "reAttach": true,
-      "url": "http://generic.host:3000",
-      "skipFiles": ["${workspaceFolder}/<node_internals>/**", "${workspaceFolder}/node_modules/**"],
+    // {
+    //   "name": "firefox launch",
+    //   "type": "firefox",
+    //   "request": "launch",
+    //   "reAttach": true,
+    //   "url": "http://generic.host:3000",
+    //   "skipFiles": ["${workspaceFolder}/<node_internals>/**", "${workspaceFolder}/node_modules/**"],
 
-      "webRoot": "${workspaceFolder}"
-    },
+    //   "webRoot": "${workspaceFolder}"
+    // },
     {
       "name": "client-side Next.js: debug ",
       "type": "chrome",

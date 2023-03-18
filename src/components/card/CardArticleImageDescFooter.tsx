@@ -10,6 +10,8 @@ import {
   Avatar,
   createStyles,
   rem,
+  Stack,
+  Box,
 } from '@mantine/core';
 import { CSSProperties } from 'react';
 
@@ -19,11 +21,12 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     // maxWidth: 350,
     maxWidth: 400,
+    maxHeight: 400,
     // width: 300,
     // height: 300,
     // flex: '1 auto',
     padding: 10,
-    border: '1px solid red',
+    // border: '1px solid red',
     gridRowEnd: 'span 2',
   },
 
@@ -40,6 +43,10 @@ const useStyles = createStyles((theme) => ({
     marginBottom: rem(5),
   },
 
+  buttons: {
+    height: '100%',
+    alignItems: 'flex-end',
+  },
   action: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     ...theme.fn.hover({
@@ -87,27 +94,35 @@ export function CardArticleImageDescFooter({
         </a>
       </Card.Section>
 
-      <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
+      {/* <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
         {rating}
-      </Badge>
+      </Badge> */}
+      <Box sx={{ height: 100, overflow: 'hidden' }}>
+        <Text className={classes.title} fw={500} component="a" {...linkProps}>
+          {title}
+        </Text>
 
-      <Text className={classes.title} fw={500} component="a" {...linkProps}>
-        {title}
-      </Text>
-
-      <Text fz="sm" color="dimmed" lineClamp={4}>
-        {description}
-      </Text>
+        <Text fz="sm" color="dimmed" lineClamp={4}>
+          {description}
+        </Text>
+      </Box>
 
       <Group position="apart" className={classes.footer}>
-        <Center>
-          <Avatar src={''} size={24} radius="xl" mr="xs" />
-          <Text fz="sm" inline>
-            {author.name}
-          </Text>
-        </Center>
+        <Stack>
+          <Center>
+            <Avatar src={''} size={24} radius="xl" mr="xs" />
+            <Text fz="sm" inline>
+              {author.name}
+            </Text>
+          </Center>
+          <Center>
+            <Text fz="sm" inline>
+              {author.name}
+            </Text>
+          </Center>
+        </Stack>
 
-        <Group spacing={8} mr={0}>
+        <Group spacing={8} mr={0} className={classes.buttons}>
           <ActionIcon className={classes.action}>
             <IconHeart size="1rem" color={theme.colors.red[6]} />
           </ActionIcon>

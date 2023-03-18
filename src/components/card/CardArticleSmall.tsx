@@ -45,7 +45,7 @@ export function CardArticleSmall({
   return (
     <Card withBorder radius="md" p={0} className={classes.card}>
       <Group noWrap spacing={0}>
-        {image && <Image src={image} height={140} width={140} />}
+        {image && <Image src={image} height={150} width={140} />}
         <div className={classes.body}>
           <Text transform="uppercase" color="dimmed" weight={700} size="xs">
             {category}

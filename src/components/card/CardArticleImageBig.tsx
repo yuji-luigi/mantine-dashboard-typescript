@@ -1,11 +1,16 @@
 import { AspectRatio, Box, Card, createStyles, Text, Image } from '@mantine/core';
 import React from 'react';
-import { TypeMock } from '../../sections/homepage/posts/PostsPageComponent';
 
 const useStyles = createStyles((theme) => ({
   card: {
     transition: 'transform 150ms ease, box-shadow 150ms ease',
-
+    maxWidth: 400,
+    // width: 300,
+    // height: 300,
+    // flex: '1 auto',
+    padding: 10,
+    border: '1px solid red',
+    gridRowEnd: 'span 2',
     '&:hover': {
       transform: 'scale(1.01)',
       boxShadow: theme.shadows.md,
