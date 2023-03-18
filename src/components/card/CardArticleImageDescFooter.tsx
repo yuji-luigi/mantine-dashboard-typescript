@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
     position: 'relative',
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     // maxWidth: 350,
-    maxWidth: 400,
+    maxWidth: '100%',
     maxHeight: 400,
     // width: 300,
     // height: 300,

@@ -3,7 +3,7 @@ import { createStyles, Card, Image, Avatar, Text, Group, Box } from '@mantine/co
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.white,
-    maxWidth: 400,
+    maxWidth: '100%',
     // width: 300,
     height: 150,
     // flex: '1 auto',
