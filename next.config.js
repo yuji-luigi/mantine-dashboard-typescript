@@ -10,8 +10,8 @@ const nextConfig = {
   env: {
     // api end point
     // NEXT_PUBLIC_API_URL: 'http://flatmates-api.host:5000/api/v1',
-    NEXT_PUBLIC_API_URL: 'http://generic.host:5001/api/v1',
-    NEXT_PUBLIC_API_URL_PRODUCTION: 'https://flatmates-api.yuji-luigi.com/api/v1',
+    // NEXT_PUBLIC_API_URL: 'http://generic.host:5001/api/v1',
+    // NEXT_PUBLIC_API_URL_PRODUCTION: 'https://flatmates-api.yuji-luigi.com/api/v1',
     API_VERSION: 'api/v1',
      // MAPBOX
      MAPBOX_API: '',
