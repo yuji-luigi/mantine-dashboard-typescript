@@ -17,13 +17,12 @@ const nextConfig = (phase) => {
   console.log(`isDev:${isDev}  isProd:${isProd}   isStaging:${isStaging}`)
 
   const env = {
-    NEXT_PUBLIC_API_URL: () =>{
+    NEXT_PUBLIC_API_URL: (() =>{
       if (isDev) return 'http://generic.host:5001/api/v1'
       if (isProd) return'https://flatmates-api.yuji-luigi.com/api/v1'
       if (isStaging) return'http://generic.host:5001/api/v1'
       return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)'
-    } 
-    
+    } )()
   }
 
   return {
