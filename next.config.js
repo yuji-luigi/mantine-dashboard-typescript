@@ -1,35 +1,40 @@
+const {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} = require('next/constants')
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {
+
+const nextConfig = (phase) => {
+  
+  const isDev = phase === PHASE_DEVELOPMENT_SERVER
+  // when `next build` or `npm run build` is used
+  const isProd = phase === PHASE_PRODUCTION_BUILD && process.env.STAGING !== '1'
+  // when `next build` or `npm run build` is used
+  const isStaging =
+    phase === PHASE_PRODUCTION_BUILD && process.env.STAGING === '1'
+
+  console.log(`isDev:${isDev}  isProd:${isProd}   isStaging:${isStaging}`)
+
+  const env = {
+    NEXT_PUBLIC_API_URL: () =>{
+      if (isDev) return 'http://generic.host:5001/api/v1'
+      if (isProd) return'https://flatmates-api.yuji-luigi.com/api/v1'
+      if (isStaging) return'http://generic.host:5001/api/v1'
+      return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)'
+    } 
+    
+  }
+
+  return {
   reactStrictMode: true,
   trailingSlash: true,
   swcMinify: false,
+  env,
   eslint: {
     ignoreDuringBuilds: true,
   },
-  env: {
-    // api end point
-    // NEXT_PUBLIC_API_URL: 'http://flatmates-api.host:5000/api/v1',
-    // NEXT_PUBLIC_API_URL: 'http://generic.host:5001/api/v1',
-    // NEXT_PUBLIC_API_URL_PRODUCTION: 'https://flatmates-api.yuji-luigi.com/api/v1',
-    API_VERSION: 'api/v1',
-     // MAPBOX
-     MAPBOX_API: '',
-     // FIREBASE
-     FIREBASE_API_KEY: '',
-     FIREBASE_AUTH_DOMAIN: '',
-     FIREBASE_PROJECT_ID: '',
-     FIREBASE_STORAGE_BUCKET: '',
-     FIREBASE_MESSAGING_SENDER_ID: '',
-     FIREBASE_APPID: '',
-     FIREBASE_MEASUREMENT_ID: '',
-     // AWS COGNITO
-     AWS_COGNITO_USER_POOL_ID: '',
-     AWS_COGNITO_CLIENT_ID: '',
-     // AUTH0
-     AUTH0_CLIENT_ID: '',
-     AUTH0_DOMAIN: '',
-  },
-}
+  
+}}
 
 module.exports = nextConfig

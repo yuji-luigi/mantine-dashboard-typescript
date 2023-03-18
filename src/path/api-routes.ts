@@ -1,7 +1,7 @@
 export const API_BASE_URL =
   process.env.NODE_ENV === 'development'
     ? process.env.NEXT_PUBLIC_API_URL
-    : process.env.NEXT_PUBLIC_API_URL_PRODUCTION;
+    : process.env.NEXT_PUBLIC_API_URL;
 export type GetPathFunc = (path: string) => string;
 /**
  *  define auth string for api
