@@ -11,7 +11,7 @@ export default function Index() {
   const { pathname, replace, prefetch } = useRouter();
   useEffect(() => {
     if (pathname === PATH_DASHBOARD.root) {
-      replace(PATH_DASHBOARD.dashboard);
+      replace(PATH_DASHBOARD.posts);
     }
   }, [pathname]);
 
