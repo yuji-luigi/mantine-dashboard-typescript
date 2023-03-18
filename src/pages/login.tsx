@@ -57,7 +57,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const LoginPage = ({ user }: { user: User }) => {
+const LoginPage = ({ user }: { user?: User }) => {
   const { classes } = useStyles();
   if (user?.active) {
     return <DashboardTopPage />;

@@ -135,8 +135,7 @@ const useStyles = createStyles((theme /* , _params, getRef */) => {
 
 export function NavbarVertical() {
   const { classes, cx } = useStyles();
-  const { user } = useAuth();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
   const { asPath } = useRouter();

@@ -27,8 +27,10 @@ export default function AuthGuard({ children }: { children: JSX.Element | JSX.El
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
+      return;
     }
     push('/login');
+    return;
   }
   return <>{children}</>;
 }
