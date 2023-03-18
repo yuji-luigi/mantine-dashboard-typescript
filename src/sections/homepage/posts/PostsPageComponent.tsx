@@ -154,7 +154,7 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
     fetcher
   );
   // const { data, error } = useSWR('/mock/verticalCardArticleImageDescFooter.json', fetcher);
-  const cards = mockdata.map((article) => <CardArticleImageBig article={article} />);
+  // const cards = mockdata.map((article) => <CardArticleImageBig article={article} />);
   const formatedData = data && JSON.parse(data);
   const formatedCardArticleImageDescFooterData = articleCardData && JSON.parse(articleCardData);
   const otherCards = mock2.map((data) => <UserCard key={data.name} data={data} />);
@@ -215,6 +215,19 @@ export default function PostsPage({ threads }: { threads: Thread[] }) {
             author={thread.createdBy}
             rating={'40' /* thread.rating ||  */}
             sx={{ width: 300 }}
+          />
+        ))}
+        {threads.map((thread) => (
+          <CardArticleImageBig
+            key={thread.title}
+            article={thread}
+            // image={thread.images[0].url}
+            // link={thread._id}
+            // title={thread.title}
+            // description={thread.description}
+            // author={thread.createdBy}
+            // rating={'40' /* thread.rating ||  */}
+            // sx={{ width: 300 }}
           />
         ))}
         {/* {articleCards} */}

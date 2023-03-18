@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   description: { fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 600 },
 }));
 
-const CardArticleImageBig = ({ article }: { article: TypeMock }) => {
+const CardArticleImageBig = ({ article }: { article: Thread }) => {
   const { classes } = useStyles();
 
   return (
@@ -36,9 +36,9 @@ const CardArticleImageBig = ({ article }: { article: TypeMock }) => {
         <Text className={classes.title} align="center" my={5} mb={10}>
           {article.title}
         </Text>
-        {article.image && (
+        {article.images[0].url && (
           <AspectRatio ratio={1920 / 1080}>
-            <Image src={article.image} />
+            <Image src={article.images[0].url} />
           </AspectRatio>
         )}
 
@@ -48,7 +48,7 @@ const CardArticleImageBig = ({ article }: { article: TypeMock }) => {
       </Box>
       <Box sx={{ height: 100 }}>
         <Text color="dimmed" size="xs" transform="uppercase" align="right" weight={700} mt="md">
-          {article.date}
+          {article.createdAt.getDate()}
         </Text>
       </Box>
     </Card>
