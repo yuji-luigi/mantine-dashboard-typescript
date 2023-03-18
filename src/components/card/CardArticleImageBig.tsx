@@ -48,7 +48,7 @@ const CardArticleImageBig = ({ article }: { article: Thread }) => {
       </Box>
       <Box sx={{ height: 100 }}>
         <Text color="dimmed" size="xs" transform="uppercase" align="right" weight={700} mt="md">
-          {article.createdAt.getDate()}
+          {article.createdAt}
         </Text>
       </Box>
     </Card>
