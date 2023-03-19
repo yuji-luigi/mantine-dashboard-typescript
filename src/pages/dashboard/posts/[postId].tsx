@@ -79,7 +79,7 @@ const PostIdPage = ({ thread }: { thread: Thread }) => {
             {thread.createdBy.name}
           </Text>
           <Text fz="sm" inline>
-            {thread.createdAt}
+            {thread._createdAt}
           </Text>
         </Group>
       </Stack>

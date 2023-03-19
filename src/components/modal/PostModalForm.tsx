@@ -13,6 +13,7 @@ import axiosInstance from '../../utils/axios-instance';
 import CreationToolBar from '../input/CreationToolBar';
 import { UPLOAD_FOLDERS } from '../../lib/enums';
 import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
+import { useRouter } from 'next/router';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -31,6 +32,8 @@ const useStyles = createStyles(() => ({
   },
 }));
 const PostModalForm = () => {
+  const router = useRouter();
+
   const { classes } = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const sectionFormFields: FormFieldInterface[] = formFields.threads;
@@ -79,6 +82,7 @@ const PostModalForm = () => {
       });
       setSubmitting(false);
       form.reset();
+      router.reload();
     }
     if (crudStatus === 'failed') {
       notifications.show({

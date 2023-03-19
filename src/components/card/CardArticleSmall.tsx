@@ -80,7 +80,7 @@ export function CardArticleSmall({
                 •
               </Text>
               <Text size="xs" color="dimmed">
-                {date}
+                {thread._createdAt}
               </Text>
             </Group>
           </div>

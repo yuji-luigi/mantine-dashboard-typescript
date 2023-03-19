@@ -20,4 +20,6 @@ interface Thread extends MongooseBaseModel<null> {
   createdBy: IUser | string;
   isImportant: boolean;
   owner: IOwner | string;
+  /** formatted in some way. from api schema level */
+  _createdAt: string;
 }
