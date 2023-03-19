@@ -44,5 +44,13 @@
       },
       "skipFiles": ["<node_internals>/**", ".next/**"]
     }
+  ],
+  "compounds": [
+    {
+      "name": "Chrome/Node",
+      "configurations": ["server-side:Next.js: debug", "client-side Next.js: debug "],
+      // "preLaunchTask": "${defaultBuildTask}",
+      "stopAll": true
+    }
   ]
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import LoginPage from '../sections/auth/LoginForm';
+import { LoadingOverlay } from '@mantine/core';
 
 export default function AuthGuard({ children }: { children: JSX.Element | JSX.Element[] }) {
   const { isAuthenticated, isInitialized } = useAuth();
@@ -21,16 +22,17 @@ export default function AuthGuard({ children }: { children: JSX.Element | JSX.El
   }, [isAuthenticated, pathname, push, requestedLocation]);
 
   if (!isInitialized) {
-    return <p>loading screen</p>;
+    return <LoadingOverlay visible />;
   }
 
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
-      return;
+      return <LoadingOverlay visible />;
     }
     push('/login');
-    return;
+    return <LoadingOverlay visible />;
   }
+  /** finally authenticated user enters here */
   return <>{children}</>;
 }
