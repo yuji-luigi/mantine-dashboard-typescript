@@ -67,7 +67,7 @@ interface FormFieldInterface {
   required?: boolean;
   /** when defined: show the defaultValue on the dataTable.
    */
-  priority: number;
+  priority?: number;
 
   /**
    * determines in which formField(table column) can be found the dropzone's file url
