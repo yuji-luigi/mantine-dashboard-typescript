@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { Button, createStyles, Drawer } from '@mantine/core';
+import { Button, createStyles, Drawer, LoadingOverlay } from '@mantine/core';
 
 import FormFields from '../input/FormFields';
 import formFields from '../../../json/dataTable/formfields';
@@ -89,6 +89,10 @@ const PostModalForm = () => {
       setSubmitting(false);
     }
   }, [crudStatus]);
+
+  if (crudStatus === 'loading') {
+    return <LoadingOverlay visible />;
+  }
 
   return (
     <form className={classes.form} onSubmit={onSubmit}>
