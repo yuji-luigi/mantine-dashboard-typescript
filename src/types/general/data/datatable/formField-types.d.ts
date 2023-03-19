@@ -19,6 +19,7 @@ interface FormFieldInterface {
     | 'text'
     | 'long-text'
     | 'boolean'
+    | 'checkbox'
     | 'select'
     | 'static-select'
     | 'number'

@@ -18,7 +18,7 @@ PostsPage.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const jwtToken = context.req.cookies.jwt;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/threads`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/threads`, {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
       // 'Content-Type': 'application/x-www-form-urlencoded',

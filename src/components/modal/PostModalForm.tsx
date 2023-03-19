@@ -43,14 +43,7 @@ const PostModalForm = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append('file', form.values.media.files[0]);
-    // const rawData = await axiosInstance.post(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/upload-files`,
-    //   { ...form.values.media, folderName: UPLOAD_FOLDERS.threads },
-    //   config
-    // );
-    // const data = rawData.data.data;
+
     const media = structuredClone(form.values.media);
 
     const reqBody = {
@@ -69,12 +62,9 @@ const PostModalForm = () => {
       message: 'Sending data to the server.',
       autoClose: false,
     });
-    // setSubmitting(true);
-
-    /** Create new Document */
-
-    // form.reset();
+    setSubmitting(true);
   };
+
   return (
     <form className={classes.form} onSubmit={onSubmit}>
       {sectionFormFields?.map((formField) => (

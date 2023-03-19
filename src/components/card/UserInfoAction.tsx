@@ -7,7 +7,7 @@ interface UserInfoActionProps {
   job: string;
 }
 
-export function UserInfoAction({ avatar, name, email, job }: UserInfoActionProps) {
+export function UserInfoAction({ user }: { user: User }) {
   return (
     <Paper
       radius="md"
@@ -17,12 +17,12 @@ export function UserInfoAction({ avatar, name, email, job }: UserInfoActionProps
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       })}
     >
-      <Avatar src={avatar} size={120} radius={120} mx="auto" />
-      <Text align="center" size="lg" weight={500} mt="md">
-        {name}
+      <Avatar src={user.avatar?.url || ''} size={120} radius={120} mx="auto" />
+      <Text ta="center" fz="lg" weight={500} mt="md">
+        {user.name}
       </Text>
-      <Text align="center" color="dimmed" size="sm">
-        {email} • {job}
+      <Text ta="center" c="dimmed" fz="sm">
+        {user.email} • {user.role}
       </Text>
 
       <Button variant="default" fullWidth mt="md">

@@ -1,4 +1,4 @@
-import { Select, Switch, Textarea, TextInput } from '@mantine/core';
+import { Checkbox, Select, Switch, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import React, { CSSProperties, ReactNode } from 'react';
 import Image from 'next/image';
@@ -89,6 +89,18 @@ const FormFields = ({
       )}
       {formField.type === 'boolean' && (
         <Switch
+          checked={form.values[formField.name]}
+          name={formField.name}
+          label={formField.label}
+          placeholder={formField.placeholder}
+          size="md"
+          mt={10}
+          {...others}
+          {...form.getInputProps(formField.name || formField.id)}
+        />
+      )}
+      {formField.type === 'checkbox' && (
+        <Checkbox
           checked={form.values[formField.name]}
           name={formField.name}
           label={formField.label}

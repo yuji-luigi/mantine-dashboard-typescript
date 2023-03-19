@@ -8,26 +8,27 @@ const PostList = ({ thread }: { thread: Thread }) => {
       {thread.listViewType === 'default' && (
         <CardArticleSmall
           key={thread.title}
+          thread={thread}
           author={thread.createdBy}
           category={thread.tags?.toString() || 'tech'}
           date={thread.createdAt}
-          image={thread.images[0].url}
+          image={thread.images[0]?.url}
           title={thread.title}
         />
       )}
-      {thread.listViewType === 'default' && (
+      {/* {thread.listViewType === 'default' && (
         <CardArticleImageDescFooter
           key={thread.title}
           className={''}
-          image={thread.images[0].url}
+          image={thread.images[0]?.url}
           link={thread._id}
           title={thread.title}
           description={thread.description}
           author={thread.createdBy}
-          rating={'40' /* thread.rating ||  */}
+          rating={'40' }
           sx={{ width: 300 }}
         />
-      )}
+      )} */}
     </>
   );
 };

@@ -59,4 +59,11 @@ export const threadTableData: Array<FormFieldInterface> = [
   //   required: false,
   //   priority: 2,
   // },
+  {
+    id: 'isImportant',
+    name: 'isImportant',
+    label: 'Important',
+    type: 'checkbox',
+    required: false,
+  },
 ];

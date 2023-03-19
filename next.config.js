@@ -30,6 +30,9 @@ const nextConfig = (phase) => {
   trailingSlash: true,
   swcMinify: false,
   env,
+  images: {
+    domains: ['flatmates-api.yuji-luigi.com', 'flatmates.eu-central-1.linodeobjects.com'],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

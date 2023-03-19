@@ -20,10 +20,10 @@ const useStyles = createStyles((theme) => ({
     position: 'relative',
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     // maxWidth: 350,
-    maxWidth: '100%',
-    maxHeight: 400,
-    // width: 300,
-    // height: 300,
+    // maxWidth: '100%',
+    // maxHeight: 450,
+    // width: 400,
+    height: 300,
     // flex: '1 auto',
     padding: 10,
     // border: '1px solid red',
@@ -60,7 +60,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface CardArticleImageDescFooterProps {
-  image: string;
+  image?: string;
   link: string;
   title: string;
   description: string;
@@ -68,7 +68,7 @@ interface CardArticleImageDescFooterProps {
   sx: CSSProperties;
   author: {
     name: string;
-    image: string;
+    image?: string;
   };
 }
 
@@ -88,11 +88,13 @@ export function CardArticleImageDescFooter({
   const linkProps = { href: `posts/${link}`, target: '_blank', rel: 'noopener noreferrer' };
   return (
     <Card withBorder radius="md" className={cx(classes.card, className)} {...others}>
-      <Card.Section>
-        <a {...linkProps}>
-          <Image src={image} height={180} />
-        </a>
-      </Card.Section>
+      {image && (
+        <Card.Section>
+          <a {...linkProps}>
+            <Image src={image} height={180} />
+          </a>
+        </Card.Section>
+      )}
 
       {/* <Badge className={classes.rating} variant="gradient" gradient={{ from: 'yellow', to: 'red' }}>
         {rating}

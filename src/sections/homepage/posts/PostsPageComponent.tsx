@@ -51,8 +51,9 @@ const useStyles = createStyles((theme) => ({
     // left: '50%',
     // transform: 'translateX(-50%)',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, max-content))',
-    // gridTemplateColumns: 'repeat(auto-fill, 400px)',
+    // gridTemplateColumns: 'repeat(auto-fit, minmax(400px, max-content))',
+    gridTemplateColumns: 'repeat(auto-fill, 400px)',
+    // gridAutoColumns: 'repeat(400px, minmax(400px, 1fr))',
     gridAutoRows: 'minmax(50px, auto)',
     justifyContent: 'center',
     gap: 10,
@@ -65,7 +66,8 @@ export default function PostPageComponent({ threads }: { threads: Thread[] }) {
   return (
     // <Container mx="auto" py="xl">
     <Box
-      className={classes.pinContainer} /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
+      className={classes.pinContainer}
+      py="xl" /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
     >
       {/* todo create Cards component where differentiate card by thread.type */}
       {threads.map((thread) => (

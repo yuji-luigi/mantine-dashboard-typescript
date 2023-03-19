@@ -1,8 +1,8 @@
 interface Thread extends MongooseBaseModel<null> {
   title: string;
-  images: Upload[];
+  images: Upload[] | [];
   description: string;
-  attachments?: string[] | undefined;
+  attachments?: Upload[] | [];
   tags?: string[];
   rating?: number;
   listViewType: 'default' | 'bigImage';
@@ -18,5 +18,6 @@ interface Thread extends MongooseBaseModel<null> {
     | 'discussion';
   building?: string | IBuilding;
   createdBy: IUser | string;
+  isImportant: boolean;
   owner: IOwner | string;
 }
