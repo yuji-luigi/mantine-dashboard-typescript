@@ -4,7 +4,7 @@ import { Button, createStyles, Drawer } from '@mantine/core';
 import FormFields from '../input/FormFields';
 import formFields from '../../../json/dataTable/formfields';
 import { useState, FormEvent, useMemo, useEffect } from 'react';
-import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { Form, useForm } from '@mantine/form';
 import { FormCustom } from '../../context/FormContextProvider';
 import { getDefaultValues } from '../../utils/helper-functions';
@@ -35,6 +35,7 @@ const PostModalForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const sectionFormFields: FormFieldInterface[] = formFields.threads;
   const { createCrudDocument } = useCrudSliceStore();
+  const { crudMessage, crudStatus } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
   const form = useForm({
@@ -59,11 +60,35 @@ const PostModalForm = () => {
     });
     notifications.show({
       id: 'submit',
-      message: 'Sending data to the server.',
+      message: 'Sending data to the server. Please wait...',
       autoClose: false,
+      loading: true,
     });
     setSubmitting(true);
   };
+
+  useEffect(() => {
+    if (crudStatus === 'succeed') {
+      notifications.hide('submit');
+      notifications.show({
+        color: 'teal',
+        loading: false,
+        id: 'success',
+        message: 'Successfully created a new thread.',
+        autoClose: 5000,
+      });
+      setSubmitting(false);
+      form.reset();
+    }
+    if (crudStatus === 'failed') {
+      notifications.show({
+        id: 'submit',
+        message: crudMessage,
+        autoClose: true,
+      });
+      setSubmitting(false);
+    }
+  }, [crudStatus]);
 
   return (
     <form className={classes.form} onSubmit={onSubmit}>
