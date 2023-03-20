@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import Page from '../../components/Page';
 import Layout from '../../layouts';
-import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
+import { TableSectionHeader } from '../../sections/datatable_section/TableSectionHeader';
 import { ProgressCard } from '../../components/stats/ProgressCard';
 import { StatsGrid } from '../../components/stats/StatsGrid';
 import { StatsControls } from '../../components/stats/StatControls';

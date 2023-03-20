@@ -5,7 +5,7 @@ import axiosInstance from '../../../../utils/axios-instance';
 
 import { UsersTable } from '../../../../components/datatable/UsersTable';
 import Layout from '../../../../layouts';
-import { TableSectionHeader } from '../../../../sections/datatable/TableSectionHeader';
+import { TableSectionHeader } from '../../../../sections/datatable_section/TableSectionHeader';
 import Page from '../../../../components/Page';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
 import { CrudDrawerDefault } from '../../../../components/drawer/CrudDrawerDefault';

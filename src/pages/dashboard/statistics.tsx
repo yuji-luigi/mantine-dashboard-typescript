@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 // import { createStyles } from '@mantine/core';
-import { TableSectionHeader } from '../../sections/datatable/TableSectionHeader';
+import { TableSectionHeader } from '../../sections/datatable_section/TableSectionHeader';
 import type { NextPageWithLayout } from '../_app';
 import { PropWithChildren } from '../../types/general/config';
 import Tables from '../../components/datatable/Tables';
