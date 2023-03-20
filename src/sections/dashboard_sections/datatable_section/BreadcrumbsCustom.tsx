@@ -1,6 +1,6 @@
 import { Breadcrumbs, createStyles } from '@mantine/core';
 import Link from 'next/link';
-import useLayoutContext from '../../../hooks/useLayoutContext';
+import useLayoutContext from '../../../../hooks/useLayoutContext';
 
 const useStyles = createStyles((theme) => ({
   link: {

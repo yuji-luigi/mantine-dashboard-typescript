@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import Layout from '../layouts';
-import { SignUpForm } from '../sections/auth/SignUpForm';
+import { SignUpForm } from '../sections/login_signup_section/SignUpForm';
 
 const SignUpPage = () => <SignUpForm />;
 

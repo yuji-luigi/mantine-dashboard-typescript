@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { GetServerSidePropsContext } from 'next';
 import { ReactElement } from 'react';
 import Layout from '../../layouts';
-import PostsPageSection from '../../sections/homepage/posts/PostsPageComponent';
+import PostsPageSection from '../../sections/posts_section/PostsPageComponent';
 import axiosInstance from '../../utils/axios-instance';
 
 export default function PostsPage({ threads }: { threads: Thread[] }) {

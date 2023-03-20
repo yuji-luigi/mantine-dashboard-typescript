@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardArticleImageDescFooter } from '../../../components/card/CardArticleImageDescFooter';
-import { CardArticleSmall } from '../../../components/card/CardArticleSmall';
+import { CardArticleImageDescFooter } from '../../components/card/CardArticleImageDescFooter';
+import { CardArticleSmall } from '../../components/card/CardArticleSmall';
 
 const PostList = ({ thread }: { thread: Thread }) => {
   return (

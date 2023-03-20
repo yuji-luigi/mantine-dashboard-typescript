@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { Button, createStyles } from '@mantine/core';
 import { useEffect } from 'react';
-import { sectionData } from '../../data';
-import { useDrawerContext } from '../../context/DataTableDrawerContext';
+import { sectionData } from '../../../data';
+import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
-import useLayoutContext from '../../../hooks/useLayoutContext';
-import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import useLayoutContext from '../../../../hooks/useLayoutContext';
+import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 
 const useStyles = createStyles(() => ({
   headerWrapper: {

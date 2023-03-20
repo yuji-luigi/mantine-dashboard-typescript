@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 // hooks
 import useAuth from '../../hooks/useAuth';
-import LoginPage from '../sections/auth/LoginForm';
+import LoginPage from '../sections/login_signup_section/LoginForm';
 import { LoadingOverlay } from '@mantine/core';
 
 export default function AuthGuard({ children }: { children: JSX.Element | JSX.Element[] }) {

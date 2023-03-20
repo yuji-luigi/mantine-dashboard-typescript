@@ -9,7 +9,7 @@ import GuestGuard from '../guards/GuestGuard';
 import Layout from '../layouts';
 import { API_BASE_URL, PATH_AUTH } from '../path/api-routes';
 import { AUTH } from '../path/page-paths';
-import LoginForm from '../sections/auth/LoginForm';
+import LoginForm from '../sections/login_signup_section/LoginForm';
 import DashboardTopPage from './dashboard/home';
 
 const useStyles = createStyles((theme) => ({
