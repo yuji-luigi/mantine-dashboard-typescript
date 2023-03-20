@@ -3,7 +3,13 @@ import { useState, ReactElement, ReactNode } from 'react';
 import { AppProps } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
-import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
+import {
+  MantineProvider,
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineTheme,
+  Tuple,
+} from '@mantine/core';
 import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from '../context/JWTContext';
 import reduxStore from '../redux/store';
@@ -11,6 +17,9 @@ import { DashboardLayoutContextProvider } from '../context/DashboardLayoutContex
 import { DrawerContextProvider } from '../context/DataTableDrawerContext';
 import { PaginationContextProvider } from '../context/PaginationContext';
 import { Notifications } from '@mantine/notifications';
+import { DeepPartial } from '@reduxjs/toolkit';
+import { myColors } from '../lib/custom-colors';
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -18,7 +27,6 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
-
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps }: AppPropsWithLayout = props;
   const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
@@ -41,7 +49,15 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
       <AuthProvider>
         <ReduxProvider store={reduxStore}>
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+            <MantineProvider
+              theme={{
+                colors: myColors,
+                primaryColor: 'sw-dark-blue',
+                colorScheme,
+              }}
+              withGlobalStyles
+              withNormalizeCSS
+            >
               <DashboardLayoutContextProvider>
                 <PaginationContextProvider>
                   <DrawerContextProvider>
