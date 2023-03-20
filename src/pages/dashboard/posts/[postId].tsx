@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconBookmark, IconHeart, IconShare } from '@tabler/icons-react';
+import { IconBookmark, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
 import {
   Card,
   Image,
@@ -15,12 +15,14 @@ import {
   Stack,
   Box,
   Divider,
+  Button,
 } from '@mantine/core';
 import { GetServerSidePropsContext } from 'next';
 import axiosInstance from '../../../utils/axios-instance';
 import { ReactElement } from 'react';
 import Layout from '../../../layouts';
 import CarouselBasic from '../../../components/carousel/CarouselBasic';
+import useAuth from '../../../../hooks/useAuth';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -28,7 +30,9 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     minHeight: '100vh',
   },
-
+  header: {
+    marginBottom: 50,
+  },
   rating: {
     position: 'absolute',
     top: theme.spacing.xs,
@@ -43,7 +47,8 @@ const useStyles = createStyles((theme) => ({
     marginBottom: rem(5),
   },
   articleArea: {
-    marginBlock: 50,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+    boxShadow: theme.shadows.xl,
   },
 
   action: {
@@ -66,10 +71,15 @@ const useStyles = createStyles((theme) => ({
 
 const PostIdPage = ({ thread }: { thread: Thread }) => {
   const { classes, cx, theme } = useStyles();
+  const { user } = useAuth();
+
+  const handleEdit = () => {
+    console.log('edit');
+  };
 
   return (
     <Container py="lg">
-      <Stack>
+      <Stack className={classes.header}>
         <Text className={classes.title} fw={800} component="a">
           {thread.title}
         </Text>
@@ -83,6 +93,14 @@ const PostIdPage = ({ thread }: { thread: Thread }) => {
           </Text>
         </Group>
       </Stack>
+      {user?._id === thread.createdBy._id && (
+        <Group position="right" mb={10}>
+          <ActionIcon className={classes.action}>
+            <IconSettings size="1rem" />
+          </ActionIcon>
+        </Group>
+      )}
+
       <Card className={classes.articleArea}>
         <Text fz="md" fw={500} color="dimmed" lineClamp={4}>
           {thread.description}
