@@ -23,6 +23,7 @@ import { ReactElement } from 'react';
 import Layout from '../../../layouts';
 import CarouselBasic from '../../../components/carousel/CarouselBasic';
 import useAuth from '../../../../hooks/useAuth';
+import PostEditButton from '../../../sections/single_post_section/PostEditButton';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -93,14 +94,8 @@ const PostIdPage = ({ thread }: { thread: Thread }) => {
           </Text>
         </Group>
       </Stack>
-      {user?._id === thread.createdBy._id && (
-        <Group position="right" mb={10}>
-          <ActionIcon className={classes.action}>
-            <IconSettings size="1rem" />
-          </ActionIcon>
-        </Group>
-      )}
 
+      <PostEditButton thread={thread} />
       <Card className={classes.articleArea}>
         <Text fz="md" fw={500} color="dimmed" lineClamp={4}>
           {thread.description}
