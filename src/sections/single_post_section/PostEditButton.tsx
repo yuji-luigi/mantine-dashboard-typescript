@@ -3,7 +3,7 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { Icons } from '../../data/icons';
 import { FONT_SIZES } from '../../lib/enums';
-import { IconBookmark, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
+import { IconBookmark, IconDots, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   action: {
@@ -23,28 +23,32 @@ const PostEditButton = ({ thread }: { thread: Thread }) => {
           <Menu shadow="lg">
             <Menu.Target>
               <ActionIcon>
-                <IconSettings />
+                <IconDots />
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Label sx={{ textAlign: 'center' }}>Create something</Menu.Label>
               <Menu.Item
-                sx={{ fontSize: FONT_SIZES.menuItems }}
-                icon={<Icons.article size={FONT_SIZES.menuItems} />}
+                sx={{ fontSize: FONT_SIZES.menuItemsS }}
+                icon={<Icons.article size={FONT_SIZES.menuItemsS} />}
               >
-                New post
+                Edit
               </Menu.Item>
               <Menu.Item
-                sx={{ fontSize: FONT_SIZES.menuItems }}
-                icon={<Icons.funds size={FONT_SIZES.menuItems} />}
+                sx={{ fontSize: FONT_SIZES.menuItemsS }}
+                icon={<Icons.archive size={FONT_SIZES.menuItemsS} />}
               >
-                New fund
+                Mark as draft
               </Menu.Item>
               <Menu.Item
-                sx={{ fontSize: FONT_SIZES.menuItems }}
-                icon={<Icons.messageDots size={FONT_SIZES.menuItems} />}
+                sx={{
+                  fontSize: FONT_SIZES.menuItemsS,
+                  '&:hover': {
+                    background: theme.colors.red[7],
+                  },
+                }}
+                icon={<Icons.trash color="red" size={FONT_SIZES.menuItemsS} />}
               >
-                Send message
+                Delete
               </Menu.Item>
               {/* <Menu.Item
           icon={<IconSearch size={14} />}

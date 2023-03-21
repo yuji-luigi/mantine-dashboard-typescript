@@ -24,6 +24,9 @@ import Layout from '../../../layouts';
 import CarouselBasic from '../../../components/carousel/CarouselBasic';
 import useAuth from '../../../../hooks/useAuth';
 import PostEditButton from '../../../sections/single_post_section/PostEditButton';
+import SinglePostArticleArea from '../../../sections/single_post_section/SinglePostArticleArea';
+import RelatedArticlesArea from '../../../sections/single_post_section/RelatedArticleArea';
+import SinglePostHeading from '../../../sections/single_post_section/SinglePostHeading';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -80,43 +83,11 @@ const PostIdPage = ({ thread }: { thread: Thread }) => {
 
   return (
     <Container py="lg">
-      <Stack className={classes.header}>
-        <Text className={classes.title} fw={800} component="a">
-          {thread.title}
-        </Text>
-        <Group align="center">
-          <Avatar src={thread.createdBy.image} size={50} radius="xl" mr={0} />
-          <Text fz="sm" inline>
-            {thread.createdBy.name}
-          </Text>
-          <Text fz="sm" inline>
-            {thread._createdAt}
-          </Text>
-        </Group>
-      </Stack>
-
+      <SinglePostHeading thread={thread} />
       <PostEditButton thread={thread} />
-      <Card className={classes.articleArea}>
-        <Text fz="md" fw={500} color="dimmed" lineClamp={4}>
-          {thread.description}
-        </Text>
-        <CarouselBasic images={thread.images} />
-        <Group position="right" spacing={8} mt={10}>
-          <ActionIcon className={classes.action}>
-            <IconHeart size="1rem" color={theme.colors.red[6]} />
-          </ActionIcon>
-          <ActionIcon className={classes.action}>
-            <IconBookmark size="1rem" color={theme.colors.yellow[7]} />
-          </ActionIcon>
-          <ActionIcon className={classes.action}>
-            <IconShare size="1rem" />
-          </ActionIcon>
-        </Group>
-        <Divider className={classes.articleMenuDivider} />
-        <Group position="apart" align="flex-end" className={classes.footer}>
-          <Box className={classes.relatedArticlesSection}></Box>
-        </Group>
-      </Card>
+      <SinglePostArticleArea thread={thread} />
+      <Divider className={classes.articleMenuDivider} />
+      <RelatedArticlesArea />
     </Container>
   );
 };
