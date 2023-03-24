@@ -7,7 +7,7 @@ import useLayoutContext from '../../../hooks/useLayoutContext';
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import { LogoBanner } from '../../components/Banner/LogoBanner';
 import { Icons } from '../../data/icons';
-import { HeaderCreationModal } from '../../components/modal/HeaderCreationModal';
+import { HeaderCreationModal } from '../../components/modal/header-creation-modal/HeaderCreationModal';
 
 const useStyles = createStyles((theme) => ({
   header: {

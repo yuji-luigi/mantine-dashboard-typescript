@@ -1,3 +1,4 @@
+import { IconX } from '@tabler/icons-react';
 /**
  * use the key name same as the slice name
  */
@@ -34,6 +35,8 @@ import {
   IconPaperclip as Paperclip,
   IconTrash as Trash,
   IconArchive as Archive,
+  IconPhoto as Image,
+  IconEdit as Edit,
 } from '@tabler/icons-react';
 
 export const Icons /* : Record<IconIndexTypes, Icon> */ = {
@@ -68,6 +71,8 @@ export const Icons /* : Record<IconIndexTypes, Icon> */ = {
   paperclip: Paperclip,
   trash: Trash,
   archive: Archive,
+  image: Image,
+  edit: Edit,
   TablerIcon,
 } as const;
 

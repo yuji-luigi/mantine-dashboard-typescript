@@ -3,7 +3,7 @@ import { Box } from '@mantine/core';
 import Image from 'next/image';
 // import { Image } from '@mantine/core';
 
-function CarouselBasic({ images }: { images: Upload[] | [] }) {
+function CarouselBasic({ images }: { images: File[] | Upload[] }) {
   if (!images.length) {
     return null;
   }
@@ -20,17 +20,24 @@ function CarouselBasic({ images }: { images: Upload[] | [] }) {
         { maxWidth: 'sm', slideSize: '100%', slideGap: 0 },
       ]}
     >
-      {images.map((image) => (
-        <Carousel.Slide key={image._id} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Image
-            src={image.url}
-            width={300}
-            height={200}
-            alt={image.originalFileName}
-            style={{ objectFit: 'cover' }}
-          />
-        </Carousel.Slide>
-      ))}
+      {images.map((image) => {
+        const isFile = image instanceof File;
+
+        return (
+          <Carousel.Slide
+            key={isFile ? image.name : image._id}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          >
+            <Image
+              src={isFile ? URL.createObjectURL(image) : image.url}
+              width={300}
+              height={200}
+              alt={isFile ? image.name : image.originalFileName}
+              style={{ objectFit: 'cover' }}
+            />
+          </Carousel.Slide>
+        );
+      })}
     </Carousel>
   );
 }

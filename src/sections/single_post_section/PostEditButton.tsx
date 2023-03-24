@@ -1,9 +1,11 @@
 import { Group, ActionIcon, createStyles, Menu } from '@mantine/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { Icons } from '../../data/icons';
 import { FONT_SIZES } from '../../lib/enums';
 import { IconBookmark, IconDots, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
+import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import { useDrawerContext } from '../../context/DataTableDrawerContext';
 
 const useStyles = createStyles((theme) => ({
   action: {
@@ -15,19 +17,30 @@ const useStyles = createStyles((theme) => ({
 }));
 const PostEditButton = ({ thread }: { thread: Thread }) => {
   const { user } = useAuth();
+  const { selectCrudDocument } = useCrudSliceStore();
+
+  const { openDrawer } = useDrawerContext();
+
   const { classes, cx, theme } = useStyles();
+  const handleClicked = () => selectCrudDocument({ document: thread, entity: 'threads' });
+  const handleEditClicked = () => openDrawer();
+  // useEffect(() => {
+  //   return () => selectCrudDocument({ document: null, entity: 'threads' });
+  // }, []);
+
   return (
     <>
       {user?._id === thread.createdBy._id && (
         <Group position="right" mb={10}>
           <Menu shadow="lg">
             <Menu.Target>
-              <ActionIcon>
+              <ActionIcon onClick={handleClicked}>
                 <IconDots />
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item
+                onClick={handleEditClicked}
                 sx={{ fontSize: FONT_SIZES.menuItemsS }}
                 icon={<Icons.article size={FONT_SIZES.menuItemsS} />}
               >
@@ -42,9 +55,10 @@ const PostEditButton = ({ thread }: { thread: Thread }) => {
               <Menu.Item
                 sx={{
                   fontSize: FONT_SIZES.menuItemsS,
-                  '&:hover': {
-                    background: theme.colors.red[7],
-                  },
+                  // '&:hover': {
+                  //   background:
+                  //     theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
+                  // },
                 }}
                 icon={<Icons.trash color="red" size={FONT_SIZES.menuItemsS} />}
               >

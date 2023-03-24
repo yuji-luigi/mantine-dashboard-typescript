@@ -1,4 +1,6 @@
-interface Upload extends MongooseBaseModel<null> {
+interface Upload {
+  _id: string;
+  name: string;
   fileName: string;
   originalFileName: string;
   extension: string;
@@ -6,4 +8,6 @@ interface Upload extends MongooseBaseModel<null> {
   fullPath: string;
   size: number;
   url: string;
+  createdAt: string;
+  updatedAt: string;
 }

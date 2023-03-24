@@ -9,10 +9,10 @@ import {
   IconTrash,
   IconArrowsLeftRight,
 } from '@tabler/icons-react';
-import { Icons } from '../../data/icons';
-import { allSectionArrayWithRoles } from '../../data';
+import { Icons } from '../../../data/icons';
+import { allSectionArrayWithRoles } from '../../../data';
 
-import { FONT_SIZES } from '../../lib/enums';
+import { FONT_SIZES } from '../../../lib/enums';
 import ModalContent from './ModalContent';
 import { useState } from 'react';
 

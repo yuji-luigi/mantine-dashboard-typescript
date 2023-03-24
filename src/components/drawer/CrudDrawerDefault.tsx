@@ -13,13 +13,15 @@ import formFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-import { getDefaultValues, sleep } from '../../utils/helper-functions';
+import { sleep } from '../../utils/helper-functions';
+import { getDefaultValues } from '../../utils/getDefaultValues';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationQuery } from '../../context/PaginationContext';
 import { addLinkedChildrenDocument } from '../../redux/features/crudAsyncThunks';
+import CreationToolBar from '../input/CreationToolBar';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -30,13 +32,15 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-export function CrudDrawerDefault() {
+export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Sections }) {
   const [submitting, setSubmitting] = useState(false);
 
   const { classes } = useStyles();
 
   const { query } = useRouter();
-  const entity = query.entity as Sections;
+
+  const entity = overrideEntity || (query.entity as Sections);
+
   const parentId = query.parentId as string;
 
   const paginationQuery = usePaginationQuery();
@@ -181,9 +185,15 @@ export function CrudDrawerDefault() {
             key={formField.id}
           />
         ))}
-        <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
-          Add {entity}!
-        </Button>
+        <CreationToolBar
+          formFields={sectionFormFields}
+          form={form}
+          submitButton={
+            <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
+              Add Post!
+            </Button>
+          }
+        />
       </form>
     </Drawer>
   );

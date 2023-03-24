@@ -27,67 +27,29 @@ import PostEditButton from '../../../sections/single_post_section/PostEditButton
 import SinglePostArticleArea from '../../../sections/single_post_section/SinglePostArticleArea';
 import RelatedArticlesArea from '../../../sections/single_post_section/RelatedArticleArea';
 import SinglePostHeading from '../../../sections/single_post_section/SinglePostHeading';
+import { CrudDrawerDefault } from '../../../components/drawer/CrudDrawerDefault';
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    position: 'relative',
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-    minHeight: '100vh',
-  },
-  header: {
-    marginBottom: 50,
-  },
-  rating: {
-    position: 'absolute',
-    top: theme.spacing.xs,
-    right: rem(12),
-    pointerEvents: 'none',
-  },
-
-  title: {
-    display: 'block',
-    fontSize: 50,
-    marginTop: theme.spacing.md,
-    marginBottom: rem(5),
-  },
-  articleArea: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
-    boxShadow: theme.shadows.xl,
-  },
-
-  action: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
-    }),
+  main: {
+    minHeight: 'calc(100vh - 64px)',
   },
 
   articleMenuDivider: {
     marginBlock: theme.spacing.xl,
   },
-  relatedArticlesSection: {
-    maxWidth: 300,
-  },
-  footer: {
-    // paddingTop: theme.spacing.xl,
-  },
 }));
 
 const PostIdPage = ({ thread }: { thread: Thread }) => {
   const { classes, cx, theme } = useStyles();
-  const { user } = useAuth();
-
-  const handleEdit = () => {
-    console.log('edit');
-  };
 
   return (
-    <Container py="lg">
+    <Container py="lg" className={classes.main}>
       <SinglePostHeading thread={thread} />
       <PostEditButton thread={thread} />
       <SinglePostArticleArea thread={thread} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />
+      <CrudDrawerDefault overrideEntity="threads" />
     </Container>
   );
 };

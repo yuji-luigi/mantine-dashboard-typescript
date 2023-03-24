@@ -48,7 +48,10 @@ const useStyles = createStyles((theme) => ({
 
 const RelatedArticlesArea = () => {
   const { classes, cx, theme } = useStyles();
-
+  const relatedArticles = false;
+  if (!relatedArticles) {
+    return null;
+  }
   return (
     <Card className={classes.articleArea}>
       <Group position="apart" align="flex-end" className={classes.footer}>
