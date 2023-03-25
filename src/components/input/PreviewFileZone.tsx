@@ -11,9 +11,11 @@ import CrudCarousel from '../carousel/CrudCarousel';
 interface Prop {
   form: UseFormReturnTypeWithMedia;
   formField: FormFieldInterface;
+  /** @Link ./CreationToolBar.tsx */
+  entity: Sections;
 }
-const PreviewFileZone = ({ form, formField }: Prop) => {
-  const [opened, { open, close }] = useDisclosure(true);
+const PreviewFileZone = ({ form, formField, entity }: Prop) => {
+  const [opened, { open, close }] = useDisclosure(false);
   // const files = form.values.mediaPreview?.[formField?.name || ''] || [];
   const files = form.values.media?.[formField?.name || ''] || [];
   if (!files.length) {
@@ -43,7 +45,7 @@ const PreviewFileZone = ({ form, formField }: Prop) => {
       </OverlayCustom>
       {/* this carousel must be somewhere out side of the drawer. lets put this on top level component.  */}
       <Modal opened={opened} onClose={close} withOverlay size={900} centered>
-        <CrudCarousel images={files} />
+        <CrudCarousel entity={entity} images={files} formField={formField} />
       </Modal>
       {opened && <Overlay />}
     </Stack>

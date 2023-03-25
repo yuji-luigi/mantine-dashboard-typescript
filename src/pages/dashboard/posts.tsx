@@ -2,13 +2,18 @@ import { createStyles, SimpleGrid, Card, Image, Text, Container, AspectRatio } f
 import fetch from 'node-fetch';
 
 import { GetServerSidePropsContext } from 'next';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Layout from '../../layouts';
 import PostsPageSection from '../../sections/posts_section/PostsPageComponent';
 import axiosInstance from '../../utils/axios-instance';
+import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
 export default function PostsPage({ threads }: { threads: Thread[] }) {
-  return <PostsPageSection threads={threads} />;
+  const { setCrudDocuments } = useCrudSliceStore();
+  useEffect(() => {
+    setCrudDocuments({ entity: 'threads', documents: threads });
+  }, [threads]);
+  return <PostsPageSection /* threads={threads} */ />;
 }
 
 PostsPage.getLayout = function getLayout(page: ReactElement) {

@@ -29,7 +29,7 @@ const CreationToolBarIconButton = ({
           if (event.target.files) {
             // what is prevFiles?
             const prevFiles = form.values.media?.[formField.name];
-            const prevFilePreviews = form.values.mediaPreview?.[formField.name];
+            // const prevFilePreviews = form.values.mediaPreview?.[formField.name];
             if (!prevFiles) {
               const filesUrl = [];
               // for of loop
@@ -42,7 +42,7 @@ const CreationToolBarIconButton = ({
 
               // string of image urls.
               // getting also existing values from DB
-              form.setFieldValue(`mediaPreview.${formField.name}`, [...event.target.files]);
+              // form.setFieldValue(`mediaPreview.${formField.name}`, [...event.target.files]);
               return;
             }
             form.setFieldValue(`media.${formField.name}`, [...prevFiles]);

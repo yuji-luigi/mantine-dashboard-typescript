@@ -65,7 +65,8 @@ export const addCrudDocument = createAsyncThunk(
     const endPoint = !parentId ? entity : `${API_PATH.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument, config);
     const payload = {
-      entity: res.data.collection,
+      // entity: res.data.collection,
+      entity,
       documents: res.data.data,
       // documentId,
       totalDocuments: res.data.totalDocuments,
