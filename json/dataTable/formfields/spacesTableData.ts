@@ -39,11 +39,11 @@ export const spacesTableData: Array<FormFieldInterface> = [
   },
 
   {
-    id: 'owner',
-    name: 'owner',
-    label: 'Owner',
+    id: 'organization',
+    name: 'organization',
+    label: 'Organizations',
     type: 'select',
-    _entity: 'owners',
+    _entity: 'organizations',
     selectValues: ['name', 'email'],
     grantTo: ['super_admin'],
     required: false,

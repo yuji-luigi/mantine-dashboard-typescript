@@ -27,6 +27,7 @@ interface Reduxdb {
   tags: ReduxDbEntity<Array<Record>>;
   threads: ReduxDbEntity<Array<Record>>;
   userSettings: ReduxDbEntity<Array<Record>>;
+  uploads: ReduxDbEntity<Array<Record>>;
   wallets: ReduxDbEntity<Array<Record>>;
   events: ReduxDbEntity<Array<Record>>;
 }

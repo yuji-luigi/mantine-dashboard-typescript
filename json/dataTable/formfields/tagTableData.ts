@@ -42,7 +42,7 @@ export const tagTableData: Array<FormFieldInterface> = [
     label: 'created by',
     type: 'select',
     multi: true,
-    _entity: 'owners',
+    _entity: 'organizations',
     selectValues: ['name'],
     required: false,
     priority: 2,

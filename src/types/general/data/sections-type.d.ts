@@ -25,7 +25,8 @@ type Sections =
   | 'threads'
   | 'userSettings'
   | 'wallets'
-  | 'owners'
+  | 'organizations'
   | 'events'
   | 'spaces'
+  | 'uploads'
   | '';

@@ -58,20 +58,42 @@ PostIdPage.getLayout = function getLayout(page: ReactElement) {
 };
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const jwtToken = context.req.cookies.jwt;
-  const rawThread = await axiosInstance.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/threads/${context.query.postId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
+  try {
+    const rawThread = await axiosInstance.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/threads/${context.query.postId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    const thread = rawThread.data.data;
+    // define case nothing is in the data. go back to posts page
+    if (!thread) {
+      return {
+        redirect: {
+          destination: '/dashboard/posts',
+        },
+      };
     }
-  );
-  return {
-    props: {
-      thread: await rawThread.data.data,
-    },
-  };
+
+    // by default show the single post
+    return {
+      props: {
+        thread,
+      },
+    };
+  } catch (error) {
+    // log error and send to posts page
+    console.error(error);
+    return {
+      redirect: {
+        destination: '/dashboard/posts',
+      },
+    };
+  }
 };
 
 export default PostIdPage;
