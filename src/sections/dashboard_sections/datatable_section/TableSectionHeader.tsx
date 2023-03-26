@@ -6,6 +6,8 @@ import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
 import useLayoutContext from '../../../../hooks/useLayoutContext';
 import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
+import { API_PATH } from '../../../path/api-routes';
+import axiosInstance from '../../../utils/axios-instance';
 
 const useStyles = createStyles(() => ({
   headerWrapper: {
@@ -86,6 +88,12 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
   if (query.parentId && instanceOfParentDataInterface(parentData)) {
     title = parentData.name;
   }
+
+  const deleteAllUploads = async () => {
+    console.log('delete all uploads');
+    await axiosInstance.delete(`${API_PATH.uploads}/delete-all`);
+  };
+
   return (
     <div>
       <div className={classes.headerWrapper}>
@@ -96,6 +104,11 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
         {section.createButton && (
           <Button onClick={handleOpenDrawer} className={classes.button}>
             <h3>{section.createButton}</h3>
+          </Button>
+        )}
+        {query.entity === 'uploads' && (
+          <Button color="red" onClick={deleteAllUploads} className={classes.button}>
+            <h3>Delete All!!</h3>
           </Button>
         )}
       </div>

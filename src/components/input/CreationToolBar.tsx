@@ -12,8 +12,13 @@ interface Props {
   form: UseFormReturnTypeCustom;
   formFields: FormFieldInterface[];
   submitButton?: ReactNode;
+  /**
+   *  need to pass down from drawer.
+   * because there is a case that I am using override entity
+   */
+  entity: Sections;
 }
-function CreationToolBar({ form, formFields, submitButton }: Props) {
+function CreationToolBar({ form, formFields, submitButton, entity }: Props) {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const attachmentInputRef = useRef<HTMLInputElement>(null);
 
@@ -38,7 +43,7 @@ function CreationToolBar({ form, formFields, submitButton }: Props) {
   return (
     <Stack>
       {uploadFormFields?.map((uploadField) => (
-        <PreviewFileZone key={uploadField.id} formField={uploadField} form={form} />
+        <PreviewFileZone entity={entity} key={uploadField.id} formField={uploadField} form={form} />
       ))}
       <Group
         mt={10}

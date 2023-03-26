@@ -1,4 +1,4 @@
-export const ownersTableData: Array<FormFieldInterface> = [
+export const organizationsTableData: Array<FormFieldInterface> = [
   {
     id: 'name',
     name: 'name',

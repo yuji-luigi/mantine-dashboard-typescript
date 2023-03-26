@@ -21,6 +21,7 @@ import { CardArticleImageDescFooter } from '../../components/card/CardArticleIma
 import CardArticleImageBig from '../../components/card/CardArticleImageBig';
 import axiosInstance from '../../utils/axios-instance';
 import PostList from './PostList';
+import { useCrudSelectors } from '../../redux/features/crud/crudSlice';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 interface TypeMock {
@@ -60,8 +61,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function PostPageComponent({ threads }: { threads: Thread[] }) {
+export default function PostPageComponent() {
   const { classes, cx, theme } = useStyles();
+  const { crudDocuments: threads } = useCrudSelectors('threads');
 
   return (
     // <Container mx="auto" py="xl">

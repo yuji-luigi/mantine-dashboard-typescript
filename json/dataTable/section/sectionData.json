@@ -186,6 +186,16 @@
 		],
 		"contents": [
 			{
+				"sliceName": "uploads",
+				"entity": "uploads",
+				"title": "uploads",
+				"subtitle": "subtitle",
+				"navbarTitle": "uploads",
+				"link": "/dashboard/uploads",
+				"createButton": "New Wallet",
+				"icon": "Dashboard"
+			},
+			{
 				"sliceName": "wallets",
 				"entity": "wallets",
 				"title": "Wallets",
@@ -206,12 +216,12 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "owners",
-				"entity": "owners",
-				"title": "owners",
+				"sliceName": "organizations",
+				"entity": "organizations",
+				"title": "organizations",
 				"subtitle": "subtitle",
-				"navbarTitle": "Owners",
-				"link": "/dashboard/owners",
+				"navbarTitle": "organizations",
+				"link": "/dashboard/organizations",
 				"createButton": "New Owner",
 				"icon": "Dashboard"
 			}

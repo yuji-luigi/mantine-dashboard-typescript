@@ -188,6 +188,7 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
         <CreationToolBar
           formFields={sectionFormFields}
           form={form}
+          entity={entity}
           submitButton={
             <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
               Add Post!

@@ -6,6 +6,7 @@ import { FONT_SIZES } from '../../lib/enums';
 import { IconBookmark, IconDots, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   action: {
@@ -17,7 +18,10 @@ const useStyles = createStyles((theme) => ({
 }));
 const PostEditButton = ({ thread }: { thread: Thread }) => {
   const { user } = useAuth();
-  const { selectCrudDocument } = useCrudSliceStore();
+
+  const router = useRouter();
+
+  const { selectCrudDocument, deleteCrudDocument } = useCrudSliceStore();
 
   const { openDrawer } = useDrawerContext();
 
@@ -27,7 +31,12 @@ const PostEditButton = ({ thread }: { thread: Thread }) => {
   // useEffect(() => {
   //   return () => selectCrudDocument({ document: null, entity: 'threads' });
   // }, []);
-
+  const handleDeleteClicked = () => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      deleteCrudDocument({ documentId: thread._id, entity: 'threads' });
+      router.push('/dashboard/posts');
+    }
+  };
   return (
     <>
       {user?._id === thread.createdBy._id && (
@@ -53,8 +62,10 @@ const PostEditButton = ({ thread }: { thread: Thread }) => {
                 Mark as draft
               </Menu.Item>
               <Menu.Item
+                onClick={handleDeleteClicked}
                 sx={{
                   fontSize: FONT_SIZES.menuItemsS,
+                  color: 'red',
                   // '&:hover': {
                   //   background:
                   //     theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],

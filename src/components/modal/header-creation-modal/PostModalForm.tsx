@@ -71,7 +71,7 @@ const PostModalForm = () => {
   };
 
   useEffect(() => {
-    if (crudStatus === 'succeed') {
+    if (crudStatus === 'succeed' && submitting) {
       notifications.hide('submit');
       notifications.show({
         color: 'teal',
@@ -82,7 +82,7 @@ const PostModalForm = () => {
       });
       setSubmitting(false);
       form.reset();
-      router.reload();
+      // router.reload();
     }
     if (crudStatus === 'failed') {
       notifications.show({
@@ -114,6 +114,7 @@ const PostModalForm = () => {
       <CreationToolBar
         formFields={sectionFormFields}
         form={form}
+        entity="threads"
         submitButton={
           <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
             Add Post!
