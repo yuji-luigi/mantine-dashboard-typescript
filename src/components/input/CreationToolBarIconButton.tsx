@@ -23,7 +23,8 @@ const CreationToolBarIconButton = ({
       <input
         type="file"
         multiple={formField.multi}
-        capture="filesystem"
+        // capture="filesystem"
+        capture="environment"
         style={{ display: 'none' }}
         ref={inputRef}
         onChange={(event) => {
