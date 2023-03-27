@@ -1,3 +1,4 @@
+import { maintenancesTableData } from './maintenancesTableData';
 import { billingsTableData as billing } from './billingsTableData';
 import { buildingTableData as buildings } from './buildingsTableData';
 import { usersTableData as users } from './usersTableData';
@@ -15,6 +16,7 @@ import { userSettingTableData as userSettings } from './userSetting-tabledata';
 import { organizationsTableData as organizations } from './organizationsTableData';
 import { spacesTableData as spaces } from './spacesTableData';
 import { uploadsTableData as uploads } from './uploadsTableData';
+import { maintenancesTableData as maintenances } from './maintenancesTableData';
 
 // /**
 //  * typing support when making conditions in jsx (tabelcell component)
@@ -54,5 +56,6 @@ const formFields: FormFieldsType = {
   organizations,
   spaces,
   uploads,
+  maintenances,
 };
 export default formFields;

@@ -43,6 +43,7 @@ interface FormFieldInterface {
   multi?: boolean;
   /**For type select for editing reason put under score meaning field in formField config json(object)*/
   _entity?: Sections;
+  accept?: string;
   /**
    * from object. get the property [selectValue[0]] [selectValue[1]]... To show on the DataTable.
    */
@@ -75,6 +76,11 @@ interface FormFieldInterface {
    * */
   preview?: string;
 }
+
+// interface FileFormType  {
+//   type: 'image' | 'attachment';
+//   accept: 'image/*' | 'application/pdf' | null | undefined;
+// };
 
 interface SelectOption extends React.ComponentPropsWithoutRef<'div'> {
   /** both must be string or null */

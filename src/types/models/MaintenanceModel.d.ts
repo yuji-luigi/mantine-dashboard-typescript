@@ -1,4 +1,4 @@
-interface Thread extends MongooseBaseModel<null> {
+interface Maintenance extends MongooseBaseModel<null> {
   title: string;
   images: Upload[] | [];
   description: string;

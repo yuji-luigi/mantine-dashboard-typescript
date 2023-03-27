@@ -45,9 +45,10 @@ export function HeaderCreationModal() {
           </Menu.Item>
           <Menu.Item
             sx={{ fontSize: FONT_SIZES.menuItems }}
-            icon={<Icons.funds size={FONT_SIZES.menuItems} />}
+            onClick={() => handleOpenModal('maintenances')}
+            icon={<Icons.maintenance size={FONT_SIZES.menuItems} />}
           >
-            New fund
+            Add maintenance
           </Menu.Item>
           <Menu.Item
             sx={{ fontSize: FONT_SIZES.menuItems }}

@@ -29,4 +29,5 @@ type Sections =
   | 'events'
   | 'spaces'
   | 'uploads'
+  | 'maintenances'
   | '';

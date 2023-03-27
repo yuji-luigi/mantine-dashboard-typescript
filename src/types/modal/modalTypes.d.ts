@@ -1,1 +1,1 @@
-type ModalType = 'posts' | 'funds';
+type ModalType = 'posts' | 'funds' | 'maintenances';

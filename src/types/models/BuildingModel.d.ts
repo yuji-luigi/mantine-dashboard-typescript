@@ -1,4 +1,4 @@
- interface Building extends MongooseBaseModel {
+interface ISpace extends MongooseBaseModel {
   address?: string;
   floors?: string[];
   password: string;

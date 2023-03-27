@@ -37,6 +37,7 @@ import {
   IconArchive as Archive,
   IconPhoto as Image,
   IconEdit as Edit,
+  IconHammer as maintenance,
 } from '@tabler/icons-react';
 
 export const Icons /* : Record<IconIndexTypes, Icon> */ = {
@@ -73,6 +74,7 @@ export const Icons /* : Record<IconIndexTypes, Icon> */ = {
   archive: Archive,
   image: Image,
   edit: Edit,
+  maintenance,
   TablerIcon,
 } as const;
 

@@ -1,5 +1,5 @@
 export const FONT_SIZES = {
-  menuItems: 20,
+  menuItems: 16,
   menuItemsS: 14,
 };
 

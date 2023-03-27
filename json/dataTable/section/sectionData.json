@@ -16,6 +16,16 @@
 				"link": "/dashboard/posts",
 				"createButton": "",
 				"icon": "posts"
+			},
+			{
+				"sliceName": "maintenances",
+				"entity": "maintenances",
+				"title": "maintenances",
+				"subtitle": "subtitle",
+				"navbarTitle": "maintenances",
+				"link": "/dashboard/maintenances",
+				"createButton": "",
+				"icon": "posts"
 			}
 		]
 	},
