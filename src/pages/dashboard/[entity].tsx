@@ -19,7 +19,7 @@ const CrudPage = ({ isHead = false /*  data */ }: { isHead: boolean /*  data?: I
   const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
   formFields as FormFieldsType;
   useEffect(() => {
-    if (!sections.includes(entity as string)) {
+    if (!sections.includes(entity)) {
       push('/dashboard/home');
     }
 
