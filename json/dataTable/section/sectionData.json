@@ -8,7 +8,6 @@
 		],
 		"contents": [
 			{
-				"sliceName": "posts",
 				"entity": "posts",
 				"title": "Posts",
 				"subtitle": "subtitle",
@@ -18,7 +17,6 @@
 				"icon": "posts"
 			},
 			{
-				"sliceName": "maintenances",
 				"entity": "maintenances",
 				"title": "maintenances",
 				"subtitle": "subtitle",
@@ -38,7 +36,6 @@
 		],
 		"contents": [
 			{
-				"sliceName": "home",
 				"entity": "home",
 				"title": "welcome to dashboard",
 				"subtitle": "subtitle",
@@ -48,7 +45,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "statistics",
 				"entity": "statistics",
 				"title": "Statistics",
 				"subtitle": "subtitle",
@@ -58,7 +54,6 @@
 				"icon": "Statistic"
 			},
 			{
-				"sliceName": "notifications",
 				"entity": "notifications",
 				"title": "Notifications",
 				"subtitle": "subtitle",
@@ -68,7 +63,6 @@
 				"icon": "Notification"
 			},
 			{
-				"sliceName": "bookmarks",
 				"entity": "bookmarks",
 				"title": "Bookmarks",
 				"subtitle": "subtitle",
@@ -78,7 +72,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "comments",
 				"entity": "comments",
 				"title": "Comments",
 				"subtitle": "subtitle",
@@ -99,7 +92,6 @@
 		],
 		"contents": [
 			{
-				"sliceName": "fundRules",
 				"entity": "fundRules",
 				"title": "FundRules",
 				"subtitle": "subtitle",
@@ -109,7 +101,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "proposals",
 				"entity": "proposals",
 				"title": "Proposals",
 				"subtitle": "subtitle",
@@ -119,7 +110,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "funds",
 				"entity": "funds",
 				"title": "Funds",
 				"subtitle": "subtitle",
@@ -129,27 +119,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "threads",
-				"entity": "threads",
-				"title": "Threads",
-				"subtitle": "subtitle",
-				"navbarTitle": "Thread",
-				"link": "/dashboard/threads",
-				"createButton": "New Thread",
-				"icon": "Dashboard"
-			},
-			{
-				"sliceName": "instances",
-				"entity": "instances",
-				"title": "Instances",
-				"subtitle": "subtitle",
-				"navbarTitle": "Instance",
-				"link": "/dashboard/instances",
-				"createButton": "New Instance",
-				"icon": "Dashboard"
-			},
-			{
-				"sliceName": "tags",
 				"entity": "tags",
 				"title": "Tags",
 				"subtitle": "subtitle",
@@ -168,7 +137,15 @@
 		],
 		"contents": [
 			{
-				"sliceName": "spaces",
+				"entity": "threads",
+				"title": "Threads",
+				"subtitle": "subtitle",
+				"navbarTitle": "Thread",
+				"link": "/dashboard/threads",
+				"createButton": "New Thread",
+				"icon": "Dashboard"
+			},
+			{
 				"entity": "spaces",
 				"title": "spaces",
 				"subtitle": "subtitle",
@@ -178,7 +155,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "users",
 				"entity": "users",
 				"title": "Users",
 				"subtitle": "subtitle",
@@ -196,7 +172,6 @@
 		],
 		"contents": [
 			{
-				"sliceName": "uploads",
 				"entity": "uploads",
 				"title": "uploads",
 				"subtitle": "subtitle",
@@ -206,7 +181,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "wallets",
 				"entity": "wallets",
 				"title": "Wallets",
 				"subtitle": "subtitle",
@@ -216,7 +190,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "userSettings",
 				"entity": "userSettings",
 				"title": "UserSettings",
 				"subtitle": "subtitle",
@@ -226,7 +199,6 @@
 				"icon": "Dashboard"
 			},
 			{
-				"sliceName": "organizations",
 				"entity": "organizations",
 				"title": "organizations",
 				"subtitle": "subtitle",
