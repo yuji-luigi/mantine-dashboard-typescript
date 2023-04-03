@@ -87,6 +87,5 @@ export function getDefaultValues(
     obj[path] = crudDocument?.[path] || '';
     return obj;
   }, {});
-  console.log(defaultValueObj);
   return defaultValueObj || {};
 }

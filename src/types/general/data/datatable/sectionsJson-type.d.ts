@@ -1,5 +1,4 @@
 interface SectionDataJson {
-  sliceName: string;
   entity: string;
   title: string;
   subtitle: string;
@@ -17,7 +16,6 @@ interface SectionDataJsonWithRoles extends SectionDataJson {
 
 interface a {
   roles: string[];
-  sliceName: string;
   entity: string;
   title: string;
   subtitle: string;

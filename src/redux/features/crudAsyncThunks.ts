@@ -126,3 +126,23 @@ export const deleteCrudDocument = createAsyncThunk(
     return payload;
   }
 );
+
+export const deleteLinkedChildDocument = createAsyncThunk(
+  'crud/deleteLinkedChildDocument',
+  async ({ entity, documentId, query = '' }: DeleteLinkedChildrenPayload) => {
+    /**
+     * in the Api first delete and do getCrudDocuments
+     * returns new crudDocuments with limit number
+     *  */
+    const res = await axiosInstance.delete(
+      `/${API_PATH.linkedChildren}/${entity}/${documentId}${query}`
+    );
+    const payload = {
+      entity: res.data.collection,
+      documents: res.data.data,
+      documentId,
+      totalDocuments: res.data.totalDocuments,
+    };
+    return payload;
+  }
+);

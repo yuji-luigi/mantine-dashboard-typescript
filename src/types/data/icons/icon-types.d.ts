@@ -1,5 +1,6 @@
 type IconIndexTypes =
   | 'bookmarks'
+  | 'maintenances'
   | 'comments'
   | 'buildings'
   | 'funds'

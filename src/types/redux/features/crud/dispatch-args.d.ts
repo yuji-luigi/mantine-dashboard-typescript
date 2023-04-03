@@ -18,6 +18,11 @@ interface DeleteCrudPayload {
   query?: string;
   // paginationQuery?: string;
 }
+
+interface DeleteLinkedChildrenPayload extends DeleteCrudPayload {
+  // parentId: string;
+  // paginationQuery?: string;
+}
 interface UpdateCrudPayload {
   entity: Sections;
   /** form.values */

@@ -1,3 +1,4 @@
+import { ActionCells } from './ActionCells';
 import { ActionIcon, Group } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import React, { useEffect } from 'react';
@@ -29,13 +30,13 @@ export function TableRow({
   const entity = query.entity as Sections;
   // const selectedDocument = getSelectedDocument(entity);
   // const { deleteCrudDocument: old } = useCrudSlice();
-  const onModify = (): void => {
-    selectCrudDocument({ entity, document: rowData });
-    openDrawer();
-  };
-  const onDelete = (): void => {
-    deleteCrudDocument({ entity, documentId: rowData._id, query: paginationQuery });
-  };
+  // const onModify = (): void => {
+  //   selectCrudDocument({ entity, document: rowData });
+  //   openDrawer();
+  // };
+  // const onDelete = (): void => {
+  //   deleteCrudDocument({ entity, documentId: rowData._id, query: paginationQuery });
+  // };
   useEffect(
     () => () => {
       selectCrudDocument({ entity, document: null });
@@ -53,16 +54,7 @@ export function TableRow({
       {/*
           Action cells defined here(modify, delete button)
       */}
-      <td>
-        <Group spacing={0} position="right">
-          <ActionIcon onClick={onModify}>
-            <IconPencil size={16} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon color="red" onClick={onDelete}>
-            <IconTrash size={16} stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </td>
+      <ActionCells rowData={rowData} />
     </tr>
   );
 }

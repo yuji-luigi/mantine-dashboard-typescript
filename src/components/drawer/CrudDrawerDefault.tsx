@@ -153,13 +153,20 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
       if (crudStatus === 'succeed') {
         handleSubmitSucceed();
       }
-      if (crudError) {
+      if (crudError && crudStatus === 'failed') {
         hideNotification('submit');
         notifications.show(errorNotificationData(crudError, 5000));
         setSubmitting(false);
-        sleep(5000).then(() => cleanNotifications());
+        sleep(5000).then(() => {
+          notifications.hide('error');
+          cleanNotifications();
+        });
       }
     }
+    () => {
+      hideNotification('submit');
+      hideNotification('error');
+    };
   }, [crudStatus]);
 
   useEffect(() => {

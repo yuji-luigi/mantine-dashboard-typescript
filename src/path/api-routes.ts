@@ -23,6 +23,10 @@ export const PATH_AUTH: TAuthPath = {
 };
 
 export enum API_PATH {
+  /**
+   * creation: /linkedChildren/${entity}/...
+   * update: /linkedChildren/${entity}/${}
+   * */
   linkedChildren = 'linkedChildren',
   uploads = 'upload-files',
 }

@@ -6,6 +6,7 @@ import {
   deleteCrudDocument,
   fetchLinkedChildren,
   addLinkedChildrenDocument,
+  deleteLinkedChildDocument,
 } from '../crudAsyncThunks';
 // import { sectionData } from '../../../data';
 import { flattenSectionData } from '../../../data';
@@ -159,6 +160,22 @@ export const crudSlice = createSlice({
         // );
         state.reduxdb[entity].totalDocuments = totalDocuments;
         state.reduxdb[entity].documentsArray = newDocumentArray;
+      })
+      .addCase(deleteLinkedChildDocument.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteLinkedChildDocument.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(deleteLinkedChildDocument.fulfilled, (state, action) => {
+        const { entity, totalDocuments, documents } = action.payload;
+        state.status = 'succeed';
+        const newDocumentArray = documents;
+        // const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
+        //   (document) => document._id !== documentId
+        // );
+        state.reduxdb[entity].totalDocuments = totalDocuments;
+        state.reduxdb[entity].documentsArray = newDocumentArray;
       });
   },
 });
@@ -194,6 +211,10 @@ export const useCrudSliceStore = () => {
     /** delete from Api and redux */
     deleteCrudDocument(data: DeleteCrudPayload) {
       appDispatch(deleteCrudDocument(data));
+    },
+    /** delete from Api and redux */
+    deleteLinkedChildDocument(data: DeleteLinkedChildrenPayload) {
+      appDispatch(deleteLinkedChildDocument(data));
     },
     /** set object in selectedDocument in Reduxdb*/
     selectCrudDocument(data: SelectCrudPayload) {

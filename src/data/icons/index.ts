@@ -1,4 +1,4 @@
-import { IconX } from '@tabler/icons-react';
+import { Icon, IconX } from '@tabler/icons-react';
 /**
  * use the key name same as the slice name
  */
@@ -10,14 +10,14 @@ import {
   IconDashboard as Dashboard,
   IconDatabaseImport as Database,
   IconFingerprint as Security,
-  IconHomeStats as Statistic,
+  IconChartBar as Statistic,
   IconKey as Key,
   IconReceipt2 as Receipt,
   IconSettings as Cog,
   IconSwitchHorizontal as SwitchHorizontal,
   IconLogout as Logout,
   IconUser as User,
-  IconBook as Bookmark,
+  IconBookmarks as Bookmark,
   IconMessage as Comment,
   IconBuilding as Building,
   IconRuler as FundRule,
@@ -38,9 +38,10 @@ import {
   IconPhoto as Image,
   IconEdit as Edit,
   IconHammer as maintenance,
+  // IconCardboards as posts,
 } from '@tabler/icons-react';
 
-export const Icons /* : Record<IconIndexTypes, Icon> */ = {
+export const Icons = {
   authentication: Authentication,
   notifications: Notification,
   home: Dashboard,
@@ -75,9 +76,10 @@ export const Icons /* : Record<IconIndexTypes, Icon> */ = {
   image: Image,
   edit: Edit,
   maintenance,
-  TablerIcon,
+  maintenances: maintenance,
+  posts: Article,
+  // TablerIcon,
 } as const;
-
 // export {
 //   Icon2fa as authentication,
 //   IconBellRinging as notifications,
