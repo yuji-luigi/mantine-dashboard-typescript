@@ -20,7 +20,7 @@ import { CardArticleSmall } from '../../components/card/CardArticleSmall';
 import { CardArticleImageDescFooter } from '../../components/card/CardArticleImageDescFooter';
 import CardArticleImageBig from '../../components/card/CardArticleImageBig';
 import axiosInstance from '../../utils/axios-instance';
-import PostList from './PostList';
+import MaintenanceList from './MaintenanceList';
 import { useCrudSelectors } from '../../redux/features/crud/crudSlice';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -61,7 +61,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function PostPageComponent() {
+export default function MaintenanceListPageSection() {
   const { classes, cx, theme } = useStyles();
   const { crudDocuments: threads } = useCrudSelectors('threads');
 
@@ -73,7 +73,7 @@ export default function PostPageComponent() {
     >
       {/* todo create Cards component where differentiate card by thread.type */}
       {threads.map((thread) => (
-        <PostList key={thread._id} thread={thread} />
+        <MaintenanceList key={thread._id} thread={thread} />
       ))}
     </Box>
     // </Container>

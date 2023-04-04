@@ -3,20 +3,20 @@ import fetch from 'node-fetch';
 
 import { GetServerSidePropsContext } from 'next';
 import { ReactElement, useEffect } from 'react';
-import Layout from '../../../layouts';
-import PostsPageSection from '../../../sections/posts_section/PostsPageComponent';
-import axiosInstance from '../../../utils/axios-instance';
-import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
+import Layout from '../../layouts';
+import MaintenanceListPageSection from '../../sections/maintenance_list_section/MaintenanceListPageSection';
+import axiosInstance from '../../utils/axios-instance';
+import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
-export default function PostsPage({ threads }: { threads: Thread[] }) {
+export default function MaintenanceListPage({ threads }: { threads: Thread[] }) {
   const { setCrudDocuments } = useCrudSliceStore();
   useEffect(() => {
     setCrudDocuments({ entity: 'threads', documents: threads });
   }, [threads]);
-  return <PostsPageSection /* threads={threads} */ />;
+  return <MaintenanceListPageSection /* threads={threads} */ />;
 }
 
-PostsPage.getLayout = function getLayout(page: ReactElement) {
+MaintenanceListPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout variant="dashboard">{page}</Layout>;
 };
 

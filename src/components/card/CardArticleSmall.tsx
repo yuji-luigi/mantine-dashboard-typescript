@@ -1,7 +1,8 @@
 import { createStyles, Card, Image, Avatar, Text, Group, Box, Stack } from '@mantine/core';
 import Link from 'next/link';
 import { threadId } from 'worker_threads';
-import { PATH_DASHBOARD } from '../../path/page-paths';
+import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../path/page-paths';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -38,6 +39,7 @@ interface CardArticleImageDescFooterVerticalProps {
   category: string;
   title: string;
   date: string;
+  hrefRoot: CARD_LINK_PATH;
   author: {
     name: string;
     avatar?: string;
@@ -50,6 +52,7 @@ export function CardArticleSmall({
   title,
   date,
   thread,
+  hrefRoot,
   author = { name: 'not registered user', avatar: '' },
 }: CardArticleImageDescFooterVerticalProps) {
   const description =
@@ -57,8 +60,10 @@ export function CardArticleSmall({
       ? `${thread.description.substring(0, 50)}...`
       : thread.description;
   const { classes } = useStyles();
+  const router = useRouter();
+  console.log(router);
   return (
-    <Link href={`${PATH_DASHBOARD.posts}/${thread._id}`} className={classes.link}>
+    <Link href={`${hrefRoot}/${thread._id}`} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>
         <Group noWrap sx={{ height: 150 }} spacing={0}>
           {image && <Image src={image} height={150} width={140} />}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { CardArticleImageDescFooter } from '../../components/card/CardArticleImageDescFooter';
 import { CardArticleSmall } from '../../components/card/CardArticleSmall';
+import { CARD_LINK_PATH } from '../../path/page-paths';
 
 const PostList = ({ thread }: { thread: Thread }) => {
   return (
@@ -14,6 +15,7 @@ const PostList = ({ thread }: { thread: Thread }) => {
           date={thread.createdAt}
           image={thread.images[0]?.url}
           title={thread.title}
+          hrefRoot={CARD_LINK_PATH.posts}
         />
       )}
       {/* {thread.listViewType === 'default' && (

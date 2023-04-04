@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { GetServerSidePropsContext } from 'next';
 import { ReactElement, useEffect } from 'react';
 import Layout from '../../layouts';
-import PostsPageSection from '../../sections/posts_section/PostsPageComponent';
+import PostsPageSection from '../../sections/posts_list_section/PostsPageComponent';
 import axiosInstance from '../../utils/axios-instance';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 

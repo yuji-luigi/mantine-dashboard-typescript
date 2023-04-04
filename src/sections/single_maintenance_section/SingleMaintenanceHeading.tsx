@@ -46,21 +46,21 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SingleMaintenanceHeading = ({ thread }: { thread: Thread }) => {
+const SingleMaintenanceHeading = ({ maintenance }: { maintenance: Maintenance }) => {
   const { classes, cx, theme } = useStyles();
 
   return (
     <Stack className={classes.header}>
       <Text className={classes.title} fw={800} component="a">
-        {thread.title}
+        {maintenance.title}
       </Text>
       <Group align="center">
-        <Avatar src={thread.createdBy.image} size={50} radius="xl" mr={0} />
+        <Avatar src={maintenance.createdBy.image} size={50} radius="xl" mr={0} />
         <Text fz="sm" inline>
-          {thread.createdBy.name}
+          {maintenance.createdBy.name}
         </Text>
         <Text fz="sm" inline>
-          {thread._createdAt}
+          {maintenance._createdAt}
         </Text>
       </Group>
     </Stack>
