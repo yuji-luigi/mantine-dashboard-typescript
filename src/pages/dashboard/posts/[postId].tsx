@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IconBookmark, IconHeart, IconSettings, IconShare } from '@tabler/icons-react';
 import {
   Card,
@@ -28,6 +28,9 @@ import SinglePostArticleArea from '../../../sections/single_post_section/SingleP
 import RelatedArticlesArea from '../../../sections/single_post_section/RelatedArticleArea';
 import SinglePostHeading from '../../../sections/single_post_section/SinglePostHeading';
 import { CrudDrawerDefault } from '../../../components/drawer/CrudDrawerDefault';
+import { selectCrudDocument } from '../../../redux/features/crud/crudSlice';
+import { useCrudSliceStore, useCrudSelectors } from '../../../redux/features/crud/crudSlice';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -41,6 +44,19 @@ const useStyles = createStyles((theme) => ({
 
 const PostIdPage = ({ thread }: { thread: Thread }) => {
   const { classes, cx, theme } = useStyles();
+
+  // const { query }: { query: ParsedQueryCustom } = useRouter();
+  const { selectCrudDocument } = useCrudSliceStore();
+  // const { selectedCrudDocument: thread } = useCrudSelectors();
+  useEffect(() => {
+    // selectCrudDocument({ entity: 'threads', document: thread });
+
+    return () => {
+      selectCrudDocument({ entity: 'threads', documentId: null });
+    };
+  }, []);
+
+  if (!thread) return null;
 
   return (
     <Container py="lg" className={classes.main}>

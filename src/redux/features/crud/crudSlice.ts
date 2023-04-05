@@ -69,6 +69,10 @@ export const crudSlice = createSlice({
     resetStatus: (state) => {
       state.status = 'idle';
     },
+    setCrudDocument: (state, action) => {
+      const { document, entity } = action.payload;
+      state.reduxdb[entity].documentsArray;
+    },
     setCrudDocuments: (state, action) => {
       const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
 
