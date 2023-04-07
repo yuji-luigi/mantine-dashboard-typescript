@@ -82,7 +82,8 @@ export const addLinkedChildrenDocument = createAsyncThunk(
     const endPoint = `${API_PATH.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
     const payload = {
-      entity: res.data.collection,
+      // entity: res.data.collection,
+      entity,
       documents: res.data.data,
       // documentId,
       totalDocuments: res.data.totalDocuments,
@@ -94,7 +95,7 @@ export const addLinkedChildrenDocument = createAsyncThunk(
 
 export const updateCrudDocument = createAsyncThunk(
   'crud/updateDocument',
-  async ({ entity, updateData, documentId, parentId }: UpdateCrudPayload) => {
+  async ({ entity, updateData, documentId }: UpdateCrudPayload) => {
     /** parentId ? then linkedChildren endpoint. else case update normally */
     const endpoint = `${entity}/${documentId}`;
     // const endpoint = !parentId
@@ -102,7 +103,8 @@ export const updateCrudDocument = createAsyncThunk(
     //   : `/linkedChildren/${entity}/${parentId}`;
     const res = await axiosInstance.put(endpoint, updateData);
     const payload = {
-      entity: res.data.collection,
+      // entity: res.data.collection,
+      entity,
       updatedDocument: res.data.data as Record<string, any>,
     };
     return payload;
@@ -118,7 +120,8 @@ export const deleteCrudDocument = createAsyncThunk(
      *  */
     const res = await axiosInstance.delete(`${entity}/${documentId}${query}`);
     const payload = {
-      entity: res.data.collection,
+      // entity: res.data.collection,
+      entity,
       documents: res.data.data,
       documentId,
       totalDocuments: res.data.totalDocuments,
@@ -138,7 +141,8 @@ export const deleteLinkedChildDocument = createAsyncThunk(
       `/${API_PATH.linkedChildren}/${entity}/${documentId}${query}`
     );
     const payload = {
-      entity: res.data.collection,
+      // entity: res.data.collection,
+      entity,
       documents: res.data.data,
       documentId,
       totalDocuments: res.data.totalDocuments,
