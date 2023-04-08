@@ -38,7 +38,7 @@ export enum FieldTypes {
  * type for the json files
  *
  * */
-const formFields: FormFieldsType = {
+const allFormFields: FormFieldsType = {
   billing,
   users,
   statistics,
@@ -58,4 +58,4 @@ const formFields: FormFieldsType = {
   uploads,
   maintenances,
 };
-export default formFields;
+export default allFormFields;

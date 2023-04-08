@@ -33,7 +33,7 @@ const CreationToolBarIconButton = ({
             // what is prevFiles?
             const prevFiles = form.values.media?.[formField.name];
             // const prevFilePreviews = form.values.mediaPreview?.[formField.name];
-            if (!prevFiles) {
+            if (!prevFiles?.length) {
               const filesUrl = [];
               // for of loop
               for (const file of event.target.files) {
@@ -48,7 +48,7 @@ const CreationToolBarIconButton = ({
               // form.setFieldValue(`mediaPreview.${formField.name}`, [...event.target.files]);
               return;
             }
-            form.setFieldValue(`media.${formField.name}`, [...prevFiles]);
+            form.setFieldValue(`media.${formField.name}`, [...prevFiles, ...event.target.files]);
           }
         }}
       />

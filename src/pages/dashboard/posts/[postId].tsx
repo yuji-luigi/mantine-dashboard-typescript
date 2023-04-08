@@ -31,6 +31,7 @@ import { CrudDrawerDefault } from '../../../components/drawer/CrudDrawerDefault'
 import { selectCrudDocument } from '../../../redux/features/crud/crudSlice';
 import { useCrudSliceStore, useCrudSelectors } from '../../../redux/features/crud/crudSlice';
 import { useRouter } from 'next/router';
+import { threadId } from 'worker_threads';
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -45,24 +46,25 @@ const useStyles = createStyles((theme) => ({
 const PostIdPage = ({ thread }: { thread: Thread }) => {
   const { classes, cx, theme } = useStyles();
 
-  // const { query }: { query: ParsedQueryCustom } = useRouter();
+  const { query }: { query: ParsedQueryCustom } = useRouter();
   const { selectCrudDocument } = useCrudSliceStore();
-  // const { selectedCrudDocument: thread } = useCrudSelectors();
-  useEffect(() => {
-    // selectCrudDocument({ entity: 'threads', document: thread });
+  const { selectedCrudDocument: _thread } = useCrudSelectors('threads');
 
+  useEffect(() => {
+    if (!query.postId) return;
+    selectCrudDocument({ entity: 'threads', document: thread });
     return () => {
       selectCrudDocument({ entity: 'threads', documentId: null });
     };
   }, []);
 
-  if (!thread) return null;
+  if (!_thread?._id) return null;
 
   return (
     <Container py="lg" className={classes.main}>
-      <SinglePostHeading thread={thread} />
-      <PostEditButton thread={thread} />
-      <SinglePostArticleArea thread={thread} />
+      <SinglePostHeading thread={_thread} />
+      <PostEditButton thread={_thread} />
+      <SinglePostArticleArea thread={_thread} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />
       <CrudDrawerDefault overrideEntity="threads" />

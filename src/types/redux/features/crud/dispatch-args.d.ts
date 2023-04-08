@@ -1,3 +1,7 @@
+interface UpdateCrudDocumentInStorePayload {
+  entity: Sections;
+  document: AllModels;
+}
 interface FetchCrudPayload {
   entity: Sections;
   query?: string;

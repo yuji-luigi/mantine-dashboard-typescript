@@ -5,6 +5,7 @@ interface Upload {
   originalFileName: string;
   extension: string;
   folder?: string | undefined;
+  fieldName: string;
   fullPath: string;
   size: number;
   url: string;

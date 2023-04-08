@@ -2,7 +2,7 @@
 import { Button, Container, createStyles, Drawer, LoadingOverlay, Text } from '@mantine/core';
 
 import FormFields from '../../input/FormFields';
-import formFields from '../../../../json/dataTable/formfields';
+import allFormFields from '../../../../json/dataTable/formfields';
 import { useState, FormEvent, useMemo, useEffect } from 'react';
 import { useCrudSelectors, useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 import { Form, useForm } from '@mantine/form';
@@ -36,7 +36,7 @@ const PostModalForm = () => {
 
   const { classes } = useStyles();
   const [submitting, setSubmitting] = useState(false);
-  const sectionFormFields: FormFieldInterface[] = formFields.threads;
+  const sectionFormFields: FormFieldInterface[] = allFormFields.threads;
   const { createCrudDocument } = useCrudSliceStore();
   const { crudMessage, crudStatus } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
@@ -49,13 +49,14 @@ const PostModalForm = () => {
     e.preventDefault();
 
     const media = structuredClone(form.values.media);
-
+    // media.images.push({ key: '' });
     const reqBody = {
       ...media,
-      folderName: UPLOAD_FOLDERS.threads,
+      folderName: UPLOAD_FOLDERS.threads, // will be params and set to entity. threads or space or whatever.
       ...form.values,
       media: undefined,
     };
+
     createCrudDocument({
       entity: 'threads',
       newDocument: reqBody,

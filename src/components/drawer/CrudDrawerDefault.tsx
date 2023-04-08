@@ -9,7 +9,7 @@ import {
 } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState, useMemo } from 'react';
-import formFields from '../../../json/dataTable/formfields';
+import allFormFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
@@ -20,8 +20,14 @@ import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationQuery } from '../../context/PaginationContext';
-import { addLinkedChildrenDocument } from '../../redux/features/crudAsyncThunks';
+import { addLinkedChildrenDocument, hasMedia } from '../../redux/features/crudAsyncThunks';
 import CreationToolBar from '../input/CreationToolBar';
+import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
+import { UPLOAD_FOLDERS } from '../../lib/enums';
+import useAuth from '../../../hooks/useAuth';
+import { API_PATH } from '../../path/api-routes';
+import axiosInstance from '../../utils/axios-instance';
+import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -37,6 +43,8 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
 
   const { classes } = useStyles();
 
+  const { user } = useAuth();
+
   const { query } = useRouter();
 
   const entity = overrideEntity || (query.entity as Sections);
@@ -45,7 +53,7 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
 
   const paginationQuery = usePaginationQuery();
 
-  const sectionFormFields: FormFieldInterface[] = formFields[entity];
+  const sectionFormFields: FormFieldInterface[] = allFormFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
   const {
@@ -69,21 +77,21 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
     [selectedDocument]
   );
 
-  const form = useForm<Record<string, unknown>>({
+  const form = useForm({
     initialValues,
     // TODO: Make Validate function and set by string value from formField.
     // validate: 'email' uses this email validator.
     // validate: {
     //   email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
     // },
-  });
+  }) as UseFormReturnTypeCustom;
   /**
    *  Define submit function
    *  show notification/error
    */
   function handleCloseDrawer() {
     closeDrawer();
-    selectCrudDocument({ entity, document: null });
+    // selectCrudDocument({ entity, document: null });
     form.reset();
   }
 
@@ -96,6 +104,30 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
     });
     setSubmitting(true);
 
+    // const data = media ? extractUploadingMedia(media) : {};
+
+    let reqBody: Record<string, any> = {
+      ...form.values,
+      // ...data,
+
+      media: undefined,
+    };
+    const media = structuredClone(form.values.media);
+
+    if (media && hasMedia(media)) {
+      try {
+        const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), entity);
+        for (let key in uploadIdData) {
+          reqBody[key] = [...reqBody[key], ...uploadIdData[key]];
+        }
+      } catch (error) {
+        console.log(error);
+        notifications.hide('submit');
+        setSubmitting(false);
+        return;
+      }
+    }
+
     /** Create new Document */
     if (!selectedDocument._id) {
       if (parentId) {
@@ -106,14 +138,14 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
           newDocument: form.values,
         });
       } else {
-        addCrud({ entity, newDocument: form.values, parentId, query: paginationQuery });
+        addCrud({ entity, newDocument: reqBody, parentId, query: paginationQuery });
       }
     }
     /** Modify selected document */
     if (selectedDocument._id) {
       updateCrudDocument({
         entity,
-        updateData: form.values,
+        updateData: reqBody,
         documentId: selectedDocument._id,
         parentId: query.parentId as string,
       });

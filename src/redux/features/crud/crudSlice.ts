@@ -47,6 +47,14 @@ export const crudSlice = createSlice({
       const { entity, documentId } = action.payload;
       state.reduxdb[entity].documentsArray.filter((data) => data._id !== documentId);
     },
+    /** update by new document already fetched. */
+    updateCrudDocumentInStore: (state, action: PayloadAction<UpdateCrudDocumentInStorePayload>) => {
+      const { document, entity } = action.payload;
+      const documentIndex = state.reduxdb[entity].documentsArray.findIndex(
+        (doc) => doc._id === document._id
+      );
+      state.reduxdb[entity].documentsArray[documentIndex] = document;
+    },
     /** to reset selectedDocument, set document to null */
     selectCrudDocument: (state, action: PayloadAction<SelectCrudPayload>) => {
       // eslint-disable-next-line prefer-const
@@ -62,7 +70,8 @@ export const crudSlice = createSlice({
       } else {
         /** if id is present then find from existing documents array */
         state.reduxdb[entity].selectedDocument =
-          state.reduxdb[entity].selectedDocument.find((doc: AllModels) => doc._id === documentId) ||
+          // state.reduxdb[entity].selectedDocument.find((doc: AllModels) => doc._id === documentId) ||
+          state.reduxdb[entity].documentsArray.find((doc: AllModels) => doc._id === documentId) ||
           null;
       }
     },
@@ -148,6 +157,9 @@ export const crudSlice = createSlice({
           return document;
         });
         state.reduxdb[entity].documentsArray = updatedDocuments;
+        if (state.reduxdb[entity].selectedDocument._id) {
+          state.reduxdb[entity].selectedDocument = updatedDocument;
+        }
       })
       /**
        * DELETE A DOCUMENT
@@ -192,6 +204,10 @@ export const useCrudSliceStore = () => {
   const appDispatch = useAppDispatch();
 
   return {
+    /** update single document in array without calling api. with already new document fetched. or updated in some how */
+    updateCrudDocumentInStore(data: UpdateCrudDocumentInStorePayload) {
+      appDispatch(crudSlice.actions.updateCrudDocumentInStore(data));
+    },
     /** get documents from api and set in documentsArray in redux */
     fetchCrudDocuments(data: FetchCrudPayload) {
       appDispatch(fetchCrudDocuments(data));

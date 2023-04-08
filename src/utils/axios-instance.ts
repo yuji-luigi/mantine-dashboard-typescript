@@ -23,4 +23,10 @@ axiosInstance.interceptors.response.use(
     Promise.reject((error.response && error.response.data) || 'Error connecting to server.')
 );
 
+export const uploadConfig = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+  // withCredentials: true,
+};
 export default axiosInstance;

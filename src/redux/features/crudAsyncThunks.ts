@@ -6,7 +6,19 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_PATH } from '../../path/api-routes';
-import axiosInstance, { AxiosResData } from '../../utils/axios-instance';
+import axiosInstance, { AxiosResData, uploadConfig } from '../../utils/axios-instance';
+
+interface MediaField {
+  [key: string]: File[] | Upload[] | [];
+  // [Symbol.iterator](): IterableIterator<string>; // to make sure it is iterable
+}
+
+export function hasMedia(mediaField: MediaField) {
+  for (const key in mediaField) {
+    if (mediaField[key].length > 0) return true;
+  }
+  return false;
+}
 
 export const HTTP_MULTIPART_CONFIG = {
   headers: {
@@ -98,10 +110,12 @@ export const updateCrudDocument = createAsyncThunk(
   async ({ entity, updateData, documentId }: UpdateCrudPayload) => {
     /** parentId ? then linkedChildren endpoint. else case update normally */
     const endpoint = `${entity}/${documentId}`;
+    // const config = hasMedia(updateData.media) ? uploadConfig : {};
     // const endpoint = !parentId
     //   ? `${entity}/${documentId}`
     //   : `/linkedChildren/${entity}/${parentId}`;
-    const res = await axiosInstance.put(endpoint, updateData);
+    updateData.media = undefined;
+    const res = await axiosInstance.put(endpoint, updateData /* config */);
     const payload = {
       // entity: res.data.collection,
       entity,
