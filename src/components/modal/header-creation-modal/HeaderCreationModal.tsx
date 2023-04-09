@@ -38,6 +38,19 @@ export function HeaderCreationModal() {
     // }
     // setSubmitting(false);
   };
+  const handleClose = () => {
+    // setSection(allSectionArrayWithRoles.find((section) => section.entity === type) || null);
+    // setModalType(type);
+    close();
+    if (submitting) {
+      notifications.hide('submit');
+      notifications.show({
+        title: 'Upload is cancelled',
+        message: 'Upload cancelled because you closed a popup',
+      });
+    }
+    setSubmitting(false);
+  };
   return (
     <>
       <Menu shadow="lg">
@@ -71,7 +84,7 @@ export function HeaderCreationModal() {
         </Menu.Dropdown>
       </Menu>
       {modalType && (
-        <Modal opened={opened} onClose={close} size="lg" title={section?.createButton}>
+        <Modal opened={opened} onClose={handleClose} size="lg" title={section?.createButton}>
           <ModalContent modalType={modalType} />
         </Modal>
       )}
