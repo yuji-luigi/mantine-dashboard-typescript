@@ -15,7 +15,7 @@ interface MediaField {
 
 export function hasMedia(mediaField: MediaField) {
   for (const key in mediaField) {
-    if (mediaField[key].length > 0) return true;
+    if (mediaField[key]?.length > 0) return true;
   }
   return false;
 }

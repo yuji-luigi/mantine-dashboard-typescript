@@ -14,6 +14,8 @@ import CreationToolBar from '../../input/CreationToolBar';
 import { UPLOAD_FOLDERS } from '../../../lib/enums';
 import { UseFormReturnTypeCustom } from '../../input/input_interfaces/useForm_interface';
 import { useRouter } from 'next/router';
+import { hasMedia } from '../../../redux/features/crudAsyncThunks';
+import { uploadFileAndGetModelId, extractUploadingMedia } from '../../../utils/upload-helper';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -48,19 +50,31 @@ const PostModalForm = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const media = structuredClone(form.values.media);
     // media.images.push({ key: '' });
-    const reqBody = {
-      ...media,
-      folderName: UPLOAD_FOLDERS.threads, // will be params and set to entity. threads or space or whatever.
+    const reqBody: Record<string, any> = {
+      // ...media,
+      // folderName: UPLOAD_FOLDERS.threads, // will be params and set to entity. threads or space or whatever.
       ...form.values,
       media: undefined,
     };
-
+    const media = structuredClone(form.values.media);
+    if (media && hasMedia(media)) {
+      try {
+        const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), 'threads');
+        for (let key in uploadIdData) {
+          if (!reqBody[key]) reqBody[key] = [];
+          reqBody[key] = [...reqBody[key], ...uploadIdData[key]];
+        }
+      } catch (error) {
+        console.log(error);
+        notifications.hide('submit');
+        setSubmitting(false);
+        return;
+      }
+    }
     createCrudDocument({
       entity: 'threads',
       newDocument: reqBody,
-      config,
     });
     notifications.show({
       id: 'submit',

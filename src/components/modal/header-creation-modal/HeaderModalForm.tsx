@@ -14,6 +14,9 @@ import CreationToolBar from '../../input/CreationToolBar';
 import { UPLOAD_FOLDERS } from '../../../lib/enums';
 import { UseFormReturnTypeCustom } from '../../input/input_interfaces/useForm_interface';
 import { useRouter } from 'next/router';
+import { hasMedia } from '../../../redux/features/crudAsyncThunks';
+import { uploadFileAndGetModelId, extractUploadingMedia } from '../../../utils/upload-helper';
+import { useDisclosure } from '@mantine/hooks';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -33,11 +36,12 @@ const useStyles = createStyles(() => ({
 }));
 const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => {
   const router = useRouter();
-
+  const [opened] = useDisclosure();
   const { classes } = useStyles();
-  const [submitting, setSubmitting] = useState(false);
+  // const [submitting, setSubmitting] = useState(false);
+  const { submitting } = useCrudSelectors(entity);
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
-  const { createCrudDocument } = useCrudSliceStore();
+  const { createCrudDocument, setSubmitting } = useCrudSliceStore();
   const { crudMessage, crudStatus } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
@@ -48,14 +52,28 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const media = structuredClone(form.values.media);
-
-    const reqBody = {
-      ...media,
-      folderName: UPLOAD_FOLDERS.threads,
+    let reqBody: Record<string, any> = {
       ...form.values,
       media: undefined,
     };
+
+    const media = structuredClone(form.values.media);
+
+    if (media && hasMedia(media)) {
+      try {
+        const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), 'threads');
+        for (let key in uploadIdData) {
+          if (!reqBody[key]) reqBody[key] = [];
+          reqBody[key] = [...reqBody[key], ...uploadIdData[key]];
+        }
+      } catch (error) {
+        console.log(error);
+        notifications.hide('submit');
+        setSubmitting(false);
+        return;
+      }
+    }
+
     createCrudDocument({
       entity,
       newDocument: reqBody,

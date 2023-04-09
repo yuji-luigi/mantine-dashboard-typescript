@@ -39,6 +39,7 @@ interface Reduxdb {
 interface CrudState {
   reduxdb: Reduxdb;
   status: CrudStatus;
+  submitting: boolean;
   error?: null | string;
   message?: null | string;
 }

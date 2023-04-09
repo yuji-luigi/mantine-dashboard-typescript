@@ -33,6 +33,7 @@ const reduxdb: Reduxdb = flattenSectionData.reduce<Reduxdb>((totalData, currentD
 const initialState: CrudState = {
   reduxdb,
   status: 'idle',
+  submitting: false,
   error: null,
   message: null,
 };
@@ -89,6 +90,9 @@ export const crudSlice = createSlice({
       state.reduxdb[entity].isChildrenTree = isChildrenTree;
       state.reduxdb[entity].documentsArray = documents;
       state.reduxdb[entity].totalDocuments = totalDocuments;
+    },
+    setSubmitting: (state, action: PayloadAction<boolean>) => {
+      state.submitting = action.payload;
     },
   },
   extraReducers(builder) {
@@ -196,7 +200,15 @@ export const crudSlice = createSlice({
   },
 });
 
-export const { selectCrudDocument, setCrudDocuments } = crudSlice.actions;
+export const {
+  selectCrudDocument,
+  setCrudDocuments,
+  setSubmitting,
+  deleteCrud,
+  resetStatus,
+  setCrudDocument,
+  updateCrudDocumentInStore,
+} = crudSlice.actions;
 
 export default crudSlice.reducer;
 
@@ -243,6 +255,9 @@ export const useCrudSliceStore = () => {
     setCrudDocuments(data: SetCrudDocumentsPayload) {
       appDispatch(setCrudDocuments(data));
     },
+    setSubmitting(bool: boolean) {
+      appDispatch(setSubmitting(bool));
+    },
   };
 };
 
@@ -287,4 +302,5 @@ export const useCrudSelectors = (entity?: Sections) => ({
   isChildrenTree: useIsChildrenTree(entity),
   /** number of total documents in queried array from db. */
   totalDocumentsCount: useTotalDocumentsCount(entity),
+  submitting: useAppSelector((state) => state.crud.submitting),
 });

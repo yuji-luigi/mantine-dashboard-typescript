@@ -2,12 +2,13 @@ import React from 'react';
 import HeaderModalForm from './HeaderModalForm';
 import PostModalForm from './PostModalForm';
 
-const ModalContent = ({ modalType = null }: { modalType?: ModalType | null }) => {
+const ModalContent = ({ modalType }: { modalType: ModalType }) => {
   return (
     <>
-      {modalType === 'posts' && <PostModalForm />}
+      {/* {modalType === 'posts' && <PostModalForm />}
       {modalType === 'funds' && <div>funds</div>}
-      {modalType === 'maintenances' && <HeaderModalForm entity={modalType} />}
+      {modalType === 'maintenances' && <HeaderModalForm entity={modalType} />} */}
+      <HeaderModalForm entity={modalType} />
     </>
   );
 };
