@@ -29,7 +29,7 @@ interface TypeMock {
   description: string;
   date: string;
   image?: undefined;
-  createdBy?: undefined;
+  user?: undefined;
 }
 
 interface mock2 {
@@ -42,7 +42,7 @@ interface mock2 {
     value: string;
     label: string;
   }[];
-  createdBy: string;
+  user: string;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -63,7 +63,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function MaintenanceListPageSection() {
   const { classes, cx, theme } = useStyles();
-  const { crudDocuments: threads } = useCrudSelectors('threads');
+  const { crudDocuments: maintenances } = useCrudSelectors('maintenances');
 
   return (
     // <Container mx="auto" py="xl">
@@ -72,8 +72,8 @@ export default function MaintenanceListPageSection() {
       py="xl" /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
     >
       {/* todo create Cards component where differentiate card by thread.type */}
-      {threads.map((thread) => (
-        <MaintenanceList key={thread._id} thread={thread} />
+      {maintenances.map((maintenance) => (
+        <MaintenanceList key={maintenance._id} maintenance={maintenance} />
       ))}
     </Box>
     // </Container>

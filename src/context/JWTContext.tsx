@@ -168,11 +168,11 @@ function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout: Logout = async () => {
+    deleteCookie('jwt');
+    setSession(null);
     dispatch({
       type: 'LOGOUT',
     });
-    setSession(null);
-    deleteCookie('jwt');
   };
 
   return (

@@ -23,7 +23,7 @@ import { ReactElement } from 'react';
 import Layout from '../../../layouts';
 import CarouselBasic from '../../../components/carousel/CarouselBasic';
 import useAuth from '../../../../hooks/useAuth';
-import PostEditButton from '../../../sections/single_maintenance_section/MaintenanceEditButton';
+import PostEditButton from '../../../components/posts/PostEditButton';
 import SinglePostArticleArea from '../../../sections/single_maintenance_section/SingleMaintenanceArticleArea';
 import RelatedArticlesArea from '../../../sections/single_maintenance_section/RelatedArticleArea';
 import SingleMaintenanceHeading from '../../../sections/single_maintenance_section/SingleMaintenanceHeading';
@@ -44,7 +44,7 @@ const MaintenancePage = ({ maintenance }: { maintenance: Maintenance }) => {
   return (
     <Container py="lg" className={classes.main}>
       <SingleMaintenanceHeading maintenance={maintenance} />
-      <PostEditButton maintenance={maintenance} />
+      <PostEditButton data={maintenance} entity="maintenances" />
       <SinglePostArticleArea maintenance={maintenance} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />

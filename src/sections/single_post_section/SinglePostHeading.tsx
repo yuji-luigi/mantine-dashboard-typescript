@@ -55,9 +55,9 @@ const SingleMaintenanceHeading = ({ thread }: { thread: Thread }) => {
         {thread.title}
       </Text>
       <Group align="center">
-        <Avatar src={thread.createdBy.image} size={50} radius="xl" mr={0} />
+        <Avatar src={thread.user.image} size={50} radius="xl" mr={0} />
         <Text fz="sm" inline>
-          {thread.createdBy.name}
+          {thread.user.name}
         </Text>
         <Text fz="sm" inline>
           {thread._createdAt}

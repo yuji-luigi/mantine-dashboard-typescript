@@ -8,6 +8,7 @@ import { Dropzone } from '@mantine/dropzone';
 import { DropzoneCustomImage } from './DropzoneCustomImage';
 import { DropzoneCustomButton } from './DropzoneCustomButton';
 import CreationToolBar from './CreationToolBar';
+// import { FormFieldInterface } from '../../types/general/data/dataTable/formField-types';
 interface Props {
   formField: FormFieldInterface;
   // initialValues: Record<string, any>;
@@ -64,9 +65,21 @@ const FormFields = ({
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {(formField.type === 'select' || formField.type === 'static-select') && (
+      {formField.type === 'select' && (
         <Select
           data={options}
+          name={formField.name}
+          label={formField.label}
+          placeholder={formField.placeholder}
+          size="md"
+          mt={10}
+          {...others}
+          {...form.getInputProps(formField.name || formField.id)}
+        />
+      )}
+      {formField.type === 'static-select' && (
+        <Select
+          data={formField.options!}
           name={formField.name}
           label={formField.label}
           placeholder={formField.placeholder}

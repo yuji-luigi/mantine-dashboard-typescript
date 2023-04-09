@@ -29,7 +29,7 @@ interface TypeMock {
   description: string;
   date: string;
   image?: undefined;
-  createdBy?: undefined;
+  user?: undefined;
 }
 
 interface mock2 {
@@ -42,7 +42,7 @@ interface mock2 {
     value: string;
     label: string;
   }[];
-  createdBy: string;
+  user: string;
 }
 
 const useStyles = createStyles((theme) => ({

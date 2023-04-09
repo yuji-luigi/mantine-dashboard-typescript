@@ -4,5 +4,5 @@ interface IProposal extends MongooseBaseModel {
   fundRule?: string | IFundRule | undefined;
   headSpace?: string | ISpace;
   proposals?: string[] | IProposal[] | undefined;
-  createdBy?: string | IUser | undefined;
+  user?: string | IUser | undefined;
 }

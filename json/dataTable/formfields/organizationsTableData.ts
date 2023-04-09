@@ -57,6 +57,14 @@ export const organizationsTableData: Array<FormFieldInterface> = [
     required: false,
     priority: 2,
   },
+  {
+    id: 'isPublic',
+    name: 'isPublic',
+    label: 'Public Organization',
+    type: 'boolean',
+    required: false,
+    priority: 2,
+  },
   // {
   //   id: 'building',
   //   name: 'building',

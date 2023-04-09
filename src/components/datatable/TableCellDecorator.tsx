@@ -22,6 +22,7 @@ export function TableCellDecorator({
   const cellData = rowData[cellConfig.name!];
   // decorate the TableCell component before render.
   // EX put style: Array<string> then decorate the cell based on the style.
+  if (cellConfig.noTable) return null;
   if (cellConfig.badge) {
     let color = '__null';
     let queriedCellData = cellData;

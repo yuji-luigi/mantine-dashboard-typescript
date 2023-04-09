@@ -1,4 +1,4 @@
-import { Group, ActionIcon } from '@mantine/core';
+import { Group, ActionIcon, Stack } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -42,14 +42,14 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
 
   return (
     <td>
-      <Group spacing={0} position="right">
+      <Stack spacing={0} align="center" /* position="right" */>
         <ActionIcon onClick={onModify}>
           <IconPencil size={16} stroke={1.5} />
         </ActionIcon>
         <ActionIcon color="red" onClick={onDelete}>
           <IconTrash size={16} stroke={1.5} />
         </ActionIcon>
-      </Group>
+      </Stack>
     </td>
   );
 }

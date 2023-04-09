@@ -5,7 +5,7 @@ export interface IUser {
   phone?: string | undefined;
   email: string | undefined;
   password: string;
-  role: string;
+  role: 'admin' | 'user' | 'super_admin';
   bookmarks: string[] | IBookmark[];
   wallet?: string | IWallet;
   buildings: [] | string[] | IBuilding[] | undefined;

@@ -20,9 +20,9 @@ export const usersTableData: Array<FormFieldInterface> = [
     id: 'role',
     name: 'role',
     label: 'Ruolo',
-    type: 'text',
-    // options: ['super_admin', 'admin', 'operatore', 'supervisore', 'manutentore'],
-    options: [{ value: 'static-slect-value', label: 'static-label' }],
+    type: 'static-select',
+    options: [{ label: 'admin', value: 'admin' }, 'user'],
+    // options: [{ value: 'static-slect-value', label: 'static-label' }],
 
     required: true,
     priority: 3,

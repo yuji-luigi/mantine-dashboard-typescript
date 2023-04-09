@@ -17,7 +17,7 @@ interface Thread extends MongooseBaseModel<null> {
     | 'question'
     | 'discussion';
   headSpace?: string | ISpace;
-  createdBy: IUser | string;
+  user: IUser | string;
   isImportant: boolean;
   owner: IOwner | string;
   /** formatted in some way. from api schema level */

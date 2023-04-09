@@ -1,5 +1,5 @@
- interface IFundRule extends MongooseBaseModel {
+interface IFundRule extends MongooseBaseModel {
   executeCondition?: 'every' | 'majority';
   building?: string | Building | undefined;
-  createdBy?: string | User | undefined;
+  user?: string | User | undefined;
 }

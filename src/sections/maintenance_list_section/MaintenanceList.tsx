@@ -3,30 +3,30 @@ import { CardArticleImageDescFooter } from '../../components/card/CardArticleIma
 import { CardArticleSmall } from '../../components/card/CardArticleSmall';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../path/page-paths';
 
-const MaintenanceList = ({ thread }: { thread: Thread }) => {
+const MaintenanceList = ({ maintenance }: { maintenance: Maintenance }) => {
   return (
     <>
-      {thread.listViewType === 'default' && (
+      {maintenance.listViewType === 'default' && (
         <CardArticleSmall
-          key={thread.title}
-          thread={thread}
-          author={thread.createdBy}
-          category={thread.tags?.toString() || 'tech'}
-          date={thread.createdAt}
-          image={thread.images[0]?.url}
-          title={thread.title}
+          key={maintenance.title}
+          data={maintenance}
+          author={maintenance.user}
+          category={maintenance.tags?.toString() || 'tech'}
+          date={maintenance.createdAt}
+          image={maintenance.images[0]?.url}
+          title={maintenance.title}
           hrefRoot={CARD_LINK_PATH.maintenances}
         />
       )}
-      {/* {thread.listViewType === 'default' && (
+      {/* {maintenance.listViewType === 'default' && (
         <CardArticleImageDescFooter
-          key={thread.title}
+          key={maintenance.title}
           className={''}
-          image={thread.images[0]?.url}
-          link={thread._id}
-          title={thread.title}
-          description={thread.description}
-          author={thread.createdBy}
+          image={maintenance.images[0]?.url}
+          link={maintenance._id}
+          title={maintenance.title}
+          description={maintenance.description}
+          author={maintenance.user}
           rating={'40' }
           sx={{ width: 300 }}
         />

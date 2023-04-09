@@ -9,8 +9,8 @@ const PostList = ({ thread }: { thread: Thread }) => {
       {thread.listViewType === 'default' && (
         <CardArticleSmall
           key={thread.title}
-          thread={thread}
-          author={thread.createdBy}
+          data={thread}
+          author={thread.user}
           category={thread.tags?.toString() || 'tech'}
           date={thread.createdAt}
           image={thread.images[0]?.url}
@@ -26,7 +26,7 @@ const PostList = ({ thread }: { thread: Thread }) => {
           link={thread._id}
           title={thread.title}
           description={thread.description}
-          author={thread.createdBy}
+          author={thread.user}
           rating={'40' }
           sx={{ width: 300 }}
         />

@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
     }),
   },
 }));
-const MaintenanceEditButton = ({ maintenance }: { maintenance: Maintenance }) => {
+const PostEditButton = ({ data, entity }: { data: AllModels; entity: Sections }) => {
   const { user } = useAuth();
 
   const router = useRouter();
@@ -26,20 +26,21 @@ const MaintenanceEditButton = ({ maintenance }: { maintenance: Maintenance }) =>
   const { openDrawer } = useDrawerContext();
 
   const { classes, cx, theme } = useStyles();
-  const handleClicked = () => selectCrudDocument({ document: maintenance, entity: 'maintenances' });
+  const handleClicked = () => selectCrudDocument({ document: data, entity });
   const handleEditClicked = () => openDrawer();
   // useEffect(() => {
-  //   return () => selectCrudDocument({ document: null, entity: 'maintenances' });
+  //   return () => selectCrudDocument({ document: null, entity });
   // }, []);
   const handleDeleteClicked = () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      deleteCrudDocument({ documentId: maintenance._id, entity: 'maintenances' });
+      deleteCrudDocument({ documentId: data._id, entity });
       router.push('/dashboard/posts');
     }
   };
+  console.log(user?._id === data.user._id || user?.role === 'super_admin');
   return (
     <>
-      {user?._id === maintenance.createdBy._id && (
+      {(user?._id === data.user._id || user?.role === 'super_admin') && (
         <Group position="right" mb={10}>
           <Menu shadow="lg">
             <Menu.Target>
@@ -101,4 +102,4 @@ const MaintenanceEditButton = ({ maintenance }: { maintenance: Maintenance }) =>
   );
 };
 
-export default MaintenanceEditButton;
+export default PostEditButton;

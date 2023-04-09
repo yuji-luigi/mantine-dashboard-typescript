@@ -8,12 +8,12 @@ import MaintenanceListPageSection from '../../sections/maintenance_list_section/
 import axiosInstance from '../../utils/axios-instance';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
-export default function MaintenanceListPage({ threads }: { threads: Thread[] }) {
+export default function MaintenanceListPage({ maintenances }: { maintenances: Thread[] }) {
   const { setCrudDocuments } = useCrudSliceStore();
   useEffect(() => {
-    setCrudDocuments({ entity: 'threads', documents: threads });
-  }, [threads]);
-  return <MaintenanceListPageSection /* threads={threads} */ />;
+    setCrudDocuments({ entity: 'maintenances', documents: maintenances });
+  }, [maintenances]);
+  return <MaintenanceListPageSection /* maintenances={maintenances} */ />;
 }
 
 MaintenanceListPage.getLayout = function getLayout(page: ReactElement) {
@@ -32,11 +32,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const data = (await res.json()) as Record<string, any>;
 
-  const threads = data.data || [];
+  const maintenances = data.data || [];
 
   return {
     props: {
-      threads,
+      maintenances,
     },
   };
 }

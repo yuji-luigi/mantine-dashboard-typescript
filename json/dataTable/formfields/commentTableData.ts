@@ -73,8 +73,8 @@ export const commentTableData: Array<FormFieldInterface> = [
     priority: 2,
   },
   {
-    id: 'createdBy',
-    name: 'createdBy',
+    id: 'user',
+    name: 'user',
     label: 'Created by',
     type: 'select',
     _entity: 'users',

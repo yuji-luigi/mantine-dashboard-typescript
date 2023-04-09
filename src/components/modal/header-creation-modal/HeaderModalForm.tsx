@@ -42,7 +42,7 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
   const { submitting } = useCrudSelectors(entity);
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { createCrudDocument, setSubmitting } = useCrudSliceStore();
-  const { crudMessage, crudStatus } = useCrudSelectors();
+  const { crudMessage, crudStatus, crudError } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
   const form = useForm({
@@ -77,8 +77,9 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
     createCrudDocument({
       entity,
       newDocument: reqBody,
-      config,
+      // config,
     });
+
     notifications.show({
       id: 'submit',
       message: 'Sending data to the server. Please wait...',
@@ -103,10 +104,13 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
       // router.reload();
     }
     if (crudStatus === 'failed') {
+      notifications.hide('submit');
       notifications.show({
-        id: 'submit',
-        message: crudMessage,
-        autoClose: true,
+        color: 'red',
+        loading: false,
+        id: 'failed',
+        message: crudError,
+        autoClose: 10000,
       });
       setSubmitting(false);
     }

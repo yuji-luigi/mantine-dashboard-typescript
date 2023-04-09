@@ -23,7 +23,7 @@ import { ReactElement } from 'react';
 import Layout from '../../../layouts';
 import CarouselBasic from '../../../components/carousel/CarouselBasic';
 import useAuth from '../../../../hooks/useAuth';
-import PostEditButton from '../../../sections/single_post_section/PostEditButton';
+import PostEditButton from '../../../components/posts/PostEditButton';
 import SinglePostArticleArea from '../../../sections/single_post_section/SinglePostArticleArea';
 import RelatedArticlesArea from '../../../sections/single_post_section/RelatedArticleArea';
 import SinglePostHeading from '../../../sections/single_post_section/SinglePostHeading';
@@ -63,7 +63,7 @@ const PostIdPage = ({ thread }: { thread: Thread }) => {
   return (
     <Container py="lg" className={classes.main}>
       <SinglePostHeading thread={_thread} />
-      <PostEditButton thread={_thread} />
+      <PostEditButton data={_thread} entity="threads" />
       <SinglePostArticleArea thread={_thread} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />

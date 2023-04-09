@@ -44,26 +44,24 @@ interface CardArticleImageDescFooterVerticalProps {
     name: string;
     avatar?: string;
   };
-  thread: Thread;
+  data: Thread | Maintenance;
 }
 export function CardArticleSmall({
   image,
   category,
   title,
   date,
-  thread,
+  data,
   hrefRoot,
   author = { name: 'not registered user', avatar: '' },
 }: CardArticleImageDescFooterVerticalProps) {
   const description =
-    thread.description.length > 50
-      ? `${thread.description.substring(0, 50)}...`
-      : thread.description;
+    data.description.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
   const { classes } = useStyles();
   const router = useRouter();
   console.log(router);
   return (
-    <Link href={`${hrefRoot}/${thread._id}`} className={classes.link}>
+    <Link href={`${hrefRoot}/${data._id}`} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>
         <Group noWrap sx={{ height: 150 }} spacing={0}>
           {image && <Image src={image} height={150} width={140} />}
@@ -85,7 +83,7 @@ export function CardArticleSmall({
                 •
               </Text>
               <Text size="xs" color="dimmed">
-                {thread._createdAt}
+                {data._createdAt}
               </Text>
             </Group>
           </div>

@@ -51,7 +51,7 @@ interface FormFieldInterface {
   badge?: boolean;
   selectValues?: Array<string>;
   /** Type select. static options*/
-  options?: Array<SelectOption>;
+  options?: Array<SelectOption | string>;
   /**
    * Hide the input from the form but still send the data
    * inside formData. -> noForm is opposite
