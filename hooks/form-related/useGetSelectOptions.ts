@@ -26,9 +26,9 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
     return options;
   }
 
-  if (formField.type === 'static-select') {
-    /** static-select type must have options Array<SelectOptions> */
-    return formField.options!;
-  }
+  // if (formField.type === 'static-select') {
+  //   /** static-select type must have options Array<SelectOptions> */
+  //   return formField.options!;
+  // }
   return [];
 };
