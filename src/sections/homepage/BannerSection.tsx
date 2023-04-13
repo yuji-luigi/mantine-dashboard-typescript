@@ -1,4 +1,4 @@
-import { EmailBanner } from '../../components/Banner/EmailBanner';
+import { EmailBanner } from '../../components/banner/EmailBanner';
 
 const BannerSection = () => <EmailBanner />;
 

@@ -38,7 +38,11 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
   link: {
-    color: 'black',
+    // color: 'black',
+    fontWeight: 700,
+    marginLeft: 8,
+    textDecoration: 'none',
+    color: theme.colors.green[5],
   },
   logo: {
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,

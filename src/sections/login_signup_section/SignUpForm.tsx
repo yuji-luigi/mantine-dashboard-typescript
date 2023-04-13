@@ -10,26 +10,28 @@ import {
   Group,
   Button,
   createStyles,
+  clsx,
+  Flex,
 } from '@mantine/core';
 
 import Link from 'next/link';
 
-import { useForm } from '@mantine/form';
+import { UseFormReturnType, useForm } from '@mantine/form';
 import useAuth from '../../../hooks/useAuth';
 
 import { PasswordStrength } from '../../components/input/Password.Strength';
 import { RegisterData } from '../../types/context/auth/useAuth';
 import GuestGuard from '../../guards/GuestGuard';
-import { showNotification } from '@mantine/notifications';
+import { notifications, showNotification } from '@mantine/notifications';
 import { Icons } from '../../data/icons';
+import SignUpStepOne from './SignUpStepOne';
+import { useState } from 'react';
+import SignUpStepTwo from './SignUpStepTwo';
 
-const initialValues: RegisterData = {
-  email: '',
-  password: '',
-  password2: '',
-  name: '',
-  surname: '',
-};
+import { IInitialValues, initialValues } from './defaultValues';
+import SignUpConfirm from './SignUpConfirm';
+import SignUpStepThree from './SignUpStepThree';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -65,24 +67,27 @@ const useStyles = createStyles((theme) => ({
     background: 'red',
   },
 }));
+const MAX_STEP = 2;
 
 export function SignUpForm() {
   const { register } = useAuth();
+  const router = useRouter();
   const { classes } = useStyles();
-  const form = useForm({ initialValues });
+  const [steps, setSteps] = useState(0);
+  const form = useForm<IInitialValues>({ initialValues });
   const onSubmit = async (data: RegisterData) => {
     try {
       // const {email, password, name, surname} = data;
       await register(data);
-      // const response = await fetch(`${API_ENDPOINT}/auth/register`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(data) as BodyInit,
-      // });
-      // const dataFromServer = await response.json();
-      // console.log(dataFromServer);
+      notifications.show({
+        title: 'Registered!',
+        message: 'You have successfully registered',
+        color: 'green',
+        icon: <Icons.check />,
+        autoClose: 2000,
+        id: 'register-success',
+      });
+      router.push('/choose-root-space');
     } catch (error: any) {
       showNotification({
         title: 'Error',
@@ -94,7 +99,20 @@ export function SignUpForm() {
       console.error(error.message || error);
     }
   };
-
+  const handleNext = () => {
+    if (steps >= MAX_STEP) {
+      setSteps(0);
+      return;
+    }
+    setSteps(steps + 1);
+  };
+  const handlePrev = () => {
+    if (steps <= 0) {
+      setSteps(0);
+      return;
+    }
+    setSteps(steps - 1);
+  };
   return (
     <GuestGuard>
       <Container size={420} my={40}>
@@ -108,43 +126,36 @@ export function SignUpForm() {
         <Text color="dimmed" size="sm" align="center" mt={5}>
           Already have an account ? <Link href="/login">Login</Link>
         </Text>
-        <Paper withBorder shadow="md" p={30} mt={10} radius="md">
+        <Paper withBorder shadow="md" p={24} mt={10} radius="md">
           <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
-            <TextInput
-              label="Name"
-              placeholder="First name"
-              required
-              {...form.getInputProps('name')}
-            />
-            <TextInput
-              label="Surname"
-              placeholder="Last nane"
-              required
-              {...form.getInputProps('surname')}
-            />
-            <TextInput
-              label="Email"
-              placeholder="you@mantine.dev"
-              required
-              {...form.getInputProps('email')}
-            />
-            <PasswordStrength formControl={form.getInputProps('password')} />
-            <PasswordInput
-              label="confirm password"
-              placeholder="Confirm password"
-              required
-              mt="md"
-              {...form.getInputProps('password2')}
-            />
+            {steps === 0 && <SignUpStepOne form={form} />}
+            {steps === 1 && <SignUpStepTwo form={form} />}
+            {/* {steps === 2 && <SignUpStepThree form={form} />} */}
+            {steps === MAX_STEP && <SignUpConfirm form={form} />}
             <Group position="apart" mt="md">
               <Checkbox label="Remember me" />
-              <Anchor<'a'> onClick={(event) => event.preventDefault()} href="#" size="sm">
-                Forgot password?
-              </Anchor>
             </Group>
-            <Button type="submit" fullWidth mt="xl">
-              Sign in
-            </Button>
+            <Flex mt="xl" gap="md">
+              <Button disabled={steps <= 0} type="button" fullWidth onClick={handlePrev} mt="xl">
+                Prev
+              </Button>
+              <Button
+                disabled={steps >= MAX_STEP}
+                type="button"
+                fullWidth
+                onClick={handleNext}
+                mt="xl"
+              >
+                Next
+              </Button>
+            </Flex>
+            {steps === MAX_STEP && (
+              <>
+                <Button type="submit" fullWidth mt="xs">
+                  Register
+                </Button>
+              </>
+            )}
           </form>
         </Paper>
       </Container>

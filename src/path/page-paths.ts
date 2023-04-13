@@ -12,6 +12,7 @@ export enum PATH_DASHBOARD {
   posts = '/dashboard/posts',
   maintenances = '/dashboard/maintenances',
   dashboard = '/dashboard/home',
+  chooseRootSpace = '/choose-root-space',
 }
 export enum CARD_LINK_PATH {
   posts = PATH_DASHBOARD.posts,

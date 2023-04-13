@@ -38,6 +38,7 @@ import {
   IconPhoto as Image,
   IconEdit as Edit,
   IconHammer as maintenance,
+  IconCheck as check,
   // IconCardboards as posts,
 } from '@tabler/icons-react';
 
@@ -78,6 +79,7 @@ export const Icons = {
   maintenance,
   maintenances: maintenance,
   posts: Article,
+  check,
   // TablerIcon,
 } as const;
 // export {

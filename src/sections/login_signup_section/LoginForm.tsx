@@ -7,9 +7,12 @@ import useAuth from '../../../hooks/useAuth';
 import { LoginFormValues } from '../../types/context/auth/formData';
 
 import { Icons } from '../../data/icons';
+import { useRouter } from 'next/router';
+import { PATH_DASHBOARD } from '../../path/page-paths';
 
 function LoginForm() {
   const { login } = useAuth();
+  const router = useRouter();
 
   const form = useForm<LoginFormValues>({
     initialValues: {
@@ -25,6 +28,8 @@ function LoginForm() {
   const handleSubmit = async (values: LoginFormValues) => {
     try {
       await login(values.email, values.password);
+      // router.push(PATH_DASHBOARD.chooseRootSpace);
+      // return null;
     } catch (error: any) {
       notifications.show({
         title: 'Error',

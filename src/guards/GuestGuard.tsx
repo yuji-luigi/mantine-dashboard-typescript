@@ -15,7 +15,8 @@ export default function GuestGuard({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      push(PATH_DASHBOARD.root);
+      // push(PATH_DASHBOARD.root);
+      push(PATH_DASHBOARD.chooseRootSpace);
     }
   }, [isAuthenticated]);
   return <>{children}</>;
