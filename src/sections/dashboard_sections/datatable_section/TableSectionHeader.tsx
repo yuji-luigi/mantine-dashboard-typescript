@@ -6,7 +6,7 @@ import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { BreadcrumbsCustom } from './BreadcrumbsCustom';
 import useLayoutContext from '../../../../hooks/useLayoutContext';
 import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
-import { API_PATH } from '../../../path/api-routes';
+import { PATH_API } from '../../../path/api-routes';
 import axiosInstance from '../../../utils/axios-instance';
 
 const useStyles = createStyles(() => ({
@@ -91,7 +91,7 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
 
   const deleteAllUploads = async () => {
     console.log('delete all uploads');
-    await axiosInstance.delete(`${API_PATH.uploads}/delete-all`);
+    await axiosInstance.delete(`${PATH_API.uploads}/delete-all`);
   };
 
   return (

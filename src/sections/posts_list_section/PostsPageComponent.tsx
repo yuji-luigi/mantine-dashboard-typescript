@@ -22,6 +22,7 @@ import CardArticleImageBig from '../../components/card/CardArticleImageBig';
 import axiosInstance from '../../utils/axios-instance';
 import PostList from './PostList';
 import { useCrudSelectors } from '../../redux/features/crud/crudSlice';
+import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 interface TypeMock {
@@ -64,7 +65,8 @@ const useStyles = createStyles((theme) => ({
 export default function PostListPageComponent() {
   const { classes, cx, theme } = useStyles();
   const { crudDocuments: threads } = useCrudSelectors('threads');
-
+  const { currentSpace } = useCurrentSpaceContext();
+  console.log(currentSpace);
   return (
     // <Container mx="auto" py="xl">
     <Box

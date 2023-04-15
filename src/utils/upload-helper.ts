@@ -1,4 +1,4 @@
-import { API_PATH } from '../path/api-routes';
+import { PATH_API } from '../path/api-routes';
 import { MixedMediaType, UploadingMediaType } from '../types/data/media/media-types';
 import axiosInstance, { uploadConfig } from './axios-instance';
 
@@ -130,7 +130,7 @@ export async function uploadFileAndGetModelId(
   entity: string
 ): Promise<string[]> {
   const rawUpload = await axiosInstance.post(
-    `${API_PATH.uploads}/${entity}`,
+    `${PATH_API.uploads}/${entity}`,
     uploadingData,
     uploadConfig
   );

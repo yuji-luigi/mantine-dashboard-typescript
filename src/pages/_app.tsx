@@ -19,6 +19,7 @@ import { PaginationContextProvider } from '../context/PaginationContext';
 import { Notifications } from '@mantine/notifications';
 import { DeepPartial } from '@reduxjs/toolkit';
 import { myColors } from '../lib/custom-colors';
+import { CurrentSpaceContextProvider } from '../context/CurrentSpaceContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -58,14 +59,16 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
               withGlobalStyles
               withNormalizeCSS
             >
-              <DashboardLayoutContextProvider>
-                <PaginationContextProvider>
-                  <DrawerContextProvider>
-                    <Notifications />
-                    {getLayout(<Component {...pageProps} />)}
-                  </DrawerContextProvider>
-                </PaginationContextProvider>
-              </DashboardLayoutContextProvider>
+              <CurrentSpaceContextProvider>
+                <DashboardLayoutContextProvider>
+                  <PaginationContextProvider>
+                    <DrawerContextProvider>
+                      <Notifications />
+                      {getLayout(<Component {...pageProps} />)}
+                    </DrawerContextProvider>
+                  </PaginationContextProvider>
+                </DashboardLayoutContextProvider>
+              </CurrentSpaceContextProvider>
             </MantineProvider>
           </ColorSchemeProvider>
         </ReduxProvider>

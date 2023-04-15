@@ -11,6 +11,7 @@ export interface IUser {
   buildings: [] | string[] | IBuilding[] | undefined;
   userSetting: string | IUserSetting;
   last_login: Date;
+  rootSpaces: ISpace[] | [];
   // modules?: modules;
 
   _update?: {

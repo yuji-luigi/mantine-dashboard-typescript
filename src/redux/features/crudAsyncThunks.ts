@@ -5,7 +5,7 @@
  * */
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { API_PATH } from '../../path/api-routes';
+import { PATH_API } from '../../path/api-routes';
 import axiosInstance, { AxiosResData, uploadConfig } from '../../utils/axios-instance';
 
 interface MediaField {
@@ -74,7 +74,7 @@ export const addCrudDocument = createAsyncThunk(
   'crud/addDocument',
   async ({ entity, newDocument, parentId, query = '', config }: AddCrudPayloadWithConfig) => {
     /** handle endpoint by checking if parentId is passed */
-    const endPoint = !parentId ? entity : `${API_PATH.linkedChildren}/${entity}/${parentId}`;
+    const endPoint = !parentId ? entity : `${PATH_API.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument, config);
     const payload = {
       // entity: res.data.collection,
@@ -91,7 +91,7 @@ export const addLinkedChildrenDocument = createAsyncThunk(
   'crud/addDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
     /** handle endpoint by checking if parentId is passed */
-    const endPoint = `${API_PATH.linkedChildren}/${entity}/${parentId}`;
+    const endPoint = `${PATH_API.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
     const payload = {
       // entity: res.data.collection,
@@ -152,7 +152,7 @@ export const deleteLinkedChildDocument = createAsyncThunk(
      * returns new crudDocuments with limit number
      *  */
     const res = await axiosInstance.delete(
-      `/${API_PATH.linkedChildren}/${entity}/${documentId}${query}`
+      `/${PATH_API.linkedChildren}/${entity}/${documentId}${query}`
     );
     const payload = {
       // entity: res.data.collection,

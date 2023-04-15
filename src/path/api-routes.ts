@@ -22,11 +22,12 @@ export const PATH_AUTH: TAuthPath = {
   me: getAuthPath('me'),
 };
 
-export enum API_PATH {
+export enum PATH_API {
   /**
    * creation: /linkedChildren/${entity}/...
    * update: /linkedChildren/${entity}/${}
    * */
   linkedChildren = 'linkedChildren',
   uploads = 'upload-files',
+  getSpaceCookie = 'get-cookie/spaces',
 }

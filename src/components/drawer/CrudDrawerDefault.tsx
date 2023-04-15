@@ -25,7 +25,7 @@ import CreationToolBar from '../input/CreationToolBar';
 import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
 import { UPLOAD_FOLDERS } from '../../lib/enums';
 import useAuth from '../../../hooks/useAuth';
-import { API_PATH } from '../../path/api-routes';
+import { PATH_API } from '../../path/api-routes';
 import axiosInstance from '../../utils/axios-instance';
 import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
 
