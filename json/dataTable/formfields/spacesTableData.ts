@@ -39,6 +39,19 @@ export const spacesTableData: Array<FormFieldInterface> = [
   },
 
   {
+    id: 'admins',
+    name: 'admins',
+    label: 'Admins',
+    type: 'select',
+    _entity: 'users',
+    badge: true,
+    multi: true,
+    selectValues: ['name', 'email'],
+    grantTo: ['super_admin'],
+    required: false,
+    priority: 100,
+  },
+  {
     id: 'organization',
     name: 'organization',
     label: 'Organizations',

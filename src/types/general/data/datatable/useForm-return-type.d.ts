@@ -1,7 +1,7 @@
 interface UseFormReturnTypeWithMedia {
   values: {
     media?: {
-      [key: string]: File[] | Upload[];
+      [key: string]: File[] | UploadModel[];
     };
     // mediaPreview?: {
     //   [key: string]: string[];

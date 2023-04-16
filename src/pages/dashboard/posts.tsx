@@ -9,7 +9,7 @@ import axiosInstance from '../../utils/axios-instance';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
 
-export default function PostsPage({ threads }: { threads: Thread[] }) {
+export default function PostsPage({ threads }: { threads: ThreadModel[] }) {
   const { setCrudDocuments } = useCrudSliceStore();
   useEffect(() => {
     setCrudDocuments({ entity: 'threads', documents: threads });

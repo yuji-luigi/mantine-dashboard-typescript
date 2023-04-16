@@ -48,7 +48,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SingleMaintenanceArticleArea = ({ maintenance }: { maintenance: Maintenance }) => {
+const SingleMaintenanceArticleArea = ({ maintenance }: { maintenance: MaintenanceModel }) => {
   const { classes, cx, theme } = useStyles();
 
   return (

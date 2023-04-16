@@ -19,7 +19,7 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
 
   if (formField.type === 'select') {
     /** todo: to include infinite scrolling? */
-    const options = crudDocuments.map((document: MongooseBaseModel<null>) => {
+    const options = crudDocuments.map((document: MongooseBaseModel) => {
       const label = createLabelFromArrayStr(formField.selectValues!, document);
       return { value: document._id, label };
     });

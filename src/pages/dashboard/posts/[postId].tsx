@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const PostIdPage = ({ thread }: { thread: Thread }) => {
+const PostIdPage = ({ thread }: { thread: ThreadModel }) => {
   const { classes, cx, theme } = useStyles();
 
   const { query }: { query: ParsedQueryCustom } = useRouter();

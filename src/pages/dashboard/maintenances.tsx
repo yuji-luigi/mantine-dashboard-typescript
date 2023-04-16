@@ -8,7 +8,7 @@ import MaintenanceListPageSection from '../../sections/maintenance_list_section/
 import axiosInstance from '../../utils/axios-instance';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
-export default function MaintenanceListPage({ maintenances }: { maintenances: Thread[] }) {
+export default function MaintenanceListPage({ maintenances }: { maintenances: ThreadModel[] }) {
   const { setCrudDocuments } = useCrudSliceStore();
   useEffect(() => {
     setCrudDocuments({ entity: 'maintenances', documents: maintenances });

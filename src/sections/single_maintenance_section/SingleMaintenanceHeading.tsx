@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SingleMaintenanceHeading = ({ maintenance }: { maintenance: Maintenance }) => {
+const SingleMaintenanceHeading = ({ maintenance }: { maintenance: MaintenanceModel }) => {
   const { classes, cx, theme } = useStyles();
 
   return (

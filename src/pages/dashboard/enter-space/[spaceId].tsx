@@ -41,12 +41,8 @@ const EnterSpacePage = () => {
 
   setSpaceSession(data.jwt);
   setCurrentSpace(data.space);
-  return (
-    <div>
-      {JSON.stringify(data, null, 4)}
-      <Link href="/dashboard/posts">link</Link>
-    </div>
-  );
+  router.push('/dashboard');
+  return <p>loading...</p>;
 };
 
 export default EnterSpacePage;

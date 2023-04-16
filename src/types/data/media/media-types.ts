@@ -1,5 +1,5 @@
 export interface MixedMediaType {
-  [key: string]: Array<Upload | File>;
+  [key: string]: Array<UploadModel | File>;
 }
 export interface UploadingMediaType {
   [key: string]: File[];

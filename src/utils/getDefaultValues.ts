@@ -33,7 +33,7 @@ export function getDefaultValues(
         if (field.type === 'attachment' || field.type === 'image') {
           // newObj.mediaPreview = {
           //   ...newObj.mediaPreview,
-          //   [path]: crudDocument[path].map((file: Upload) => file.url),
+          //   [path]: crudDocument[path].map((file: UploadModel) => file.url),
           // };
           newObj.media = {
             ...newObj.media,

@@ -48,7 +48,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SinglePostArticleArea = ({ thread }: { thread: Thread }) => {
+const SinglePostArticleArea = ({ thread }: { thread: ThreadModel }) => {
   const { classes, cx, theme } = useStyles();
 
   return (

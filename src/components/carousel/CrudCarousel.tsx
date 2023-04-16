@@ -9,20 +9,20 @@ import axiosInstance from '../../utils/axios-instance';
 import ImageSlide from './ImageSlide';
 // import { Image } from '@mantine/core';
 
-type ImageType = File | Upload;
+type ImageType = File | UploadModel;
 
 function CrudCarousel({
   images,
   entity,
   formField,
 }: {
-  images: File[] | Upload[];
+  images: File[] | UploadModel[];
   entity: Sections;
   formField: FormFieldInterface;
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const {} = useCrudSelectors();
-  // const currentImage= useRef<File | Upload>()
+  // const currentImage= useRef<File | UploadModel>()
   const currentImage = images[currentImageIndex];
   const { selectedCrudDocument } = useCrudSelectors(entity);
   const handleDelete = async (image: ImageType) => {

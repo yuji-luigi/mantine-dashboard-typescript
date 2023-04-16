@@ -1,4 +1,4 @@
-interface Upload {
+interface UploadModel {
   _id: string;
   name: string;
   fileName: string;

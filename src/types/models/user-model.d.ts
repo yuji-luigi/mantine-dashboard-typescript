@@ -1,6 +1,6 @@
 type Roles = 'user' | 'admin' | 'super_admin';
 
-interface User extends MongooseBaseModel {
+interface UserModel extends MongooseBaseModel {
   surname: string;
   name: string;
   email: string;
@@ -8,5 +8,5 @@ interface User extends MongooseBaseModel {
   role: Roles;
   password: string;
   phone?: string;
-  avatar?: Upload;
+  avatar?: UploadModel;
 }

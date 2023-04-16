@@ -1,8 +1,8 @@
-interface Maintenance extends MongooseBaseModel<null> {
+interface MaintenanceModel extends MongooseBaseModel {
   title: string;
-  images: Upload[] | [];
+  images: UploadModel[] | [];
   description: string;
-  attachments?: Upload[] | [];
+  attachments?: UploadModel[] | [];
   tags?: string[];
   rating?: number;
   listViewType: 'default' | 'bigImage';
@@ -16,7 +16,7 @@ interface Maintenance extends MongooseBaseModel<null> {
     | 'survey'
     | 'question'
     | 'discussion';
-  headSpace?: string | ISpace;
+  headSpace?: string | SpaceModel;
   user: IUser | string;
   isImportant: boolean;
   owner: IOwner | string;

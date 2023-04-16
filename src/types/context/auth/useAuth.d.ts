@@ -6,12 +6,12 @@ export interface IUser {
   email: string | undefined;
   password: string;
   role: 'admin' | 'user' | 'super_admin';
-  bookmarks: string[] | IBookmark[];
-  wallet?: string | IWallet;
+  bookmarks: string[] | BookmarkModel[];
+  wallet?: string | WalletModel;
   buildings: [] | string[] | IBuilding[] | undefined;
-  userSetting: string | IUserSetting;
+  userSetting: string | UserSettingModel;
   last_login: Date;
-  rootSpaces: ISpace[] | [];
+  rootSpaces: SpaceModel[] | [];
   // modules?: modules;
 
   _update?: {

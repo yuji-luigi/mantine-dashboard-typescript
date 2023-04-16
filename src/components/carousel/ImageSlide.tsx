@@ -4,7 +4,7 @@ import React from 'react';
 import { Icons } from '../../data/icons';
 import Image from 'next/image';
 
-type ImageType = File | Upload;
+type ImageType = File | UploadModel;
 
 const ImageSlide = ({
   image,

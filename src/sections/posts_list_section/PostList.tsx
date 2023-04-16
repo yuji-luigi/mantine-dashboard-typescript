@@ -3,7 +3,7 @@ import { CardArticleImageDescFooter } from '../../components/card/CardArticleIma
 import { CardArticleSmall } from '../../components/card/CardArticleSmall';
 import { CARD_LINK_PATH } from '../../path/page-paths';
 
-const PostList = ({ thread }: { thread: Thread }) => {
+const PostList = ({ thread }: { thread: ThreadModel }) => {
   return (
     <>
       {thread.listViewType === 'default' && (

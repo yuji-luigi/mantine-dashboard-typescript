@@ -3,19 +3,19 @@ import { MixedMediaType, UploadingMediaType } from '../types/data/media/media-ty
 import axiosInstance, { uploadConfig } from './axios-instance';
 
 interface MediaParam {
-  [key: string]: Array<File | Upload> | [] | undefined;
-  // [key: string]: Upload[] | File[] |[] | undefined;
-  // images: Upload[] | File[] | [] | undefined;
-  // attachments: Upload[] | File[] | [] | undefined;
+  [key: string]: Array<File | UploadModel> | [] | undefined;
+  // [key: string]: UploadModel[] | File[] |[] | undefined;
+  // images: UploadModel[] | File[] | [] | undefined;
+  // attachments: UploadModel[] | File[] | [] | undefined;
 }
 
 interface ResultFields {
-  existing: Upload[] | [];
+  existing: UploadModel[] | [];
   uploading: File[] | [];
 }
 
 // type ReturnType = Record<string, ResultFields>;
-type ReturnType = [Upload[], File[]];
+type ReturnType = [UploadModel[], File[]];
 /**
  * separate medias into object  that has originalKey.existing originalKey.uploading
  * {
@@ -27,13 +27,13 @@ type ReturnType = [Upload[], File[]];
  */
 export function separateMedias(data: MediaParam): ReturnType {
   // [0]: existing media, [1]: uploading media
-  const returnArray: [Upload[], File[]] = [[], []];
+  const returnArray: [UploadModel[], File[]] = [[], []];
   // const newMediaObj: ReturnType = {};
 
   for (const key in data) {
     const mediaFields = data[key];
     if (mediaFields?.length) {
-      mediaFields.forEach((media: Upload | File) => {
+      mediaFields.forEach((media: UploadModel | File) => {
         // if (!newMediaObj[key]) {
         //   newMediaObj[key] = {
         //     existing: [],
@@ -74,14 +74,14 @@ interface UploadingMedias {
 }
 /**
  * @description make upload or File array into [File, objectId,...,].
- * File instance remains as it is. Upload model instance is replaced with objectId.
+ * File instance remains as it is. UploadModel model instance is replaced with objectId.
  */ export function pseudoExtractUploadingMedia(data: MediaParam): UploadingMedias {
   let newMediaObj: UploadingMedias = {};
   for (const key in data) {
     newMediaObj = { ...newMediaObj, [key]: [] };
     const mediaFields = data[key];
     if (!mediaFields?.length) continue;
-    newMediaObj[key] = mediaFields.map((media: Upload | File) => {
+    newMediaObj[key] = mediaFields.map((media: UploadModel | File) => {
       if (media instanceof File) return media;
       return media._id;
     });
@@ -92,8 +92,8 @@ interface UploadingMedias {
 /**
  * extracts only instance of File from media object
  * media {
- *  images: [Upload, File, Upload, File],
- * attachments: [Upload, File, Upload, File],
+ *  images: [UploadModel, File, UploadModel, File],
+ * attachments: [UploadModel, File, UploadModel, File],
  * }
  *
  * returns {
@@ -110,7 +110,7 @@ export function extractUploadingMedia(data: MixedMediaType): UploadingMediaType 
 
     if (!mediaFields?.length) continue;
     newMediaObj[key] = mediaFields.filter(
-      (media: Upload | File) => media instanceof File
+      (media: UploadModel | File) => media instanceof File
     ) as File[];
   }
 

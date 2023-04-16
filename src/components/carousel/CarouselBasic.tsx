@@ -3,7 +3,7 @@ import { Box } from '@mantine/core';
 import Image from 'next/image';
 // import { Image } from '@mantine/core';
 
-function CarouselBasic({ images }: { images: File[] | Upload[] }) {
+function CarouselBasic({ images }: { images: File[] | UploadModel[] }) {
   if (!images.length) {
     return null;
   }

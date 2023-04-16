@@ -13,7 +13,7 @@ interface ReduxDbEntity<Entity> {
 interface Reduxdb {
   [key: string]: ReduxDbEntity<AllModels>;
   home: ReduxDbEntity<Array<Record>>;
-  users: ReduxDbEntity<User>;
+  users: ReduxDbEntity<UserModel>;
   buildings: ReduxDbEntity<Building>;
   billing: ReduxDbEntity<Array<Record>>;
   statistics: ReduxDbEntity<Array<Record>>;

@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
   description: { fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 600 },
 }));
 
-const CardArticleImageBig = ({ article }: { article: Thread }) => {
+const CardArticleImageBig = ({ article }: { article: ThreadModel }) => {
   const { classes } = useStyles();
 
   return (

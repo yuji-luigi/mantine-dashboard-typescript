@@ -7,7 +7,7 @@ interface UserInfoActionProps {
   job: string;
 }
 
-export function UserInfoAction({ user }: { user: User }) {
+export function UserInfoAction({ user }: { user: UserModel }) {
   return (
     <Paper
       radius="md"

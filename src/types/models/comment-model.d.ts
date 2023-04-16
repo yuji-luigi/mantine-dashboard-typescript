@@ -1,8 +1,8 @@
- interface Comment extends MongooseBaseModel {
+interface CommentModel extends MongooseBaseModel {
   title: string;
   body?: string;
   password: string;
   fund: string[] | Fund;
   building?: string | Building;
-  user?: string | User | undefined;
+  user?: string | UserModel | undefined;
 }

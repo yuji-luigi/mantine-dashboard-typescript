@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SingleMaintenanceHeading = ({ thread }: { thread: Thread }) => {
+const SingleMaintenanceHeading = ({ thread }: { thread: ThreadModel }) => {
   const { classes, cx, theme } = useStyles();
 
   return (

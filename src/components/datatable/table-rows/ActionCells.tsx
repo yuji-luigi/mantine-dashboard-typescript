@@ -42,14 +42,14 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
 
   return (
     <td>
-      <Stack spacing={0} align="center" /* position="right" */>
+      <Group spacing={0} align="center" /* position="right" */>
         <ActionIcon onClick={onModify}>
           <IconPencil size={16} stroke={1.5} />
         </ActionIcon>
         <ActionIcon color="red" onClick={onDelete}>
           <IconTrash size={16} stroke={1.5} />
         </ActionIcon>
-      </Stack>
+      </Group>
     </td>
   );
 }

@@ -29,5 +29,7 @@ export enum PATH_API {
    * */
   linkedChildren = 'linkedChildren',
   uploads = 'upload-files',
-  getSpaceCookie = 'get-cookie/spaces',
+  getSpaceCookie = 'spaces/get-cookie',
+  spaces = 'spaces',
+  getSpaceSelections = '/spaces/selections',
 }

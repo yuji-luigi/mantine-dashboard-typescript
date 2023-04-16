@@ -44,7 +44,7 @@ interface CardArticleImageDescFooterVerticalProps {
     name: string;
     avatar?: string;
   };
-  data: Thread | Maintenance;
+  data: ThreadModel | MaintenanceModel;
 }
 export function CardArticleSmall({
   image,

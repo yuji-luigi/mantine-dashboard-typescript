@@ -3,7 +3,7 @@ import { CardArticleImageDescFooter } from '../../components/card/CardArticleIma
 import { CardArticleSmall } from '../../components/card/CardArticleSmall';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../path/page-paths';
 
-const MaintenanceList = ({ maintenance }: { maintenance: Maintenance }) => {
+const MaintenanceList = ({ maintenance }: { maintenance: MaintenanceModel }) => {
   return (
     <>
       {maintenance.listViewType === 'default' && (

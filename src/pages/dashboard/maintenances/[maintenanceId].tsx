@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const MaintenancePage = ({ maintenance }: { maintenance: Maintenance }) => {
+const MaintenancePage = ({ maintenance }: { maintenance: MaintenanceModel }) => {
   const { classes, cx, theme } = useStyles();
   return (
     <Container py="lg" className={classes.main}>

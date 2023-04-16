@@ -9,7 +9,7 @@ import { PATH_API } from '../../path/api-routes';
 import axiosInstance, { AxiosResData, uploadConfig } from '../../utils/axios-instance';
 
 interface MediaField {
-  [key: string]: File[] | Upload[] | [];
+  [key: string]: File[] | UploadModel[] | [];
   // [Symbol.iterator](): IterableIterator<string>; // to make sure it is iterable
 }
 

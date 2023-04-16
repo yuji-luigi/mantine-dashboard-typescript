@@ -49,6 +49,8 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     fontWeight: 700,
+    fontSize: 32,
+    textAlign: 'center',
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     wordBreak: 'break-word',
     lineHeight: 1.2,
@@ -63,48 +65,38 @@ const useStyles = createStyles((theme) => ({
     padding: theme.spacing.md,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'end',
+    justifyContent: 'center',
     height: '100%',
     // zIndex: 55,
   },
 }));
 
-interface CardArticleImageDescFooterVerticalProps {
-  image?: string;
-  // category: string;
-  // title: string;
-  // date: string;
-  hrefRoot: CARD_LINK_PATH;
-  author: {
-    name: string;
-    avatar?: string;
-  };
-  data: ISpace;
+export interface CardData {
+  _id: string;
+  name: string;
+  address: string;
+  createdAt: string;
+  user?: UserModel;
 }
-export function CardArticleVertical({
-  image,
-  // title,
-  data,
-  hrefRoot,
-  author = { name: 'not registered user', avatar: '' },
-}: CardArticleImageDescFooterVerticalProps) {
+
+interface CardArticleImageDescFooterVerticalProps {
+  // data: SpaceModel | OrganizationModel;
+}
+export function CardArticleVerticalTextCenter({}: CardArticleImageDescFooterVerticalProps) {
   // const description =
   //   data.description?.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
   const { classes, cx } = useStyles();
   const router = useRouter();
+
   return (
-    <Link href={`${hrefRoot}/${data._id}`} className={classes.link}>
+    <Link href={`}`} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>
-        <BackgroundImage
-          className={classes.bgImage}
-          src={image || PATH_IMAGE.rootSpaceCard1}
-          radius="sm"
-        >
+        <BackgroundImage className={classes.bgImage} src={''} radius="sm">
           <Box className={classes.bgImageGradient} />
 
           <div className={classes.body}>
             <Text className={cx(classes.title, classes.appear)} /* mt="xs" mb="xs" */>
-              {data.name}
+              data name
             </Text>
             <Text
               className={classes.appear}
@@ -113,18 +105,18 @@ export function CardArticleVertical({
               weight={700}
               size="xs"
             >
-              {data.address}
+              desc1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, in.
             </Text>
             <Group noWrap className={classes.appear} spacing="xs">
               <Group spacing="xs" noWrap>
                 <Avatar size={20} src={''} />
-                <Text size="xs">{author?.name || 'hh'}</Text>
+                <Text size="xs">user name</Text>
               </Group>
               <Text size="xs" color="dimmed">
                 •
               </Text>
               <Text size="xs" color="dimmed">
-                {data._createdAt}
+                date 1990/01/01
               </Text>
             </Group>
           </div>
