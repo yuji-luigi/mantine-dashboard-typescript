@@ -53,6 +53,11 @@ const TableCell = ({
           </Text>
         </Group>
       )}
+      {cellConfig.type === 'select' && (
+        <Text size="xs" weight={500}>
+          {cellData}
+        </Text>
+      )}
 
       {/*
         <Badge

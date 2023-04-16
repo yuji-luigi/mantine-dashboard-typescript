@@ -1,4 +1,4 @@
-import { Badge, useMantineTheme } from '@mantine/core';
+import { Badge, Box, useMantineTheme } from '@mantine/core';
 import TableCell from './TableCell';
 
 export const colors: Record<string, string> = {
@@ -22,6 +22,20 @@ const BadgeCell = ({
 }) => {
   const theme = useMantineTheme();
   return (
+    // <Box
+    //   color={colors[color || '__null']}
+    //   sx={{
+    //     // display: 'flex',
+    //     border: `${colors[color || '__null']} solid 1px`,
+    //     borderRadius: '999px',
+    //     padding: '0.25rem 0.5rem',
+    //   }}
+    //   // variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
+    // >
+    //   <TableCell cellData={cellData} cellConfig={cellConfig} rowData={rowData} />
+    // </Box>
+
+    // return (
     <Badge
       color={colors[color || '__null']}
       variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}

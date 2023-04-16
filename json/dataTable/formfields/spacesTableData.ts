@@ -54,7 +54,7 @@ export const spacesTableData: Array<FormFieldInterface> = [
   {
     id: 'organization',
     name: 'organization',
-    label: 'Organizations',
+    label: 'Organization',
     type: 'select',
     _entity: 'organizations',
     selectValues: ['name', 'email'],

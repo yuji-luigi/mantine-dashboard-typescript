@@ -143,9 +143,9 @@ export function NavbarVertical() {
   const filteredSectionData = sectionData.filter((data) => data.name !== 'others');
 
   if (!user) return null;
-  const links = sectionData.map((section) => {
+  const links = sectionData.map((section, i) => {
     return (
-      <>
+      <Fragment key={i}>
         {section.roles?.includes(user.role) && (
           <Fragment key={section.name}>
             <p>{section.name}</p>
@@ -166,7 +166,7 @@ export function NavbarVertical() {
             })}
           </Fragment>
         )}
-      </>
+      </Fragment>
     );
   });
 

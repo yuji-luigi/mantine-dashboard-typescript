@@ -3,6 +3,10 @@ import BadgeCell from './table-rows/tablecell/BadgeCell';
 // import BadgeCell from './table-rows/tablecell/BadgeCell';
 import TableCell from './table-rows/tablecell/TableCell';
 
+function isObject(value: any): boolean {
+  return value && typeof value === 'object' && !Array.isArray(value) && typeof value !== 'string';
+}
+
 export function TableCellDecorator({
   rowData,
   cellConfig,
@@ -10,44 +14,81 @@ export function TableCellDecorator({
   rowData: UsersTableRow;
   cellConfig: FormFieldInterface;
 }) {
-  // const { query, push } = useRouter();
+  /**
+   * cellData can be an array of objects or a single object or a string.
+   */
+  const cellData = rowData[cellConfig.name];
 
-  // const sectionFormFields = formFields[query.entity as Sections];
-  // if (!sectionFormFields) {
-  //   push('/dashboard/home');
-  //   return null;
-  // }
-  // sectionFormFields.sort((a, b) => a.priority - b.priority);
+  let color = 'red';
+  let queriedCellData = cellData;
 
-  const cellData = rowData[cellConfig.name!];
-  // decorate the TableCell component before render.
-  // EX put style: Array<string> then decorate the cell based on the style.
-  if (cellConfig.noTable) return null;
-  if (cellConfig.badge) {
-    let color = '__null';
-    let queriedCellData = cellData;
-    if (typeof cellData === 'object') {
-      color = cellData.color as string;
-      queriedCellData = cellData.text;
-    }
-    return (
-      <td>
-        <BadgeCell
-          cellConfig={cellConfig}
-          color={color}
-          rowData={rowData}
-          cellData={queriedCellData as string}
-        />
-      </td>
-    );
-  }
-  return (
-    <td>
+  let badgeCell = <BadgeCell cellConfig={cellConfig} color={''} rowData={rowData} cellData={''} />;
+
+  let tableCell =
+    typeof cellData === 'string' ? (
+      <TableCell cellData={cellData} cellConfig={cellConfig} rowData={rowData} />
+    ) : typeof cellData === 'object' && !Array.isArray(cellData) ? (
       <TableCell
-        cellData={rowData[cellConfig.name!] as string}
+        cellData={
+          cellConfig.selectValues
+            ?.map((key) => cellData[key])
+            // .concat('')
+            .join('-') || ''
+        }
         cellConfig={cellConfig}
         rowData={rowData}
       />
-    </td>
-  );
+    ) : null;
+
+  /**
+   * if the cellData is an array, then we need to render multiple cells.
+   */
+  if (Array.isArray(cellData)) {
+    tableCell = (
+      <>
+        {cellData.map((cellData) => (
+          <TableCell
+            cellData={
+              cellConfig.selectValues
+                ?.map((key) => cellData[key])
+                // .concat('')
+                .join('-') || ''
+            }
+            cellConfig={cellConfig}
+            rowData={rowData}
+          />
+        ))}
+      </>
+    );
+    badgeCell = (
+      <>
+        {cellData.map((cellData) => {
+          return (
+            <BadgeCell
+              key={cellData._id}
+              cellConfig={cellConfig}
+              color={cellData.color as string}
+              rowData={rowData}
+              cellData={
+                cellConfig.selectValues
+                  ?.map((key) => cellData[key])
+                  // .concat('')
+                  .join('-') || ''
+              }
+            />
+          );
+        })}
+      </>
+    );
+  }
+
+  // decorate the TableCell component before render.
+  // EX put style: Array<string> then decorate the cell based on the style.
+  if (cellConfig.noTable) return null;
+
+  if (cellConfig.badge) {
+    return badgeCell;
+  }
+
+  return tableCell;
 }

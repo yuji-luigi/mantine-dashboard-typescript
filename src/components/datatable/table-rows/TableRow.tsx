@@ -1,7 +1,7 @@
 import { ActionCells } from './ActionCells';
 import { ActionIcon, Group } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // import { useCrudSlice } from '../../../../hooks/redux-hooks/useCrudSlice';
 import { TableCellDecorator } from '../TableCellDecorator';
@@ -43,13 +43,16 @@ export function TableRow({
     },
     []
   );
+
   return (
     <tr key={rowData._id}>
       {/*
           Regular cells defined here
       */}
       {sectionFormFields.map((cellConfig) => (
-        <TableCellDecorator key={cellConfig.id} cellConfig={cellConfig} rowData={rowData} />
+        <td key={cellConfig.id}>
+          <TableCellDecorator cellConfig={cellConfig} rowData={rowData} />
+        </td>
       ))}
       {/*
           Action cells defined here(modify, delete button)
