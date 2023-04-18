@@ -24,18 +24,18 @@ export function TableRow({
   const { query } = useRouter();
   /** use hook useCrudSlice */
   // const { selectCrudDocument } = useCrudSlice();
-  const { selectCrudDocument, deleteCrudDocument } = useCrudSliceStore();
+  const { selectCrudDocument, deleteCrudDocumentWithPagination } = useCrudSliceStore();
 
   /** get runtime value of the entity */
   const entity = query.entity as Sections;
   // const selectedDocument = getSelectedDocument(entity);
-  // const { deleteCrudDocument: old } = useCrudSlice();
+  // const { deleteCrudDocumentWithPagination: old } = useCrudSlice();
   // const onModify = (): void => {
   //   selectCrudDocument({ entity, document: rowData });
   //   openDrawer();
   // };
   // const onDelete = (): void => {
-  //   deleteCrudDocument({ entity, documentId: rowData._id, query: paginationQuery });
+  //   deleteCrudDocumentWithPagination({ entity, documentId: rowData._id, query: paginationQuery });
   // };
   useEffect(
     () => () => {

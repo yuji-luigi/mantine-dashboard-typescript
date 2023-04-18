@@ -27,8 +27,8 @@ export const HTTP_MULTIPART_CONFIG = {
   withCredentials: true,
 };
 
-export const fetchCrudDocumentsDataTable = createAsyncThunk(
-  'cruds/dataTable/fetchCrudDocumentsDataTable',
+export const fetchCrudDocumentsWithPagination = createAsyncThunk(
+  'cruds/dataTable/fetchCrudDocumentsWithPagination',
   async ({ entity, query, isChildrenTree = false, queryObject = {} }: FetchCrudPayload) => {
     const res = await axiosInstance.get<AxiosResData>(
       `${PATH_API_DATA_TABLE_ROOT}/${entity}${query || ''}`,
@@ -43,8 +43,8 @@ export const fetchCrudDocumentsDataTable = createAsyncThunk(
   }
 );
 
-export const fetchLinkedChildrenDataTable = createAsyncThunk(
-  'cruds/dataTable/fetchCrudDocumentsDataTable',
+export const fetchLinkedChildrenWithPagination = createAsyncThunk(
+  'cruds/dataTable/fetchCrudDocumentsWithPagination',
   async ({ entity, query, /* isChildrenTree = true, */ parentId }: FetchLinkedChildrenPayload) => {
     const res = await axiosInstance.get<AxiosResData>(
       `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${parentId}${query || ''}`
@@ -133,7 +133,7 @@ export const updateCrudDocument = createAsyncThunk(
   }
 );
 
-export const deleteCrudDocument = createAsyncThunk(
+export const deleteCrudDocumentWithPagination = createAsyncThunk(
   'crud/withPagination/deleteDocument',
   async ({ entity, documentId, query = '' }: DeleteCrudPayload) => {
     /**
@@ -154,8 +154,8 @@ export const deleteCrudDocument = createAsyncThunk(
   }
 );
 
-export const deleteLinkedChildDocument = createAsyncThunk(
-  'crud/withPagination/deleteLinkedChildDocument',
+export const deleteLinkedChildDocumentWithPagination = createAsyncThunk(
+  'crud/withPagination/deleteLinkedChildDocumentWithPagination',
   async ({ entity, documentId, query = '' }: DeleteLinkedChildrenPayload) => {
     /**
      * in the Api first delete and do getCrudDocuments

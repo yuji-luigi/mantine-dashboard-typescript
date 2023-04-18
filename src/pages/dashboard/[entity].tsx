@@ -15,7 +15,7 @@ const CrudPage = ({ isHead = false /*  data */ }: { isHead: boolean /*  data?: I
 
   const entity = query.entity as Sections;
 
-  const { fetchCrudDocumentsDataTable } = useCrudSliceStore();
+  const { fetchCrudDocumentsWithPagination } = useCrudSliceStore();
   const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
   formFields as FormFieldsType;
   useEffect(() => {
@@ -24,10 +24,10 @@ const CrudPage = ({ isHead = false /*  data */ }: { isHead: boolean /*  data?: I
     }
 
     if (!crudDocuments.length) {
-      fetchCrudDocumentsDataTable({ entity });
+      fetchCrudDocumentsWithPagination({ entity });
     }
     if (isChildrenTree) {
-      fetchCrudDocumentsDataTable({ entity, isChildrenTree: false });
+      fetchCrudDocumentsWithPagination({ entity, isChildrenTree: false });
     }
   }, [entity]); // include parentId: string | undefined to update on change page
 

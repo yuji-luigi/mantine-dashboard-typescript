@@ -57,10 +57,10 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
   const {
-    createCrudDocument: addCrud,
+    createCrudDocumentWithPagination: addCrud,
     selectCrudDocument,
     updateCrudDocument,
-    createLinkedChildDocument,
+    createLinkedChildDocumentWithPagination,
   } = useCrudSliceStore();
   const {
     selectedCrudDocument: selectedDocument,
@@ -91,8 +91,8 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
    */
   function handleCloseDrawer() {
     closeDrawer();
-    // selectCrudDocument({ entity, document: null });
-    form.reset();
+    selectCrudDocument({ entity, document: null });
+    // form.reset();
   }
 
   const onSubmit = async (e: FormEvent) => {
@@ -131,7 +131,7 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
     /** Create new Document */
     if (!selectedDocument._id) {
       if (parentId) {
-        createLinkedChildDocument({
+        createLinkedChildDocumentWithPagination({
           entity,
           parentId,
           query: paginationQuery,

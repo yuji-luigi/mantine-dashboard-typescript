@@ -18,7 +18,11 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
 
   /** use hook useCrudSlice */
   // const { selectCrudDocument } = useCrudSlice();
-  const { selectCrudDocument, deleteCrudDocument, deleteLinkedChildDocument } = useCrudSliceStore();
+  const {
+    selectCrudDocument,
+    deleteCrudDocumentWithPagination,
+    deleteLinkedChildDocumentWithPagination,
+  } = useCrudSliceStore();
 
   // selectCrudDocument({ entity, document: rowData });
 
@@ -29,7 +33,7 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
 
   const onDelete = (): void => {
     if (parentId) {
-      deleteLinkedChildDocument({
+      deleteLinkedChildDocumentWithPagination({
         entity,
         documentId: rowData._id,
         query: paginationQuery,
@@ -37,7 +41,7 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
       });
       return;
     }
-    deleteCrudDocument({ entity, documentId: rowData._id, query: paginationQuery });
+    deleteCrudDocumentWithPagination({ entity, documentId: rowData._id, query: paginationQuery });
   };
 
   return (

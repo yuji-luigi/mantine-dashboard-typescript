@@ -21,7 +21,7 @@ const PostEditButton = ({ data, entity }: { data: AllModels; entity: Sections })
 
   const router = useRouter();
 
-  const { selectCrudDocument, deleteCrudDocument } = useCrudSliceStore();
+  const { selectCrudDocument, deleteCrudDocumentWithPagination } = useCrudSliceStore();
 
   const { openDrawer } = useDrawerContext();
 
@@ -33,7 +33,7 @@ const PostEditButton = ({ data, entity }: { data: AllModels; entity: Sections })
   // }, []);
   const handleDeleteClicked = () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      deleteCrudDocument({ documentId: data._id, entity });
+      deleteCrudDocumentWithPagination({ documentId: data._id, entity });
       router.push('/dashboard/posts');
     }
   };

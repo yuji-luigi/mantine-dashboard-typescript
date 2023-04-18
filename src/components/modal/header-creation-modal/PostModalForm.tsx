@@ -39,7 +39,7 @@ const PostModalForm = () => {
   const { classes } = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const sectionFormFields: FormFieldInterface[] = allFormFields.threads;
-  const { createCrudDocument } = useCrudSliceStore();
+  const { createCrudDocumentWithPagination } = useCrudSliceStore();
   const { crudMessage, crudStatus } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
@@ -72,7 +72,7 @@ const PostModalForm = () => {
         return;
       }
     }
-    createCrudDocument({
+    createCrudDocumentWithPagination({
       entity: 'threads',
       newDocument: reqBody,
     });

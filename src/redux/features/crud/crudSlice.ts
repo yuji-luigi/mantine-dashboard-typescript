@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  fetchCrudDocumentsDataTable,
+  fetchCrudDocumentsWithPagination,
   addCrudDocumentDataTable,
   updateCrudDocument,
-  deleteCrudDocument,
-  fetchLinkedChildrenDataTable,
+  deleteCrudDocumentWithPagination,
+  fetchLinkedChildrenWithPagination,
   addLinkedChildrenDocumentDataTable,
-  deleteLinkedChildDocument,
+  deleteLinkedChildDocumentWithPagination,
 } from '../crudAsyncThunks';
 // import { sectionData } from '../../../data';
 import { flattenSectionData } from '../../../data';
@@ -100,17 +100,17 @@ export const crudSlice = createSlice({
       /**
        * FETCH DOCUMENTS
        */
-      .addCase(fetchCrudDocumentsDataTable.pending, (state) => {
+      .addCase(fetchCrudDocumentsWithPagination.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchCrudDocumentsDataTable.fulfilled, (state, action) => {
+      .addCase(fetchCrudDocumentsWithPagination.fulfilled, (state, action) => {
         const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
         state.status = 'succeed';
         state.reduxdb[entity].isChildrenTree = isChildrenTree;
         state.reduxdb[entity].documentsArray = documents;
         state.reduxdb[entity].totalDocuments = totalDocuments;
       })
-      .addCase(fetchCrudDocumentsDataTable.rejected, (state, action) => {
+      .addCase(fetchCrudDocumentsWithPagination.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -168,10 +168,10 @@ export const crudSlice = createSlice({
       /**
        * DELETE A DOCUMENT
        */
-      .addCase(deleteCrudDocument.pending, (state) => {
+      .addCase(deleteCrudDocumentWithPagination.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(deleteCrudDocument.fulfilled, (state, action) => {
+      .addCase(deleteCrudDocumentWithPagination.fulfilled, (state, action) => {
         const { entity, totalDocuments, documents } = action.payload;
         state.status = 'succeed';
         const newDocumentArray = documents;
@@ -181,13 +181,13 @@ export const crudSlice = createSlice({
         state.reduxdb[entity].totalDocuments = totalDocuments;
         state.reduxdb[entity].documentsArray = newDocumentArray;
       })
-      .addCase(deleteLinkedChildDocument.pending, (state) => {
+      .addCase(deleteLinkedChildDocumentWithPagination.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(deleteLinkedChildDocument.rejected, (state) => {
+      .addCase(deleteLinkedChildDocumentWithPagination.rejected, (state) => {
         state.status = 'failed';
       })
-      .addCase(deleteLinkedChildDocument.fulfilled, (state, action) => {
+      .addCase(deleteLinkedChildDocumentWithPagination.fulfilled, (state, action) => {
         const { entity, totalDocuments, documents } = action.payload;
         state.status = 'succeed';
         const newDocumentArray = documents;
@@ -221,19 +221,19 @@ export const useCrudSliceStore = () => {
       appDispatch(crudSlice.actions.updateCrudDocumentInStore(data));
     },
     /** get documents from api and set in documentsArray in redux */
-    fetchCrudDocumentsDataTable(data: FetchCrudPayload) {
-      appDispatch(fetchCrudDocumentsDataTable(data));
+    fetchCrudDocumentsWithPagination(data: FetchCrudPayload) {
+      appDispatch(fetchCrudDocumentsWithPagination(data));
     },
     /** get children documents from api and set in documentsArray in redux */
-    fetchLinkedChildrenDataTable(data: FetchLinkedChildrenPayload) {
-      appDispatch(fetchLinkedChildrenDataTable(data));
+    fetchLinkedChildrenWithPagination(data: FetchLinkedChildrenPayload) {
+      appDispatch(fetchLinkedChildrenWithPagination(data));
     },
     /** add new document in api and insert in redux. */
-    createCrudDocument(data: AddCrudPayload) {
+    createCrudDocumentWithPagination(data: AddCrudPayload) {
       appDispatch(addCrudDocumentDataTable(data));
     },
     /** add new document in api and insert in redux. */
-    createLinkedChildDocument(data: AddLinkedChildPayload) {
+    createLinkedChildDocumentWithPagination(data: AddLinkedChildPayload) {
       appDispatch(addLinkedChildrenDocumentDataTable(data));
     },
     /** update in Api and update new document with old document in redux */
@@ -241,12 +241,12 @@ export const useCrudSliceStore = () => {
       appDispatch(updateCrudDocument(data));
     },
     /** delete from Api and redux */
-    deleteCrudDocument(data: DeleteCrudPayload) {
-      appDispatch(deleteCrudDocument(data));
+    deleteCrudDocumentWithPagination(data: DeleteCrudPayload) {
+      appDispatch(deleteCrudDocumentWithPagination(data));
     },
     /** delete from Api and redux */
-    deleteLinkedChildDocument(data: DeleteLinkedChildrenPayload) {
-      appDispatch(deleteLinkedChildDocument(data));
+    deleteLinkedChildDocumentWithPagination(data: DeleteLinkedChildrenPayload) {
+      appDispatch(deleteLinkedChildDocumentWithPagination(data));
     },
     /** set object in selectedDocument in Reduxdb*/
     selectCrudDocument(data: SelectCrudPayload) {

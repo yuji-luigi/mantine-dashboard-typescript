@@ -7,13 +7,16 @@ export const useGetSelectOptions = (formField: FormFieldInterface): Array<Select
   // const options: Array<SelectOption> = [];
   // const [idleDocuments, setIdleDocuments] = useState<SelectOption[]>([]);
   /** fetch with query,  */
-  const { fetchCrudDocumentsDataTable } = useCrudSliceStore();
+  const { fetchCrudDocumentsWithPagination } = useCrudSliceStore();
   const { crudDocuments } = useCrudSelectors(formField._entity as Sections);
-  // const { fetchCrudDocumentsDataTable, crudDocuments } = useCrudSlice(formField._entity);
+  // const { fetchCrudDocumentsWithPagination, crudDocuments } = useCrudSlice(formField._entity);
 
   useEffect(() => {
     if (formField.type === 'select') {
-      fetchCrudDocumentsDataTable({ entity: formField._entity!, queryObject: formField.query });
+      fetchCrudDocumentsWithPagination({
+        entity: formField._entity!,
+        queryObject: formField.query,
+      });
     }
   }, [formField]);
 
