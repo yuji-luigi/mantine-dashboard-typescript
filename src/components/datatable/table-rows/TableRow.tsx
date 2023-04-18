@@ -49,11 +49,13 @@ export function TableRow({
       {/*
           Regular cells defined here
       */}
-      {sectionFormFields.map((cellConfig) => (
-        <td key={cellConfig.id}>
-          <TableCellDecorator cellConfig={cellConfig} rowData={rowData} />
-        </td>
-      ))}
+      {sectionFormFields.map((cellConfig) =>
+        cellConfig.noTable ? null : (
+          <td key={cellConfig.id}>
+            <TableCellDecorator cellConfig={cellConfig} rowData={rowData} />
+          </td>
+        )
+      )}
       {/*
           Action cells defined here(modify, delete button)
       */}

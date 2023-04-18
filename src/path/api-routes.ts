@@ -33,3 +33,13 @@ export enum PATH_API {
   spaces = 'spaces',
   getSpaceSelections = '/spaces/selections',
 }
+
+export const PATH_API_DATA_TABLE_ROOT = 'data-table';
+
+export enum PATH_API_DATA_TABLE {
+  linkedChildren = `${PATH_API_DATA_TABLE_ROOT}/linkedChildren`,
+  uploads = `${PATH_API_DATA_TABLE_ROOT}/upload-files`,
+  getSpaceCookie = `${PATH_API_DATA_TABLE_ROOT}/spaces/get-cookie`,
+  spaces = `${PATH_API_DATA_TABLE_ROOT}/spaces`,
+  getSpaceSelections = `${PATH_API_DATA_TABLE_ROOT}/spaces/selections`,
+}

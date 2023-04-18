@@ -44,6 +44,7 @@ interface FormFieldInterface {
   /**For type select for editing reason put under score meaning field in formField config json(object)*/
   _entity?: Sections;
   accept?: string;
+  query?: Record<string, string | number | boolean>;
   /**
    * from object. get the property [selectValue[0]] [selectValue[1]]... To show on the DataTable.
    */

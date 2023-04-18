@@ -50,24 +50,17 @@ const ChooseRootSpacePage = () => {
         {title}
       </Text>
       <Divider />
-      {/* <Text>user: {JSON.stringify(user, null, 2)}</Text> */}
+
       <Box
         className={classes.pinContainer}
         py="xl" /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
       >
-        {/* todo create Cards component where differentiate card by thread.type */}
-        {/* {user?.rootSpaces?.map((rootSpace) => (
-          <CardArticleVerticalTextBottom
-            data={rootSpace}
-            hrefRoot={hrefRoot}
-            author={{
-              name: '',
-              avatar: undefined,
-            }}
+        {user?.role === 'super_admin' && (
+          <CardArticleVerticalTextCenter
+            data={{ href: '/dashboard', _id: '', name: '', address: '', createdAt: '' }}
           />
-        ))} */}
-        {/* todo create Cards component where differentiate card by thread.type */}
-        {user?.role === 'super_admin' && <CardArticleVerticalTextCenter />}
+        )}
+
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom data={rootSpace as CardData} hrefRoot={hrefRoot} />
         ))}

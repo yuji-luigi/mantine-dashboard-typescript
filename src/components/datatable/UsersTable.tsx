@@ -71,6 +71,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
           <p>loading</p>
         ) : (
           <Table sx={{ minWidth: 800 }} highlightOnHover>
+
             <TableHeader />
 
             <tbody>
@@ -82,6 +83,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
                 />
               ))}
             </tbody>
+
           </Table>
         )}
         <Divider sx={{ marginBottom: 20 }} />

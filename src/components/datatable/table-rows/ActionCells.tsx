@@ -42,7 +42,7 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
 
   return (
     <td>
-      <Group spacing={0} align="center" /* position="right" */>
+      <Group spacing={0} align="center">
         <ActionIcon onClick={onModify}>
           <IconPencil size={16} stroke={1.5} />
         </ActionIcon>

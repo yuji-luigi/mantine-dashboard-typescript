@@ -5,6 +5,7 @@ interface UpdateCrudDocumentInStorePayload {
 interface FetchCrudPayload {
   entity: Sections;
   query?: string;
+  queryObject?: Record<string, string | number | boolean>;
   isChildrenTree?: boolean;
 }
 /** has parentId */

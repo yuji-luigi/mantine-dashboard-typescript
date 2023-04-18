@@ -29,8 +29,8 @@ export const HTTP_MULTIPART_CONFIG = {
 
 export const fetchCrudDocuments = createAsyncThunk(
   'cruds/fetchCrudDocuments',
-  async ({ entity, query, isChildrenTree = false }: FetchCrudPayload) => {
-    const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`);
+  async ({ entity, query, isChildrenTree = false, queryObject = {} }: FetchCrudPayload) => {
+    const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`, queryObject);
     return {
       entity,
       isChildrenTree,

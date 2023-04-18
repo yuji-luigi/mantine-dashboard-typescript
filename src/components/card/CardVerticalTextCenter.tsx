@@ -20,6 +20,9 @@ const useStyles = createStyles((theme) => ({
     textDecoration: 'none',
   },
   card: {
+    '&:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[0],
+    },
     // backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.white,
     height: 500,
     // width: 300,
@@ -77,26 +80,29 @@ export interface CardData {
   address: string;
   createdAt: string;
   user?: UserModel;
+  onClick?: () => void;
+  href: string;
 }
 
 interface CardArticleImageDescFooterVerticalProps {
   // data: SpaceModel | OrganizationModel;
 }
-export function CardArticleVerticalTextCenter({}: CardArticleImageDescFooterVerticalProps) {
+export function CardArticleVerticalTextCenter({ data }: { data?: CardData }) {
   // const description =
   //   data.description?.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
   const { classes, cx } = useStyles();
   const router = useRouter();
 
   return (
-    <Link href={`}`} className={classes.link}>
+    <Link href={data?.href || ''} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>
         <BackgroundImage className={classes.bgImage} src={''} radius="sm">
           <Box className={classes.bgImageGradient} />
 
           <div className={classes.body}>
             <Text className={cx(classes.title, classes.appear)} /* mt="xs" mb="xs" */>
-              data name
+              Browse all organizations
+              {/* title */}
             </Text>
             <Text
               className={classes.appear}
@@ -105,18 +111,20 @@ export function CardArticleVerticalTextCenter({}: CardArticleImageDescFooterVert
               weight={700}
               size="xs"
             >
-              desc1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, in.
+              {/* desctption */}
             </Text>
             <Group noWrap className={classes.appear} spacing="xs">
-              <Group spacing="xs" noWrap>
-                <Avatar size={20} src={''} />
-                <Text size="xs">user name</Text>
-              </Group>
+              {data?.user && (
+                <Group spacing="xs" noWrap>
+                  <Avatar size={20} src={''} />
+                  <Text size="xs">{/**username */}</Text>
+                </Group>
+              )}
               <Text size="xs" color="dimmed">
                 •
               </Text>
               <Text size="xs" color="dimmed">
-                date 1990/01/01
+                {/* date */}
               </Text>
             </Group>
           </div>

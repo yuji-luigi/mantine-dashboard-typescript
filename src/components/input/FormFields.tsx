@@ -1,4 +1,4 @@
-import { Checkbox, Select, Switch, Textarea, TextInput } from '@mantine/core';
+import { Checkbox, MultiSelect, Select, Switch, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import React, { CSSProperties, ReactNode } from 'react';
 import Image from 'next/image';
@@ -65,20 +65,33 @@ const FormFields = ({
           {...form.getInputProps(formField.name || formField.id)}
         />
       )}
-      {formField.type === 'select' && (
-        <Select
-          data={options}
-          name={formField.name}
-          label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
-      )}
+      {formField.type === 'select' &&
+        (formField.multi ? (
+          <MultiSelect
+            data={options}
+            name={formField.name}
+            label={formField.label}
+            placeholder={formField.placeholder}
+            size="md"
+            mt={10}
+            {...others}
+            {...form.getInputProps(formField.name || formField.id)}
+          />
+        ) : (
+          <Select
+            data={options}
+            name={formField.name}
+            label={formField.label}
+            placeholder={formField.placeholder}
+            size="md"
+            mt={10}
+            {...others}
+            {...form.getInputProps(formField.name || formField.id)}
+          />
+        ))}
       {formField.type === 'static-select' && (
         <Select
+          multiple={formField.multi}
           data={formField.options!}
           name={formField.name}
           label={formField.label}
