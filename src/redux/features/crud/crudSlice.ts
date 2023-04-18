@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  fetchCrudDocuments,
-  addCrudDocument,
+  fetchCrudDocumentsDataTable,
+  addCrudDocumentDataTable,
   updateCrudDocument,
   deleteCrudDocument,
-  fetchLinkedChildren,
-  addLinkedChildrenDocument,
+  fetchLinkedChildrenDataTable,
+  addLinkedChildrenDocumentDataTable,
   deleteLinkedChildDocument,
 } from '../crudAsyncThunks';
 // import { sectionData } from '../../../data';
@@ -100,31 +100,31 @@ export const crudSlice = createSlice({
       /**
        * FETCH DOCUMENTS
        */
-      .addCase(fetchCrudDocuments.pending, (state) => {
+      .addCase(fetchCrudDocumentsDataTable.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchCrudDocuments.fulfilled, (state, action) => {
+      .addCase(fetchCrudDocumentsDataTable.fulfilled, (state, action) => {
         const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
         state.status = 'succeed';
         state.reduxdb[entity].isChildrenTree = isChildrenTree;
         state.reduxdb[entity].documentsArray = documents;
         state.reduxdb[entity].totalDocuments = totalDocuments;
       })
-      .addCase(fetchCrudDocuments.rejected, (state, action) => {
+      .addCase(fetchCrudDocumentsDataTable.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
       /**
        * ADD/CREATE NEW DOCUMENT
        */
-      .addCase(addCrudDocument.pending, (state) => {
+      .addCase(addCrudDocumentDataTable.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(addCrudDocument.rejected, (state, action) => {
+      .addCase(addCrudDocumentDataTable.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(addCrudDocument.fulfilled, (state, action) => {
+      .addCase(addCrudDocumentDataTable.fulfilled, (state, action) => {
         const { entity, /* documentId, */ totalDocuments, documents } = action.payload;
         state.status = 'succeed';
         // const newDocumentArray = documents;
@@ -221,20 +221,20 @@ export const useCrudSliceStore = () => {
       appDispatch(crudSlice.actions.updateCrudDocumentInStore(data));
     },
     /** get documents from api and set in documentsArray in redux */
-    fetchCrudDocuments(data: FetchCrudPayload) {
-      appDispatch(fetchCrudDocuments(data));
+    fetchCrudDocumentsDataTable(data: FetchCrudPayload) {
+      appDispatch(fetchCrudDocumentsDataTable(data));
     },
     /** get children documents from api and set in documentsArray in redux */
-    fetchLinkedChildren(data: FetchLinkedChildrenPayload) {
-      appDispatch(fetchLinkedChildren(data));
+    fetchLinkedChildrenDataTable(data: FetchLinkedChildrenPayload) {
+      appDispatch(fetchLinkedChildrenDataTable(data));
     },
     /** add new document in api and insert in redux. */
     createCrudDocument(data: AddCrudPayload) {
-      appDispatch(addCrudDocument(data));
+      appDispatch(addCrudDocumentDataTable(data));
     },
     /** add new document in api and insert in redux. */
     createLinkedChildDocument(data: AddLinkedChildPayload) {
-      appDispatch(addLinkedChildrenDocument(data));
+      appDispatch(addLinkedChildrenDocumentDataTable(data));
     },
     /** update in Api and update new document with old document in redux */
     updateCrudDocument(data: UpdateCrudPayload) {

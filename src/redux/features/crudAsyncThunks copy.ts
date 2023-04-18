@@ -5,7 +5,7 @@
  * */
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { PATH_API, PATH_API_DATA_TABLE, PATH_API_DATA_TABLE_ROOT } from '../../path/api-routes';
+import { PATH_API } from '../../path/api-routes';
 import axiosInstance, { AxiosResData, uploadConfig } from '../../utils/axios-instance';
 
 interface MediaField {
@@ -28,12 +28,9 @@ export const HTTP_MULTIPART_CONFIG = {
 };
 
 export const fetchCrudDocumentsDataTable = createAsyncThunk(
-  'cruds/dataTable/fetchCrudDocumentsDataTable',
+  'cruds/fetchCrudDocumentsDataTable',
   async ({ entity, query, isChildrenTree = false, queryObject = {} }: FetchCrudPayload) => {
-    const res = await axiosInstance.get<AxiosResData>(
-      `${PATH_API_DATA_TABLE_ROOT}/${entity}${query || ''}`,
-      queryObject
-    );
+    const res = await axiosInstance.get<AxiosResData>(`${entity}${query || ''}`, queryObject);
     return {
       entity,
       isChildrenTree,
@@ -44,10 +41,10 @@ export const fetchCrudDocumentsDataTable = createAsyncThunk(
 );
 
 export const fetchLinkedChildrenDataTable = createAsyncThunk(
-  'cruds/dataTable/fetchCrudDocumentsDataTable',
+  'cruds/fetchCrudDocumentsDataTable',
   async ({ entity, query, /* isChildrenTree = true, */ parentId }: FetchLinkedChildrenPayload) => {
     const res = await axiosInstance.get<AxiosResData>(
-      `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${parentId}${query || ''}`
+      `/linkedChildren/${entity}/${parentId}${query || ''}`
     );
     return {
       entity,
@@ -78,11 +75,7 @@ export const addCrudDocumentDataTable = createAsyncThunk(
   async ({ entity, newDocument, parentId, query = '', config }: AddCrudPayloadWithConfig) => {
     /** handle endpoint by checking if parentId is passed */
     const endPoint = !parentId ? entity : `${PATH_API.linkedChildren}/${entity}/${parentId}`;
-    const res = await axiosInstance.post(
-      `${PATH_API_DATA_TABLE_ROOT}/${endPoint}${query}`,
-      newDocument,
-      config
-    );
+    const res = await axiosInstance.post(`${endPoint}${query}`, newDocument, config);
     const payload = {
       // entity: res.data.collection,
       entity,
@@ -95,10 +88,10 @@ export const addCrudDocumentDataTable = createAsyncThunk(
   }
 );
 export const addLinkedChildrenDocumentDataTable = createAsyncThunk(
-  'crud/withPagination/addDocument',
+  'crud/addDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
     /** handle endpoint by checking if parentId is passed */
-    const endPoint = `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${parentId}`;
+    const endPoint = `${PATH_API.linkedChildren}/${entity}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
     const payload = {
       // entity: res.data.collection,
@@ -134,15 +127,13 @@ export const updateCrudDocument = createAsyncThunk(
 );
 
 export const deleteCrudDocument = createAsyncThunk(
-  'crud/withPagination/deleteDocument',
+  'crud/deleteDocument',
   async ({ entity, documentId, query = '' }: DeleteCrudPayload) => {
     /**
      * in the Api first delete and do getCrudDocuments
      * returns new crudDocuments with limit number
      *  */
-    const res = await axiosInstance.delete(
-      `${PATH_API_DATA_TABLE_ROOT}/${entity}/${documentId}${query}`
-    );
+    const res = await axiosInstance.delete(`${entity}/${documentId}${query}`);
     const payload = {
       // entity: res.data.collection,
       entity,
@@ -155,14 +146,14 @@ export const deleteCrudDocument = createAsyncThunk(
 );
 
 export const deleteLinkedChildDocument = createAsyncThunk(
-  'crud/withPagination/deleteLinkedChildDocument',
+  'crud/deleteLinkedChildDocument',
   async ({ entity, documentId, query = '' }: DeleteLinkedChildrenPayload) => {
     /**
      * in the Api first delete and do getCrudDocuments
      * returns new crudDocuments with limit number
      *  */
     const res = await axiosInstance.delete(
-      `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${documentId}${query}`
+      `/${PATH_API.linkedChildren}/${entity}/${documentId}${query}`
     );
     const payload = {
       // entity: res.data.collection,

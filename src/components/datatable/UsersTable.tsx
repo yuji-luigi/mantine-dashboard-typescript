@@ -18,7 +18,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   const [page, setPage] = useState(1);
   const { setPagination, paginationQuery } = usePaginationContext();
   const { query }: { query: ParsedQueryCustom } = useRouter();
-  const { fetchCrudDocuments } = useCrudSliceStore();
+  const { fetchCrudDocumentsDataTable } = useCrudSliceStore();
   const { crudDocuments, totalDocumentsCount, crudStatus } = useCrudSelectors(
     query.entity as Sections
   );
@@ -42,7 +42,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
       return;
     }
     /** fetch all the entity if not childrenpage */
-    fetchCrudDocuments({ entity: query.entity, query: paginationQuery });
+    fetchCrudDocumentsDataTable({ entity: query.entity, query: paginationQuery });
   }, [paginationQuery]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
   function onPageChange(pageNumber: number) {
     setPage(pageNumber);
     setPagination(pageNumber); //! after setting the pagination. useEffect will be called to fetch the documents
-    // fetchCrudDocuments({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
+    // fetchCrudDocumentsDataTable({ entity: query.entity as Sections, query: `?skip=${pageNumber}` });
   }
 
   return (
@@ -71,7 +71,6 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
           <p>loading</p>
         ) : (
           <Table sx={{ minWidth: 800 }} highlightOnHover>
-
             <TableHeader />
 
             <tbody>
@@ -83,7 +82,6 @@ export function UsersTable({ entityOverride = '' }: { entityOverride?: string })
                 />
               ))}
             </tbody>
-
           </Table>
         )}
         <Divider sx={{ marginBottom: 20 }} />

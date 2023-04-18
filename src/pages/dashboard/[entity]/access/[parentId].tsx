@@ -18,7 +18,7 @@ const fetcher = (args: string) => axiosInstance.get(args).then((res) => res.data
 
 const ChildrenTablePage = () => {
   const { query }: { query: ParsedQueryCustom } = useRouter();
-  const { fetchLinkedChildren } = useCrudSliceStore();
+  const { fetchLinkedChildrenDataTable } = useCrudSliceStore();
   // const { crudStatus } = useCrudSelectors(query.entity);
   const { paginationQuery } = usePaginationContext();
 
@@ -40,7 +40,11 @@ const ChildrenTablePage = () => {
     if (!query.entity || !query.parentId) {
       return;
     }
-    fetchLinkedChildren({ entity: query.entity, parentId: query.parentId, query: paginationQuery });
+    fetchLinkedChildrenDataTable({
+      entity: query.entity,
+      parentId: query.parentId,
+      query: paginationQuery,
+    });
     // setCrudDocuments({ entity: query.entity, documents: data?.data || [], isChildrenTree: true });
 
     if (parentData) {

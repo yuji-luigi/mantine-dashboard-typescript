@@ -20,7 +20,7 @@ import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationQuery } from '../../context/PaginationContext';
-import { addLinkedChildrenDocument, hasMedia } from '../../redux/features/crudAsyncThunks';
+import { addLinkedChildrenDocumentDataTable, hasMedia } from '../../redux/features/crudAsyncThunks';
 import CreationToolBar from '../input/CreationToolBar';
 import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
 import { UPLOAD_FOLDERS } from '../../lib/enums';

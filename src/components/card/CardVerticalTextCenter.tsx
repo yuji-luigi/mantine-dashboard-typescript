@@ -111,7 +111,7 @@ export function CardArticleVerticalTextCenter({ data }: { data?: CardData }) {
               weight={700}
               size="xs"
             >
-              {/* desctption */}
+              {/* description */}
             </Text>
             <Group noWrap className={classes.appear} spacing="xs">
               {data?.user && (
