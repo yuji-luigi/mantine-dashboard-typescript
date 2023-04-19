@@ -28,7 +28,11 @@ const useStyles = createStyles(() => ({
 function instanceOfParentDataInterface(object: any): object is ParentDataInterface {
   return 'name' in object;
 }
-export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: Sections | '' }) {
+export function TableSectionHeader({
+  overridingEntity = '',
+}: {
+  overridingEntity?: Sections | '';
+}) {
   /** define open state for crudDrawer component */
 
   const { openDrawer } = useDrawerContext();
@@ -44,7 +48,7 @@ export function TableSectionHeader({ entityOverride = '' }: { entityOverride?: S
 
   /** get entity from url using useRouter().query */
   let { entity } = query;
-  entity = entityOverride || entity; // if entityOverride is present entity is set to override one
+  entity = overridingEntity || entity; // if overridingEntity is present entity is set to override one
 
   /**
    *  getSection json data to show the page headings  sectionData is array of objects

@@ -15,8 +15,8 @@ const StatisticsPage: NextPageWithLayout<PropWithChildren> = () => (
 
   <Page>
     <div>
-      <TableSectionHeader entityOverride="statistics" />
-      <Tables entityOverride="statistics" />
+      <TableSectionHeader overridingEntity="statistics" />
+      <Tables overridingEntity="statistics" />
       <div>message: </div>
     </div>
   </Page>

@@ -39,6 +39,9 @@ interface FormFieldInterface {
    * refers to how to display in the dataTable
    * */
   cellType?: 'link-children';
+  /** determines link root, then set the linkKey path after*/
+  linkRoot?: string;
+  linkKey?: string;
   /**For type select */
   multi?: boolean;
   /**For type select for editing reason put under score meaning field in formField config json(object)*/

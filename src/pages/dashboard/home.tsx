@@ -11,7 +11,7 @@ import data from '../../../json/mock/statsGrid.json';
 
 const DashboardTopPage /* : NextPageWithLayout<PropWithChildren> */ = () => (
   <Page title="HOME:">
-    <TableSectionHeader entityOverride="home" />
+    <TableSectionHeader overridingEntity="home" />
     <ProgressCard />
     {/* <ProgressCardColored /> */}
     <StatsGrid />

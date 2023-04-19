@@ -12,7 +12,9 @@ import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 export function TableRow({
   rowData,
   sectionFormFields,
+  overridingEntity,
 }: {
+  overridingEntity?: Sections;
   rowData: AllModels;
   sectionFormFields: Array<FormFieldInterface>;
 }) {
@@ -27,7 +29,7 @@ export function TableRow({
   const { selectCrudDocument, deleteCrudDocumentWithPagination } = useCrudSliceStore();
 
   /** get runtime value of the entity */
-  const entity = query.entity as Sections;
+  const entity = overridingEntity || (query.entity as Sections);
   // const selectedDocument = getSelectedDocument(entity);
   // const { deleteCrudDocumentWithPagination: old } = useCrudSlice();
   // const onModify = (): void => {

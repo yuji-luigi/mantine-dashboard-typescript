@@ -28,6 +28,7 @@ import useAuth from '../../../hooks/useAuth';
 import { PATH_API } from '../../path/api-routes';
 import axiosInstance from '../../utils/axios-instance';
 import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
+import { log } from 'console';
 
 const useStyles = createStyles(() => ({
   drawer: {
@@ -38,7 +39,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Sections }) {
+export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?: Sections }) {
   const [submitting, setSubmitting] = useState(false);
 
   const { classes } = useStyles();
@@ -47,8 +48,7 @@ export function CrudDrawerDefault({ overrideEntity = '' }: { overrideEntity?: Se
 
   const { query } = useRouter();
 
-  const entity = overrideEntity || (query.entity as Sections);
-
+  const entity = overridingEntity || (query.entity as Sections);
   const parentId = query.parentId as string;
 
   const paginationQuery = usePaginationQuery();

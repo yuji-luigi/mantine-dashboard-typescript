@@ -6,9 +6,9 @@ import { UsersTable } from './UsersTable';
 // import data3 from '../../../json/mock/usersDatatable.json';
 // import { UsersStack } from './UsersStack';
 
-const Tables = ({ entityOverride }: { entityOverride?: string }) => (
+const Tables = ({ overridingEntity }: { overridingEntity?: Sections }) => (
   <>
-    <UsersTable entityOverride={entityOverride} />
+    <UsersTable overridingEntity={overridingEntity} />
   </>
 );
 

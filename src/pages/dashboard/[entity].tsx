@@ -9,11 +9,13 @@ import formFields from '../../../json/dataTable/formfields';
 import Page from '../../components/Page';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import { usePaginationContext } from '../../context/PaginationContext';
 
-const CrudPage = ({ isHead = false /*  data */ }: { isHead: boolean /*  data?: IUser */ }) => {
+const CrudPage = () => {
   const { query, push } = useRouter();
 
   const entity = query.entity as Sections;
+  const { setPagination, paginationQuery } = usePaginationContext();
 
   const { fetchCrudDocumentsWithPagination } = useCrudSliceStore();
   const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
@@ -23,13 +25,26 @@ const CrudPage = ({ isHead = false /*  data */ }: { isHead: boolean /*  data?: I
       push('/dashboard/home');
     }
 
-    if (!crudDocuments.length) {
-      fetchCrudDocumentsWithPagination({ entity });
-    }
-    if (isChildrenTree) {
-      fetchCrudDocumentsWithPagination({ entity, isChildrenTree: false });
-    }
+    // if (!crudDocuments.length) {
+    //   fetchCrudDocumentsWithPagination({ entity });
+    // }
+    // if (isChildrenTree) {
+    //   fetchCrudDocumentsWithPagination({ entity, isChildrenTree: false });
+    // }
   }, [entity]); // include parentId: string | undefined to update on change page
+
+  useEffect(() => {
+    /** type guard */
+    if (!entity) {
+      return;
+    }
+    /** check if this is a childrenPage */
+    if (query.parentId) {
+      return;
+    }
+    /** fetch all the entity if not childrenpage */
+    fetchCrudDocumentsWithPagination({ entity: entity, query: paginationQuery });
+  }, [paginationQuery, entity, query.parentId]);
 
   return (
     <Page>

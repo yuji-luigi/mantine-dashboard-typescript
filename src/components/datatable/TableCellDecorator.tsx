@@ -19,9 +19,6 @@ export function TableCellDecorator({
    */
   const cellData = rowData[cellConfig.name];
 
-  let color = 'red';
-  let queriedCellData = cellData;
-
   let badgeCell = <BadgeCell cellConfig={cellConfig} color={''} rowData={rowData} cellData={''} />;
 
   let tableCell =
@@ -48,6 +45,7 @@ export function TableCellDecorator({
       <>
         {cellData.map((cellData) => (
           <TableCell
+            key={cellData._id}
             cellData={
               cellConfig.selectValues
                 ?.map((key) => cellData[key])

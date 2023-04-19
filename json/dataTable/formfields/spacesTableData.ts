@@ -6,6 +6,8 @@ export const spacesTableData: Array<FormFieldInterface> = [
     placeholder: 'Building East/Quarto oggiaro district(whole city as building)',
     type: 'text',
     cellType: 'link-children',
+    linkRoot: '/dashboard/spaces/access/',
+    linkKey: '_id',
     required: true,
     priority: 1,
   },
