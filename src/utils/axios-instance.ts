@@ -13,6 +13,16 @@ export interface AxiosResData {
   data: Array<AllModels>;
   totalDocuments: number;
 }
+export interface AxiosResDataGeneric<DataType> {
+  success: boolean;
+  collection: Sections;
+  data: DataType;
+}
+export interface AxiosResDataMeResponse<DataType> {
+  success: boolean;
+  collection: Sections;
+  user: DataType;
+}
 axiosInstance.interceptors.request.use(
   (config) => {
     // const token = localStorage.getItem('accessToken');

@@ -58,7 +58,7 @@ export const usersTableData: Array<FormFieldInterface> = [
     label: 'Struttura',
     type: 'select',
     _entity: 'spaces',
-    query: { rootSpace: true },
+    query: { isMain: true },
     selectValues: ['name'],
     multi: true,
     required: false,

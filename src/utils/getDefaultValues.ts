@@ -25,7 +25,7 @@ export function getDefaultValues(
            * set array of ids as a default values.
            */
           Array.isArray(crudDocument[path])
-            ? crudDocument[path].map((list: AllModels) => list._id) || ''
+            ? crudDocument[path].map((list: AllModels) => list._id || list) || ''
             : /** otherwise set only id as defaultValue */
               crudDocument[path]?._id || ''
         );

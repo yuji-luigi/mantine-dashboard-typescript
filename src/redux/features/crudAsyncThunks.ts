@@ -32,7 +32,7 @@ export const fetchCrudDocumentsWithPagination = createAsyncThunk(
   async ({ entity, query, isChildrenTree = false, queryObject = {} }: FetchCrudPayload) => {
     const res = await axiosInstance.get<AxiosResData>(
       `${PATH_API_DATA_TABLE_ROOT}/${entity}${query || ''}`,
-      queryObject
+      { params: queryObject }
     );
     return {
       entity,

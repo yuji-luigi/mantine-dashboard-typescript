@@ -6,6 +6,7 @@ interface UserModel extends MongooseBaseModel {
   email: string;
   active: boolean;
   role: Roles;
+  rootSpaces: Array<string>;
   password: string;
   phone?: string;
   avatar?: UploadModel;

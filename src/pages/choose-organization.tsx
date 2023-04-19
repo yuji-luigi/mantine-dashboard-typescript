@@ -4,15 +4,10 @@ import { Box, Divider, Stack, Text, createStyles } from '@mantine/core';
 import PostList from '../sections/posts_list_section/PostList';
 import { CardArticleVerticalTextBottom, CardData } from '../components/card/CardVerticalTextBottom';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../path/page-paths';
-import axiosInstance, {
-  AxiosResData,
-  AxiosResDataGeneric,
-  AxiosResDataMeResponse,
-} from '../utils/axios-instance';
+import axiosInstance from '../utils/axios-instance';
 import { PATH_API } from '../path/api-routes';
 import { CardArticleVerticalTextCenter } from '../components/card/CardVerticalTextCenter';
-import { GetServerSidePropsContext } from 'next/types';
-import { PATH_AUTH } from '../path/api-routes';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   pinContainer: {
@@ -33,9 +28,25 @@ const ChooseRootSpacePage = () => {
   const { user } = useAuth();
   const [rootSpaces, setRootSpaces] = React.useState<OrganizationModel[] | SpaceModel[]>([]);
   const { classes, cx, theme } = useStyles();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user?.role !== 'super_admin') {
+      router.push(PATH_DASHBOARD.chooseRootSpace);
+      return;
+    }
+
+    axiosInstance.get(`${PATH_API.getSpaceSelections}`).then((res) => {
+      setRootSpaces(res.data.data);
+    });
+  }, [user?.role]);
 
   const title = user?.role === 'super_admin' ? 'Choose organization' : 'Choose space';
-  const hrefRoot = CARD_LINK_PATH.rootSpaceSelected;
+  const hrefRoot = CARD_LINK_PATH.organizationSelected;
+
+  if (user?.role !== 'super_admin') {
+    return null;
+  }
 
   return (
     <Stack>
@@ -64,38 +75,5 @@ const ChooseRootSpacePage = () => {
     </Stack>
   );
 };
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const jwtToken = context.req.cookies.jwt;
-  const res = await axiosInstance.get<AxiosResDataMeResponse<UserModel>>(`${PATH_AUTH.me}`, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
-
-  const user = res.data.user;
-
-  if (user?.role === 'super_admin') {
-    return {
-      redirect: {
-        destination: '/choose-organization',
-        permanent: false,
-      },
-    };
-  }
-
-  // get space of the user
-  const rootSpaces = await axiosInstance.get(`${PATH_API.spaces}`, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    // params: { _id: { $in: user?.rootSpaces } },
-    params: { _id: user?.rootSpaces },
-  });
-
-  return { props: { rootSpaces: rootSpaces.data.data || [] } };
-}
 
 export default ChooseRootSpacePage;

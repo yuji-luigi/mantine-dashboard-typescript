@@ -82,7 +82,7 @@ interface CardArticleImageDescFooterVerticalProps {
   // category: string;
   // title: string;
   // date: string;
-  hrefRoot: CARD_LINK_PATH;
+  href: string;
 
   data: CardData;
   // data: SpaceModel | OrganizationModel;
@@ -91,7 +91,7 @@ export function CardArticleVerticalTextBottom({
   image,
   // title,
   data,
-  hrefRoot,
+  href,
 }: CardArticleImageDescFooterVerticalProps) {
   // const description =
   //   data.description?.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
@@ -99,7 +99,7 @@ export function CardArticleVerticalTextBottom({
   const router = useRouter();
 
   return (
-    <Link href={`${hrefRoot}/${data._id}`} className={classes.link}>
+    <Link href={href} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>
         <BackgroundImage
           className={classes.bgImage}
