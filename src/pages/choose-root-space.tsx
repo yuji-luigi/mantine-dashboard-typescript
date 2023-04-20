@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { Box, Divider, Stack, Text, createStyles } from '@mantine/core';
+import { Box, Button, Divider, Group, Stack, Text, createStyles } from '@mantine/core';
 import PostList from '../sections/posts_list_section/PostList';
 import { CardArticleVerticalTextBottom, CardData } from '../components/card/CardVerticalTextBottom';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../path/page-paths';
@@ -13,7 +13,11 @@ import { PATH_API } from '../path/api-routes';
 import { CardArticleVerticalTextCenter } from '../components/card/CardVerticalTextCenter';
 import { GetServerSidePropsContext } from 'next/types';
 import { PATH_AUTH } from '../path/api-routes';
-
+import useSWR from 'swr';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Layout from '../layouts';
 const useStyles = createStyles((theme) => ({
   pinContainer: {
     // position: 'absolute',
@@ -29,19 +33,42 @@ const useStyles = createStyles((theme) => ({
     gap: 10,
   },
 }));
+
+const fetchSpaceSelections = async (user: UserModel) => {
+  if (!user) return null;
+  const res = await axiosInstance.get(PATH_API.getSpaceSelections);
+  return res.data?.data;
+};
+
 const ChooseRootSpacePage = () => {
   const { user } = useAuth();
-  const [rootSpaces, setRootSpaces] = React.useState<OrganizationModel[] | SpaceModel[]>([]);
   const { classes, cx, theme } = useStyles();
+  const router = useRouter();
 
   const title = user?.role === 'super_admin' ? 'Choose organization' : 'Choose space';
   const hrefRoot = CARD_LINK_PATH.rootSpaceSelected;
+  const {
+    data: rootSpaces,
+    error,
+    isLoading,
+  } = useSWR<SpaceModel[] | null, AxiosError>(user, fetchSpaceSelections);
+
+  if (user?.role === 'super_admin' && !rootSpaces) {
+    router.push(PATH_DASHBOARD.chooseOrganization);
+    return null;
+  }
+  if (!rootSpaces || isLoading) return <p>loading</p>;
 
   return (
     <Stack>
-      <Text variant="text" size={36} weight={600} align="center">
-        {title}
-      </Text>
+      <Group position="apart" align="center" pt={16}>
+        <Text variant="text" size={36} weight={600} align="center">
+          {title}
+        </Text>
+        <Button component={Link} href={PATH_DASHBOARD.logout}>
+          logout
+        </Button>
+      </Group>
       <Divider />
 
       <Box
@@ -65,37 +92,41 @@ const ChooseRootSpacePage = () => {
   );
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const jwtToken = context.req.cookies.jwt;
-  const res = await axiosInstance.get<AxiosResDataMeResponse<UserModel>>(`${PATH_AUTH.me}`, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
+ChooseRootSpacePage.getLayout = (page: ReactElement) => <Layout variant="main">{page}</Layout>;
 
-  const user = res.data.user;
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const jwtToken = context.req.cookies.jwt;
+//   const res = await axiosInstance.get<AxiosResDataMeResponse<UserModel>>(`${PATH_AUTH.me}`, {
+//     headers: {
+//       Authorization: `Bearer ${jwtToken}`,
+//       // 'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//   });
 
-  if (user?.role === 'super_admin') {
-    return {
-      redirect: {
-        destination: '/choose-organization',
-        permanent: false,
-      },
-    };
-  }
+//   const user = res.data.user;
 
-  // get space of the user
-  const rootSpaces = await axiosInstance.get(`${PATH_API.spaces}`, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    // params: { _id: { $in: user?.rootSpaces } },
-    params: { _id: user?.rootSpaces },
-  });
+//   if (user?.role === 'super_admin') {
+//     return {
+//       redirect: {
+//         destination: '/choose-organization',
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return { props: { rootSpaces: rootSpaces.data.data || [] } };
-}
+//   // get space of the user
+//   const rootSpaces = await axiosInstance.get(`${PATH_API.getSpaceSelections}/`, {
+//     headers: {
+//       Authorization: `Bearer ${jwtToken}`,
+//       // 'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     params,
+//     // params: { $in: [...user?.rootSpaces, '$_id'] },
+//     // params: { _id: { $in: user?.rootSpaces } },
+//     // params: { _id: user?.rootSpaces },
+//   });
+
+//   return { props: { rootSpaces: rootSpaces.data.data || [] } };
+// }
 
 export default ChooseRootSpacePage;

@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import React, { ReactElement, useEffect } from 'react';
+import useAuth from '../../../../hooks/useAuth';
 import { Box, Divider, Stack, Text, createStyles } from '@mantine/core';
-import PostList from '../sections/posts_list_section/PostList';
-import { CardArticleVerticalTextBottom, CardData } from '../components/card/CardVerticalTextBottom';
-import { CARD_LINK_PATH, PATH_DASHBOARD } from '../path/page-paths';
-import axiosInstance from '../utils/axios-instance';
-import { PATH_API } from '../path/api-routes';
-import { CardArticleVerticalTextCenter } from '../components/card/CardVerticalTextCenter';
+import PostList from '../../../sections/posts_list_section/PostList';
+import {
+  CardArticleVerticalTextBottom,
+  CardData,
+} from '../../../components/card/CardVerticalTextBottom';
+import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../../path/page-paths';
+import axiosInstance from '../../../utils/axios-instance';
+import { PATH_API } from '../../../path/api-routes';
+import { CardArticleVerticalTextCenter } from '../../../components/card/CardVerticalTextCenter';
 import { useRouter } from 'next/router';
+import Layout from '../../../layouts';
 
 const useStyles = createStyles((theme) => ({
   pinContainer: {
@@ -24,7 +28,7 @@ const useStyles = createStyles((theme) => ({
     gap: 10,
   },
 }));
-const ChooseRootSpacePage = () => {
+const ChooseOrganizationPage = () => {
   const { user } = useAuth();
   const [rootSpaces, setRootSpaces] = React.useState<OrganizationModel[] | SpaceModel[]>([]);
   const { classes, cx, theme } = useStyles();
@@ -36,7 +40,7 @@ const ChooseRootSpacePage = () => {
       return;
     }
 
-    axiosInstance.get(`${PATH_API.getSpaceSelections}`).then((res) => {
+    axiosInstance.get(`${PATH_API.getOrganizations}`).then((res) => {
       setRootSpaces(res.data.data);
     });
   }, [user?.role]);
@@ -75,5 +79,5 @@ const ChooseRootSpacePage = () => {
     </Stack>
   );
 };
-
-export default ChooseRootSpacePage;
+ChooseOrganizationPage.getLayout = (page: ReactElement) => <Layout variant="main">{page}</Layout>;
+export default ChooseOrganizationPage;

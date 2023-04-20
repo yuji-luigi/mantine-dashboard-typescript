@@ -33,6 +33,7 @@ import Link from 'next/link';
 import { ColorSchemeToggle } from '../../components/colorSchemeToggle/ColorSchemeToggle';
 import { useCloseDrawer } from '../../context/DataTableDrawerContext';
 import { sleep } from '../../utils/helper-functions';
+import useAuth from '../../../hooks/useAuth';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -129,7 +130,7 @@ const mockdata = [
 
 export function HomepageHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
+  const { user } = useAuth();
   const { classes, theme } = useStyles();
   const { push } = useRouter();
 
@@ -224,6 +225,7 @@ export function HomepageHeader() {
               Log in
             </Button>
             <Button onClick={() => push('/sign-up')}>Sign up</Button>
+            {user && <Button onClick={() => push('/logout')}>Logout</Button>}
             <ColorSchemeToggle variant="outline" />
           </Group>
 

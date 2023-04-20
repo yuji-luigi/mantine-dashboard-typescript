@@ -31,20 +31,20 @@ const useStyles = createStyles((theme) => ({
     // '&:hover': {
     //   backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
     // },
-    zIndex: 50,
+    zIndex: 40,
   },
 
   bgImage: {
     background: 'linearGradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
     height: '100%',
-    zIndex: 50,
+    zIndex: 40,
   },
   bgImageGradient: {
     width: '100%',
     height: '100%',
     position: 'absolute',
     background: 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
-    zIndex: 51,
+    zIndex: 10,
   },
 
   title: {
@@ -52,11 +52,11 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     wordBreak: 'break-word',
     lineHeight: 1.2,
-    zIndex: 55,
+    zIndex: 60,
   },
 
   appear: {
-    zIndex: 55,
+    zIndex: 65,
   },
 
   body: {
@@ -66,6 +66,10 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'end',
     height: '100%',
     // zIndex: 55,
+  },
+  text: {
+    color: 'black',
+    // color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
   },
 }));
 
@@ -109,11 +113,11 @@ export function CardArticleVerticalTextBottom({
           <Box className={classes.bgImageGradient} />
 
           <div className={classes.body}>
-            <Text className={cx(classes.title, classes.appear)} /* mt="xs" mb="xs" */>
+            <Text className={cx(classes.title, classes.appear, classes.text)} /* mt="xs" mb="xs" */>
               {data.name}
             </Text>
             <Text
-              className={classes.appear}
+              className={cx(classes.appear, classes.text)}
               transform="uppercase"
               color="dimmed"
               weight={700}
@@ -121,12 +125,14 @@ export function CardArticleVerticalTextBottom({
             >
               {data.address}
             </Text>
-            <Group noWrap className={classes.appear} spacing="xs">
+            <Group noWrap className={cx(classes.appear)} spacing="xs">
               <Group spacing="xs" noWrap>
-                <Avatar size={20} src={''} />
-                <Text size="xs">{data.user?.name}</Text>
+                {/* <Avatar size={20} src={''} /> */}
+                <Text className={classes.text} size="xs">
+                  {data.user?.name}
+                </Text>
               </Group>
-              <Text size="xs" color="dimmed">
+              <Text className={classes.text} size="xs" color="dimmed">
                 •
               </Text>
               <Text size="xs" color="dimmed">

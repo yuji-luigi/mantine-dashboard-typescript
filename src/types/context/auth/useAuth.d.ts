@@ -26,7 +26,7 @@ type ActionEnum = 'LOGIN' | 'REGISTER' | 'LOGOUT' | 'INITIALIZE';
 export interface JWTContextState {
   isAuthenticated?: boolean | null;
   isInitialized?: boolean | null;
-  user?: IUser | null;
+  user?: UserModel | null;
 }
 export interface ReducerStateAction {
   payload?: JWTContextState;

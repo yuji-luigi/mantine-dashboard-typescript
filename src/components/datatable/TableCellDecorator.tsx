@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import BadgeCell from './table-rows/tablecell/BadgeCell';
 // import BadgeCell from './table-rows/tablecell/BadgeCell';
 import TableCell from './table-rows/tablecell/TableCell';
@@ -26,6 +26,7 @@ export function TableCellDecorator({
       <TableCell cellData={cellData} cellConfig={cellConfig} rowData={rowData} />
     ) : typeof cellData === 'object' && !Array.isArray(cellData) ? (
       <TableCell
+        key={cellData._id}
         cellData={
           cellConfig.selectValues
             ?.map((key) => cellData[key])
@@ -43,19 +44,21 @@ export function TableCellDecorator({
   if (Array.isArray(cellData)) {
     tableCell = (
       <>
-        {cellData.map((cellData) => (
-          <TableCell
-            key={cellData._id}
-            cellData={
-              cellConfig.selectValues
-                ?.map((key) => cellData[key])
-                // .concat('')
-                .join('-') || ''
-            }
-            cellConfig={cellConfig}
-            rowData={rowData}
-          />
-        ))}
+        {cellData.map((cellData) => {
+          return (
+            <TableCell
+              key={cellData._id}
+              cellData={
+                cellConfig.selectValues
+                  ?.map((key) => cellData[key])
+                  // .concat('')
+                  .join('-') || ''
+              }
+              cellConfig={cellConfig}
+              rowData={rowData}
+            />
+          );
+        })}
       </>
     );
     badgeCell = (

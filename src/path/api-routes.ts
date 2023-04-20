@@ -31,10 +31,11 @@ export enum PATH_API {
   uploads = 'upload-files',
   getSpaceCookie = 'spaces/get-cookie',
   spaces = 'spaces',
-  getSpaceSelections = '/spaces/selections',
+  getSpaceSelections = 'spaces/selections',
+  getOrganizations = 'organizations',
 }
 
-export const PATH_API_DATA_TABLE_ROOT = 'data-table';
+export const PATH_API_DATA_TABLE_ROOT = 'with-pagination';
 
 export enum PATH_API_DATA_TABLE {
   linkedChildren = `${PATH_API_DATA_TABLE_ROOT}/linkedChildren`,

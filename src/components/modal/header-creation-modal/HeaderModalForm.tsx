@@ -61,6 +61,7 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
 
     if (media && hasMedia(media)) {
       try {
+        console.log(extractUploadingMedia(media));
         const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), 'threads');
         for (let key in uploadIdData) {
           if (!reqBody[key]) reqBody[key] = [];
