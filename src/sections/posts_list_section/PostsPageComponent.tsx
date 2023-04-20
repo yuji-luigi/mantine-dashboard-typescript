@@ -66,7 +66,6 @@ export default function PostListPageComponent() {
   const { classes, cx, theme } = useStyles();
   const { crudDocuments: threads } = useCrudSelectors('threads');
   const { currentSpace } = useCurrentSpaceContext();
-  console.log(currentSpace);
   return (
     // <Container mx="auto" py="xl">
     <Box

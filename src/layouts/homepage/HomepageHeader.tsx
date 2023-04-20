@@ -34,6 +34,7 @@ import { ColorSchemeToggle } from '../../components/colorSchemeToggle/ColorSchem
 import { useCloseDrawer } from '../../context/DataTableDrawerContext';
 import { sleep } from '../../utils/helper-functions';
 import useAuth from '../../../hooks/useAuth';
+import { PATH_DASHBOARD } from '../../path/page-paths';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -223,9 +224,14 @@ export function HomepageHeader() {
 
           <Group className={classes.hiddenMobile}>
             {user ? (
-              <Button variant="default" onClick={() => pushAndCloseDrawer('/logout')}>
-                Logout
-              </Button>
+              <>
+                <Button variant="default" onClick={() => pushAndCloseDrawer('/logout')}>
+                  Logout
+                </Button>
+                <Button onClick={() => pushAndCloseDrawer(PATH_DASHBOARD.chooseRootSpace)}>
+                  Enter
+                </Button>
+              </>
             ) : (
               <>
                 <Button onClick={() => push('/login')} variant="default">
@@ -281,7 +287,14 @@ export function HomepageHeader() {
             </Button>
 
             <Button onClick={() => pushAndCloseDrawer('/sign-up')}>Sign up</Button>
-            {user && <Button onClick={() => pushAndCloseDrawer('/logout')}>Logout</Button>}
+            {user && (
+              <>
+                <Button onClick={() => pushAndCloseDrawer('/logout')}>Logout</Button>
+                <Button onClick={() => pushAndCloseDrawer(PATH_DASHBOARD.chooseRootSpace)}>
+                  Enter
+                </Button>
+              </>
+            )}
           </Group>
         </ScrollArea>
       </Drawer>

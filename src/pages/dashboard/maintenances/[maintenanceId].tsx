@@ -48,7 +48,7 @@ const MaintenancePage = ({ maintenance }: { maintenance: MaintenanceModel }) => 
       <SinglePostArticleArea maintenance={maintenance} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />
-      <CrudDrawerDefault overrideEntity="maintenances" />
+      <CrudDrawerDefault overridingEntity="maintenances" />
     </Container>
   );
 };

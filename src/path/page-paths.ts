@@ -7,6 +7,8 @@ export const AUTH = {
 
 export const PATH_AFTER_LOGIN = '/dashboard/home';
 
+// export const PATH_ROOT {}
+
 export enum PATH_DASHBOARD {
   root = '/dashboard',
   posts = '/dashboard/posts',
@@ -15,12 +17,12 @@ export enum PATH_DASHBOARD {
   chooseRootSpace = '/choose-root-space',
   chooseOrganization = '/choose-organization',
   rootSpaceSelected = '/dashboard/enter-space',
-  organizationSelected = '/dashboard/select-organization',
+  // organizationSelected = '/dashboard/select-organization',
   logout = '/logout',
 }
 export enum CARD_LINK_PATH {
   posts = PATH_DASHBOARD.posts,
   maintenances = PATH_DASHBOARD.maintenances,
   rootSpaceSelected = PATH_DASHBOARD.rootSpaceSelected,
-  organizationSelected = PATH_DASHBOARD.organizationSelected,
+  // organizationSelected = PATH_DASHBOARD.organizationSelected,
 }

@@ -1,17 +1,17 @@
 import React, { ReactElement, useEffect } from 'react';
-import useAuth from '../../../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { Box, Divider, Stack, Text, createStyles } from '@mantine/core';
-import PostList from '../../../sections/posts_list_section/PostList';
+import PostList from '../../sections/posts_list_section/PostList';
 import {
   CardArticleVerticalTextBottom,
   CardData,
-} from '../../../components/card/CardVerticalTextBottom';
-import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../../path/page-paths';
-import axiosInstance from '../../../utils/axios-instance';
-import { PATH_API } from '../../../path/api-routes';
-import { CardArticleVerticalTextCenter } from '../../../components/card/CardVerticalTextCenter';
+} from '../../components/card/CardVerticalTextBottom';
+import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../path/page-paths';
+import axiosInstance from '../../utils/axios-instance';
+import { PATH_API } from '../../path/api-routes';
+import { CardArticleVerticalTextCenter } from '../../components/card/CardVerticalTextCenter';
 import { useRouter } from 'next/router';
-import Layout from '../../../layouts';
+import Layout from '../../layouts';
 
 const useStyles = createStyles((theme) => ({
   pinContainer: {
@@ -46,7 +46,7 @@ const ChooseOrganizationPage = () => {
   }, [user?.role]);
 
   const title = user?.role === 'super_admin' ? 'Choose organization' : 'Choose space';
-  const hrefRoot = CARD_LINK_PATH.organizationSelected;
+  const hrefRoot = PATH_DASHBOARD.chooseOrganization;
 
   if (user?.role !== 'super_admin') {
     return null;
@@ -72,7 +72,7 @@ const ChooseOrganizationPage = () => {
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
             data={rootSpace as CardData}
-            href={`${hrefRoot}/${rootSpace._id}`}
+            href={`/${hrefRoot}/${rootSpace._id}`}
           />
         ))}
       </Box>

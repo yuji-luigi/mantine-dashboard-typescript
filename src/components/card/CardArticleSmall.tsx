@@ -59,7 +59,6 @@ export function CardArticleSmall({
     data.description.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
   const { classes } = useStyles();
   const router = useRouter();
-  console.log(router);
   return (
     <Link href={`${hrefRoot}/${data._id}`} className={classes.link}>
       <Card withBorder radius="md" p={0} className={classes.card}>

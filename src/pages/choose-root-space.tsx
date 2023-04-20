@@ -1,18 +1,11 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { Box, Button, Divider, Group, Stack, Text, createStyles } from '@mantine/core';
-import PostList from '../sections/posts_list_section/PostList';
 import { CardArticleVerticalTextBottom, CardData } from '../components/card/CardVerticalTextBottom';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../path/page-paths';
-import axiosInstance, {
-  AxiosResData,
-  AxiosResDataGeneric,
-  AxiosResDataMeResponse,
-} from '../utils/axios-instance';
+import axiosInstance from '../utils/axios-instance';
 import { PATH_API } from '../path/api-routes';
-import { CardArticleVerticalTextCenter } from '../components/card/CardVerticalTextCenter';
-import { GetServerSidePropsContext } from 'next/types';
-import { PATH_AUTH } from '../path/api-routes';
+
 import useSWR from 'swr';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -53,7 +46,7 @@ const ChooseRootSpacePage = () => {
     isLoading,
   } = useSWR<SpaceModel[] | null, AxiosError>(user, fetchSpaceSelections);
 
-  if (user?.role === 'super_admin' && !rootSpaces) {
+  if (user?.role === 'super_admin') {
     router.push(PATH_DASHBOARD.chooseOrganization);
     return null;
   }
@@ -75,12 +68,6 @@ const ChooseRootSpacePage = () => {
         className={classes.pinContainer}
         py="xl" /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
       >
-        {user?.role === 'super_admin' && (
-          <CardArticleVerticalTextCenter
-            data={{ href: '/dashboard', _id: '', name: '', address: '', createdAt: '' }}
-          />
-        )}
-
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
             data={rootSpace as CardData}

@@ -67,7 +67,7 @@ const PostIdPage = ({ thread }: { thread: ThreadModel }) => {
       <SinglePostArticleArea thread={_thread} />
       <Divider className={classes.articleMenuDivider} />
       <RelatedArticlesArea />
-      <CrudDrawerDefault overrideEntity="threads" />
+      <CrudDrawerDefault overridingEntity="threads" />
     </Container>
   );
 };

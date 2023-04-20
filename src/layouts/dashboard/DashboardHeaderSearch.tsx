@@ -8,6 +8,8 @@ import { ColorSchemeToggle } from '../../components/colorSchemeToggle/ColorSchem
 import { LogoBanner } from '../../components/banner/LogoBanner';
 import { Icons } from '../../data/icons';
 import { HeaderCreationModal } from '../../components/modal/header-creation-modal/HeaderCreationModal';
+import useAuth from '../../../hooks/useAuth';
+import { PATH_DASHBOARD } from '../../path/page-paths';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -76,13 +78,18 @@ export function DashboardHeaderSearch() {
   // const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
   const { isOpen, toggleBarOpen } = useLayoutContext();
-
+  const { user } = useAuth();
+  const isSuperAdmin = user?.role === 'super_admin';
   const items = links.map((link) => (
     <Link key={link.label} className={classes.link} href={link.link}>
       {link.label}
     </Link>
   ));
 
+  const chooseHref = isSuperAdmin
+    ? PATH_DASHBOARD.chooseOrganization
+    : PATH_DASHBOARD.chooseRootSpace;
+  const chooseText = isSuperAdmin ? 'Organization' : 'Space';
   return (
     <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
@@ -102,6 +109,10 @@ export function DashboardHeaderSearch() {
           <HeaderCreationModal />
         </Group>
         <Group>
+          <Button component={Link} href={chooseHref}>
+            Choose {chooseText}
+          </Button>
+
           <ColorSchemeToggle size="lg" />
         </Group>
       </div>
