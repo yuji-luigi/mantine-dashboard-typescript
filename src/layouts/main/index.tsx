@@ -1,4 +1,4 @@
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import { ColorSchemeToggle } from '../../components/color-schemeToggle/ColorSchemeToggle';
 import { PropWithChildren } from '../../types/general/config';
 import { HomepageHeader } from './MainPageHeader';
 

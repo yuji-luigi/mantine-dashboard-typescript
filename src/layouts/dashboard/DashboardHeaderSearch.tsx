@@ -4,7 +4,7 @@ import { IconSearch } from '@tabler/icons-react';
 import Link from 'next/link';
 import links from '../../../json/navbar/headerLinks.json';
 import useLayoutContext from '../../../hooks/useLayoutContext';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import { ColorSchemeToggle } from '../../components/color-schemeToggle/ColorSchemeToggle';
 import { LogoBanner } from '../../components/banner/LogoBanner';
 import { Icons } from '../../data/icons';
 import { HeaderCreationModal } from '../../components/modal/header-creation-modal/HeaderCreationModal';

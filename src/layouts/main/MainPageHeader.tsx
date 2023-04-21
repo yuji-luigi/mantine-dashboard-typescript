@@ -30,7 +30,7 @@ import {
   IconChevronDown,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
+import { ColorSchemeToggle } from '../../components/color-schemeToggle/ColorSchemeToggle';
 import { useCloseDrawer } from '../../context/DataTableDrawerContext';
 import { sleep } from '../../utils/helper-functions';
 import useAuth from '../../../hooks/useAuth';
