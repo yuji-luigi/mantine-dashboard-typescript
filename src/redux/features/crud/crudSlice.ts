@@ -138,6 +138,27 @@ export const crudSlice = createSlice({
         // state.status = 'succeed';
         // (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
       })
+      .addCase(addLinkedChildrenDocumentDataTable.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addLinkedChildrenDocumentDataTable.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addLinkedChildrenDocumentDataTable.fulfilled, (state, action) => {
+        const { entity, /* documentId, */ totalDocuments, documents } = action.payload;
+        state.status = 'succeed';
+        // const newDocumentArray = documents;
+        // const newDocumentArray = state.reduxdb[entity].documentsArray.filter(
+        //   (document) => document._id !== documentId
+        // );
+        const prevDocuments = state.reduxdb[entity].documentsArray;
+        state.reduxdb[entity].totalDocuments = totalDocuments;
+        state.reduxdb[entity].documentsArray = documents;
+        // const { collection, data }: AddedCrudResponse = action.payload;
+        // state.status = 'succeed';
+        // (state.reduxdb[collection].documentsArray as Array<AllModels>).push(data);
+      })
       /**
        * UPDATE/MODIFY A DOCUMENT
        */

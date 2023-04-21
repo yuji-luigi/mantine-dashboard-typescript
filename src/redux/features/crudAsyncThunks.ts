@@ -47,7 +47,7 @@ export const fetchLinkedChildrenWithPagination = createAsyncThunk(
   'cruds/dataTable/fetchCrudDocumentsWithPagination',
   async ({ entity, query, /* isChildrenTree = true, */ parentId }: FetchLinkedChildrenPayload) => {
     const res = await axiosInstance.get<AxiosResData>(
-      `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${parentId}${query || ''}`
+      `/${entity}/${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${parentId}${query || ''}`
     );
     return {
       entity,
@@ -98,7 +98,7 @@ export const addLinkedChildrenDocumentDataTable = createAsyncThunk(
   'crud/withPagination/addDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
     /** handle endpoint by checking if parentId is passed */
-    const endPoint = `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${parentId}`;
+    const endPoint = `${entity}/${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${parentId}`;
     const res = await axiosInstance.post(`${endPoint}${query}`, newDocument);
     const payload = {
       // entity: res.data.collection,
@@ -162,7 +162,7 @@ export const deleteLinkedChildDocumentWithPagination = createAsyncThunk(
      * returns new crudDocuments with limit number
      *  */
     const res = await axiosInstance.delete(
-      `${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${entity}/${documentId}${query}`
+      `/${entity}/${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${documentId}${query}`
     );
     const payload = {
       // entity: res.data.collection,
