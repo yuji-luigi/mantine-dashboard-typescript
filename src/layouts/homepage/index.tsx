@@ -1,4 +1,4 @@
-import { ColorSchemeToggle } from '../../components/colorSchemeToggle/ColorSchemeToggle';
+import { ColorSchemeToggle } from '../../components/ColorSchemeToggle/ColorSchemeToggle';
 import AuthGuard from '../../guards/AuthGuard';
 import GuestGuard from '../../guards/GuestGuard';
 import { PropWithChildren } from '../../types/general/config';
