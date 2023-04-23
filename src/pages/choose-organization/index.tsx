@@ -40,7 +40,7 @@ const ChooseOrganizationPage = () => {
       return;
     }
 
-    axiosInstance.get(`${PATH_API.getOrganizations}`).then((res) => {
+    axiosInstance.get(`${PATH_API.getOrganizationsForAdmin}`).then((res) => {
       setRootSpaces(res.data.data);
     });
   }, [user?.role]);
@@ -72,7 +72,7 @@ const ChooseOrganizationPage = () => {
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
             data={rootSpace as CardData}
-            href={`/${hrefRoot}/${rootSpace._id}`}
+            href={`${hrefRoot}/${rootSpace._id}`}
           />
         ))}
       </Box>

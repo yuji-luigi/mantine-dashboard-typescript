@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import jwtDecode from 'jwt-decode';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export const CurrentSpaceContext = createContext<CurrentSpaceContextState>({
   currentSpace: null,
@@ -7,6 +8,15 @@ export const CurrentSpaceContext = createContext<CurrentSpaceContextState>({
 
 const useStore = () => {
   const [currentSpace, setCurrentSpace] = useState<CurrentSpace | null>(null);
+
+  useEffect(() => {
+    if (!currentSpace) {
+      const spaceJWT = localStorage?.getItem('spaceToken');
+      const decodedSpace = spaceJWT ? jwtDecode<CurrentSpace>(spaceJWT) : null;
+      setCurrentSpace(decodedSpace);
+    }
+  }, []);
+
   return {
     currentSpace,
     setCurrentSpace,

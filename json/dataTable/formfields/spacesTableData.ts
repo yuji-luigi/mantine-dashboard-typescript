@@ -30,6 +30,14 @@ export const spacesTableData: Array<FormFieldInterface> = [
     priority: 1,
   },
   {
+    id: 'isMain',
+    name: 'isMain',
+    label: 'Main space?',
+    type: 'boolean',
+    required: true,
+    priority: 1,
+  },
+  {
     id: 'password',
     name: 'password',
     label: 'password',

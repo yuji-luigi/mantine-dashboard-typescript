@@ -168,7 +168,11 @@ function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout: Logout = async () => {
+    await axiosInstance.get(PATH_AUTH.logout, { withCredentials: true });
     deleteCookie('jwt');
+    deleteCookie('space');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('spaceToken');
     setSession(null);
     dispatch({
       type: 'LOGOUT',

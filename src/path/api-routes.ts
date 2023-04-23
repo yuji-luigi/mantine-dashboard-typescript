@@ -33,6 +33,7 @@ export enum PATH_API {
   spaces = 'spaces',
   getSpaceSelections = 'spaces/selections',
   getOrganizations = 'organizations',
+  getOrganizationsForAdmin = 'organizations/selections/super-admin',
 }
 
 export const PATH_API_DATA_TABLE_ROOT = 'with-pagination';

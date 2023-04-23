@@ -23,7 +23,7 @@ PostsPage.getLayout = function getLayout(page: ReactElement) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const jwtToken = context.req.cookies.jwt;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/threads`, {
+  const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/threads`, {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
       space: context.req.cookies.space || '',
@@ -31,9 +31,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   });
 
-  const data = (await res.json()) as Record<string, any>;
+  // const data = (await res.data.data) as Record<string, any>;
 
-  const threads = data.data || [];
+  const threads = res.data.data || [];
 
   return {
     props: {

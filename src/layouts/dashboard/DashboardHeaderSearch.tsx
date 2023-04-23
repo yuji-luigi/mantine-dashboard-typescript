@@ -10,6 +10,7 @@ import { Icons } from '../../data/icons';
 import { HeaderCreationModal } from '../../components/modal/header-creation-modal/HeaderCreationModal';
 import useAuth from '../../../hooks/useAuth';
 import { PATH_DASHBOARD } from '../../path/page-paths';
+import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -79,6 +80,7 @@ export function DashboardHeaderSearch() {
   const { classes } = useStyles();
   const { isOpen, toggleBarOpen } = useLayoutContext();
   const { user } = useAuth();
+  const { currentSpace } = useCurrentSpaceContext();
   const isSuperAdmin = user?.role === 'super_admin';
   const items = links.map((link) => (
     <Link key={link.label} className={classes.link} href={link.link}>
@@ -97,6 +99,7 @@ export function DashboardHeaderSearch() {
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo className={classes.logo} size={28} /> */}
           <LogoBanner transparent />
+          {currentSpace?.name}
           <Autocomplete
             className={classes.search}
             placeholder="Search"
