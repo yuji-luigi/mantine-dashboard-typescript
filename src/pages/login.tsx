@@ -11,6 +11,7 @@ import { API_BASE_URL, PATH_AUTH } from '../path/api-routes';
 import { AUTH } from '../path/page-paths';
 import LoginForm from '../sections/login_signup_section/LoginForm';
 import DashboardTopPage from './dashboard/home';
+import { DeleteAlertModal } from '../components/modal/DeleteAlertModal';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {

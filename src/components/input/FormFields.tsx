@@ -68,6 +68,7 @@ const FormFields = ({
       {formField.type === 'select' &&
         (formField.multi ? (
           <MultiSelect
+            searchable
             data={options}
             name={formField.name}
             label={formField.label}
@@ -79,6 +80,7 @@ const FormFields = ({
           />
         ) : (
           <Select
+            searchable
             data={options}
             name={formField.name}
             label={formField.label}

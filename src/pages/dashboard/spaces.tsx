@@ -11,7 +11,6 @@ import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/c
 const HeadSpaceTable = () => {
   const entity = 'spaces';
   const { fetchCrudDocumentsWithPagination } = useCrudSliceStore();
-  const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
 
   useEffect(() => {
     fetchCrudDocumentsWithPagination({ entity, query: '?isHead=true' });

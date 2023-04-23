@@ -5,16 +5,26 @@ import React from 'react';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { usePaginationContext } from '../../../context/PaginationContext';
 import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
-
-export function ActionCells({ rowData }: { rowData: AllModels }) {
+import { DialogDefault } from '../../modal/Dialog';
+import { DeleteAlertModal } from '../../modal/DeleteAlertModal';
+import { use_ModalContext } from '../../../context/modal-context/_ModalContext';
+import { Text } from '@mantine/core';
+export function ActionCells({
+  rowData,
+  overridingEntity,
+}: {
+  rowData: AllModels;
+  overridingEntity?: Sections;
+}) {
   const { paginationQuery } = usePaginationContext();
+  const { openModal, openConfirmModal, closeModal } = use_ModalContext();
 
   /** use hook context */
   const { openDrawer } = useDrawerContext();
   /** use hook router hook */
-  const { query } = useRouter();
-  const parentId = query.parentId as string;
-  const entity = query.entity as Sections;
+  const router = useRouter();
+  const parentId = router.query.parentId as string;
+  const entity = overridingEntity || (router.query.entity as Sections);
 
   /** use hook useCrudSlice */
   // const { selectCrudDocument } = useCrudSlice();
@@ -32,16 +42,32 @@ export function ActionCells({ rowData }: { rowData: AllModels }) {
   };
 
   const onDelete = (): void => {
-    if (parentId) {
-      deleteLinkedChildDocumentWithPagination({
-        entity,
-        documentId: rowData._id,
-        query: paginationQuery,
-        // parentId,
-      });
-      return;
-    }
-    deleteCrudDocumentWithPagination({ entity, documentId: rowData._id, query: paginationQuery });
+    openConfirmModal({
+      title: 'Delete',
+      type: 'alert',
+      centered: true,
+      labels: {
+        cancel: 'Cancel',
+        confirm: 'Delete',
+      },
+      children: <Text>Are you sure delete the data??</Text>,
+      onCancel: closeModal,
+      onConfirm: () => {
+        parentId
+          ? deleteLinkedChildDocumentWithPagination({
+              entity,
+              documentId: rowData._id,
+              query: paginationQuery,
+              // parentId,
+            })
+          : deleteCrudDocumentWithPagination({
+              entity,
+              documentId: rowData._id,
+              query: paginationQuery,
+            });
+        closeModal();
+      },
+    });
   };
 
   return (

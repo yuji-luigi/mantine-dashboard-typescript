@@ -11,6 +11,8 @@ import formFields from '../../../json/dataTable/formfields';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import { DataTableModal } from '../modal/data-table-modal/DataTableModal';
+import { useDisclosure } from '@mantine/hooks';
 
 export function UsersTable({ overridingEntity = '' }: { overridingEntity?: Sections }) {
   const ROWS_PER_PAGE = 10;
@@ -23,27 +25,6 @@ export function UsersTable({ overridingEntity = '' }: { overridingEntity?: Secti
   const { crudDocuments, totalDocumentsCount, crudStatus } = useCrudSelectors(entity);
 
   const sectionFormFields = formFields[entity as Sections];
-
-  // /** might need handle overridingEntity with context in the future */
-  // useEffect(() => {
-  //   if (overridingEntity) {
-  //   return;
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   /** type guard */
-  //   if (!entity) {
-  //     return;
-  //   }
-  //   /** check if this is a childrenPage */
-  //   if (query.parentId) {
-  //     return;
-  //   }
-  //   /** fetch all the entity if not childrenpage */
-  //   fetchCrudDocumentsWithPagination({ entity: entity, query: paginationQuery });
-  // }, [paginationQuery]);
-
   useEffect(() => {
     setPage(1);
     setPagination(1);
@@ -60,7 +41,6 @@ export function UsersTable({ overridingEntity = '' }: { overridingEntity?: Secti
   function onPageChange(pageNumber: number) {
     setPage(pageNumber);
     setPagination(pageNumber); //! after setting the pagination. useEffect will be called to fetch the documents
-    // fetchCrudDocumentsWithPagination({ entity: entity as Sections, query: `?skip=${pageNumber}` });
   }
 
   return (

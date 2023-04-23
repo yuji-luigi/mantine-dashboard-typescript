@@ -35,14 +35,12 @@ const useStyles = createStyles(() => ({
   },
 }));
 const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => {
-  const router = useRouter();
-  const [opened] = useDisclosure();
   const { classes } = useStyles();
   // const [submitting, setSubmitting] = useState(false);
   const { submitting } = useCrudSelectors(entity);
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
   const { createCrudDocumentWithPagination, setSubmitting } = useCrudSliceStore();
-  const { crudMessage, crudStatus, crudError } = useCrudSelectors();
+  const { crudStatus, crudError } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
   const form = useForm({

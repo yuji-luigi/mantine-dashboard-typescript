@@ -24,13 +24,6 @@ const CrudPage = () => {
     if (!sections.includes(entity)) {
       push('/dashboard/home');
     }
-
-    // if (!crudDocuments.length) {
-    //   fetchCrudDocumentsWithPagination({ entity });
-    // }
-    // if (isChildrenTree) {
-    //   fetchCrudDocumentsWithPagination({ entity, isChildrenTree: false });
-    // }
   }, [entity]); // include parentId: string | undefined to update on change page
 
   useEffect(() => {
@@ -60,38 +53,5 @@ const CrudPage = () => {
 CrudPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
-
-type Data = { data: any };
-
-// export const getServerSideProps: GetServerSideProps<Data> = async (context) => {
-//   const res = await axiosInstance.get(PATH_AUTH.me, {
-//     withCredentials: true,
-//     headers: {
-//       Cookie: context.req.headers.cookie,
-//     },
-//   });
-//   const targetSection = allSectionArrayWithRoles.find(
-//     (section) => section.entity === context.params?.entity
-//   );
-//   const role = res.data.user?.role;
-//   if (!role || !targetSection?.roles.includes(role)) {
-//     return {
-//       props: {
-//         data: '',
-//       },
-//     };
-//     // return {
-//     //   redirect: {
-//     //     destination: '/404',
-//     //     permanent: false,
-//     //   },
-//     // };
-//   }
-//   return {
-//     props: {
-//       data: res.data.user,
-//     },
-//   };
-// };
 
 export default CrudPage;

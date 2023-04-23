@@ -303,7 +303,7 @@ const useTotalDocumentsCount = (entity?: Sections): number =>
 const useIsChildrenTree = (entity?: Sections): boolean =>
   useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.isChildrenTree);
 
-/** Returns Document of the entity */
+/** Returns selected Document of the entity or if not selected returns null  */
 const useSelectedDocument = (entity?: Sections): AllModels =>
   useAppSelector((state) => state.crud.reduxdb?.[entity || '']?.selectedDocument || {});
 

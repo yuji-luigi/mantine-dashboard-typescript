@@ -61,7 +61,7 @@ export function TableRow({
       {/*
           Action cells defined here(modify, delete button)
       */}
-      <ActionCells rowData={rowData} />
+      <ActionCells rowData={rowData} overridingEntity={entity} />
     </tr>
   );
 }

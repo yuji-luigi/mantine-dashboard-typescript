@@ -13,46 +13,42 @@ import allFormFields from '../../../json/dataTable/formfields';
 import { Icons } from '../../data/icons';
 import { errorNotificationData } from '../../data/showNofification/notificationObjects';
 // import { useCrudSlice } from '../../../hooks/redux-hooks/useCrudSlice';
-import { sleep } from '../../utils/helper-functions';
+import { capitalize, sleep } from '../../utils/helper-functions';
 import { getDefaultValues } from '../../utils/getDefaultValues';
 // import classes from "./CrudDrawerDefault.module.css";
 import FormFields from '../input/FormFields';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationQuery } from '../../context/PaginationContext';
-import { addLinkedChildrenDocumentDataTable, hasMedia } from '../../redux/features/crudAsyncThunks';
+import { hasMedia } from '../../redux/features/crudAsyncThunks';
 import CreationToolBar from '../input/CreationToolBar';
 import { UseFormReturnTypeCustom } from '../input/input_interfaces/useForm_interface';
-import { UPLOAD_FOLDERS } from '../../lib/enums';
 import useAuth from '../../../hooks/useAuth';
-import { PATH_API } from '../../path/api-routes';
-import axiosInstance from '../../utils/axios-instance';
+import { sections, flattenSectionData, entities, sectionData } from '../../data';
+
 import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
-import { log } from 'console';
 
 const useStyles = createStyles(() => ({
   drawer: {
     overflow: 'scroll',
+    padding: 20,
   },
   form: {
     marginTop: 50,
+    height: '100vh',
   },
 }));
 
 export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?: Sections }) {
   const [submitting, setSubmitting] = useState(false);
 
-  const { classes } = useStyles();
-
-  const { user } = useAuth();
-
   const { query } = useRouter();
-
   const entity = overridingEntity || (query.entity as Sections);
+  const sectionJson = flattenSectionData.find((section) => section.entity === entity);
+  const { classes } = useStyles();
+  const { user } = useAuth();
   const parentId = query.parentId as string;
-
   const paginationQuery = usePaginationQuery();
-
   const sectionFormFields: FormFieldInterface[] = allFormFields[entity];
   const { closeDrawer, drawerIsOpen } = useDrawerContext();
 
@@ -150,7 +146,7 @@ export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?
         parentId: query.parentId as string,
       });
     }
-    form.reset();
+    // form.reset();
   };
 
   /** todo: separate the function in to hooks or util function.*/
@@ -205,6 +201,13 @@ export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?
     form.setValues(initialValues);
   }, [selectedDocument._id]);
 
+  useEffect(() => {
+    form.setValues(initialValues);
+  }, [drawerIsOpen]);
+
+  const entityText = capitalize(sectionJson?.entitySingle);
+  const submitText = selectedDocument._id ? `Update ${entityText}!` : `Add ${entityText}!`;
+
   return (
     <Drawer
       className={classes.drawer}
@@ -230,7 +233,7 @@ export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?
           entity={entity}
           submitButton={
             <Button fullWidth disabled={submitting} type="submit" mt="xl" size="md">
-              Add Post!
+              {submitText}
             </Button>
           }
         />

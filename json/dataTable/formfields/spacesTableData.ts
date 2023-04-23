@@ -29,7 +29,6 @@ export const spacesTableData: Array<FormFieldInterface> = [
     required: true,
     priority: 1,
   },
-
   {
     id: 'password',
     name: 'password',

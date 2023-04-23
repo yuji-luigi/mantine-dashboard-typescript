@@ -9,6 +9,7 @@
 		"contents": [
 			{
 				"entity": "posts",
+				"entitySingle": "post",
 				"title": "Posts",
 				"subtitle": "subtitle",
 				"navbarTitle": "posts",
@@ -37,6 +38,7 @@
 		"contents": [
 			{
 				"entity": "home",
+				"entitySingle": "home",
 				"title": "welcome to dashboard",
 				"subtitle": "subtitle",
 				"navbarTitle": "Dashboard",
@@ -46,6 +48,7 @@
 			},
 			{
 				"entity": "statistics",
+				"entitySingle": "statistic",
 				"title": "Statistics",
 				"subtitle": "subtitle",
 				"navbarTitle": "Statistics",
@@ -55,6 +58,7 @@
 			},
 			{
 				"entity": "notifications",
+				"entitySingle": "notification",
 				"title": "Notifications",
 				"subtitle": "subtitle",
 				"navbarTitle": "Notifications",
@@ -64,6 +68,7 @@
 			},
 			{
 				"entity": "bookmarks",
+				"entitySingle": "bookmark",
 				"title": "Bookmarks",
 				"subtitle": "subtitle",
 				"navbarTitle": "Bookmark",
@@ -73,6 +78,7 @@
 			},
 			{
 				"entity": "comments",
+				"entitySingle": "comment",
 				"title": "Comments",
 				"subtitle": "subtitle",
 				"navbarTitle": "Comment",
@@ -93,6 +99,7 @@
 		"contents": [
 			{
 				"entity": "fundRules",
+				"entitySingle": "fundRule",
 				"title": "FundRules",
 				"subtitle": "subtitle",
 				"navbarTitle": "Fund rule",
@@ -102,6 +109,7 @@
 			},
 			{
 				"entity": "proposals",
+				"entitySingle": "proposal",
 				"title": "Proposals",
 				"subtitle": "subtitle",
 				"navbarTitle": "Proposal",
@@ -111,6 +119,7 @@
 			},
 			{
 				"entity": "funds",
+				"entitySingle": "fund",
 				"title": "Funds",
 				"subtitle": "subtitle",
 				"navbarTitle": "Fund",
@@ -120,6 +129,7 @@
 			},
 			{
 				"entity": "tags",
+				"entitySingle": "tag",
 				"title": "Tags",
 				"subtitle": "subtitle",
 				"navbarTitle": "Tag",
@@ -138,6 +148,7 @@
 		"contents": [
 			{
 				"entity": "threads",
+				"entitySingle": "thread",
 				"title": "Threads",
 				"subtitle": "subtitle",
 				"navbarTitle": "Thread",
@@ -147,6 +158,7 @@
 			},
 			{
 				"entity": "spaces",
+				"entitySingle": "space",
 				"title": "spaces",
 				"subtitle": "subtitle",
 				"navbarTitle": "spaces",
@@ -156,6 +168,7 @@
 			},
 			{
 				"entity": "users",
+				"entitySingle": "user",
 				"title": "Users",
 				"subtitle": "subtitle",
 				"navbarTitle": "User",
@@ -173,6 +186,7 @@
 		"contents": [
 			{
 				"entity": "uploads",
+				"entitySingle": "upload",
 				"title": "uploads",
 				"subtitle": "subtitle",
 				"navbarTitle": "uploads",
@@ -182,6 +196,7 @@
 			},
 			{
 				"entity": "wallets",
+				"entitySingle": "wallet",
 				"title": "Wallets",
 				"subtitle": "subtitle",
 				"navbarTitle": "Wallets",
@@ -191,6 +206,7 @@
 			},
 			{
 				"entity": "userSettings",
+				"entitySingle": "userSetting",
 				"title": "UserSettings",
 				"subtitle": "subtitle",
 				"navbarTitle": "User setting",
@@ -200,6 +216,7 @@
 			},
 			{
 				"entity": "organizations",
+				"entitySingle": "organization",
 				"title": "organizations",
 				"subtitle": "subtitle",
 				"navbarTitle": "organizations",

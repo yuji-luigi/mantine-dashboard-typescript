@@ -17,7 +17,7 @@ export const adminEntities = beta
   .filter((sectionData) => sectionData.roles.includes('admin'))
   .flatMap((sectionData) => sectionData.contents.map((content) => content.entity));
 
-// set programatically the roles for every sections
+// set programmatically the roles for every sections
 export const allSectionArrayWithRoles = beta.flatMap((sectionData) => {
   return sectionData.contents.map((content) => {
     const modifiedContent = {

@@ -75,11 +75,9 @@ interface AddCrudPayloadWithConfig extends AddCrudPayload {
  * */
 export const addCrudDocumentDataTable = createAsyncThunk(
   'crud/addDocument',
-  async ({ entity, newDocument, parentId, query = '', config }: AddCrudPayloadWithConfig) => {
-    /** handle endpoint by checking if parentId is passed */
-    const endPoint = !parentId ? entity : `${PATH_API.linkedChildren}/${entity}/${parentId}`;
+  async ({ entity, newDocument, query = '', config }: AddCrudPayloadWithConfig) => {
     const res = await axiosInstance.post(
-      `${PATH_API_DATA_TABLE_ROOT}/${endPoint}${query}`,
+      `${entity}/${PATH_API_DATA_TABLE_ROOT}${query}`,
       newDocument,
       config
     );
@@ -95,7 +93,7 @@ export const addCrudDocumentDataTable = createAsyncThunk(
   }
 );
 export const addLinkedChildrenDocumentDataTable = createAsyncThunk(
-  'crud/withPagination/addDocument',
+  'crud/withPagination/addLinkedChildrenDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
     /** handle endpoint by checking if parentId is passed */
     const endPoint = `${entity}/${PATH_API_DATA_TABLE_ROOT}/${PATH_API.linkedChildren}/${parentId}`;
@@ -141,7 +139,7 @@ export const deleteCrudDocumentWithPagination = createAsyncThunk(
      * returns new crudDocuments with limit number
      *  */
     const res = await axiosInstance.delete(
-      `${PATH_API_DATA_TABLE_ROOT}/${entity}/${documentId}${query}`
+      `${entity}/${PATH_API_DATA_TABLE_ROOT}/${documentId}${query}`
     );
     const payload = {
       // entity: res.data.collection,

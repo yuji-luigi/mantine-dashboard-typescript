@@ -20,6 +20,7 @@ import { Notifications } from '@mantine/notifications';
 import { DeepPartial } from '@reduxjs/toolkit';
 import { myColors } from '../lib/custom-colors';
 import { CurrentSpaceContextProvider } from '../context/CurrentSpaceContext';
+import { _ModalContextProvider } from '../context/modal-context/_ModalContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -63,8 +64,10 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                 <DashboardLayoutContextProvider>
                   <PaginationContextProvider>
                     <DrawerContextProvider>
-                      <Notifications />
-                      {getLayout(<Component {...pageProps} />)}
+                      <_ModalContextProvider>
+                        <Notifications />
+                        {getLayout(<Component {...pageProps} />)}
+                      </_ModalContextProvider>
                     </DrawerContextProvider>
                   </PaginationContextProvider>
                 </DashboardLayoutContextProvider>
