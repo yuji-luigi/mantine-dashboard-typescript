@@ -103,7 +103,7 @@ const PostModalForm = () => {
       notifications.show({
         id: 'submit',
         message: crudMessage,
-        autoClose: true,
+        autoClose: 5000,
       });
       setSubmitting(false);
     }

@@ -39,7 +39,7 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
   // const [submitting, setSubmitting] = useState(false);
   const { submitting } = useCrudSelectors(entity);
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
-  const { createCrudDocumentWithPagination, setSubmitting } = useCrudSliceStore();
+  const { createCrudDocumentWithPagination, setSubmitting, resetCrudStatus } = useCrudSliceStore();
   const { crudStatus, crudError } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
 
@@ -109,8 +109,9 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
         loading: false,
         id: 'failed',
         message: crudError,
-        autoClose: 10000,
+        autoClose: 5000,
       });
+      resetCrudStatus();
       setSubmitting(false);
     }
   }, [crudStatus]);

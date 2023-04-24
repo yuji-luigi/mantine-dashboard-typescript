@@ -32,6 +32,7 @@ const useStyles = createStyles((theme) => ({
 }));
 const fetchSpaces = async (organizationId: string) => {
   if (!organizationId) return null;
+  delete axiosInstance.defaults.headers.common['space'];
   const rawSpaces = await axiosInstance.get<AxiosResDataGeneric<SpaceModel[]>>(PATH_API.spaces, {
     params: { organization: organizationId, isHead: true },
   });

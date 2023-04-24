@@ -279,6 +279,9 @@ export const useCrudSliceStore = () => {
     setSubmitting(bool: boolean) {
       appDispatch(setSubmitting(bool));
     },
+    resetCrudStatus() {
+      appDispatch(resetStatus());
+    },
   };
 };
 
