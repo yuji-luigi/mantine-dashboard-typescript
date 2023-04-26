@@ -65,7 +65,13 @@ const ChooseSpaceInOrganizationPage = () => {
       >
         {user?.role === 'super_admin' && (
           <CardArticleVerticalTextCenter
-            data={{ href: '/dashboard', _id: '', name: '', address: '', createdAt: '' }}
+            data={{
+              href: PATH_DASHBOARD.chooseOrganization,
+              _id: '',
+              name: 'Back',
+              address: '',
+              createdAt: '',
+            }}
           />
         )}
 

@@ -101,7 +101,7 @@ export function CardArticleVerticalTextCenter({ data }: { data?: CardData }) {
 
           <div className={classes.body}>
             <Text className={cx(classes.title, classes.appear)} /* mt="xs" mb="xs" */>
-              Browse all organizations
+              {data?.name}
               {/* title */}
             </Text>
             <Text

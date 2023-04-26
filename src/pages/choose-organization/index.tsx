@@ -65,7 +65,13 @@ const ChooseOrganizationPage = () => {
       >
         {user?.role === 'super_admin' && (
           <CardArticleVerticalTextCenter
-            data={{ href: '/dashboard', _id: '', name: '', address: '', createdAt: '' }}
+            data={{
+              href: '/dashboard',
+              _id: '',
+              name: ' Browse all organizations',
+              address: '',
+              createdAt: '',
+            }}
           />
         )}
 

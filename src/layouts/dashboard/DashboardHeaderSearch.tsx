@@ -11,6 +11,7 @@ import { HeaderCreationModal } from '../../components/modal/header-creation-moda
 import useAuth from '../../../hooks/useAuth';
 import { PATH_DASHBOARD } from '../../path/page-paths';
 import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
+import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -24,7 +25,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     // justifyContent: 'flex-start',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 
   burger: {
@@ -82,6 +83,8 @@ export function DashboardHeaderSearch() {
   const { user } = useAuth();
   const { currentSpace } = useCurrentSpaceContext();
   const isSuperAdmin = user?.role === 'super_admin';
+  const isMediaScreen = useMediaQuery('(max-width: 750px)');
+
   const items = links.map((link) => (
     <Link key={link.label} className={classes.link} href={link.link}>
       {link.label}
@@ -99,24 +102,27 @@ export function DashboardHeaderSearch() {
           <Burger className={classes.burger} opened={isOpen} onClick={toggleBarOpen} size="sm" />
           {/* <MantineLogo className={classes.logo} size={28} /> */}
           <LogoBanner transparent />
-          {currentSpace?.name}
-          <Autocomplete
+          {!isMediaScreen && currentSpace?.name}
+          {/* <Autocomplete
             className={classes.search}
             placeholder="Search"
             icon={<IconSearch size={16} stroke={1.5} />}
             data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
-          />
+          /> */}
           <Group ml={5} spacing={5} className={classes.links}>
             {items}
           </Group>
           <HeaderCreationModal />
         </Group>
         <Group>
-          <Button component={Link} href={chooseHref}>
-            Choose {chooseText}
-          </Button>
-
-          <ColorSchemeToggle size="lg" />
+          {!isMediaScreen && (
+            <>
+              <Button component={Link} href={chooseHref}>
+                Choose {chooseText}
+              </Button>
+              <ColorSchemeToggle size="lg" />
+            </>
+          )}
         </Group>
       </div>
     </Header>
