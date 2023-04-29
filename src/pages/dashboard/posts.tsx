@@ -26,23 +26,32 @@ PostsPage.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const jwtToken = context.req.cookies.jwt;
-  const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/threads`, {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      space: context.req.cookies.space || '',
-      organization: context.req.cookies.organization || '',
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
+  try {
+    const jwtToken = context.req.cookies.jwt;
 
-  // const data = (await res.data.data) as Record<string, any>;
+    const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/threads`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+        space: context.req.cookies.space || '',
+        organization: context.req.cookies.organization || '',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-  const threads = res.data.data || [];
+    // const data = (await res.data.data) as Record<string, any>;
 
-  return {
-    props: {
-      threads,
-    },
-  };
+    const threads = res.data.data || [];
+
+    return {
+      props: {
+        threads,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/logout',
+      },
+    };
+  }
 }
