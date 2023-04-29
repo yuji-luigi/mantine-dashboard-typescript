@@ -19,7 +19,8 @@ import { PaginationContextProvider } from '../context/PaginationContext';
 import { Notifications } from '@mantine/notifications';
 import { DeepPartial } from '@reduxjs/toolkit';
 import { myColors } from '../lib/custom-colors';
-import { CurrentSpaceContextProvider } from '../context/CurrentSpaceContext';
+// import { CurrentSpaceContextProvider } from '../context/CurrentSpaceContext';
+import { CookieContextProvider } from '../context/CookieContext';
 import { _ModalContextProvider } from '../context/modal-context/_ModalContext';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -60,7 +61,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
               withGlobalStyles
               withNormalizeCSS
             >
-              <CurrentSpaceContextProvider>
+              <CookieContextProvider>
                 <DashboardLayoutContextProvider>
                   <PaginationContextProvider>
                     <DrawerContextProvider>
@@ -71,7 +72,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                     </DrawerContextProvider>
                   </PaginationContextProvider>
                 </DashboardLayoutContextProvider>
-              </CurrentSpaceContextProvider>
+              </CookieContextProvider>
             </MantineProvider>
           </ColorSchemeProvider>
         </ReduxProvider>

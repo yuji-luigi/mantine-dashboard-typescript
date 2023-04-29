@@ -7,6 +7,7 @@ import { IconBookmark, IconDots, IconHeart, IconSettings, IconShare } from '@tab
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useRouter } from 'next/router';
+import { Sections } from '../../types/general/data/sections-type';
 
 const useStyles = createStyles((theme) => ({
   action: {

@@ -5,29 +5,58 @@
  *   entity: "Sections"
  * }
  */
-type Sections =
-  | 'home'
-  | 'statistics'
-  | 'notifications'
-  | 'billing'
-  | 'users'
-  | 'buildings'
-  | 'bookmarks'
-  | 'comments'
-  | 'funds'
-  | 'areas'
-  | 'floors'
-  | 'fundRules'
-  | 'instances'
-  | 'notifications'
-  | 'proposals'
-  | 'tags'
-  | 'threads'
-  | 'userSettings'
-  | 'wallets'
-  | 'organizations'
-  | 'events'
-  | 'spaces'
-  | 'uploads'
-  | 'maintenances'
-  | '';
+// export type Sections =
+//   | 'home'
+//   | 'statistics'
+//   | 'notifications'
+//   | 'billing'
+//   | 'users'
+//   | 'buildings'
+//   | 'bookmarks'
+//   | 'comments'
+//   | 'funds'
+//   | 'areas'
+//   | 'floors'
+//   | 'fundRules'
+//   | 'instances'
+//   | 'notifications'
+//   | 'proposals'
+//   | 'tags'
+//   | 'threads'
+//   | 'userSettings'
+//   | 'wallets'
+//   | 'organizations'
+//   | 'events'
+//   | 'spaces'
+//   | 'uploads'
+//   | 'maintenances'
+//   | '';
+export type Sections = (typeof sectionsArray)[number];
+
+export const sectionsArray = [
+  'home',
+  'statistics',
+  'notifications',
+  'billing',
+  'users',
+  'buildings',
+  'bookmarks',
+  'comments',
+  'funds',
+  'areas',
+  'floors',
+  'fundRules',
+  'instances',
+  'notifications',
+  'proposals',
+  'tags',
+  'threads',
+  'userSettings',
+  'wallets',
+  'organizations',
+  'events',
+  'spaces',
+  'uploads',
+  'maintenances',
+  '',
+];

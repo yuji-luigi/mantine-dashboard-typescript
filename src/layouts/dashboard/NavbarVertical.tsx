@@ -16,6 +16,10 @@ import useAuth from '../../../hooks/useAuth';
 import { sectionData } from '../../data';
 
 import { Icons } from '../../data/icons';
+import { useMediaQuery } from '@mantine/hooks';
+import { PATH_DASHBOARD } from '../../path/page-paths';
+import { ColorSchemeToggle } from '../../components/color-schemeToggle/ColorSchemeToggle';
+import { MouseEventHandler } from 'react';
 
 const useStyles = createStyles((theme /* , _params, getRef */) => {
   const icon = getStylesRef('icon') as string;
@@ -139,15 +143,21 @@ export function NavbarVertical() {
   const [active, setActive] = useState('');
   const { isOpen } = useLayoutContext();
   const { asPath } = useRouter();
+  const isMediaScreen = useMediaQuery('(max-width: 750px)');
+  const isSuperAdmin = user?.role === 'super_admin';
+
+  const chooseText = isSuperAdmin ? 'Organization' : 'Space';
 
   const filteredSectionData = sectionData.filter((data) => data.name !== 'others');
-
+  const chooseHref = isSuperAdmin
+    ? PATH_DASHBOARD.chooseOrganization
+    : PATH_DASHBOARD.chooseRootSpace;
   if (!user) return null;
   const links = sectionData.map((section, i) => {
     return (
-      <Fragment key={i}>
+      <Fragment key={section.name}>
         {section.roles?.includes(user.role) && (
-          <Fragment key={section.name}>
+          <>
             <p>{section.name}</p>
             {section.contents.map((navbarContent) => {
               const Icon = Icons[navbarContent.entity as IconIndexTypes] || Icons.home;
@@ -164,7 +174,7 @@ export function NavbarVertical() {
                 </Link>
               );
             })}
-          </Fragment>
+          </>
         )}
       </Fragment>
     );
@@ -194,14 +204,30 @@ export function NavbarVertical() {
         {links.map((navbarData) => navbarData)}
 
         <Navbar.Section className={classes.footer}>
-          {/* <Button className={classes.button} onClick={(event) => event.preventDefault()}>
+          {/* <Button
+            className={cx(classes.button, classes.link)}
+            // className={cx(classes.button, classes.link)}
+            onClick={(event) => event.preventDefault()}
+          >
             <Icons.switch className={classes.linkIcon} stroke={1.5} />
             <span>Change account</span>
           </Button> */}
-          <Button variant="outline" className={classes.button} onClick={logout}>
+          <Button variant="outline" className={cx(classes.button, classes.link)} onClick={logout}>
             <Icons.logout className={classes.linkIcon} stroke={1.5} />
             <span>Logout</span>
           </Button>
+          {isMediaScreen && (
+            <>
+              <Button
+                className={cx(classes.button, classes.link)}
+                component={Link}
+                href={chooseHref}
+              >
+                Choose {chooseText}
+              </Button>
+              {/* <ColorSchemeToggle size="lg" /> */}
+            </>
+          )}
         </Navbar.Section>
       </ScrollArea>
     </Navbar>

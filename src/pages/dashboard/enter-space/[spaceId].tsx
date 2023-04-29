@@ -5,11 +5,12 @@ import { PATH_API } from '../../../path/api-routes';
 import axiosInstance from '../../../utils/axios-instance';
 import { setSession, setSpaceSession } from '../../../utils/jwt';
 import { json } from 'stream/consumers';
-import { useCurrentSpaceContext } from '../../../context/CurrentSpaceContext';
+// import { useCurrentSpaceContext } from '../../../context/CurrentSpaceContext';
+import { useCookieContext } from '../../../context/CookieContext';
 import Link from 'next/link';
 
 const getSpaceAsCookie = async (spaceId: string) => {
-  const res = await axiosInstance.get(`${PATH_API.getSpaceCookie}/${spaceId}`, {
+  const res = await axiosInstance.get(`${PATH_API.spaceCookie}/${spaceId}`, {
     withCredentials: true,
   });
 
@@ -29,7 +30,7 @@ const getSpaceAsCookie = async (spaceId: string) => {
 const EnterSpacePage = () => {
   const router = useRouter();
   const { spaceId } = router.query;
-  const { setCurrentSpace } = useCurrentSpaceContext();
+  const { setCurrentSpace } = useCookieContext();
   const { data, error, isLoading } = useSWR(spaceId, getSpaceAsCookie);
   if (isLoading) return <div>loading</div>;
   if (error) return <div>error</div>;

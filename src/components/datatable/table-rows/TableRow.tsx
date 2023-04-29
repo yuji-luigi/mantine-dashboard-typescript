@@ -8,6 +8,7 @@ import { TableCellDecorator } from '../TableCellDecorator';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
 import { usePaginationContext } from '../../../context/PaginationContext';
 import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
+import { Sections } from '../../../types/general/data/sections-type';
 
 export function TableRow({
   rowData,

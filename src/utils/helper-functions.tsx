@@ -66,6 +66,7 @@ export function isObjectEmpty(value: Record<any, any> | any) {
 export function getCookie(name: string) {
   return document.cookie.split(';').some((c) => c.trim().startsWith(`${name}=`));
 }
+
 export function deleteCookie(name: string, path: string, domain: string) {
   if (getCookie(name)) {
     document.cookie = `${name}=${path ? `;path=${path}` : ''}${
@@ -135,3 +136,19 @@ export function _set(
 // };
 
 export const capitalize = (str?: string) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : '');
+
+export const convertToSelectItems = (
+  mongooseDocuments: Array<AllModels>,
+  label: string = 'name'
+) => {
+  return mongooseDocuments.map((doc) => {
+    return {
+      value: doc._id,
+      label: doc[label],
+      // selected?: boolean;
+      // disabled?: boolean;
+      // group?: string;
+      // [key: string]: any;
+    };
+  });
+};

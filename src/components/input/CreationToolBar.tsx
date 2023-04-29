@@ -7,6 +7,7 @@ import { Icons } from '../../data/icons';
 import CreationToolBarIconButton from './CreationToolBarIconButton';
 import PreviewFileZone from './PreviewFileZone';
 import { UseFormReturnTypeCustom } from './input_interfaces/useForm_interface';
+import { Sections } from '../../types/general/data/sections-type';
 
 interface Props {
   form: UseFormReturnTypeCustom;

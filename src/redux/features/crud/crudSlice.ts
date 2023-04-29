@@ -11,6 +11,7 @@ import {
 // import { sectionData } from '../../../data';
 import { flattenSectionData } from '../../../data';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux-hooks/useRedux';
+import { Sections } from '../../../types/general/data/sections-type';
 // import { appDispatch } from '../../store';
 /* eslint-disable no-param-reassign */
 

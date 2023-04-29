@@ -2,6 +2,7 @@ import React, { createContext, ReactNode, useContext, useState, useReducer } fro
 
 // import { useCrudSlice } from '../../hooks/redux-hooks/useCrudSlice';
 import { useCrudSliceStore } from '../redux/features/crud/crudSlice';
+import { Sections } from '../types/general/data/sections-type';
 
 // This custom hook is to control entity of the dashboard page: jsonFormField, sectionJson.
 // And CrudDrawer component state.

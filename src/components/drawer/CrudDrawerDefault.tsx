@@ -27,6 +27,7 @@ import useAuth from '../../../hooks/useAuth';
 import { sections, flattenSectionData, entities, sectionData } from '../../data';
 
 import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
+import { Sections } from '../../types/general/data/sections-type';
 
 const useStyles = createStyles(() => ({
   drawer: {

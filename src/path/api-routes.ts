@@ -29,10 +29,11 @@ export enum PATH_API {
    * */
   linkedChildren = 'linkedChildren',
   uploads = 'upload-files',
-  getSpaceCookie = 'spaces/get-cookie',
   spaces = 'spaces',
+  spaceCookie = 'spaces/cookie',
   getSpaceSelections = 'spaces/selections',
-  getOrganizations = 'organizations',
+  organization = 'organizations',
+  getOrganizationsAndSpaces = 'organizations/spaces',
   getOrganizationsForAdmin = 'organizations/selections/super-admin',
 }
 
@@ -41,7 +42,7 @@ export const PATH_API_DATA_TABLE_ROOT = 'with-pagination';
 export const PATH_API_DATA_TABLE = {
   linkedChildren: `${PATH_API_DATA_TABLE_ROOT}/linkedChildren`,
   uploads: `${PATH_API_DATA_TABLE_ROOT}/upload-files`,
-  getSpaceCookie: `${PATH_API_DATA_TABLE_ROOT}/spaces/get-cookie`,
+  spaceCookie: `${PATH_API_DATA_TABLE_ROOT}/spaces/get-cookie`,
   spaces: `${PATH_API_DATA_TABLE_ROOT}/spaces`,
   getSpaceSelections: `${PATH_API_DATA_TABLE_ROOT}/spaces/selections`,
 } as const;

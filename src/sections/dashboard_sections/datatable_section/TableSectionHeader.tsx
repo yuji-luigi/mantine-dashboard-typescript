@@ -8,6 +8,7 @@ import useLayoutContext from '../../../../hooks/useLayoutContext';
 import { useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 import { PATH_API } from '../../../path/api-routes';
 import axiosInstance from '../../../utils/axios-instance';
+import { Sections } from '../../../types/general/data/sections-type';
 
 const useStyles = createStyles(() => ({
   headerWrapper: {
@@ -64,7 +65,7 @@ export function TableSectionHeader({
     /** entity is possibly null */
     if (entity) {
       const regex = /^\w/;
-      const title = entity.replace(regex, (c) => c.toUpperCase());
+      const title = entity.replace(regex, (c: string) => c.toUpperCase());
       /** TODO: fix hardcoded /dashboard */
       setBreadcrumbs({ title, href: `/dashboard/${entity}` });
       setPrevBreadcrumbs(breadcrumbs);

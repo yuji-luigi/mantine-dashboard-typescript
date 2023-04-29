@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import formFields from '../../../../json/dataTable/formfields';
+import { Sections } from '../../../types/general/data/sections-type';
 
 const TableHeader = ({ overridingEntity }: { overridingEntity: Sections }) => {
   const { query } = useRouter();

@@ -9,6 +9,7 @@ import { DialogDefault } from '../../modal/Dialog';
 import { DeleteAlertModal } from '../../modal/DeleteAlertModal';
 import { use_ModalContext } from '../../../context/modal-context/_ModalContext';
 import { Text } from '@mantine/core';
+import { Sections } from '../../../types/general/data/sections-type';
 export function ActionCells({
   rowData,
   overridingEntity,

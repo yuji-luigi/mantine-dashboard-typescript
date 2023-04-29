@@ -7,6 +7,7 @@ import { PATH_API } from '../../path/api-routes';
 import { useCrudSelectors } from '../../redux/features/crud/crudSlice';
 import axiosInstance from '../../utils/axios-instance';
 import ImageSlide from './ImageSlide';
+import { Sections } from '../../types/general/data/sections-type';
 // import { Image } from '@mantine/core';
 
 type ImageType = File | UploadModel;

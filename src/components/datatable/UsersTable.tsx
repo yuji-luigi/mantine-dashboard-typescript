@@ -13,6 +13,7 @@ import { usePaginationContext } from '../../context/PaginationContext';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { DataTableModal } from '../modal/data-table-modal/DataTableModal';
 import { useDisclosure } from '@mantine/hooks';
+import { Sections } from '../../types/general/data/sections-type';
 
 export function UsersTable({ overridingEntity = '' }: { overridingEntity?: Sections }) {
   const ROWS_PER_PAGE = 10;

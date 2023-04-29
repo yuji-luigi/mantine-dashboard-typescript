@@ -30,12 +30,13 @@ export const HTTP_MULTIPART_CONFIG = {
 export const fetchCrudDocumentsWithPagination = createAsyncThunk(
   'cruds/dataTable/fetchCrudDocumentsWithPagination',
   async ({ entity, query, isChildrenTree = false, queryObject = {} }: FetchCrudPayload) => {
+    const _entity = entity === 'posts' ? 'threads' : entity;
     const res = await axiosInstance.get<AxiosResData>(
-      `${entity}/${PATH_API_DATA_TABLE_ROOT}${query || ''}`,
+      `${_entity}/${PATH_API_DATA_TABLE_ROOT}${query || ''}`,
       { params: queryObject }
     );
     return {
-      entity,
+      entity: _entity,
       isChildrenTree,
       documents: res.data.data,
       totalDocuments: res.data.totalDocuments,

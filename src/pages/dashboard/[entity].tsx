@@ -10,6 +10,7 @@ import Page from '../../components/Page';
 import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
+import { Sections } from '../../types/general/data/sections-type';
 
 const CrudPage = () => {
   const { query, push } = useRouter();
