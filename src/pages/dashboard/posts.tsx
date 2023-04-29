@@ -7,13 +7,17 @@ import Layout from '../../layouts';
 import PostsPageSection from '../../sections/posts_list_section/PostsPageComponent';
 import axiosInstance from '../../utils/axios-instance';
 import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
-import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
+// import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
+import { useCookieContext } from '../../context/CookieContext';
+import { getCookie } from 'cookies-next';
 
 export default function PostsPage({ threads }: { threads: ThreadModel[] }) {
   const { setCrudDocuments } = useCrudSliceStore();
+  const { currentSpace } = useCookieContext();
   useEffect(() => {
     setCrudDocuments({ entity: 'threads', documents: threads });
-  }, [threads]);
+    console.log();
+  }, [threads, currentSpace?._id]);
   return <PostsPageSection /* threads={threads} */ />;
 }
 
@@ -27,6 +31,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
       space: context.req.cookies.space || '',
+      organization: context.req.cookies.organization || '',
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
