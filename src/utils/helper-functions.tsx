@@ -145,10 +145,6 @@ export const convertToSelectItems = (
     return {
       value: doc._id,
       label: doc[label],
-      // selected?: boolean;
-      // disabled?: boolean;
-      // group?: string;
-      // [key: string]: any;
     };
   });
 };
