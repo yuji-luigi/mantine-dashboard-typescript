@@ -109,11 +109,16 @@ export function DashboardHeaderSearch() {
   const [spaces, setSpaces] = useState<SelectItem[] | []>([]);
   const router = useRouter();
   const pageEntity = router.query.entity || router.pathname.split('/').pop();
-  const { setCurrentOrganization, setCurrentSpace } = useCookieContext();
+  const {
+    setCurrentOrganization,
+    setCurrentSpace,
+    currentSpace,
+    currentOrganization,
+    resetCurrentSpace,
+  } = useCookieContext();
   const { classes } = useStyles();
   const { isOpen, toggleBarOpen } = useLayoutContext();
   const { user } = useAuth();
-  const { currentSpace } = useCookieContext();
   const isSuperAdmin = user?.role === 'super_admin';
   const isMediaScreen = useMediaQuery('(max-width: 750px)');
 
@@ -129,7 +134,6 @@ export function DashboardHeaderSearch() {
   const chooseText = isSuperAdmin ? 'Organization' : 'Space';
 
   const getOrganizations = async () => {
-    localStorage.setItem('aaa', '');
     const response = await axiosInstance.get(PATH_API.organization);
     const selectOptions = convertToSelectItems(response.data.data);
     setOrganizations(selectOptions);
@@ -138,7 +142,14 @@ export function DashboardHeaderSearch() {
   /** get spaces options and reset the cookie of space. show all the info of organization without querying by space. */
   const handleOnSelectOrganization = async (organizationId: string) => {
     try {
-      const response = await axiosInstance.get(`organizations/selected/${organizationId}`);
+      if (organizationId === '') {
+        await axiosInstance.delete(`${PATH_API.organizationSelected}`);
+        setCurrentOrganization('no organization selected');
+        return;
+      }
+      const response = await axiosInstance.get(
+        `${PATH_API.organizationSelected}/${organizationId}`
+      );
       const selectOptions = convertToSelectItems(response.data.data);
       await axiosInstance.delete(`${PATH_API.spaceCookie}`);
       setCurrentSpace(null);
@@ -150,6 +161,11 @@ export function DashboardHeaderSearch() {
   };
 
   const getSpaceCookieFromApi = async (spaceId: string) => {
+    if (spaceId === '') {
+      await axiosInstance.delete(PATH_API.spaceCookie);
+      resetCurrentSpace();
+      return;
+    }
     const response = await axiosInstance.get(`${PATH_API.spaceCookie}/${spaceId}`);
     setCurrentSpace(response.data.data.jwt);
   };
@@ -190,14 +206,17 @@ export function DashboardHeaderSearch() {
           {!isMediaScreen && (
             <>
               <Select
+                allowDeselect
                 onClick={getOrganizations}
-                defaultValue={getCookie('organization')?.toString()}
+                // defaultValue={getCookie('organization')?.toString()}
                 data={organizations}
                 onChange={(value) => {
                   handleOnSelectOrganization(value || '');
                 }}
               />
               <Select
+                allowDeselect
+                key={currentOrganization || ''}
                 data={spaces}
                 value={currentSpace?._id?.toString()}
                 onChange={(value) => {
