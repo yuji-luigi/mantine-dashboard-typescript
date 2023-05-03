@@ -5,4 +5,5 @@ interface CookieContextState {
   // setCurrentSpace: (space: CurrentSpace | null) => void;
   currentOrganization?: string | null;
   setCurrentOrganization: (organization: string | null) => void;
+  resetCurrentSpace: () => void;
 }

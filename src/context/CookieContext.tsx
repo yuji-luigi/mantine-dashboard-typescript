@@ -10,6 +10,7 @@ export const CookieContext = createContext<CookieContextState>({
   setCurrentSpace: (space: string | null) => {},
   currentOrganization: null,
   setCurrentOrganization: (organization: string | null) => {},
+  resetCurrentSpace: () => {},
 });
 
 const useStore = () => {
@@ -54,6 +55,8 @@ const useStore = () => {
       const decodedSpace = spaceJWT ? jwtDecode<CurrentSpace>(spaceJWT) : null;
       setCurrentSpace(decodedSpace);
     },
+    resetCurrentSpace: () =>
+      setCurrentSpace({ _id: 'no space', name: '', address: '', organization: '' }),
     currentOrganization,
     setCurrentOrganization,
   };
