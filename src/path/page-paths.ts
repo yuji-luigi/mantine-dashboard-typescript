@@ -18,12 +18,12 @@ export enum PATH_DASHBOARD {
   chooseRootSpace = '/choose-root-space',
   chooseOrganization = '/choose-organization',
   rootSpaceSelected = '/dashboard/enter-space',
-  // organizationSelected = '/dashboard/select-organization',
+  // organizationCookie = '/dashboard/select-organization',
   logout = '/logout',
 }
 export enum CARD_LINK_PATH {
   posts = PATH_DASHBOARD.posts,
   maintenances = PATH_DASHBOARD.maintenances,
   rootSpaceSelected = PATH_DASHBOARD.rootSpaceSelected,
-  // organizationSelected = PATH_DASHBOARD.organizationSelected,
+  // organizationCookie = PATH_DASHBOARD.organizationCookie,
 }

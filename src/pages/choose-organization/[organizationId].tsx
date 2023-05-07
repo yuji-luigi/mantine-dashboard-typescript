@@ -29,7 +29,7 @@ const fetchSpaces = async (organizationId: string) => {
   if (!organizationId) return null;
   // delete axiosInstance.defaults.headers.common['space'];
   console.log(organizationId);
-  const res = await axiosInstance.get(`${PATH_API.organizationSelected}/${organizationId}`);
+  const res = await axiosInstance.get(`${PATH_API.organizationCookie}/${organizationId}`);
   return res.data.data;
   // const rawSpaces = await axiosInstance.get<AxiosResDataGeneric<SpaceModel[]>>(PATH_API.spaces, {
   //   params: { organization: organizationId, isHead: true },
