@@ -10,7 +10,8 @@ export const PATH_AFTER_LOGIN = '/dashboard/home';
 // export const PATH_ROOT {}
 
 export enum PATH_DASHBOARD {
-  root = '/dashboard',
+  // root = '/dashboard',
+  root = '/dashboard/posts',
   posts = '/dashboard/posts',
   maintenances = '/dashboard/maintenances',
   dashboard = '/dashboard/home',

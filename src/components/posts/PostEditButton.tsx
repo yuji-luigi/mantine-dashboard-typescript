@@ -8,6 +8,7 @@ import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/c
 import { useDrawerContext } from '../../context/DataTableDrawerContext';
 import { useRouter } from 'next/router';
 import { Sections } from '../../types/general/data/sections-type';
+import { PATH_DASHBOARD } from '../../path/page-paths';
 
 const useStyles = createStyles((theme) => ({
   action: {
@@ -35,7 +36,7 @@ const PostEditButton = ({ data, entity }: { data: AllModels; entity: Sections })
   const handleDeleteClicked = () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       deleteCrudDocumentWithPagination({ documentId: data._id, entity });
-      router.push('/dashboard/posts');
+      router.push(PATH_DASHBOARD.posts);
     }
   };
   console.log(user?._id === data.user._id || user?.role === 'super_admin');
