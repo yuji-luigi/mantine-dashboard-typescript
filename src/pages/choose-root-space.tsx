@@ -75,6 +75,7 @@ const ChooseRootSpacePage = () => {
       >
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
+            key={rootSpace._id}
             data={rootSpace as CardData}
             onClick={() => handleSpaceSelected(rootSpace._id)}
             // href={`${hrefRoot}/${rootSpace._id}`}
