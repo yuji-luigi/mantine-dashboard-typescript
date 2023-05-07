@@ -1,15 +1,4 @@
-import {
-  createStyles,
-  Header,
-  Autocomplete,
-  Group,
-  Burger,
-  Button,
-  Select,
-  SelectItem,
-  Text,
-  Tooltip,
-} from '@mantine/core';
+import { createStyles, Header, Group, Burger, Select, SelectItem } from '@mantine/core';
 // import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -23,13 +12,15 @@ import useAuth from '../../../hooks/useAuth';
 import { PATH_DASHBOARD } from '../../path/page-paths';
 // import { useCurrentSpaceContext } from '../../context/CurrentSpaceContext';
 import { useCookieContext } from '../../context/CookieContext';
-import { useMediaQuery } from '@mantine/hooks';
+import { lowerFirst, useMediaQuery } from '@mantine/hooks';
 import axiosInstance from '../../utils/axios-instance';
 import { useEffect, useState } from 'react';
 import { PATH_API } from '../../path/api-routes';
 import { convertToSelectItems } from '../../utils/helper-functions';
 import { getCookies, getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
+import jwtDecode from 'jwt-decode';
+import { kMaxLength } from 'buffer';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -134,6 +125,9 @@ export function DashboardHeaderSearch() {
   const chooseText = isSuperAdmin ? 'Organization' : 'Space';
 
   const getOrganizations = async () => {
+    await axiosInstance.delete(`${PATH_API.organizationCookie}`);
+    await axiosInstance.delete(PATH_API.spaceCookie);
+    setCurrentSpace(null);
     const response = await axiosInstance.get(PATH_API.organization);
     const selectOptions = convertToSelectItems(response.data.data);
     setOrganizations(selectOptions);
@@ -143,13 +137,11 @@ export function DashboardHeaderSearch() {
   const handleOnSelectOrganization = async (organizationId: string) => {
     try {
       if (organizationId === '') {
-        await axiosInstance.delete(`${PATH_API.organizationSelected}`);
+        await axiosInstance.delete(`${PATH_API.organizationCookie}`);
         setCurrentOrganization('no organization selected');
         return;
       }
-      const response = await axiosInstance.get(
-        `${PATH_API.organizationSelected}/${organizationId}`
-      );
+      const response = await axiosInstance.get(`${PATH_API.organizationCookie}/${organizationId}`);
       const selectOptions = convertToSelectItems(response.data.data);
       await axiosInstance.delete(`${PATH_API.spaceCookie}`);
       setCurrentSpace(null);
@@ -181,11 +173,22 @@ export function DashboardHeaderSearch() {
   };
 
   useEffect(() => {
-    if (getCookie('organization')) {
-      axiosInstance.get(`${PATH_API.organization}?_id=${getCookie('organization')}`).then((res) => {
-        console.log(res.data.data);
-        setOrganizations(convertToSelectItems(res.data.data));
+    console.log('get organizations');
+    console.log(getCookie('organization'));
+    const organizationCookie = getCookie('organization');
+    if (typeof organizationCookie === 'string') {
+      axiosInstance.get(`${PATH_API.organization}/${organizationCookie}`).then((res) => {
+        setOrganizations(convertToSelectItems([res.data.data]));
+        console.log({ convertedData: convertToSelectItems([res.data.data]) });
+        setCurrentOrganization(organizationCookie);
       });
+    }
+    const spaceCookie = getCookie('space');
+    if (typeof spaceCookie === 'string') {
+      const space = jwtDecode<CurrentSpace>(spaceCookie);
+      const spaceOption = [{ value: space._id, label: space.name }];
+      setCurrentSpace(spaceCookie);
+      setSpaces(spaceOption);
     }
   }, []);
 
@@ -220,6 +223,7 @@ export function DashboardHeaderSearch() {
                 <Select
                   allowDeselect
                   onClick={getOrganizations}
+                  value={currentOrganization || ''}
                   // defaultValue={getCookie('organization')?.toString()}
                   data={organizations}
                   onChange={(value) => {
