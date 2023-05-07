@@ -161,6 +161,7 @@ export function DashboardHeaderSearch() {
   };
 
   const getSpaceCookieFromApi = async (spaceId: string) => {
+    console.log(spaceId);
     if (spaceId === '') {
       await axiosInstance.delete(PATH_API.spaceCookie);
       resetCurrentSpace();
@@ -170,11 +171,21 @@ export function DashboardHeaderSearch() {
     setCurrentSpace(response.data.data.jwt);
   };
 
+  const handleGetSpaces = async () => {
+    try {
+      if (isSuperAdmin) return;
+      const response = await axiosInstance.get(`${PATH_API.getSpaceSelections}`);
+      const selectOptions = convertToSelectItems(response.data.data);
+      setSpaces(selectOptions);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (getCookie('organization')) {
-      axiosInstance
-        .get(`${PATH_API.organization}?_id=${getCookie('organization')}`)
-        .then((res) => setOrganizations(convertToSelectItems(res.data.data)));
+      axiosInstance.get(`${PATH_API.organization}?_id=${getCookie('organization')}`).then((res) => {
+        console.log(res.data.data);
+        setOrganizations(convertToSelectItems(res.data.data));
+      });
     }
   }, []);
 
@@ -205,17 +216,20 @@ export function DashboardHeaderSearch() {
         <Group>
           {!isMediaScreen && (
             <>
+              {isSuperAdmin && (
+                <Select
+                  allowDeselect
+                  onClick={getOrganizations}
+                  // defaultValue={getCookie('organization')?.toString()}
+                  data={organizations}
+                  onChange={(value) => {
+                    handleOnSelectOrganization(value || '');
+                  }}
+                />
+              )}
               <Select
                 allowDeselect
-                onClick={getOrganizations}
-                // defaultValue={getCookie('organization')?.toString()}
-                data={organizations}
-                onChange={(value) => {
-                  handleOnSelectOrganization(value || '');
-                }}
-              />
-              <Select
-                allowDeselect
+                onClick={handleGetSpaces}
                 key={currentOrganization || ''}
                 data={spaces}
                 value={currentSpace?._id?.toString()}
