@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import axiosInstance, { AxiosResData, AxiosResDataGeneric } from '../../utils/axios-instance';
 import { PATH_API } from '../../path/api-routes';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import useSWR from 'swr';
 import { AxiosError } from 'axios';
 import Layout from '../../layouts';
@@ -15,16 +15,11 @@ import { PATH_DASHBOARD } from '../../path/page-paths';
 import { Box, Button, Divider, Group, Stack, createStyles, Text } from '@mantine/core';
 import useAuth from '../../../hooks/useAuth';
 import Link from 'next/link';
+import { useCookieContext } from '../../context/CookieContext';
 const useStyles = createStyles((theme) => ({
   pinContainer: {
-    // position: 'absolute',
-    // width: '100%',
-    // left: '50%',
-    // transform: 'translateX(-50%)',
     display: 'grid',
-    // gridTemplateColumns: 'repeat(auto-fit, minmax(400px, max-content))',
     gridTemplateColumns: 'repeat(auto-fill, 400px)',
-    // gridAutoColumns: 'repeat(400px, minmax(400px, 1fr))',
     gridAutoRows: 'minmax(50px, auto)',
     justifyContent: 'center',
     gap: 10,
@@ -32,23 +27,37 @@ const useStyles = createStyles((theme) => ({
 }));
 const fetchSpaces = async (organizationId: string) => {
   if (!organizationId) return null;
-  delete axiosInstance.defaults.headers.common['space'];
-  const rawSpaces = await axiosInstance.get<AxiosResDataGeneric<SpaceModel[]>>(PATH_API.spaces, {
-    params: { organization: organizationId, isHead: true },
-  });
-  return rawSpaces.data?.data;
+  // delete axiosInstance.defaults.headers.common['space'];
+  console.log(organizationId);
+  const res = await axiosInstance.get(`${PATH_API.organizationSelected}/${organizationId}`);
+  return res.data.data;
+  // const rawSpaces = await axiosInstance.get<AxiosResDataGeneric<SpaceModel[]>>(PATH_API.spaces, {
+  //   params: { organization: organizationId, isHead: true },
+  // });
+  // return rawSpaces.data?.data;
 };
 
 const ChooseSpaceInOrganizationPage = () => {
-  const router = useRouter();
+  // const router: { query: ParsedQueryCustom; pathname: string; push: any } = useRouter();
+  const router: NextRouter & { query: ParsedQueryCustom; pathname: string } = useRouter();
   const { user } = useAuth();
   const { classes, cx, theme } = useStyles();
+  const { setCurrentOrganization } = useCookieContext();
 
-  const {
-    data: spaces,
-    error,
-    isLoading,
-  } = useSWR<SpaceModel[] | null, AxiosError>(router.query.organizationId, fetchSpaces);
+  useEffect(() => {
+    if (router.query.organizationId) {
+      setCurrentOrganization(router.query.organizationId);
+    }
+  }, []);
+
+  const { data: spaces } = useSWR<SpaceModel[] | null, AxiosError>(
+    router.query.organizationId,
+    fetchSpaces
+  );
+  const handleSpaceSelected = async (spaceId: string) => {
+    await axiosInstance.get(`${PATH_API.spaceCookie}/${spaceId}`);
+    router.push(PATH_DASHBOARD.root);
+  };
   if (!spaces) return <p>loading...</p>;
   return (
     <Stack>
@@ -78,7 +87,7 @@ const ChooseSpaceInOrganizationPage = () => {
         {spaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
             data={rootSpace as CardData}
-            href={`${PATH_DASHBOARD.rootSpaceSelected}/${rootSpace._id}`}
+            onClick={() => handleSpaceSelected(rootSpace._id)}
           />
         ))}
       </Box>

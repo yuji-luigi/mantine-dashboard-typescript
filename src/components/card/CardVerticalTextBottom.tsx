@@ -14,6 +14,7 @@ import { threadId } from 'worker_threads';
 import { CARD_LINK_PATH, PATH_DASHBOARD } from '../../path/page-paths';
 import { useRouter } from 'next/router';
 import { PATH_IMAGE } from '../../lib/image-paths';
+import { notInitialized } from 'react-redux/es/utils/useSyncExternalStore';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -86,7 +87,8 @@ interface CardArticleImageDescFooterVerticalProps {
   // category: string;
   // title: string;
   // date: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 
   data: CardData;
   // data: SpaceModel | OrganizationModel;
@@ -96,52 +98,61 @@ export function CardArticleVerticalTextBottom({
   // title,
   data,
   href,
+  onClick,
 }: CardArticleImageDescFooterVerticalProps) {
   // const description =
   //   data.description?.length > 50 ? `${data.description.substring(0, 50)}...` : data.description;
   const { classes, cx } = useStyles();
   const router = useRouter();
+  const content = (
+    <Card withBorder radius="md" p={0} className={classes.card} onClick={onClick}>
+      <BackgroundImage
+        className={classes.bgImage}
+        src={image || PATH_IMAGE.rootSpaceCard1}
+        radius="sm"
+      >
+        <Box className={classes.bgImageGradient} />
 
-  return (
-    <Link href={href} className={classes.link}>
-      <Card withBorder radius="md" p={0} className={classes.card}>
-        <BackgroundImage
-          className={classes.bgImage}
-          src={image || PATH_IMAGE.rootSpaceCard1}
-          radius="sm"
-        >
-          <Box className={classes.bgImageGradient} />
-
-          <div className={classes.body}>
-            <Text className={cx(classes.title, classes.appear, classes.text)} /* mt="xs" mb="xs" */>
-              {data.name}
-            </Text>
-            <Text
-              className={cx(classes.appear, classes.text)}
-              transform="uppercase"
-              color="dimmed"
-              weight={700}
-              size="xs"
-            >
-              {data.address}
-            </Text>
-            <Group noWrap className={cx(classes.appear)} spacing="xs">
-              <Group spacing="xs" noWrap>
-                {/* <Avatar size={20} src={''} /> */}
-                <Text className={classes.text} size="xs">
-                  {data.user?.name}
-                </Text>
-              </Group>
-              <Text className={classes.text} size="xs" color="dimmed">
-                •
-              </Text>
-              <Text size="xs" color="dimmed">
-                {data.createdAt}
+        <div className={classes.body}>
+          <Text className={cx(classes.title, classes.appear, classes.text)} /* mt="xs" mb="xs" */>
+            {data.name}
+          </Text>
+          <Text
+            className={cx(classes.appear, classes.text)}
+            transform="uppercase"
+            color="dimmed"
+            weight={700}
+            size="xs"
+          >
+            {data.address}
+          </Text>
+          <Group noWrap className={cx(classes.appear)} spacing="xs">
+            <Group spacing="xs" noWrap>
+              {/* <Avatar size={20} src={''} /> */}
+              <Text className={classes.text} size="xs">
+                {data.user?.name}
               </Text>
             </Group>
-          </div>
-        </BackgroundImage>
-      </Card>
-    </Link>
+            <Text className={classes.text} size="xs" color="dimmed">
+              •
+            </Text>
+            <Text size="xs" color="dimmed">
+              {data.createdAt}
+            </Text>
+          </Group>
+        </div>
+      </BackgroundImage>
+    </Card>
   );
+  // if (!href && onClick) {
+  //   return content;
+  // }
+  if (href) {
+    return (
+      <Link href={href} className={classes.link}>
+        {content}
+      </Link>
+    );
+  }
+  return content;
 }

@@ -52,6 +52,11 @@ const ChooseRootSpacePage = () => {
   }
   if (!rootSpaces || isLoading) return <p>loading</p>;
 
+  const handleSpaceSelected = async (spaceId: string) => {
+    await axiosInstance.get(`${PATH_API.spaceCookie}/${spaceId}`);
+    router.push(PATH_DASHBOARD.root);
+  };
+
   return (
     <Stack>
       <Group position="apart" align="center" pt={16}>
@@ -71,7 +76,8 @@ const ChooseRootSpacePage = () => {
         {rootSpaces.map((rootSpace) => (
           <CardArticleVerticalTextBottom
             data={rootSpace as CardData}
-            href={`${hrefRoot}/${rootSpace._id}`}
+            onClick={() => handleSpaceSelected(rootSpace._id)}
+            // href={`${hrefRoot}/${rootSpace._id}`}
           />
         ))}
       </Box>
