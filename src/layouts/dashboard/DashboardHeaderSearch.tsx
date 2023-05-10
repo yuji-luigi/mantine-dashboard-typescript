@@ -173,25 +173,31 @@ export function DashboardHeaderSearch() {
   };
 
   useEffect(() => {
-    console.log('get organizations');
-    console.log(getCookie('organization'));
-    const organizationCookie = getCookie('organization');
-    if (typeof organizationCookie === 'string') {
-      axiosInstance.get(`${PATH_API.organization}/${organizationCookie}`).then((res) => {
-        setOrganizations(convertToSelectItems([res.data.data]));
-        console.log({ convertedData: convertToSelectItems([res.data.data]) });
-        setCurrentOrganization(organizationCookie);
-      });
+    const organizationNameCookie = getCookie('organizationName');
+    if (typeof organizationNameCookie === 'string') {
+      setOrganizations([{ label: organizationNameCookie, value: currentOrganization || '' }]);
     }
-    const spaceCookie = getCookie('space');
-    if (typeof spaceCookie === 'string') {
-      const space = jwtDecode<CurrentSpace>(spaceCookie);
-      const spaceOption = [{ value: space._id, label: space.name }];
-      setCurrentSpace(spaceCookie);
-      setSpaces(spaceOption);
-    }
-  }, []);
 
+    // if (typeof organizationCookie === 'string') {
+    //   axiosInstance.get(`${PATH_API.organization}/${organizationCookie}`).then((res) => {
+    //     setOrganizations(convertToSelectItems([res.data.data]));
+    //     console.log({ convertedData: convertToSelectItems([res.data.data]) });
+    //     setCurrentOrganization(organizationCookie);
+    // });
+    // }
+    const spaceNameCookie = getCookie('spaceName');
+    if (typeof spaceNameCookie === 'string') {
+      setSpaces([{ label: spaceNameCookie, value: '' }]);
+    }
+    // const spaceCookie = getCookie('space');
+    // if (typeof spaceCookie === 'string') {
+    //   const space = jwtDecode<CurrentSpace>(spaceCookie);
+    //   const spaceOption = [{ value: space._id, label: space.name }];
+    //   setCurrentSpace(spaceCookie);
+    //   setSpaces(spaceOption);
+    // }
+  }, []);
+  console.log({ organizations });
   return (
     <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
@@ -236,7 +242,7 @@ export function DashboardHeaderSearch() {
                 onClick={handleGetSpaces}
                 key={currentOrganization || ''}
                 data={spaces}
-                value={currentSpace?._id?.toString()}
+                value={currentSpace?._id?.toString() || ''}
                 onChange={(value) => {
                   getSpaceCookieFromApi(value || '');
                 }}
