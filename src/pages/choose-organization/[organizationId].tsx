@@ -27,18 +27,12 @@ const useStyles = createStyles((theme) => ({
 }));
 const fetchSpaces = async (organizationId: string) => {
   if (!organizationId) return null;
-  // delete axiosInstance.defaults.headers.common['space'];
   console.log(organizationId);
   const res = await axiosInstance.get(`${PATH_API.organizationCookie}/${organizationId}`);
   return res.data.data;
-  // const rawSpaces = await axiosInstance.get<AxiosResDataGeneric<SpaceModel[]>>(PATH_API.spaces, {
-  //   params: { organization: organizationId, isHead: true },
-  // });
-  // return rawSpaces.data?.data;
 };
 
 const ChooseSpaceInOrganizationPage = () => {
-  // const router: { query: ParsedQueryCustom; pathname: string; push: any } = useRouter();
   const router: NextRouter & { query: ParsedQueryCustom; pathname: string } = useRouter();
   const { user } = useAuth();
   const { classes, cx, theme } = useStyles();
@@ -51,6 +45,10 @@ const ChooseSpaceInOrganizationPage = () => {
   }, []);
 
   const { data: spaces } = useSWR<SpaceModel[] | null, AxiosError>(
+    router.query.organizationId,
+    fetchSpaces
+  );
+  const { data, error, isLoading } = useSWR<SpaceModel[] | null, AxiosError>(
     router.query.organizationId,
     fetchSpaces
   );
