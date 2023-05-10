@@ -1,4 +1,5 @@
 import { maintenancesTableData } from './maintenancesTableData';
+import { maintainersTableData } from './maintainersTableData';
 import { billingsTableData as billing } from './billingsTableData';
 import { buildingTableData as buildings } from './buildingsTableData';
 import { usersTableData as users } from './usersTableData';
@@ -57,5 +58,6 @@ const allFormFields: FormFieldsType = {
   spaces,
   uploads,
   maintenances,
+  maintainers: maintainersTableData,
 };
 export default allFormFields;

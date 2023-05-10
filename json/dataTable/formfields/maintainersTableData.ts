@@ -1,0 +1,62 @@
+export const maintainersTableData: Array<FormFieldInterface> = [
+  {
+    id: 'name',
+    name: 'name',
+    label: 'Nome',
+    placeholder: 'First name',
+    type: 'text',
+    required: true,
+    priority: 1,
+  },
+  {
+    id: 'homepage',
+    name: 'homepage',
+    label: 'Website',
+    type: 'text',
+    required: false,
+    priority: 2,
+  },
+  {
+    id: 'email',
+    name: 'email',
+    label: 'Email',
+    type: 'text',
+    required: true,
+    priority: 2,
+  },
+  {
+    id: 'type',
+    name: 'type',
+    label: 'Type of maintainer',
+    type: 'static-select',
+    options: ['Plumber', 'Electrician', 'Carpenter', 'Other'],
+    required: true,
+    priority: 3,
+  },
+
+  {
+    id: 'description',
+    name: 'description',
+    label: 'Description',
+    type: 'text',
+    required: false,
+    priority: 5,
+  },
+
+  {
+    id: 'address',
+    name: 'address',
+    label: 'Address',
+    type: 'text',
+    required: false,
+    priority: 5,
+  },
+  {
+    id: 'isIndividual',
+    name: 'isIndividual',
+    label: 'Is individual',
+    type: 'boolean',
+    required: false,
+    priority: 6,
+  },
+];

@@ -175,6 +175,16 @@
 				"link": "/dashboard/users",
 				"createButton": "New User",
 				"icon": "Dashboard"
+			},
+			{
+				"entity": "maintainers",
+				"entitySingle": "maintainer",
+				"title": "Maintainers",
+				"subtitle": "subtitle",
+				"navbarTitle": "Maintainer",
+				"link": "/dashboard/maintainers",
+				"createButton": "New Maintainer",
+				"icon": "Dashboard"
 			}
 		]
 	},
