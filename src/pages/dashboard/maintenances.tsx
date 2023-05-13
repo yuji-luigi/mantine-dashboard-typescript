@@ -27,6 +27,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
       // 'Content-Type': 'application/x-www-form-urlencoded',
+      space: context.req.cookies.space || '',
+      organization: context.req.cookies.organization || '',
     },
   });
 
