@@ -52,7 +52,6 @@ interface ModalRootCustomProps {
 export function ModalRootCustom() {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { isOpenModal: opened, closeModal: close, modals } = use_ModalContext();
-
   const isAlert = modals.type === 'alert';
 
   const handleCancel = () => {
