@@ -93,6 +93,28 @@ export const addCrudDocumentDataTable = createAsyncThunk(
     // return res.data;
   }
 );
+/**
+ * addCrudDocumentDataTable handles regular crud creation and linkedChildren creation
+ * ! Todo: should be separate the functions
+ * */
+export const addCrudDocument = createAsyncThunk(
+  'crud/addDocument',
+  async ({ entity, newDocument, query = '', config, queryObject }: AddCrudPayloadWithConfig) => {
+    const res = await axiosInstance.post(`${entity}`, newDocument, {
+      params: queryObject,
+      ...config,
+    });
+    const payload = {
+      // entity: res.data.collection,
+      entity,
+      documents: res.data.data,
+      // documentId,
+      totalDocuments: res.data.totalDocuments,
+    };
+    return payload;
+    // return res.data;
+  }
+);
 export const addLinkedChildrenDocumentDataTable = createAsyncThunk(
   'crud/withPagination/addLinkedChildrenDocument',
   async ({ entity, newDocument, parentId, query = '' }: AddCrudPayload) => {
