@@ -1,5 +1,14 @@
 /* eslint-disable react/jsx-pascal-case */
-import { Button, Container, createStyles, Drawer, LoadingOverlay, Text } from '@mantine/core';
+import {
+  Button,
+  Container,
+  createStyles,
+  Drawer,
+  LoadingOverlay,
+  Select,
+  SelectItem,
+  Text,
+} from '@mantine/core';
 
 import FormFields from '../../input/FormFields';
 import formFields from '../../../../json/dataTable/formfields';
@@ -17,6 +26,11 @@ import { useRouter } from 'next/router';
 import { hasMedia } from '../../../redux/features/crudAsyncThunks';
 import { uploadFileAndGetModelId, extractUploadingMedia } from '../../../utils/upload-helper';
 import { useDisclosure } from '@mantine/hooks';
+import useAuth from '../../../../hooks/useAuth';
+import { PATH_API } from '../../../path/api-routes';
+import { convertToSelectItems } from '../../../utils/helper-functions';
+import OrganizationSpaceSelect from '../../select-custom/OrganizationSpaceSelect';
+import { getCookie } from 'cookies-next';
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -36,12 +50,15 @@ const useStyles = createStyles(() => ({
 }));
 const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => {
   const { classes } = useStyles();
+  const { isSuperAdmin } = useAuth();
   // const [submitting, setSubmitting] = useState(false);
   const { submitting } = useCrudSelectors(entity);
   const sectionFormFields: FormFieldInterface[] = formFields[entity];
-  const { createCrudDocumentWithPagination, setSubmitting, resetCrudStatus } = useCrudSliceStore();
+  const { setSubmitting, resetCrudStatus, createCrudDocument } = useCrudSliceStore();
   const { crudStatus, crudError } = useCrudSelectors();
   const initialValues = useMemo(() => getDefaultValues(sectionFormFields), []);
+  // const [organizationOptions, setOrganizationOptions] = useState<SelectItem[] | []>([]);
+  // const [spaceOptions, setSpaceOptions] = useState<SelectItem[] | []>([]);
 
   const form = useForm({
     initialValues,
@@ -73,11 +90,12 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
       }
     }
 
-    createCrudDocumentWithPagination({
-      entity,
-      newDocument: reqBody,
-      // config,
-    });
+    createCrudDocument({ entity, newDocument: reqBody });
+    // createCrudDocumentWithPagination({
+    //   entity,
+    //   newDocument: reqBody,
+    //   // config,
+    // });
 
     notifications.show({
       id: 'submit',
@@ -115,7 +133,16 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
       setSubmitting(false);
     }
   }, [crudStatus]);
-
+  // useEffect(() => {}, []);
+  // async function getOrganizations() {
+  //   const rawOrganizations = await axiosInstance.get(PATH_API.organizationAll);
+  //   setOrganizationOptions(convertToSelectItems(rawOrganizations.data.data));
+  // }
+  // async function organizationSelected(organizationId: string) {
+  //   console.log(organizationId);
+  //   const rawSpaces = await axiosInstance.get(`${PATH_API.spaces}`, { params: { isMain: true } });
+  //   setSpaceOptions(convertToSelectItems(rawSpaces.data.data));
+  // }
   return (
     <form className={classes.form} onSubmit={onSubmit}>
       {submitting && (
@@ -134,6 +161,14 @@ const HeaderModalForm = ({ entity }: { entity: 'threads' | 'maintenances' }) => 
           minRows={formField.type === 'long-text' ? 10 : 3}
         />
       ))}
+      {isSuperAdmin && (
+        <OrganizationSpaceSelect
+          form={form}
+          size="md"
+          labels={{ organization: 'Organization', space: 'Spaces' }}
+          sx={{ marginBlock: 16 }}
+        />
+      )}
       <CreationToolBar
         formFields={sectionFormFields}
         form={form}
