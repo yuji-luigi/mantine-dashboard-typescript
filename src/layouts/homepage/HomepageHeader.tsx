@@ -35,6 +35,7 @@ import { useCloseDrawer } from '../../context/DataTableDrawerContext';
 import { sleep } from '../../utils/helper-functions';
 import useAuth from '../../../hooks/useAuth';
 import { PATH_DASHBOARD } from '../../path/page-paths';
+import { getCookie } from 'cookies-next';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -136,8 +137,13 @@ export function HomepageHeader() {
   const { classes, theme } = useStyles();
   const { push } = useRouter();
 
-  function pushAndCloseDrawer(path: string) {
-    push(path);
+  function handleEnterClicked() {
+    if (getCookie('spaceName')) {
+      push(PATH_DASHBOARD.root);
+      closeDrawer();
+      return;
+    }
+    push(PATH_DASHBOARD.chooseRootSpace);
     closeDrawer();
   }
 
@@ -228,9 +234,7 @@ export function HomepageHeader() {
                 <Button variant="default" onClick={() => pushAndCloseDrawer('/logout')}>
                   Logout
                 </Button>
-                <Button onClick={() => pushAndCloseDrawer(PATH_DASHBOARD.chooseRootSpace)}>
-                  Enter
-                </Button>
+                <Button onClick={handleEnterClicked}>Enter</Button>
               </>
             ) : (
               <>
