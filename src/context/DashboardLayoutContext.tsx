@@ -43,7 +43,7 @@ const useStore = () => {
     openBar: () => setBarOpen(true),
     setBreadcrumbs: (breadcrumb: BreadcrumbInterface | null) => {
       if (breadcrumb === null) {
-        setBreadcrumbs([]);
+        setBreadcrumbs([{ title: 'Feed', href: '/dashboard/posts' }]);
         return;
       }
       setBreadcrumbs((prev) => [...prev, breadcrumb]);
