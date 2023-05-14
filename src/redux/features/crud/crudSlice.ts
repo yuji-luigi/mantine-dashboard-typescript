@@ -7,6 +7,7 @@ import {
   fetchLinkedChildrenWithPagination,
   addLinkedChildrenDocumentDataTable,
   deleteLinkedChildDocumentWithPagination,
+  addCrudDocument,
 } from '../crudAsyncThunks';
 // import { sectionData } from '../../../data';
 import { flattenSectionData } from '../../../data';
@@ -250,7 +251,10 @@ export const useCrudSliceStore = () => {
     fetchLinkedChildrenWithPagination(data: FetchLinkedChildrenPayload) {
       appDispatch(fetchLinkedChildrenWithPagination(data));
     },
-    /** add new document in api and insert in redux. */
+    createCrudDocument(data: AddCrudPayload) {
+      appDispatch(addCrudDocument(data));
+    },
+    /** add new document in api and issert in redux. */
     createCrudDocumentWithPagination(data: AddCrudPayload) {
       appDispatch(addCrudDocumentDataTable(data));
     },
