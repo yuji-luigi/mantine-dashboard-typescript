@@ -231,7 +231,7 @@ export function HomepageHeader() {
           <Group className={classes.hiddenMobile}>
             {user ? (
               <>
-                <Button variant="default" onClick={() => pushAndCloseDrawer('/logout')}>
+                <Button variant="default" component={Link} href={PATH_DASHBOARD.logout}>
                   Logout
                 </Button>
                 <Button onClick={handleEnterClicked}>Enter</Button>
@@ -286,15 +286,19 @@ export function HomepageHeader() {
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button onClick={() => pushAndCloseDrawer('/login')} variant="default">
+            <Button component={Link} href={PATH_DASHBOARD.login} variant="default">
               Log in
             </Button>
 
-            <Button onClick={() => pushAndCloseDrawer('/sign-up')}>Sign up</Button>
+            <Button component={Link} href={PATH_DASHBOARD.signup}>
+              Sign up
+            </Button>
             {user && (
               <>
-                <Button onClick={() => pushAndCloseDrawer('/logout')}>Logout</Button>
-                <Button onClick={() => pushAndCloseDrawer(PATH_DASHBOARD.chooseRootSpace)}>
+                <Button component={Link} href={PATH_DASHBOARD.logout}>
+                  Logout
+                </Button>
+                <Button component={Link} href={PATH_DASHBOARD.chooseRootSpace}>
                   Enter
                 </Button>
               </>

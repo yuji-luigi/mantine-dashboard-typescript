@@ -20,6 +20,8 @@ export enum PATH_DASHBOARD {
   rootSpaceSelected = '/dashboard/enter-space',
   // organizationCookie = '/dashboard/select-organization',
   logout = '/logout',
+  login = '/login',
+  signup = '/signup',
   maintainers = '/dashboard/maintainers',
   maintainersSearch = '/dashboard/maintainers/search',
 }
