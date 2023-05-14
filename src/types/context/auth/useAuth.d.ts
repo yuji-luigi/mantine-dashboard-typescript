@@ -27,6 +27,7 @@ export interface JWTContextState {
   isAuthenticated?: boolean | null;
   isInitialized?: boolean | null;
   user?: UserModel | null;
+  isSuperAdmin?: boolean;
 }
 export interface ReducerStateAction {
   payload?: JWTContextState;
