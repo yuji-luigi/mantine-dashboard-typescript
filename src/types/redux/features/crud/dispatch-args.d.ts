@@ -43,6 +43,7 @@ interface AddCrudPayload {
   /** specify parentId for creation of child of given id */
   parentId?: string;
   query?: string;
+  queryObject?: Record<string, string | number | boolean>;
   config?: any;
 }
 interface AddLinkedChildPayload {
