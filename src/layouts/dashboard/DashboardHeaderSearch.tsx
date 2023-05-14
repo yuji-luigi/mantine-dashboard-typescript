@@ -21,6 +21,7 @@ import { getCookies, getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import jwtDecode from 'jwt-decode';
 import { kMaxLength } from 'buffer';
+import OrganizationSpaceSelect from '../../components/select-custom/OrganizationSpaceSelect';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -187,7 +188,8 @@ export function DashboardHeaderSearch() {
     // }
     const spaceNameCookie = getCookie('spaceName');
     if (typeof spaceNameCookie === 'string') {
-      setSpaces([{ label: spaceNameCookie, value: '' }]);
+      const spaceId = currentSpace?._id || '';
+      setSpaces([{ label: spaceNameCookie, value: spaceId }]);
     }
     // const spaceCookie = getCookie('space');
     // if (typeof spaceCookie === 'string') {
@@ -225,7 +227,9 @@ export function DashboardHeaderSearch() {
         <Group>
           {!isMediaScreen && (
             <>
-              {isSuperAdmin && (
+              <OrganizationSpaceSelect />
+
+              {/* {isSuperAdmin && (
                 <Select
                   allowDeselect
                   onClick={getOrganizations}
@@ -246,7 +250,7 @@ export function DashboardHeaderSearch() {
                 onChange={(value) => {
                   getSpaceCookieFromApi(value || '');
                 }}
-              />
+              /> */}
 
               <ColorSchemeToggle size="lg" />
             </>
