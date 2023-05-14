@@ -28,6 +28,7 @@ const handlers: JWTContextHandlers = {
       isAuthenticated,
       isInitialized: true,
       user,
+      isSuperAdmin: user?.role === 'super_admin',
     };
   },
   LOGIN: (state, action) => {
@@ -36,15 +37,22 @@ const handlers: JWTContextHandlers = {
       ...state,
       isAuthenticated: true,
       user,
+      isSuperAdmin: user?.role === 'super_admin',
     };
   },
-  LOGOUT: (state) => ({ ...state, isAuthenticated: false, user: null }),
+  LOGOUT: (state) => ({
+    ...state,
+    isAuthenticated: false,
+    user: null,
+    isSuperAdmin: false,
+  }),
   REGISTER: (state, action) => {
     const { user } = action.payload as JWTContextState;
     return {
       ...state,
       isAuthenticated: true,
       user,
+      isSuperAdmin: user?.role === 'super_admin',
     };
   },
 };
