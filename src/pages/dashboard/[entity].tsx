@@ -11,6 +11,7 @@ import { CrudDrawerDefault } from '../../components/drawer/CrudDrawerDefault';
 import { useCrudSelectors, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 import { usePaginationContext } from '../../context/PaginationContext';
 import { Sections } from '../../types/general/data/sections-type';
+import { Box } from '@mantine/core';
 
 const CrudPage = () => {
   const { query, push } = useRouter();
@@ -42,10 +43,10 @@ const CrudPage = () => {
 
   return (
     <Page>
-      <div>
+      <Box px={32}>
         <TableSectionHeader />
         <Tables />
-      </div>
+      </Box>
       <CrudDrawerDefault />
     </Page>
   );

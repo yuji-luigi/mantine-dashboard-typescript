@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Button, createStyles } from '@mantine/core';
+import { Box, Button, Group, Stack, Sx, createStyles } from '@mantine/core';
 import { useEffect } from 'react';
 import { sectionData } from '../../../data';
 import { useDrawerContext } from '../../../context/DataTableDrawerContext';
@@ -15,9 +15,11 @@ const useStyles = createStyles(() => ({
     display: 'flex',
     width: '100%',
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingInline: 10,
+    alignItems: 'end',
+    justifyContent: 'space-between',
+    // paddingInline: 10,
     paddingTop: 30,
+    // paddingInline: 32,
   },
   title: {
     marginBlock: 5,
@@ -31,7 +33,9 @@ function instanceOfParentDataInterface(object: any): object is ParentDataInterfa
 }
 export function TableSectionHeader({
   overridingEntity = '',
+  sx = {},
 }: {
+  sx?: Sx;
   overridingEntity?: Sections | '';
 }) {
   /** define open state for crudDrawer component */
@@ -100,24 +104,24 @@ export function TableSectionHeader({
   };
 
   return (
-    <div>
-      <div className={classes.headerWrapper}>
-        <div>
-          <h1 className={classes.title}>{title}</h1>
-          <BreadcrumbsCustom />
-        </div>
-        {section.createButton && (
-          <Button onClick={handleOpenDrawer} className={classes.button}>
-            <h3>{section.createButton}</h3>
-          </Button>
-        )}
-        {query.entity === 'uploads' && (
-          <Button color="red" onClick={deleteAllUploads} className={classes.button}>
-            <h3>Delete All!!</h3>
-          </Button>
-        )}
-      </div>
+    <Group className={classes.headerWrapper} sx={sx}>
+      {/* <div > */}
+      <Stack>
+        <h1 className={classes.title}>{title}</h1>
+        <BreadcrumbsCustom />
+      </Stack>
+      {section.createButton && (
+        <Button onClick={handleOpenDrawer} className={classes.button}>
+          <h3>{section.createButton}</h3>
+        </Button>
+      )}
+      {/* {query.entity === 'uploads' && (
+        <Button color="red" onClick={deleteAllUploads} className={classes.button}>
+          <h3>Delete All!!</h3>
+        </Button>
+      )} */}
+      {/* </div> */}
       {/* <CrudDrawerDefault /> */}
-    </div>
+    </Group>
   );
 }
