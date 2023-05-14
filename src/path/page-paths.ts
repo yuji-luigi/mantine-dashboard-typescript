@@ -20,6 +20,8 @@ export enum PATH_DASHBOARD {
   rootSpaceSelected = '/dashboard/enter-space',
   // organizationCookie = '/dashboard/select-organization',
   logout = '/logout',
+  maintainers = '/dashboard/maintainers',
+  maintainersSearch = '/dashboard/maintainers/search',
 }
 export enum CARD_LINK_PATH {
   posts = PATH_DASHBOARD.posts,
