@@ -55,7 +55,8 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
             <MantineProvider
               theme={{
                 colors: myColors,
-                primaryColor: 'sw-dark-blue',
+                primaryColor: 'ocean-blue',
+                // primaryColor: 'sw-dark-blue',
                 colorScheme,
               }}
               withGlobalStyles
