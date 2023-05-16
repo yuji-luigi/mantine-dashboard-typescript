@@ -25,7 +25,8 @@ const useStyles = createStyles(() => ({
     marginBlock: 5,
   },
   button: {
-    marginLeft: 40,
+    minWidth: 150,
+    // marginLeft: 40,
   },
 }));
 function instanceOfParentDataInterface(object: any): object is ParentDataInterface {
@@ -34,9 +35,11 @@ function instanceOfParentDataInterface(object: any): object is ParentDataInterfa
 export function TableSectionHeader({
   overridingEntity = '',
   sx = {},
+  children,
 }: {
   sx?: Sx;
   overridingEntity?: Sections | '';
+  children?: React.ReactNode;
 }) {
   /** define open state for crudDrawer component */
 
@@ -104,24 +107,27 @@ export function TableSectionHeader({
   };
 
   return (
-    <Group className={classes.headerWrapper} sx={sx}>
-      {/* <div > */}
-      <Stack>
-        <h1 className={classes.title}>{title}</h1>
-        <BreadcrumbsCustom />
-      </Stack>
-      {section.createButton && (
-        <Button onClick={handleOpenDrawer} className={classes.button}>
-          <h3>{section.createButton}</h3>
-        </Button>
-      )}
-      {/* {query.entity === 'uploads' && (
+    <Box px={40}>
+      <Group className={classes.headerWrapper} sx={sx}>
+        {/* <div > */}
+        <Stack>
+          <h1 className={classes.title}>{title}</h1>
+          <BreadcrumbsCustom />
+        </Stack>
+        {section.createButton && (
+          <Button onClick={handleOpenDrawer} className={classes.button}>
+            <h3>{section.createButton}</h3>
+          </Button>
+        )}
+        {/* {query.entity === 'uploads' && (
         <Button color="red" onClick={deleteAllUploads} className={classes.button}>
           <h3>Delete All!!</h3>
         </Button>
       )} */}
-      {/* </div> */}
-      {/* <CrudDrawerDefault /> */}
-    </Group>
+        {/* </div> */}
+        {/* <CrudDrawerDefault /> */}
+      </Group>
+      {children}
+    </Box>
   );
 }

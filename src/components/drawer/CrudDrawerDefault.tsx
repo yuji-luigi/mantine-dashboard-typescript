@@ -209,6 +209,7 @@ export function CrudDrawerDefault({ overridingEntity = '' }: { overridingEntity?
   const entityText = capitalize(sectionJson?.entitySingle);
   const submitText = selectedDocument._id ? `Update ${entityText}!` : `Add ${entityText}!`;
 
+  if (!drawerIsOpen) return null;
   return (
     <Drawer
       className={classes.drawer}

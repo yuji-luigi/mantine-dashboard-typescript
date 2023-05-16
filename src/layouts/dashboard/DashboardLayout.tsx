@@ -11,9 +11,8 @@ const useStyles = createStyles((theme /* _params, getRef */) => ({
     // display: 'flex',
     // alignItems: 'center',
     paddingTop: 50,
-    paddingLeft: 30,
     [theme.fn.largerThan('md')]: {
-      paddingLeft: 320,
+      paddingLeft: 300,
     },
   },
 }));
@@ -23,7 +22,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const theme = useMantineTheme();
   const { isOpen } = useLayoutContext();
   const matches = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
-  const paddingSmOpen = isOpen && matches ? { paddingLeft: 320 } : {};
+  const paddingSmOpen = isOpen && matches ? { paddingLeft: 300 } : {};
   return (
     <>
       <DashboardHeaderSearch />

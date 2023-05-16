@@ -13,6 +13,7 @@ import { Sections } from '../../../types/general/data/sections-type';
 import { Button, Group, Select, createStyles, Text, Box } from '@mantine/core';
 import Link from 'next/link';
 import { PATH_DASHBOARD } from '../../../path/page-paths';
+import MaintainerList from '../../../sections/dashboard_sections/maintainers-section/MaintainerList';
 
 const useStyles = createStyles((theme) => ({
   secondButton: {
@@ -58,18 +59,19 @@ const MaintainerPage = () => {
 
   return (
     <Page>
-      {/* <Group align="end" position="apart" pl={16} mb={32} sx={{ width: '100%' }}> */}
-      <Box px={32}>
-        <TableSectionHeader overridingEntity="maintainers" />
-        <Button
-          className={classes.secondButton}
-          component={Link}
-          href={PATH_DASHBOARD.maintainersSearch}
-          children={<Text>Search Maintainer</Text>}
-        />
-      </Box>
-      {/* </Group> */}
-      <Tables overridingEntity="maintainers" />
+      <TableSectionHeader
+        overridingEntity="maintainers"
+        // children={
+        //   <Button
+        //     className={classes.secondButton}
+        //     component={Link}
+        //     href={PATH_DASHBOARD.maintainersSearch}
+        //     children={<Text>Search Maintainer</Text>}
+        //   />
+        // }
+      />
+      {/* <Tables overridingEntity="maintainers" /> */}
+      <MaintainerList />
       <CrudDrawerDefault overridingEntity="maintainers" />
     </Page>
   );

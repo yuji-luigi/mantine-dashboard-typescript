@@ -43,10 +43,10 @@ const CrudPage = () => {
 
   return (
     <Page>
-      <Box px={32}>
-        <TableSectionHeader />
-        <Tables />
-      </Box>
+      {/* <Box px={32}> */}
+      <TableSectionHeader />
+      <Tables />
+      {/* </Box> */}
       <CrudDrawerDefault />
     </Page>
   );
