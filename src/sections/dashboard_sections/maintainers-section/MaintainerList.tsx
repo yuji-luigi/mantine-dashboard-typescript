@@ -2,6 +2,8 @@ import React from 'react';
 import { CardMaintainer } from '../../../components/card/CardMaintainer';
 import { Box, createStyles } from '@mantine/core';
 import { PATH_IMAGE } from '../../../lib/image-paths';
+import { Sections } from '../../../types/general/data/sections-type';
+import { useCrudSelectors } from '../../../redux/features/crud/crudSlice';
 
 /**
  * 1. fetch all the maintainers from database with redux.
@@ -39,7 +41,7 @@ const mario: MaintainerModel = {
   type: 'plumber',
   tel: '+39-123-456-7890',
   email: 'u.ji.jp777@gmail.com',
-  logo: PATH_IMAGE.faviconsvg,
+  logo: { url: PATH_IMAGE.faviconsvg } as UploadModel,
   description:
     'lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet',
   address: 'via roma 1, 00100, roma, italia',
@@ -49,8 +51,11 @@ const mario: MaintainerModel = {
   createdAt: Date.now().toString(),
   updatedAt: Date.now().toString(),
 };
-const MaintainerList = () => {
+
+const MaintainerList = ({ entity }: { entity: Sections }) => {
   const { classes, cx, theme } = useStyles();
+
+  const { crudDocuments } = useCrudSelectors(entity);
 
   return (
     <>
@@ -58,10 +63,9 @@ const MaintainerList = () => {
         className={classes.pinContainer}
         py="xl" /* cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} */
       >
-        {[...Array(10)].map((_, i) => (
-          <CardMaintainer maintainer={mario} key={i} />
+        {crudDocuments.map((_, i) => (
+          <CardMaintainer entity={entity} maintainer={_} key={i} />
         ))}
-        )]
       </Box>
     </>
   );

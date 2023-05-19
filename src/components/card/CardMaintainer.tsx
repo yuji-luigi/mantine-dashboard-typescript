@@ -10,8 +10,13 @@ import {
   Box,
   createStyles,
   rem,
+  Tooltip,
 } from '@mantine/core';
 import { Icons } from '../../data/icons';
+import { IMAGES_ARRAY, PATH_IMAGE } from '../../lib/image-paths';
+import { getRandomItemFromArray } from '../../utils/mock-data-functions';
+import Link from 'next/link';
+import { Sections } from '../../types/general/data/sections-type';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -30,15 +35,36 @@ const useStyles = createStyles((theme) => ({
 
 const ICON_SIZE = 16;
 
-export function CardMaintainer({ maintainer }: { maintainer: MaintainerModel }) {
+export function CardMaintainer({
+  maintainer,
+  entity,
+}: {
+  maintainer: MaintainerModel;
+  entity: Sections;
+}) {
   const { classes, theme } = useStyles();
-
+  const dark = theme.colorScheme === 'dark';
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card
+      component={Link}
+      href={`${entity}/${maintainer._id}`}
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      sx={{
+        cursor: 'pointer',
+        // onhover shadow
+        '&:hover': {
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.white,
+          boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1)',
+        },
+      }}
+    >
       <Card.Section
         component="a"
         sx={{
-          backgroundImage: `url(${maintainer.avatar.url})`,
+          backgroundImage: `url(${maintainer.logo?.url || PATH_IMAGE.flatmateLogo1})`,
           height: 140,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
@@ -49,7 +75,7 @@ export function CardMaintainer({ maintainer }: { maintainer: MaintainerModel }) 
       {/* <Image src={maintainer.avatar.url} height={160} alt="Norway" /> */}
       {/* </Card.Section> */}
       <Avatar
-        src={maintainer.logo}
+        src={maintainer.logo?.url || getRandomItemFromArray(IMAGES_ARRAY)}
         size={80}
         radius={80}
         mx="auto"
@@ -81,25 +107,33 @@ export function CardMaintainer({ maintainer }: { maintainer: MaintainerModel }) 
             {maintainer.email}
           </Text>
         </Group>
-        <Badge title={maintainer.address} sx={{ cursor: 'pointer', paddingBlock: 16 }}>
-          <Text truncate weight={300}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Box>
-                <Icons.mapPin size={ICON_SIZE} />
+        <Tooltip
+          disabled={!maintainer.address}
+          label={maintainer.address}
+          withArrow
+          multiline
+          width={220}
+        >
+          <Badge sx={{ cursor: 'pointer', paddingBlock: 16 }}>
+            <Text color={dark ? '' : 'black'} truncate weight={300}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box>
+                  <Icons.mapPin size={ICON_SIZE} />
+                </Box>
+                {maintainer.address || 'add address'}
               </Box>
-              {maintainer.address} gaerw gar gare gha
-            </Box>
-          </Text>
-        </Badge>
+            </Text>
+          </Badge>
+        </Tooltip>
       </Stack>
 
       {/* <Text lineClamp={5} size="sm" color="dimmed">
         {maintainer.description}
       </Text> */}
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+      {/* <Button variant="light" color="blue" fullWidth mt="md" radius="md">
         Details
-      </Button>
+      </Button> */}
     </Card>
   );
 }

@@ -38,11 +38,6 @@ const MaintainerPage = () => {
   const { fetchCrudDocumentsWithPagination } = useCrudSliceStore();
   const { crudDocuments, isChildrenTree } = useCrudSelectors(entity);
   formFields as FormFieldsType;
-  useEffect(() => {
-    if (!sections.includes(entity)) {
-      push('/dashboard/home');
-    }
-  }, [entity]); // include parentId: string | undefined to update on change page
 
   useEffect(() => {
     /** type guard */
@@ -71,7 +66,7 @@ const MaintainerPage = () => {
         // }
       />
       {/* <Tables overridingEntity="maintainers" /> */}
-      <MaintainerList />
+      <MaintainerList entity={entity} />
       <CrudDrawerDefault overridingEntity="maintainers" />
     </Page>
   );

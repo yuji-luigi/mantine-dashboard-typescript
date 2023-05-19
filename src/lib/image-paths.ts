@@ -3,3 +3,5 @@ export const PATH_IMAGE = {
   flatmateLogo1: '/images/flatmate_circle_logo_yellow.png',
   faviconsvg: '/favicon.svg',
 };
+
+export const IMAGES_ARRAY = Object.values(PATH_IMAGE);
