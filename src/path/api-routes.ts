@@ -33,6 +33,7 @@ export enum PATH_API {
   spaceCookie = 'spaces/cookie',
   getSpaceSelections = 'spaces/selections',
   organization = 'organizations',
+  maintainers = 'maintainers',
   organizationAll = 'organizations/all',
   organizationCookie = 'organizations/cookie',
   getOrganizationsAndSpaces = 'organizations/spaces',

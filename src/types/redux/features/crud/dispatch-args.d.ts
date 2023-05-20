@@ -72,3 +72,7 @@ interface SetCrudDocumentsPayload {
   documents: AllModels;
   isChildrenTree?: boolean;
 }
+interface SetCrudDocumentPayload {
+  entity?: Sections;
+  document: AllModels;
+}

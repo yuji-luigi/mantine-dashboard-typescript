@@ -22,6 +22,7 @@ import { myColors } from '../lib/custom-colors';
 // import { CurrentSpaceContextProvider } from '../context/CurrentSpaceContext';
 import { CookieContextProvider } from '../context/CookieContext';
 import { _ModalContextProvider } from '../context/modal-context/_ModalContext';
+import '../styles/global.css';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -58,6 +59,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                 primaryColor: 'ocean-blue',
                 // primaryColor: 'sw-dark-blue',
                 colorScheme,
+                fontFamily: 'Lato, sans-serif',
               }}
               withGlobalStyles
               withNormalizeCSS

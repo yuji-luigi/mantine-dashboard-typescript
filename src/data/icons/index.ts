@@ -41,6 +41,8 @@ import {
   IconCheck as check,
   IconMapPin as mapPin,
   IconMail as mail,
+  IconPencil as pencil,
+  IconPhoneCall as phoneCall,
   // IconCardboards as posts,
 } from '@tabler/icons-react';
 
@@ -84,6 +86,8 @@ export const Icons = {
   check,
   mapPin,
   mail,
+  pencil,
+  phoneCall,
   // TablerIcon,
 } as const;
 // export {

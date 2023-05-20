@@ -83,7 +83,7 @@ export const crudSlice = createSlice({
     },
     setCrudDocument: (state, action) => {
       const { document, entity } = action.payload;
-      state.reduxdb[entity].documentsArray;
+      state.reduxdb[entity].selectedDocument = document;
     },
     setCrudDocuments: (state, action) => {
       const { entity, documents, totalDocuments, isChildrenTree } = action.payload;
@@ -281,6 +281,9 @@ export const useCrudSliceStore = () => {
     setCrudDocuments(data: SetCrudDocumentsPayload) {
       appDispatch(setCrudDocuments(data));
     },
+    setCrudDocument(data: SetCrudDocumentPayload) {
+      appDispatch(setCrudDocument(data));
+    },
     setSubmitting(bool: boolean) {
       appDispatch(setSubmitting(bool));
     },
@@ -332,4 +335,8 @@ export const useCrudSelectors = (entity?: Sections) => ({
   /** number of total documents in queried array from db. */
   totalDocumentsCount: useTotalDocumentsCount(entity),
   submitting: useAppSelector((state) => state.crud.submitting),
+  selectDocumentById: useAppSelector(
+    (state) => (documentId: string) =>
+      state.crud.reduxdb?.[entity || '']?.documentsArray.find((doc) => doc._id === documentId)
+  ),
 });

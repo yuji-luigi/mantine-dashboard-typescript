@@ -148,3 +148,10 @@ export const convertToSelectItems = (
     };
   });
 };
+
+export function getWordNextToFromUrl(url = window.location.pathname, keyword = 'dashboard') {
+  console.log(url);
+  const regex = new RegExp(`${keyword}\\/(\\w+)`);
+  const match = regex.exec(url);
+  return match ? match[1] : null;
+}
