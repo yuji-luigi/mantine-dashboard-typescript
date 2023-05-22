@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
 const TextWithIcon = ({ icon, text, sx }: { icon: ReactJSXElement; text: string; sx?: Sx }) => {
   const { classes, cx, theme } = useStyles();
   return (
-    <Text className={classes.textRows} sx={{ ...sx }}>
+    <Text className={classes.textRows} sx={sx}>
       {icon}
       {text}
     </Text>
