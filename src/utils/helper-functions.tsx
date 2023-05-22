@@ -6,8 +6,12 @@ import { PATH_API } from '../path/api-routes';
 import { MixedMediaType, UploadingMediaType } from '../types/data/media/media-types';
 import axiosInstance from './axios-instance';
 
-// eslint-disable-next-line prefer-exponentiation-operator, no-restricted-properties
-export const getRandomNumber = () => Math.ceil(Math.pow(10, 10) * Math.random());
+type ALotOfNumbers = number;
+export const getRandomNumber = (): ALotOfNumbers => Math.ceil(Math.pow(10, 10) * Math.random());
+
+export const getPsuedoID = () => Math.floor(Math.random() * 1e15);
+type OnlyNumber = number;
+export const getRandomNumberOne = (): OnlyNumber => Math.ceil(10 * Math.random());
 
 export const createLabelFromArrayStr = (
   arr: string[],
