@@ -33,25 +33,6 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mario: MaintainerModel = {
-  name: 'Mario Nintendo',
-  company: 'Hydric Nintendo',
-  avatar: { url: PATH_IMAGE.flatmateLogo1 } as UploadModel,
-  homepage: 'https://mantine.dev',
-  type: 'plumber',
-  tel: '+39-123-456-7890',
-  email: 'u.ji.jp777@gmail.com',
-  logo: { url: PATH_IMAGE.faviconsvg } as UploadModel,
-  description:
-    'lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet',
-  address: 'via roma 1, 00100, roma, italia',
-  isIndividual: false,
-  createdBy: {},
-  _id: 'jaoighar',
-  createdAt: Date.now().toString(),
-  updatedAt: Date.now().toString(),
-};
-
 const MaintainerList = ({ entity }: { entity: Sections }) => {
   const { classes, cx, theme } = useStyles();
 
