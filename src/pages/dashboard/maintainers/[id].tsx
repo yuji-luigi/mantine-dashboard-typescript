@@ -11,6 +11,7 @@ import {
   Group,
   Avatar,
   Stack,
+  Divider,
 } from '@mantine/core';
 import React, { ReactElement } from 'react';
 import Layout from '../../../layouts';
@@ -25,6 +26,10 @@ import { PATH_API } from '../../../path/api-routes';
 import AboutCard from '../../../components/profile/side/AboutCard';
 import { useMediaQuery } from '@mantine/hooks';
 import ProfileSide from '../../../components/profile/side/ProfileSide';
+import Image from 'next/image';
+import { PATH_IMAGE } from '../../../lib/image-paths';
+import AttachmentsRow from '../../../components/posts/AttachmentsRow';
+import { Icons } from '../../../data/icons';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -104,7 +109,7 @@ const MaintainerDetailsPage = () => {
     data: document,
     error,
     isLoading,
-  } = useSWR('maintainer', () => getMaintainer(router.query.id as string));
+  } = useSWR(['maintainer', router.query.id], () => getMaintainer(router.query.id as string));
 
   const isMobile = useMediaQuery('(max-width: 600px)');
   if (isLoading) return 'isLoading';
@@ -119,13 +124,28 @@ const MaintainerDetailsPage = () => {
           <ProfileCover data={data} />
           {isMobile && <ProfileSide />}
           <Card className={classes.feedCard}>
-            <Group sx={{ height: 30 }}>
-              <Avatar src="https://picsum.photos/410/300" radius={80} />
-              <Stack>
-                <Text>author name</Text>
-                <Text>{new Intl.DateTimeFormat('en-US').format(new Date())}</Text>
-              </Stack>
+            <Group
+              sx={{ height: 80, width: '100%', display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Group sx={{ height: '100%' }}>
+                <Avatar src="https://picsum.photos/410/300" radius={90} size={80} />
+                <Stack
+                  spacing={0}
+                  justify="flex-end"
+                  style={{ height: '100%', alignItems: 'flex-end' }}
+                >
+                  <Text size="lg" weight="bold">
+                    author name
+                  </Text>
+                  <Text>{new Intl.DateTimeFormat('en-US').format(new Date())}</Text>
+                </Stack>
+              </Group>
+
+              <Box sx={{ alignSelf: 'start' }}>
+                <Icons.edit />
+              </Box>
             </Group>
+
             <Box className={classes.feedContent}>
               <Title mb={16}>title feed</Title>
               <Text>
@@ -133,6 +153,8 @@ const MaintainerDetailsPage = () => {
                 feed body feed body
               </Text>
             </Box>
+            <Divider mb={16} />
+            <AttachmentsRow />
           </Card>
         </Box>
         {!isMobile && <ProfileSide />}
