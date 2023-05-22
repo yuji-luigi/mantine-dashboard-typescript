@@ -27,9 +27,10 @@ import AboutCard from '../../../components/profile/side/AboutCard';
 import { useMediaQuery } from '@mantine/hooks';
 import ProfileSide from '../../../components/profile/side/ProfileSide';
 import Image from 'next/image';
-import { PATH_IMAGE } from '../../../lib/image-paths';
+import { PATH_IMAGE, RANDOM_UPLOAD_MODELS } from '../../../lib/image-paths';
 import AttachmentsRow from '../../../components/posts/AttachmentsRow';
 import { Icons } from '../../../data/icons';
+import PostFeedCard from '../../../components/posts/feed/PostFeedCard';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -123,39 +124,13 @@ const MaintainerDetailsPage = () => {
         <Box className={classes.cardMain}>
           <ProfileCover data={data} />
           {isMobile && <ProfileSide />}
-          <Card className={classes.feedCard}>
-            <Group
-              sx={{ height: 80, width: '100%', display: 'flex', justifyContent: 'space-between' }}
-            >
-              <Group sx={{ height: '100%' }}>
-                <Avatar src="https://picsum.photos/410/300" radius={90} size={80} />
-                <Stack
-                  spacing={0}
-                  justify="flex-end"
-                  style={{ height: '100%', alignItems: 'flex-end' }}
-                >
-                  <Text size="lg" weight="bold">
-                    author name
-                  </Text>
-                  <Text>{new Intl.DateTimeFormat('en-US').format(new Date())}</Text>
-                </Stack>
-              </Group>
-
-              <Box sx={{ alignSelf: 'start' }}>
-                <Icons.edit />
-              </Box>
-            </Group>
-
-            <Box className={classes.feedContent}>
-              <Title mb={16}>title feed</Title>
-              <Text>
-                body feed body feed body feed body feed body feed body feed body feed body feed body
-                feed body feed body
-              </Text>
-            </Box>
-            <Divider mb={16} />
-            <AttachmentsRow />
-          </Card>
+          <PostFeedCard
+            createdBy={{ name: 'No name user' } as UserModel}
+            title="The First Job!"
+            body={lorem100}
+            images={RANDOM_UPLOAD_MODELS}
+            attachments={[]}
+          />
         </Box>
         {!isMobile && <ProfileSide />}
       </Box>
@@ -167,3 +142,6 @@ MaintainerDetailsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 export default MaintainerDetailsPage;
+
+const lorem100 =
+  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?';

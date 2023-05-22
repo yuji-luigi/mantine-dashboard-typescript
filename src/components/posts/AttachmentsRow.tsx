@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LinkedImage } from '../image/LinkedImage';
 
-const AttachmentsRow = ({ files }: { files?: UploadModel[] }) => {
+const AttachmentsRow = ({ attachments }: { attachments?: UploadModel[] }) => {
   return (
     <Group position="right">
       <Group position="right">
