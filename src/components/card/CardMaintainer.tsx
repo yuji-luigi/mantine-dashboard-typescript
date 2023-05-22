@@ -17,6 +17,8 @@ import { IMAGES_ARRAY, PATH_IMAGE } from '../../lib/image-paths';
 import { getRandomItemFromArray } from '../../utils/mock-data-functions';
 import Link from 'next/link';
 import { Sections } from '../../types/general/data/sections-type';
+import TextWithIcon from '../text/TextWithIcon';
+import BadgeWithToolTip from '../text/BadgeWithToolTip';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -92,39 +94,21 @@ export function CardMaintainer({
         </Badge>
       </Group>
 
-      <Stack spacing={0}>
-        <Text weight={500}>{maintainer.name}</Text>
-        <Text color="" weight={500}>
-          <Group spacing={0}>
-            <Icons.buildings size={ICON_SIZE} />
-            {maintainer.company}
-          </Group>
+      <Stack spacing={4}>
+        <Text size="lg" weight={800}>
+          {maintainer.name}
         </Text>
-
-        <Group align="center">
-          <Icons.mail size={ICON_SIZE} />
-          <Text c="dimmed" weight={300}>
-            {maintainer.email}
-          </Text>
-        </Group>
-        <Tooltip
+        <TextWithIcon icon={<Icons.buildings size={ICON_SIZE} />} text={maintainer.company} />
+        <TextWithIcon
+          sx={{ marginBottom: 4 }}
+          icon={<Icons.mail size={ICON_SIZE} />}
+          text={maintainer.email}
+        />
+        <BadgeWithToolTip
+          icon={<Icons.mapPin size={ICON_SIZE} />}
+          text={maintainer.address || 'add address'}
           disabled={!maintainer.address}
-          label={maintainer.address}
-          withArrow
-          multiline
-          width={220}
-        >
-          <Badge sx={{ cursor: 'pointer', paddingBlock: 16 }}>
-            <Text color={dark ? '' : 'black'} truncate weight={300}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box>
-                  <Icons.mapPin size={ICON_SIZE} />
-                </Box>
-                {maintainer.address || 'add address'}
-              </Box>
-            </Text>
-          </Badge>
-        </Tooltip>
+        />
       </Stack>
 
       {/* <Text lineClamp={5} size="sm" color="dimmed">
