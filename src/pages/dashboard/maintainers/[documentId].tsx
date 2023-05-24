@@ -80,7 +80,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     [theme.fn.smallerThan('md')]: {
-      width: '40%', // backgroundColor: theme.cdolors.yellow[6],
+      width: '100%', // backgroundColor: theme.cdolors.yellow[6],
     },
     [theme.fn.smallerThan('sm')]: {
       width: '100%', // backgroundColor: theme.cdolors.yellow[6],
@@ -110,13 +110,19 @@ const MaintainerDetailsPage = () => {
     data: document,
     error,
     isLoading,
-  } = useSWR(['maintainer', router.query.id], () => getMaintainer(router.query.id as string));
+  } = useSWR(['maintainer', router.query.documentId], () =>
+    getMaintainer(router.query.documentId as string)
+  );
 
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery('(max-width: 800px)');
   if (isLoading) return 'isLoading';
 
   const data = document
-    ? { title: document.name, subtitle: document.company, avatar: 'https://picsum.photos/400/300' }
+    ? {
+        title: document.name,
+        subtitle: document.company,
+        avatarUrl: document.avatar?.url,
+      }
     : ({} as ProfileCoverDataProps);
   return (
     <Container className={classes.container}>

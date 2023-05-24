@@ -9,7 +9,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     [theme.fn.smallerThan('md')]: {
-      width: '40%', // backgroundColor: theme.cdolors.yellow[6],
+      width: '100%', // backgroundColor: theme.cdolors.yellow[6],
     },
     [theme.fn.smallerThan('sm')]: {
       width: '100%', // backgroundColor: theme.cdolors.yellow[6],

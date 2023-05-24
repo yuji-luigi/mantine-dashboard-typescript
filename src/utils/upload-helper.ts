@@ -128,7 +128,8 @@ export function extractUploadingMedia(data: MixedMediaType): UploadingMediaType 
 export async function uploadFileAndGetModelId(
   uploadingData: UploadingMediaType,
   entity: string
-): Promise<string[]> {
+  // ): Promise<string[]> {
+): Promise<Record<string, string[]>> {
   const rawUpload = await axiosInstance.post(
     `${PATH_API.uploads}/${entity}`,
     uploadingData,

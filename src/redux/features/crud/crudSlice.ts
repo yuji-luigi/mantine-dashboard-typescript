@@ -184,9 +184,9 @@ export const crudSlice = createSlice({
           return document;
         });
         state.reduxdb[entity].documentsArray = updatedDocuments;
-        if (state.reduxdb[entity].selectedDocument._id) {
-          state.reduxdb[entity].selectedDocument = updatedDocument;
-        }
+        // if (state.reduxdb[entity].selectedDocument) {
+        state.reduxdb[entity].selectedDocument = updatedDocument;
+        // }
       })
       /**
        * DELETE A DOCUMENT
