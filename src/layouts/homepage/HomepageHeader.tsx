@@ -238,10 +238,12 @@ export function HomepageHeader() {
               </>
             ) : (
               <>
-                <Button onClick={() => push('/login')} variant="default">
+                <Button component={Link} variant="default" href={PATH_DASHBOARD.login}>
                   Log in
                 </Button>
-                <Button onClick={() => push('/sign-up')}>Sign up</Button>
+                <Button component={Link} href={PATH_DASHBOARD.signup}>
+                  Sign up
+                </Button>
               </>
             )}
             <ColorSchemeToggle variant="outline" />

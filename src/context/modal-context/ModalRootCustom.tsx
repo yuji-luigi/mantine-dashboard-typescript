@@ -1,6 +1,7 @@
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { Modal, Group, Button, Stack, Box, Sx } from '@mantine/core';
 import { use_ModalContext } from './_ModalContext';
+import { CrudModal } from './CrudModal';
 
 export interface _ModalContextStates {
   isOpenModal: boolean;
@@ -11,13 +12,17 @@ export interface _ModalContextStates {
   openConfirmModal: (confirmModalProps: OpenConfirmModalParams) => void;
 }
 
-export interface OpenConfirmModalParams {
+type BaseModalParams = {
   title: string;
-  type: 'confirm' | 'alert';
   centered?: boolean;
   children: React.ReactNode;
   onCancel: () => void;
   onConfirm: (data: any) => void;
+};
+
+interface ConfirmAlertModalParams extends BaseModalParams {
+  type: 'confirm' | 'alert';
+  formFields?: FormFieldInterface[];
   sx?: {
     confirm?: Sx;
     cancel?: Sx;
@@ -27,27 +32,26 @@ export interface OpenConfirmModalParams {
     cancel?: string;
   };
 }
-export interface ModalProps extends OpenConfirmModalParams {
-  id: string;
-  sx: {
-    confirm?: Sx;
-    cancel?: Sx;
-  };
+
+interface CrudModalParams extends BaseModalParams {
+  type: 'crud';
+  formFields: FormFieldInterface[];
+  crudDocument?: AllModels;
 }
 
-interface ModalRootCustomProps {
-  onConfirm: () => void;
-  onCancel: () => void;
-  title?: string;
-  description: string;
-  centered?: boolean;
-  opened: boolean;
-  close: () => void;
+export type OpenConfirmModalParams = ConfirmAlertModalParams | CrudModalParams;
+
+export type ModalProps = OpenConfirmModalParams & {
+  id: string;
   labels: {
     confirm?: string;
     cancel?: string;
   };
-}
+  sx: {
+    confirm?: Sx;
+    cancel?: Sx;
+  };
+};
 
 export function ModalRootCustom() {
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -62,6 +66,10 @@ export function ModalRootCustom() {
     modals.onConfirm(data);
     close();
   };
+
+  if (modals.type === 'crud') {
+    return <CrudModal />;
+  }
   return (
     <>
       <Modal opened={opened} centered={modals.centered} onClose={close} title={modals.title}>

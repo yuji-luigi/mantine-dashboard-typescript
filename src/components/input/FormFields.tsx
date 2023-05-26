@@ -8,6 +8,12 @@ import { Dropzone } from '@mantine/dropzone';
 import { DropzoneCustomImage } from './DropzoneCustomImage';
 import { DropzoneCustomButton } from './DropzoneCustomButton';
 import CreationToolBar from './CreationToolBar';
+import CrudTextInput from './crud-inputs/CrudTextInput';
+import CrudTextArea from './crud-inputs/CrudTextArea';
+import CrudSelectMulti from './crud-inputs/CrudSelectMulti';
+import CrudSelect from './crud-inputs/CrudSelect';
+import CrudDatePicker from './crud-inputs/CrudDatePicker';
+import CrudSwitch from './crud-inputs/CrudSwitch';
 // import { FormFieldInterface } from '../../types/general/data/dataTable/formField-types';
 interface Props {
   formField: FormFieldInterface;
@@ -42,90 +48,97 @@ const FormFields = ({
   return (
     <>
       {formField.type === 'text' && (
-        <TextInput
-          key={formField.id}
-          name={formField.name}
-          label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
+        <CrudTextInput form={form} formField={formField} {...others} />
+        // <TextInput
+        //   key={formField.id}
+        //   name={formField.name}
+        //   label={formField.label}
+        //   placeholder={formField.placeholder}
+        //   size="md"
+        //   mt={10}
+        //   {...others}
+        //   {...form.getInputProps(formField.name || formField.id)}
+        // />
       )}
 
       {formField.type === 'long-text' && (
-        <Textarea
-          name={formField.name}
-          label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
+        <CrudTextArea form={form} formField={formField} {...others} />
+        // <Textarea
+        //   name={formField.name}
+        //   label={formField.label}
+        //   placeholder={formField.placeholder}
+        //   size="md"
+        //   mt={10}
+        //   {...others}
+        //   {...form.getInputProps(formField.name || formField.id)}
+        // />
       )}
       {formField.type === 'select' &&
         (formField.multi ? (
-          <MultiSelect
-            searchable
-            data={options}
-            name={formField.name}
-            label={formField.label}
-            placeholder={formField.placeholder}
-            size="md"
-            mt={10}
-            {...others}
-            {...form.getInputProps(formField.name || formField.id)}
-          />
+          <CrudSelectMulti form={form} formField={formField} options={options} {...others} />
         ) : (
-          <Select
-            searchable
-            data={options}
-            name={formField.name}
-            label={formField.label}
-            placeholder={formField.placeholder}
-            size="md"
-            mt={10}
-            {...others}
-            {...form.getInputProps(formField.name || formField.id)}
-          />
+          // <MultiSelect
+          //   searchable
+          //   data={options}
+          //   name={formField.name}
+          //   label={formField.label}
+          //   placeholder={formField.placeholder}
+          //   size="md"
+          //   mt={10}
+          //   {...others}
+          //   {...form.getInputProps(formField.name || formField.id)}
+          // />
+          <CrudSelect form={form} formField={formField} options={options} {...others} />
+          // <Select
+          //   searchable
+          //   data={options}
+          //   name={formField.name}
+          //   label={formField.label}
+          //   placeholder={formField.placeholder}
+          //   size="md"
+          //   mt={10}
+          //   {...others}
+          //   {...form.getInputProps(formField.name || formField.id)}
+          // />
         ))}
       {formField.type === 'static-select' && (
-        <Select
-          multiple={formField.multi}
-          data={formField.options!}
-          name={formField.name}
-          label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
+        <CrudSelect form={form} formField={formField} options={formField.options!} {...others} />
+        // <Select
+        //   multiple={formField.multi}
+        //   data={formField.options!}
+        //   name={formField.name}
+        //   label={formField.label}
+        //   placeholder={formField.placeholder}
+        //   size="md"
+        //   mt={10}
+        //   {...others}
+        //   {...form.getInputProps(formField.name || formField.id)}
+        // />
       )}
       {formField.type === 'date' && (
-        <DatePicker
-          // name={formField.name}
-          // label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
+        <CrudDatePicker form={form} formField={formField} {...others} />
+        // <DatePicker
+        //   // name={formField.name}
+        //   // label={formField.label}
+        //   placeholder={formField.placeholder}
+        //   size="md"
+        //   mt={10}
+        //   {...others}
+        //   {...form.getInputProps(formField.name || formField.id)}
+        // />
       )}
       {formField.type === 'boolean' && (
-        <Switch
-          checked={form.values[formField.name]}
-          name={formField.name}
-          label={formField.label}
-          placeholder={formField.placeholder}
-          size="md"
-          mt={10}
-          {...others}
-          {...form.getInputProps(formField.name || formField.id)}
-        />
+        <CrudSwitch form={form} formField={formField} {...others} />
+        // <Switch
+        //   checked={form.values[formField.name]}
+        //   name={formField.name}
+        //   label={formField.label}
+        //   placeholder={formField.placeholder}
+        //   size="md"
+        //   mt={10}
+        //   {...others}
+        //   {...form.getInputProps(formField.name || formField.id)}
+        // />
       )}
       {formField.type === 'checkbox' && (
         <Checkbox

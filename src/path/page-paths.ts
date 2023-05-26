@@ -21,7 +21,7 @@ export enum PATH_DASHBOARD {
   // organizationCookie = '/dashboard/select-organization',
   logout = '/logout',
   login = '/login',
-  signup = '/signup',
+  signup = '/sign-up',
   maintainers = '/dashboard/maintainers',
   maintainersSearch = '/dashboard/maintainers/search',
 }

@@ -77,7 +77,7 @@ export function CardMaintainer({
       {/* <Image src={maintainer.avatar.url} height={160} alt="Norway" /> */}
       {/* </Card.Section> */}
       <Avatar
-        src={maintainer.logo?.url || getRandomItemFromArray(IMAGES_ARRAY)}
+        src={maintainer.avatar?.url || getRandomItemFromArray(IMAGES_ARRAY)}
         size={80}
         radius={80}
         mx="auto"

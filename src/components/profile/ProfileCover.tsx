@@ -1,25 +1,42 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Card, Avatar, Text, Paper, Box, Group, ActionIcon } from '@mantine/core';
 import { Icons } from '../../data/icons';
-import { setSubmitting, useCrudSliceStore } from '../../redux/features/crud/crudSlice';
+import {
+  setSubmitting,
+  useCrudSelectors,
+  useCrudSliceStore,
+} from '../../redux/features/crud/crudSlice';
 import { getWordNextToFromUrl } from '../../utils/helper-functions';
 import axiosInstance from '../../utils/axios-instance';
 import { PATH_API } from '../../path/api-routes';
 import { extractUploadingMedia, uploadFileAndGetModelId } from '../../utils/upload-helper';
 import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/router';
+import { useModalContext } from '@mantine/core/lib/Modal/Modal.context';
+import { use_ModalContext } from '../../context/modal-context/_ModalContext';
+import { Sections } from '../../types/general/data/sections-type';
 
-export interface ProfileCoverDataProps {
+export interface DataProp {
   title: string;
   subtitle: string;
   avatarUrl: string;
   backgroundImage?: string;
 }
 
-const ProfileCover = ({ data }: { data: ProfileCoverDataProps }) => {
+const ProfileCover = ({
+  data,
+  formFields,
+}: {
+  data: DataProp;
+  formFields?: FormFieldInterface[];
+}) => {
   const { documentId } = useRouter().query;
-  const _entity = getWordNextToFromUrl();
+  const _entity = getWordNextToFromUrl() as Sections;
   const { updateCrudDocument } = useCrudSliceStore();
+  const { selectDocumentById } = useCrudSelectors(_entity);
+
+  const { openConfirmModal } = use_ModalContext();
+
   console.log(data.avatarUrl);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(data.avatarUrl);
 
@@ -47,6 +64,25 @@ const ProfileCover = ({ data }: { data: ProfileCoverDataProps }) => {
       return;
     }
     const rawUpload = await axiosInstance.post(PATH_API.uploads, file);
+  };
+  const handleEditClicked = () => {
+    console.log('edit clicked');
+    if (!formFields) return console.log('formFields not defined');
+
+    openConfirmModal({
+      type: 'crud',
+      crudDocument: selectDocumentById(documentId as string),
+      formFields,
+      title: `Edit ${_entity}`,
+      children: undefined,
+
+      onCancel: function (): void {
+        throw new Error('Function not implemented.');
+      },
+      onConfirm: function (data: any): void {
+        throw new Error('Function not implemented.');
+      },
+    });
   };
 
   return (
@@ -114,7 +150,7 @@ const ProfileCover = ({ data }: { data: ProfileCoverDataProps }) => {
                   position: 'absolute',
                   top: 0,
                   borderRadius: 100,
-                  background: 'gray',
+                  background: 'black',
                   height: 100,
                   width: 100,
                   opacity: 0,
@@ -142,9 +178,11 @@ const ProfileCover = ({ data }: { data: ProfileCoverDataProps }) => {
           </Box>
         </Group>
 
-        <ActionIcon>
-          <Icons.pencil />
-        </ActionIcon>
+        {formFields && (
+          <ActionIcon onClick={handleEditClicked}>
+            <Icons.pencil />
+          </ActionIcon>
+        )}
       </Group>
     </Card>
   );

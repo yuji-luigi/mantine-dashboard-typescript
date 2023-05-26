@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import React, { ReactElement } from 'react';
 import Layout from '../../../layouts';
-import ProfileCover, { ProfileCoverDataProps } from '../../../components/profile/ProfileCover';
+import ProfileCover, { DataProp } from '../../../components/profile/ProfileCover';
 import { useCrudSelectors, useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
 import { useRouter } from 'next/router';
 import { getWordNextToFromUrl } from '../../../utils/helper-functions';
@@ -31,6 +31,8 @@ import { PATH_IMAGE, RANDOM_UPLOAD_MODELS } from '../../../lib/image-paths';
 import AttachmentsRow from '../../../components/posts/AttachmentsRow';
 import { Icons } from '../../../data/icons';
 import PostFeedCard from '../../../components/posts/feed/PostFeedCard';
+import { lorem100 } from '../../../_mock/strings';
+import { maintainersTableData } from '../../../../json/dataTable/formfields/maintainersTableData';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -123,12 +125,12 @@ const MaintainerDetailsPage = () => {
         subtitle: document.company,
         avatarUrl: document.avatar?.url,
       }
-    : ({} as ProfileCoverDataProps);
+    : ({} as DataProp);
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
         <Box className={classes.cardMain}>
-          <ProfileCover data={data} />
+          <ProfileCover formFields={maintainersTableData} data={data} />
           {isMobile && <ProfileSide />}
           <PostFeedCard
             createdBy={{ name: 'No name user' } as UserModel}
@@ -148,6 +150,3 @@ MaintainerDetailsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 export default MaintainerDetailsPage;
-
-const lorem100 =
-  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, placeat labore voluptatum corrupti sunt laborum rerum earum autem fuga, aperiam animi, molestias ullam atque quisquam amet ea expedita. Repudiandae, facere?';

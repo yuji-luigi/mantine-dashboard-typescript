@@ -49,6 +49,7 @@ const useStore = () => {
         id: modalId,
         centered: false,
         sx: {},
+        labels: {},
         ...modal,
       };
 
