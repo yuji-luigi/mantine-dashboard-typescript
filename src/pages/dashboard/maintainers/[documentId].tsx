@@ -13,7 +13,7 @@ import {
   Stack,
   Divider,
 } from '@mantine/core';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import Layout from '../../../layouts';
 import ProfileCover, { DataProp } from '../../../components/profile/ProfileCover';
 import { useCrudSelectors, useCrudSliceStore } from '../../../redux/features/crud/crudSlice';
@@ -116,7 +116,16 @@ const MaintainerDetailsPage = () => {
     getMaintainer(router.query.documentId as string)
   );
 
+  const { setCrudDocument } = useCrudSliceStore();
+
   const isMobile = useMediaQuery('(max-width: 800px)');
+
+  useEffect(() => {
+    if (document) {
+      setCrudDocument({ entity: _entity, document });
+    }
+  }, [document?._id]);
+
   if (isLoading) return 'isLoading';
 
   const data = document
@@ -124,8 +133,10 @@ const MaintainerDetailsPage = () => {
         title: document.name,
         subtitle: document.company,
         avatarUrl: document.avatar?.url,
+        coverUrl: document.cover?.url,
       }
     : ({} as DataProp);
+
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>

@@ -9,6 +9,15 @@ export const maintainersTableData: Array<FormFieldInterface> = [
     priority: 1,
   },
   {
+    id: 'company',
+    name: 'company',
+    label: 'Company',
+    placeholder: 'First name',
+    type: 'text',
+    required: true,
+    priority: 1,
+  },
+  {
     id: 'homepage',
     name: 'homepage',
     label: 'Website',
@@ -33,7 +42,18 @@ export const maintainersTableData: Array<FormFieldInterface> = [
     required: true,
     priority: 3,
   },
-
+  {
+    id: 'cover',
+    name: 'cover',
+    label: 'Cover',
+    type: 'image',
+    multi: true,
+    // type: 'dropzone',
+    accept: 'image/*',
+    selectValues: ['name'],
+    required: false,
+    priority: 2,
+  },
   {
     id: 'description',
     name: 'description',

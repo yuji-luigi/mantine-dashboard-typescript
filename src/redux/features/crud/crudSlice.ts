@@ -335,8 +335,9 @@ export const useCrudSelectors = (entity?: Sections) => ({
   /** number of total documents in queried array from db. */
   totalDocumentsCount: useTotalDocumentsCount(entity),
   submitting: useAppSelector((state) => state.crud.submitting),
-  selectDocumentById: useAppSelector(
-    (state) => (documentId: string) =>
-      state.crud.reduxdb?.[entity || '']?.documentsArray.find((doc) => doc._id === documentId)
-  ),
+  selectDocumentById: useAppSelector((state) => (documentId: string) => {
+    return state.crud.reduxdb?.[entity || '']?.documentsArray.find((doc) => {
+      return doc._id === documentId;
+    });
+  }),
 });

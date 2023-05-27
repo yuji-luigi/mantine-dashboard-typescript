@@ -4,7 +4,7 @@ import { use_ModalContext } from './_ModalContext';
 import { getDefaultValues } from '../../utils/getDefaultValues';
 import { showNotification, notifications } from '@mantine/notifications';
 import { FormEvent, useMemo, useState } from 'react';
-import { hasMedia, updateCrudDocument } from '../../redux/features/crudAsyncThunks';
+import { hasMedia } from '../../redux/features/crudAsyncThunks';
 import { uploadFileAndGetModelId, extractUploadingMedia } from '../../utils/upload-helper';
 import CreationToolBar from '../../components/input/CreationToolBar';
 import FormFields from '../../components/input/FormFields';
@@ -12,6 +12,8 @@ import { useForm } from '@mantine/form';
 import { UseFormReturnTypeCustom } from '../../components/input/input_interfaces/useForm_interface';
 import { getWordNextToFromUrl, sleep } from '../../utils/helper-functions';
 import { Sections } from '../../types/general/data/sections-type';
+import { useRouter } from 'next/router';
+import { useCrudSliceStore } from '../../redux/features/crud/crudSlice';
 
 const useStyles = createStyles(() => ({
   modal: {
@@ -31,9 +33,12 @@ const useStyles = createStyles(() => ({
 export function CrudModal() {
   const { classes } = useStyles();
   const entity = getWordNextToFromUrl() as Sections;
+  const { query } = useRouter();
+  const parentId: string = query.parentId as string;
 
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { isOpenModal: opened, closeModal: close, modals } = use_ModalContext();
+  const { updateCrudDocument } = useCrudSliceStore();
   const [submitting, setSubmitting] = useState(false);
   const handleConfirm = (data: any) => {
     modals.onConfirm(data);
@@ -42,6 +47,7 @@ export function CrudModal() {
 
   // type guard
   if (modals.type !== 'crud') return null;
+
   const initialValues = useMemo(
     () => getDefaultValues(modals.formFields, modals.crudDocument),
     [modals.crudDocument]
@@ -66,51 +72,39 @@ export function CrudModal() {
 
     // // const data = media ? extractUploadingMedia(media) : {};
 
-    // let reqBody: Record<string, any> = {
-    //   ...form.values,
-    //   // ...data,
+    let reqBody: Record<string, any> = {
+      ...form.values,
+      // ...data,
 
-    //   media: undefined,
-    // };
-    // const media = structuredClone(form.values.media);
+      media: undefined,
+    };
+    const media = structuredClone(form.values.media);
 
-    // if (media && hasMedia(media)) {
-    //   try {
-    //     const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), entity);
-    //     for (let key in uploadIdData) {
-    //       reqBody[key] = [...reqBody[key], ...uploadIdData[key]];
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     notifications.hide('submit');
-    //     setSubmitting(false);
-    //     return;
-    //   }
-    // }
+    if (media && hasMedia(media)) {
+      try {
+        const uploadIdData = await uploadFileAndGetModelId(extractUploadingMedia(media), entity);
+        for (let key in uploadIdData) {
+          reqBody[key] = [...reqBody[key], ...uploadIdData[key]];
+        }
+      } catch (error) {
+        console.log(error);
+        notifications.hide('submit');
+        setSubmitting(false);
+        return;
+      }
+    }
 
-    // /** Create new Document */
-    // if (!selectedDocument._id) {
-    //   if (parentId) {
-    //     createLinkedChildDocumentWithPagination({
-    //       entity,
-    //       parentId,
-    //       query: paginationQuery,
-    //       newDocument: form.values,
-    //     });
-    //   } else {
-    //     addCrud({ entity, newDocument: reqBody, parentId, query: paginationQuery });
-    //   }
-    // }
-    // /** Modify selected document */
-    // if (selectedDocument._id) {
-    //   updateCrudDocument({
-    //     entity,
-    //     updateData: reqBody,
-    //     documentId: selectedDocument._id,
-    //     parentId: query.parentId as string,
-    //   });
-    // }
-    // form.reset();
+    /** Modify selected document */
+    if (modals.crudDocument._id) {
+      updateCrudDocument({
+        entity,
+        updateData: reqBody,
+        documentId: modals.crudDocument._id,
+        parentId: query.parentId as string,
+      });
+    }
+
+    form.reset();
     await sleep(1000);
     notifications.hide('submit');
     notifications.show({
@@ -170,4 +164,15 @@ export function CrudModal() {
       </Modal>
     </>
   );
+}
+function createLinkedChildDocumentWithPagination(arg0: {
+  entity: string;
+  parentId: string;
+  query: any;
+  newDocument: { media?: { [key: string]: File[] | UploadModel[] } | undefined } & Record<
+    string,
+    unknown
+  >;
+}) {
+  throw new Error('Function not implemented.');
 }

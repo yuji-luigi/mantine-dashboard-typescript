@@ -7,7 +7,6 @@ interface Prop {
   form: UseFormReturnTypeCustom;
 }
 const CrudTextInput = ({ formField, form, ...others }: Prop) => {
-  console.log(form);
   return (
     <TextInput
       key={formField.id}
