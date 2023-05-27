@@ -8,6 +8,7 @@ import { useDisclosure } from '@mantine/hooks';
 import CarouselBasic from '../carousel/CarouselBasic';
 import CrudCarousel from '../carousel/CrudCarousel';
 import { Sections } from '../../types/general/data/sections-type';
+// import CarouselBasic from '../carousel/CarouselBasic';
 
 interface Prop {
   form: UseFormReturnTypeWithMedia;
