@@ -199,7 +199,6 @@ export function DashboardHeaderSearch() {
     //   setSpaces(spaceOption);
     // }
   }, []);
-  console.log({ organizations });
   return (
     <Header fixed height={56} className={classes.header}>
       <div className={classes.inner}>
