@@ -60,11 +60,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const jwtToken = context.req.cookies.jwt;
   try {
     const rawThread = await axiosInstance.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/maintenances/${context.query.maintenanceId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/maintenances/${context.query.crudId}`,
       {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          space: context.req.cookies.space || '',
+          organization: context.req.cookies.organization || '',
         },
       }
     );
