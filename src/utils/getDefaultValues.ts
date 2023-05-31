@@ -9,7 +9,6 @@ export function getDefaultValues(
   const defaultValueObj = formFields?.reduce<Record<string, any>>((obj, field) => {
     /** define path field.name or field.id */
     const path = field.name || field.id;
-
     /**§
      *  define case there is a data in path
      *  specifically when passing the crudDocument.
@@ -52,8 +51,23 @@ export function getDefaultValues(
       // TODO: query data to be implemented by header not from crudObj when possible
       //  example: I want date values are extracted from headerInputContext. avoid unnecessary looping over array in api.
       obj[path] = crudDocument?.[path] || null;
+      // password is always empty
+      if (path === 'password') {
+        obj[path] = undefined;
+      }
       return obj;
     }
+
+    // fallbackValues
+
+    if (field.multi) {
+      obj[path] = [];
+    } else {
+      obj[path] = fallbackValues[field.type];
+    }
+    return obj;
+
+    // ! TODO: remove all autopopulate
     if (field.type === 'boolean' || field.type === 'checkbox') {
       obj[path] = crudDocument?.[path] || false;
       return obj;
@@ -89,3 +103,20 @@ export function getDefaultValues(
   }, {});
   return defaultValueObj || {};
 }
+
+const fallbackValues = {
+  text: '',
+  'long-text': '',
+  boolean: false,
+  checkbox: false,
+  select: null,
+  'static-select': null,
+  number: 0,
+  currency: 0,
+  avatar: null,
+  date: new Date(Date.now()),
+  'date-range': new Date(Date.now()),
+  attachment: null,
+  image: null,
+  color: '',
+};

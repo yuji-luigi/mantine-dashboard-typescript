@@ -45,9 +45,10 @@ export function TableCellDecorator({
     tableCell = (
       <>
         {cellData.map((cellData) => {
+          const key = typeof cellData === 'string' ? cellData : cellData._id;
           return (
             <TableCell
-              key={cellData._id}
+              key={key}
               cellData={
                 cellConfig.selectValues
                   ?.map((key) => cellData[key])
